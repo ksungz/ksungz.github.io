@@ -1,7 +1,7 @@
 ---
 layout: archive
 permalink: /
-title: "HelloWorld !"
+title: "Latest Posts"
 ---
 
 <div class="tiles">

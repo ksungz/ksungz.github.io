@@ -11,14 +11,6 @@ description:
     하하하
     </h1>
     <div class="post">
-  <div class="post-info">
-    <span>Written by</span>
-    
-        Chester
-    
-
-    
-  </div>
 
   <h1 class="post-title">About</h1>
   <div class="post-line"></div>

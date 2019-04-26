@@ -1,0 +1,54 @@
+# Permalinks
+permalink:      /:year-:month-:day/:title
+
+# Setup
+title:          Suzkim
+baseurl:        ""
+url:            "https://ksungz.github.io/"
+
+# Assets
+sass:
+  sass_dir:     _sass
+  style:        :compressed
+
+# Build settings
+markdown:       kramdown
+
+# About
+author:
+  name:         Suzkim
+  url:          https://ksungz.github.io/
+  email:        k.suzkim@gmail.com  
+  github:       ksungz
+
+# Custom vars
+version:        3.4.1
+github:
+  repo:         https://github.com/ksungz/ksungz.github.io
+
+# Google Analytics
+google_analytics: UA—XXXXXXXX-X
+
+# Assets
+sass:
+  sass_dir:     _sass
+  style:        compressed
+
+# Gems
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+  - jekyll-seo-tag
+  # - jemoji #Uncomment this to allow emoji in your post
+
+# Excludes
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - tale.gemspec
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - any_additional_item # any user-specific listing goes at the end

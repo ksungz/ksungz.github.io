@@ -5,8 +5,7 @@
 }
 
 main,
-footer,
-.nav-container {
+footer {
   display: block;
   margin: 0 auto;
   max-width: 800px;
@@ -15,10 +14,8 @@ footer,
 
 .nav {
   box-shadow: 0 2px 2px -2px $shadow-color;
-  overflow: auto;
-
   &-container {
-    margin: 1rem auto;
+    margin: 0 auto;
     position: relative;
     text-align: center;
   }
@@ -37,10 +34,12 @@ footer,
   }
 
   ul {
+    display: block;
+    max-width: 800px;
+    margin: 0 auto;
     list-style-type: none;
-    margin: 1rem 0 0;
     padding: 0;
-    text-align: center;
+    text-align: left;
   }
 
   li {
@@ -61,22 +60,10 @@ footer,
   }
 
   a {
+    display: block;
+    padding: 20px 0;
     color: $default-color;
     font-family: $sans-serif;
-  }
-}
-
-@media (min-width: 600px) {
-  .nav {
-    &-container {
-      text-align: left;
-    }
-
-    ul {
-      bottom: 0;
-      position: absolute;
-      right: 0;
-    }
   }
 }
 

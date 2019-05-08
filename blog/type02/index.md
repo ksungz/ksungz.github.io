@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "제목"
-subtitle: "서브타이틀"
+title:  "마크다운 샘플"
+subtitle: ""
 type: "타입"
 blog: true
 text: true

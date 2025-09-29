@@ -1,0 +1,12 @@
+/* Layout 컴포넌트 스타일 - BEM 방식 적용 */
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
+  &__main {
+    flex: 1;
+    padding: var(--spacing-8) 0;
+    background-color: var(--color-background);
+  }
+}

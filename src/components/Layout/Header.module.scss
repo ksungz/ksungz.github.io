@@ -1,0 +1,53 @@
+/* Header 컴포넌트 스타일 - 깔끔한 디자인 */
+.header {
+  background: var(--color-primary);
+  color: white;
+  padding: var(--spacing-8) 0;
+  box-shadow: var(--shadow);
+  
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-6);
+  }
+  
+  &__logo {
+    flex-shrink: 0;
+  }
+  
+  &__title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-2);
+    color: white;
+  }
+  
+  &__subtitle {
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: var(--font-weight-normal);
+  }
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+  .header {
+    padding: var(--spacing-6) 0;
+    
+    &__content {
+      flex-direction: column;
+      text-align: center;
+      gap: var(--spacing-4);
+    }
+    
+    &__title {
+      font-size: var(--font-size-2xl);
+    }
+    
+    &__subtitle {
+      font-size: var(--font-size-sm);
+    }
+  }
+}

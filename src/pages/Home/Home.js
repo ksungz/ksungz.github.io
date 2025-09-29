@@ -38,7 +38,7 @@ const Home = () => {
       {/* Hero Section */}
       <section className={styles.home__hero}>
         <h1 className={styles.home__title}>
-          안녕하세요, 개발자 성재입니다 👋
+          Welcome to ksungz's dev 👋
         </h1>
         <p className={styles.home__description}>
           프론트엔드 개발과 웹 기술에 대한 이야기를 나누는 공간입니다.<br />

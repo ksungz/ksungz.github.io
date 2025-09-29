@@ -44,18 +44,18 @@ const Home = () => {
           프론트엔드 개발과 웹 기술에 대한 이야기를 나누는 공간입니다.<br />
           HTML, CSS, JavaScript, React를 중심으로 개발 경험과 일상을 공유합니다.
         </p>
-        <div className={styles.home__actions}>
+        {/* <div className={styles.home__actions}>
           <Link to="/about" className={styles.home__button}>
             👋 About Me
           </Link>
           <Link to="/category/react" className={`${styles.home__button} ${styles['home__button--outline']}`}>
             📚 최신 포스트 보기
           </Link>
-        </div>
+        </div> */}
       </section>
 
       {/* Recent Posts Section */}
-      <section className={styles.home__recent}>
+      {/* <section className={styles.home__recent}>
         <h2 className={styles.home__sectionTitle}>최근 포스트</h2>
         <div className={styles.home__posts}>
           {recentPosts.map((post) => (
@@ -74,10 +74,10 @@ const Home = () => {
             </article>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* Categories Section */}
-      <section className={styles.home__categories}>
+      {/* <section className={styles.home__categories}>
         <h2 className={styles.home__sectionTitle}>카테고리</h2>
         <div className={styles.home__categoryGrid}>
           <Link to="/category/html" className={styles.home__category}>
@@ -101,7 +101,7 @@ const Home = () => {
             <p>개발자의 일상과 생각</p>
           </Link>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

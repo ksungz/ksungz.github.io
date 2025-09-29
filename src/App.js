@@ -15,13 +15,13 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
+        {/* <Route path="/about" element={<About />} />
         <Route path="/category/html" element={<HtmlCategory />} />
         <Route path="/category/css" element={<CssCategory />} />
         <Route path="/category/javascript" element={<JavaScriptCategory />} />
         <Route path="/category/react" element={<ReactCategory />} />
         <Route path="/category/daily" element={<DailyCategory />} />
-        <Route path="/post/:category/:postId" element={<PostDetail />} />
+        <Route path="/post/:category/:postId" element={<PostDetail />} /> */}
       </Routes>
     </Layout>
   );

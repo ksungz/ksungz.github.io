@@ -12,7 +12,7 @@ const Header = () => {
         <div className={styles.header__content}>
           <div className={styles.header__logo}>
             <h1 className={styles.header__title}>
-              성재의 개발 블로그
+              Ksungz's DEV
             </h1>
             <p className={styles.header__subtitle}>
               Frontend Developer

@@ -12,7 +12,7 @@ const Footer = () => {
       <div className="container">
         <div className={styles.footer__content}>
           <p className={styles.footer__copyright}>
-            © {currentYear} 성재의 개발 블로그. All rights reserved.
+            © {currentYear} ksungz's dev. All rights reserved.
           </p>
           <div className={styles.footer__links}>
             <a 
@@ -24,7 +24,7 @@ const Footer = () => {
               GitHub
             </a>
             <a 
-              href="mailto:your.email@example.com"
+              href="mailto:k.suzkim@gmail.com"
               className={styles.footer__link}
             >
               Contact

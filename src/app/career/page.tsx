@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Career",
@@ -7,20 +9,20 @@ export const metadata: Metadata = {
 
 const careers = [
   {
-    company: "11번가 (SK플래닛)",
+    company: "11번가",
     team: "UI개발팀",
     period: "2020.12 ~ 현재",
     role: "UI 개발자",
     description:
       "국내 주요 이커머스 서비스인 11번가에서 트래픽이 집중되는 모바일웹 상품상세페이지(PDP)를 포함한 핵심 서비스 UI를 전담 개발하고 있습니다. SCSS→Dart Sass 전환(2,384개 파일), React 기반 PDP 마이그레이션 등 레거시 개선 작업을 주도했으며, AI 기반 개발 도구 체계를 구축해 팀 내 전파하는 등 개발 생산성 향상에 기여하고 있습니다.",
     projects: [
-      { period: "2024.06 ~ 현재", title: "모바일웹 상품상세(PDP) 전체 UI 개발" },
-      { period: "2025.11 ~ 2026.04", title: "체험단 서비스 전체 신규 구축" },
-      { period: "2026.01 ~ 2026.04", title: "React 기반 PDP 컴포넌트 개발" },
-      { period: "2025.06 ~ 2025.07", title: "Dart Sass 마이그레이션" },
-      { period: "2025.10 ~ 현재", title: "AI 기반 개발 도구 체계 구축 및 팀 전파" },
-      { period: "2021.09 ~ 현재", title: "서버/인프라 관리 및 환경 업데이트" },
-      { period: "2021.11 ~ 2022.12", title: "반응형 웹 전환 추진 및 기반 구축" },
+      { period: "2020.12 ~ 현재", title: "모바일웹 상품상세(PDP) 전체 UI 개발", link: "/tech/pdp-ui" },
+      { period: "2025.11 ~ 2026.04", title: "체험단 서비스 전체 신규 구축", link: "/tech/sample-service" },
+      { period: "2026.01 ~ 현재", title: "React 기반 PDP 컴포넌트 개발", link: "/tech/react-pdp" },
+      { period: "2025.06 ~ 2025.07", title: "Dart Sass 마이그레이션", link: "/tech/dart-sass" },
+      { period: "2025.10 ~ 현재", title: "AI 기반 개발 도구 체계 구축 및 팀 전파", link: "/tech/ai-tools" },
+      { period: "2021.09 ~ 현재", title: "서버/인프라 관리 및 환경 업데이트", link: "/tech/infra" },
+      { period: "2021.11 ~ 2022.12", title: "반응형 웹 전환 추진 및 기반 구축", link: "/tech/responsive" },
     ],
   },
   {
@@ -43,8 +45,8 @@ const careers = [
     description:
       "네이버, G마켓(eBay), 블리자드, PUBG, 스마일게이트 등 국내외 대형 클라이언트 UI 프로젝트를 전담 수행했습니다. 재직 후반 약 3년간 팀장으로서 팀원 업무 분배, 공수 산정, 클라이언트 커뮤니케이션을 총괄했으며, i-award 3개 부문 수상(대상·최우수상·우수상)에 기여했습니다.",
     projects: [
-      { period: "2016.10 ~ 2017.01", title: "네이버 웨일 브라우저 공식사이트 — i-award 최우수상" },
-      { period: "2017.02 ~ 2017.03", title: "배틀그라운드 공식사이트 구축 — i-award 대상" },
+      { period: "2016.10 ~ 2017.01", title: "네이버 웨일 브라우저 공식사이트 — i-award 최우수상", link: "/tech/whale-browser" },
+      { period: "2017.02 ~ 2017.03", title: "배틀그라운드 공식사이트 구축 — i-award 대상", link: "/tech/battlegrounds" },
       { period: "2018.04 ~ 2018.12", title: "PUBG 배틀그라운드 E-sports 사이트 — UI개발 총괄" },
       { period: "2017.12 ~ 2018.05", title: "블리자드 오버워치 E-sports 사이트 — UI개발 총괄" },
       { period: "2016.02 ~ 2016.12", title: "로스트아크 1차 CBT 사이트 구축 (PC/Mobile) — PL 담당" },
@@ -89,16 +91,16 @@ const keyDocs = [
   {
     category: "회고 · 경험 공유",
     items: [
-      { title: "Dart Sass 전환 회고 (with AI)", desc: "AI 코딩 도구 활용, 2,384개 SCSS 파일을 3주 만에 전환한 대규모 마이그레이션 경험 공유" },
+      { title: "Dart Sass 전환 회고 (with AI)", desc: "AI 코딩 도구 활용, 2,384개 SCSS 파일을 3주 만에 전환한 대규모 마이그레이션 경험 공유", link: "/tech/dart-sass-retro" },
       { title: "AI Agent 작업 플로우 기록", desc: "기획 분석 → Plan 수립 → UI 구현 → 문서화 → PR 생성까지 AI 에이전트 실무 적용 전과정" },
-      { title: "PR Review Agent 적용 정리", desc: "8개 저장소 파이프라인 설정, 빌드 러너 구성, 파일 필터링 규칙 등 도입 과정과 결과 기록" },
+      { title: "PR Review Agent 적용 정리", desc: "8개 저장소 파이프라인 설정, 빌드 러너 구성, 파일 필터링 규칙 등 도입 과정과 결과 기록", link: "/tech/pr-review-agent" },
     ],
   },
   {
     category: "성능 측정 · 기술 부채 해소",
     items: [
-      { title: "PDP CLS 개선 기록", desc: "PDP 유형별 Core Web Vitals Before/After 성능 수치 기록 및 개선 사항 추적" },
-      { title: "CDN CSS 점진적 내재화 (시리즈 7편)", desc: "외부 CDN 의존 CSS를 프로젝트 내부로 이관하는 전체 로드맵을 7편으로 문서화" },
+      { title: "PDP CLS 개선 기록", desc: "PDP 유형별 Core Web Vitals Before/After 성능 수치 기록 및 개선 사항 추적", link: "/tech/pdp-cls" },
+      { title: "CDN CSS 점진적 내재화 (시리즈 7편)", desc: "외부 CDN 의존 CSS를 프로젝트 내부로 이관하는 전체 로드맵을 7편으로 문서화", link: "/tech/cdn-css-series" },
     ],
   },
   {
@@ -108,7 +110,7 @@ const keyDocs = [
       { title: "PDP Pilot 계획서", desc: "SR 접수→기획 분석→구현→PR까지 AI 기반 PDP 업무 자동화 도구 제안" },
       { title: "SCSS 빌드/배포 프로세스 개선", desc: "컴파일 산출물 gitignore 처리로 머지 충돌 해소 + PR AI 리뷰 도입 환경 조성" },
       { title: "코드 품질 관리 강화 방안", desc: "정적 분석 도구, 린트 도구, 코드 품질 모니터링 플랫폼 비교 검토" },
-      { title: "모노레포 구조 검토 및 전환", desc: "10개+ 분산 저장소를 모노레포로 통합하는 방안 검토" },
+      { title: "모노레포 구조 검토 및 전환", desc: "10개+ 분산 저장소를 모노레포로 통합하는 방안 검토", link: "/tech/monorepo-review" },
       { title: "반응형 font 대응 검토", desc: "px/em/rem 단위 전환 함수 비교, 뷰포트 기반 유동적 타이포그래피 가이드" },
       { title: "마이페이지 반응형 검토", desc: "모바일/PC UX 일원화를 위한 부분 반응형 적용 방안 기술 검토" },
       { title: "디자인 시스템 요구사항 정리", desc: "UI 컴포넌트 라이브러리화 검토, 디자인 시스템 전환을 위한 요구사항 정리" },
@@ -158,9 +160,13 @@ export default function CareerPage() {
               <p className="text-sm text-[var(--color-muted)] leading-relaxed mb-4">{career.description}</p>
               <ul className="space-y-1.5">
                 {career.projects.map((proj) => (
-                  <li key={proj.title} className="flex gap-3 text-xs">
-                    <span className="font-mono text-[var(--color-muted)] shrink-0 w-28">{proj.period}</span>
-                    <span className="text-[var(--color-foreground)]">{proj.title}</span>
+                  <li key={proj.title} className="flex flex-col sm:flex-row sm:gap-3 gap-0.5 text-xs">
+                    <span className="font-mono text-[var(--color-muted)] shrink-0 sm:w-28">{proj.period}</span>
+                    {"link" in proj && proj.link ? (
+                      <Link href={proj.link} className="text-[var(--color-foreground)] underline underline-offset-2 decoration-[var(--color-border)] hover:decoration-[var(--color-foreground)]">{proj.title}</Link>
+                    ) : (
+                      <span className="text-[var(--color-foreground)]">{proj.title}</span>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -173,7 +179,7 @@ export default function CareerPage() {
       <section className="mb-12">
         <h2 className="mb-6 text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">Other Projects</h2>
         <div className="overflow-x-auto">
-          <table className="w-full text-xs border-collapse">
+          <table className="w-full min-w-[600px] text-xs border-collapse">
             <thead>
               <tr className="border-b border-[var(--color-border)]">
                 <th className="py-2 pr-4 text-left font-semibold text-[var(--color-foreground)] w-40">프로젝트</th>
@@ -206,12 +212,26 @@ export default function CareerPage() {
           {keyDocs.map((group) => (
             <div key={group.category}>
               <h3 className="mb-3 text-xs font-semibold text-[var(--color-foreground)] border-l-2 border-[var(--color-foreground)] pl-3">{group.category}</h3>
-              <div className="space-y-1">
+              <div className="space-y-0">
                 {group.items.map((item) => (
-                  <div key={item.title} className="grid grid-cols-[200px_1fr] gap-4 py-2 border-b border-[var(--color-border)] last:border-0 text-xs">
-                    <span className="font-medium text-[var(--color-foreground)]">{item.title}</span>
-                    <span className="text-[var(--color-muted)] leading-relaxed">{item.desc}</span>
-                  </div>
+                  "link" in item && item.link ? (
+                    <Link
+                      key={item.title}
+                      href={item.link}
+                      className="group flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4 py-2.5 -mx-2 px-2 rounded-md hover:bg-[var(--color-accent)] transition-all border-b border-[var(--color-border)] last:border-0 text-xs"
+                    >
+                      <span className="font-medium text-[var(--color-foreground)] w-full sm:w-[192px] sm:shrink-0 flex items-center gap-1.5">
+                        {item.title}
+                        <ArrowRight className="w-3 h-3 shrink-0 text-[var(--color-muted)] group-hover:text-[var(--color-foreground)] group-hover:translate-x-0.5 transition-all duration-150" />
+                      </span>
+                      <span className="text-[var(--color-muted)] leading-relaxed flex-1">{item.desc}</span>
+                    </Link>
+                  ) : (
+                    <div key={item.title} className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4 py-2.5 border-b border-[var(--color-border)] last:border-0 text-xs">
+                      <span className="font-medium text-[var(--color-foreground)] w-full sm:w-[192px] sm:shrink-0">{item.title}</span>
+                      <span className="text-[var(--color-muted)] leading-relaxed flex-1">{item.desc}</span>
+                    </div>
+                  )
                 ))}
               </div>
             </div>

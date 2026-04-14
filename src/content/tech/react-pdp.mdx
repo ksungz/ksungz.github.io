@@ -1,0 +1,65 @@
+---
+title: React 기반 PDP 컴포넌트 개발
+period: 2026.01 ~ 2026.04
+company: 11번가 UI개발팀
+role: CSS Modules + SCSS 환경 도입, UI 컴포넌트 신규 개발
+description: 기존 HTML/SCSS 기반 PDP를 React로 전환하는 과정에서 CSS Modules 환경 도입 및 주요 컴포넌트 개발
+tags: [React 18, TypeScript, CSS Modules, SCSS, Storybook, Vite, Lottie]
+---
+
+## 담당 업무
+
+기존 HTML/SCSS 기반 PDP를 React로 전환하는 과정에서, CSS Modules + SCSS 환경을 도입하고 주요 UI 컴포넌트를 신규 개발했습니다. 아마존 스토어 묶음할인 모듈, 하단 고정 버튼, AI 리뷰 요약 UI, CDN CSS 내재화 등 다양한 모듈을 구현했습니다.
+
+## 주요 성과
+
+- **묶음할인 상품 모듈** — 상품 카드, 수평 스크롤 리스트, 장바구니 추천 레이어 등 3개 컴포넌트 개발
+- **하단 고정 버튼** — 장바구니/선물하기 버튼 리팩토링, Figma 디자인 스펙과 SCSS 정합성 보정
+- **AI 리뷰 요약 UI** — 그라데이션 애니메이션 구현, Lottie 애니메이션 연동
+- **CDN CSS 내재화** — CDN에서 로드하던 외부 CSS를 Critical/Rest 2분할 번들링으로 전환하여 초기 로딩 성능 최적화
+
+## 아마존 스토어 묶음할인 모듈
+
+`2026.02 ~ 2026.03` · `React PDP 저장소`
+
+- **묶음할인 상품 카드** — 상품 정보 표시 카드 컴포넌트
+- **수평 스크롤 상품 리스트** — 가로 스크롤 기반 상품 탐색 컴포넌트
+- **장바구니 추천 레이어** — 토스트 UI, 스타일 변수화 적용
+- CSS Modules 적용 및 공통 SCSS 파일 세팅
+- Storybook 스토리 구성 및 문서화, Jest 테스트 환경 SCSS mock 설정
+
+## PDP 미니카트 / 하단 고정 버튼
+
+`2026.03` · `React PDP 저장소`
+
+- **장바구니 버튼** 컴포넌트 추가 및 **구매하기 버튼** 정리
+- **하단 고정 버튼** Storybook Story 추가
+- **선물하기 버튼**을 아이콘 버튼으로 리팩토링
+- SCSS import 경로 최적화 (3단계 → 2단계)
+- Figma 디자인 스펙과 SCSS 정합성 보정, 말풍선/재입고 알림 스토리 추가
+
+## AI 리뷰 요약 UI
+
+`2026.03` · `React PDP 저장소`
+
+- AI 리뷰 요약 컴포넌트 UI 구현
+- 그라데이션 애니메이션 속도 조절
+- Lottie 애니메이션 파일 연동
+- Storybook title 충돌 해결을 위한 스토리 파일 분리, 웹뷰 대응
+
+## PDP CDN CSS 내재화
+
+`2026.04` · `React PDP 저장소 + 모바일웹 정적 리소스 저장소`
+
+- ATF 블록 14개 + 공통 CSS를 CDN에서 번들 내재화
+- CSS 2분할 (Critical + Rest) 번들링 구현
+- ATF 그리드 시스템 CSS 내재화, ATF 소형 블록 4개 내재화
+- 모바일웹 정적 리소스 저장소에 Phase 1 내재화 테스트용 경량 CDN CSS 추가
+
+## PDP Module Sass 환경 구축
+
+`2026.01` · `React PDP 저장소`
+
+- Module Sass 모듈 추가 (전역 스타일링 파일 포함)
+- 전역 SCSS 주입 설정 적용
+- sass, sass-loader 버전 업데이트, 기존 스토리 핸들러 호환성 수정

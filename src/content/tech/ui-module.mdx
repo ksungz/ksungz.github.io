@@ -1,0 +1,89 @@
+---
+title: Monolithic UI 개선을 위한 모듈 관리 전략
+date: "2023-09"
+category: 세미나 발표
+badge: proposal
+description: 사내 세미나 발표 — HTML Include 기법 적용을 통한 코드 재사용성 및 유지보수성 향상
+context: 모바일 상품 상세 페이지
+backHref: /career
+backLabel: 경력기술서
+---
+
+<DocDiagram title="Monolithic UI → 모듈화 전환 개념">
+<svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow5" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#6366f1"/></marker>
+  </defs>
+  <rect x="20" y="10" width="280" height="160" rx="10" fill="#fef2f2" stroke="#fca5a5" strokeWidth="1.5"/>
+  <text x="160" y="35" textAnchor="middle" fontSize="12" fontWeight="700" fill="#dc2626">Monolithic 방식</text>
+  <rect x="40" y="48" width="110" height="50" rx="6" fill="#fee2e2" stroke="#fca5a5"/>
+  <text x="95" y="70" textAnchor="middle" fontSize="9" fill="#991b1b">상품A 페이지</text>
+  <text x="95" y="84" textAnchor="middle" fontSize="8" fill="#b91c1c">헤더+가격+리뷰+푸터</text>
+  <rect x="170" y="48" width="110" height="50" rx="6" fill="#fee2e2" stroke="#fca5a5"/>
+  <text x="225" y="70" textAnchor="middle" fontSize="9" fill="#991b1b">상품B 페이지</text>
+  <text x="225" y="84" textAnchor="middle" fontSize="8" fill="#b91c1c">헤더+가격+리뷰+푸터</text>
+  <rect x="40" y="108" width="110" height="50" rx="6" fill="#fee2e2" stroke="#fca5a5"/>
+  <text x="95" y="130" textAnchor="middle" fontSize="9" fill="#991b1b">상품C 페이지</text>
+  <text x="95" y="144" textAnchor="middle" fontSize="8" fill="#b91c1c">헤더+가격+리뷰+푸터</text>
+  <text x="225" y="137" textAnchor="middle" fontSize="9" fill="#991b1b">동일 블록이</text>
+  <text x="225" y="152" textAnchor="middle" fontSize="9" fill="#dc2626">각각 중복 존재</text>
+  <line x1="310" y1="90" x2="370" y2="90" stroke="#6366f1" strokeWidth="2" markerEnd="url(#arrow5)"/>
+  <rect x="380" y="10" width="300" height="160" rx="10" fill="#f0fdf4" stroke="#86efac" strokeWidth="1.5"/>
+  <text x="530" y="35" textAnchor="middle" fontSize="12" fontWeight="700" fill="#16a34a">Include 방식</text>
+  <rect x="400" y="50" width="80" height="30" rx="4" fill="#dcfce7" stroke="#4ade80"/><text x="440" y="69" textAnchor="middle" fontSize="9" fill="#166534">헤더 블록</text>
+  <rect x="490" y="50" width="80" height="30" rx="4" fill="#dcfce7" stroke="#4ade80"/><text x="530" y="69" textAnchor="middle" fontSize="9" fill="#166534">가격 블록</text>
+  <rect x="580" y="50" width="80" height="30" rx="4" fill="#dcfce7" stroke="#4ade80"/><text x="620" y="69" textAnchor="middle" fontSize="9" fill="#166534">리뷰 블록</text>
+  <rect x="400" y="100" width="80" height="28" rx="4" fill="#f0fdf4" stroke="#86efac"/><text x="440" y="118" textAnchor="middle" fontSize="9" fill="#166534">페이지A</text>
+  <rect x="490" y="100" width="80" height="28" rx="4" fill="#f0fdf4" stroke="#86efac"/><text x="530" y="118" textAnchor="middle" fontSize="9" fill="#166534">페이지B</text>
+  <rect x="580" y="100" width="80" height="28" rx="4" fill="#f0fdf4" stroke="#86efac"/><text x="620" y="118" textAnchor="middle" fontSize="9" fill="#166534">페이지C</text>
+  <text x="530" y="152" textAnchor="middle" fontSize="9" fill="#15803d">공유 블록을 include로 재사용</text>
+</svg>
+</DocDiagram>
+
+## 발표 배경
+
+모바일 상품 상세 페이지가 다양한 유형(글로벌 커머스, 리테일, 프리미엄 등)으로 파생되면서, 동일한 UI 블록이 각 페이지 산출물에 중복으로 존재하게 되었습니다. 하나의 블록을 수정하면 모든 파생 페이지를 개별적으로 수정해야 하는 비효율이 발생했고, 이를 해결하기 위한 환경 개선 사례와 전략을 사내 세미나에서 발표했습니다.
+
+## 문제 도출
+
+Monolithic UI 아키텍처에서 식별된 핵심 문제점:
+
+| 문제 | 설명 |
+|-----|------|
+| **코드 복잡성** | 크고 복잡한 코드베이스로 인해 가독성 저하 및 유지보수 어려움 |
+| **확장성 부족** | 작은 변경에도 전체 재배포 필요. 페이지마다 중복 요소 유지 부담 |
+| **성능 문제** | 일부 기능 변경 시에도 전체 빌드 필요로 배포 시간 증가 |
+| **협업 어려움** | 다수 개발자 동시 작업 시 충돌 발생 빈번 |
+| **안정성 위험** | 하나의 구성요소 실패가 전체 애플리케이션에 영향 |
+
+## 해결 방안: HTML Include
+
+공통 요소를 별도 HTML 파일로 분리하고, 빌드 도구를 통해 필요한 페이지에 삽입하는 방식을 도입했습니다.
+
+### 도구 비교 및 선정
+
+| 도구 | 특징 | 적합도 |
+|-----|------|--------|
+| gulp-file-include | Gulp 플러그인으로 기존 워크플로우 통합 용이, 경량 | **채택** |
+| Mustache | 간단한 문법, 변수 삽입 중심 | 후보 |
+| Handlebars | 복잡한 로직 지원 가능하나 상대적으로 무거움 | 과잉 |
+
+기존 Gulp 기반 빌드 환경과의 호환성, 경량성, 학습 비용을 고려하여 `gulp-file-include`를 선택했습니다.
+
+### 장점과 단점
+
+**장점**
+
+코드 재사용성 강화 — 공통 블록을 한 곳에서 관리. 개발 생산성 향상 — 모듈화된 UI 컴포넌트 재사용. 유지보수 용이 — 한 곳 수정으로 전체 반영.
+
+**단점**
+
+초기 파일 생성 수 증가 (1개 → 2~3개). 블록 UI 분리 작업에 초기 시간 투자 필요.
+
+## 발표에서 다룬 추가 주제
+
+HTML Include 외에도 팀에서 추진한 정적 리소스 관리 개선 사례를 함께 발표했습니다:
+
+- **SVG Sprite** — 벡터 기반 아이콘 스프라이트로 전환하여 관리 효율성·품질 개선
+- **CSS Versioning** — 브라우저 캐싱 문제 해결을 위한 CSS 파일 버전 관리 전략
+- **NPM 패키지화 계획** — 공통 요소를 독립적 패키지로 추출하여 프로젝트 간 재사용 로드맵

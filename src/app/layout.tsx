@@ -33,7 +33,7 @@ export default function RootLayout({
       lang="ko"
       className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-[var(--color-background)] text-[var(--color-foreground)]">
+      <body suppressHydrationWarning className="flex min-h-full flex-col bg-[var(--color-background)] text-[var(--color-foreground)]">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

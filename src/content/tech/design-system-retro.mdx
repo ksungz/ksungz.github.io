@@ -1,0 +1,79 @@
+---
+title: 디자인 시스템 인프라 구축 회고
+date: "2023"
+category: 회고
+badge: retro
+description: 저장소 세팅부터 개발/상용 서버 구성, CI/CD 파이프라인 구축까지의 전 과정
+context: 디자인 시스템
+backHref: /career
+backLabel: 경력기술서
+---
+
+<DocDiagram title="인프라 구축 단계">
+<svg viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#6366f1"/></marker>
+  </defs>
+  <rect x="10" y="10" width="140" height="55" rx="8" fill="#e0e7ff" stroke="#818cf8" strokeWidth="1.5"/>
+  <text x="80" y="32" textAnchor="middle" fontSize="11" fontWeight="600" fill="#4338ca">저장소 세팅</text>
+  <text x="80" y="47" textAnchor="middle" fontSize="10" fill="#6366f1">브랜치 전략 수립</text>
+  <line x1="150" y1="37" x2="185" y2="37" stroke="#6366f1" strokeWidth="1.5" markerEnd="url(#arrow2)"/>
+  <rect x="185" y="10" width="140" height="55" rx="8" fill="#fef3c7" stroke="#f59e0b" strokeWidth="1.5"/>
+  <text x="255" y="32" textAnchor="middle" fontSize="11" fontWeight="600" fill="#92400e">개발 서버</text>
+  <text x="255" y="47" textAnchor="middle" fontSize="10" fill="#b45309">VHost 설정·DNS</text>
+  <line x1="325" y1="37" x2="360" y2="37" stroke="#6366f1" strokeWidth="1.5" markerEnd="url(#arrow2)"/>
+  <rect x="360" y="10" width="140" height="55" rx="8" fill="#fce7f3" stroke="#ec4899" strokeWidth="1.5"/>
+  <text x="430" y="32" textAnchor="middle" fontSize="11" fontWeight="600" fill="#9d174d">상용 서버</text>
+  <text x="430" y="47" textAnchor="middle" fontSize="10" fill="#db2777">L4·DNS·방화벽·모니터링</text>
+  <line x1="500" y1="37" x2="535" y2="37" stroke="#6366f1" strokeWidth="1.5" markerEnd="url(#arrow2)"/>
+  <rect x="535" y="10" width="150" height="55" rx="8" fill="#dcfce7" stroke="#4ade80" strokeWidth="1.5"/>
+  <text x="610" y="32" textAnchor="middle" fontSize="11" fontWeight="600" fill="#166534">CI/CD 구성</text>
+  <text x="610" y="47" textAnchor="middle" fontSize="10" fill="#16a34a">Pipeline 배포 자동화</text>
+  <rect x="185" y="90" width="500" height="55" rx="8" fill="#f8fafc" stroke="#e2e8f0" strokeWidth="1"/>
+  <text x="210" y="112" fontSize="10" fontWeight="600" fill="#475569">상용 서버 구축 프로세스:</text>
+  <text x="210" y="130" fontSize="10" fill="#64748b">서버 생성 요청 → 접근제어 → L4(VIP) → DNS 연동 → 방화벽 → 보안검토 → 모니터링 → Go-Live</text>
+</svg>
+</DocDiagram>
+
+## 프로젝트 배경
+
+팀 내부에서 디자인 시스템 프로젝트가 시작되면서, 코드를 관리할 저장소와 빌드 결과물을 호스팅할 서버 인프라가 필요했습니다. Cloud 기반 코드 저장소에 파이프라인을 구성하고, 개발 서버와 상용 서버를 직접 셋업하는 것이 이 프로젝트의 핵심이었습니다.
+
+## 주요 작업
+
+### 1. 저장소 및 브랜치 전략
+
+- Cloud 코드 저장소에 프로젝트 생성 및 초기 환경 구성
+- 팀 내 의견을 수렴하여 브랜치 정책 및 머지 전략 수립
+
+### 2. 개발 서버 구성
+
+- 기존 팀 CI 서버를 활용, 디자인 시스템 전용 디렉토리 생성
+- Virtual Host 설정으로 독립적인 도메인 접속 환경 마련
+- SSH 접속 환경 구축 및 서버 접근 권한 신청
+
+### 3. 상용 서버 구성
+
+- 인프라 콘솔을 통한 서버 신규 생성 요청 (Nginx 기반)
+- 접근제어, L4(VIP) 설정, DNS 신청 및 연동
+- 방화벽 연동, 보안 검토, 상용 모니터링 등록, Go-Live 체크
+
+### 4. CI/CD 파이프라인
+
+- 배포 서버 설정 파일에 개발 서버 IP 정보 등록
+- 파이프라인 YAML 작성으로 빌드·배포 자동화
+- 개발 서버와 상용 서버 동일한 파이프라인 구조로 구성
+
+## 배운 점과 회고
+
+### 해냈고 배웠다
+
+CI/CD 환경을 처음부터 직접 구축해볼 수 있는 기회였음. 서버 접속, 리눅스 기본 명령어, 가상 호스트 설정 등 인프라 전반에 대한 이해도가 크게 향상됨. 기존 가이드 문서를 조합하며 문제를 하나씩 해결하는 과정 자체가 큰 학습이었음.
+
+### 아쉬웠던 점
+
+상용 오픈 전에 포트 기반 환경 분리를 시도해보지 못한 것이 아쉬움. 파이프라인 배포 단계에서 예상치 못한 이슈로 도움을 받게 된 부분이 있었음.
+
+### 향후 계획
+
+개발 서버 신규 세팅 시 포트를 활용한 환경 분리, 롤백 정책 수립, 최소 리뷰어 설정 등 운영 안정성 강화 계획.

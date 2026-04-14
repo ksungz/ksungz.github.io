@@ -1,0 +1,62 @@
+---
+title: AI 기반 PR 자동 리뷰 시스템 구축
+date: "2025"
+category: AI/자동화
+badge: ai
+description: CI 파이프라인에 AI 리뷰 에이전트를 통합하여 코드 리뷰 품질과 속도를 향상
+context: 팀 공용 CI/CD
+backHref: /career
+backLabel: 경력기술서
+---
+
+<DocDiagram title="PR Review Agent 동작 흐름">
+<svg viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow8" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#6366f1"/></marker>
+  </defs>
+  <rect x="10" y="35" width="120" height="50" rx="8" fill="#e0e7ff" stroke="#818cf8" strokeWidth="1.5"/>
+  <text x="70" y="57" textAnchor="middle" fontSize="11" fontWeight="600" fill="#4338ca">PR 생성</text>
+  <text x="70" y="72" textAnchor="middle" fontSize="10" fill="#6366f1">개발자 push</text>
+  <line x1="130" y1="60" x2="175" y2="60" stroke="#6366f1" strokeWidth="1.5" markerEnd="url(#arrow8)"/>
+  <rect x="175" y="35" width="140" height="50" rx="8" fill="#f3e8ff" stroke="#c084fc" strokeWidth="1.5"/>
+  <text x="245" y="57" textAnchor="middle" fontSize="11" fontWeight="600" fill="#7c3aed">CI Pipeline</text>
+  <text x="245" y="72" textAnchor="middle" fontSize="10" fill="#9333ea">AI Agent 트리거</text>
+  <line x1="315" y1="60" x2="360" y2="60" stroke="#6366f1" strokeWidth="1.5" markerEnd="url(#arrow8)"/>
+  <rect x="360" y="35" width="140" height="50" rx="8" fill="#fef3c7" stroke="#f59e0b" strokeWidth="1.5"/>
+  <text x="430" y="57" textAnchor="middle" fontSize="11" fontWeight="600" fill="#92400e">코드 분석</text>
+  <text x="430" y="72" textAnchor="middle" fontSize="10" fill="#b45309">diff 기반 리뷰</text>
+  <line x1="500" y1="60" x2="545" y2="60" stroke="#6366f1" strokeWidth="1.5" markerEnd="url(#arrow8)"/>
+  <rect x="545" y="35" width="140" height="50" rx="8" fill="#dcfce7" stroke="#4ade80" strokeWidth="1.5"/>
+  <text x="615" y="57" textAnchor="middle" fontSize="11" fontWeight="600" fill="#166534">리뷰 코멘트</text>
+  <text x="615" y="72" textAnchor="middle" fontSize="10" fill="#16a34a">PR에 자동 게시</text>
+</svg>
+</DocDiagram>
+
+## 도입 배경
+
+팀의 코드 리뷰 프로세스에서 반복적으로 발생하는 패턴이 있었습니다: 컨벤션 미준수, 접근성 속성 누락, 불필요한 코드 등 기계적으로 판별 가능한 이슈들이 사람의 리뷰 시간을 소비하고 있었습니다.
+
+이를 AI에게 위임하여 사람은 비즈니스 로직과 아키텍처에 집중할 수 있도록 하고자 했습니다.
+
+## 구축 내용
+
+- CI 파이프라인에 AI 리뷰 에이전트를 통합하여 PR 생성 시 자동으로 코드 분석 수행
+- 변경된 코드의 diff를 기반으로 리뷰 코멘트를 PR에 자동 게시
+- On-Demand 방식으로 필요한 시점에 수동으로도 리뷰를 트리거할 수 있는 옵션 추가
+- 팀의 코딩 컨벤션, 접근성 기준, BEM 네이밍 규칙 등을 리뷰 기준으로 설정
+
+## 리뷰 대상 항목
+
+| 카테고리 | 점검 항목 예시 |
+|---------|--------------|
+| 코드 품질 | 불필요한 코드, 중복 선택자, 미사용 변수 |
+| 접근성 | ARIA 속성, 시맨틱 태그, alt 텍스트, 키보드 네비게이션 |
+| 컨벤션 | BEM 네이밍, SCSS 네스팅 깊이, 클래스 접두사 |
+| 성능 | 불필요한 !important, 과도한 셀렉터 특이성 |
+
+## 성과
+
+- 반복적인 컨벤션 리뷰 코멘트가 **자동화**되어 리뷰어의 부담 감소
+- PR 리뷰 대기 시간 단축 — AI가 즉시 1차 리뷰 수행
+- 접근성·컨벤션 관련 이슈의 사전 탐지율 향상
+- 팀원들이 코드 품질 기준을 자연스럽게 학습하는 교육 효과

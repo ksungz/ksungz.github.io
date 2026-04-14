@@ -24,6 +24,8 @@ const careerSummary = [
   },
 ];
 
+const PRIMARY_SKILLS = new Set(["HTML5", "SCSS/Sass", "React 18", "TypeScript", "Cursor AI"]);
+
 const skills = [
   { label: "마크업/스타일링", items: ["HTML5", "SCSS/Sass", "CSS Modules", "BEM", "반응형 웹", "웹 접근성"] },
   { label: "프레임워크", items: ["React 18", "TypeScript", "Next.js", "Storybook"] },
@@ -72,7 +74,11 @@ export default async function Home() {
                 {items.map((item) => (
                   <span
                     key={item}
-                    className="rounded-full border border-[var(--color-border)] px-2.5 py-0.5 text-xs text-[var(--color-muted)]"
+                    className={
+                      PRIMARY_SKILLS.has(item)
+                        ? "rounded-full border border-[#2563eb] bg-[#eff6ff] px-2.5 py-0.5 text-xs text-[#2563eb] font-medium"
+                        : "rounded-full border border-[var(--color-border)] px-2.5 py-0.5 text-xs text-[var(--color-muted)]"
+                    }
                   >
                     {item}
                   </span>

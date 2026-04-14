@@ -1,0 +1,116 @@
+---
+title: SVG Sprite 환경 구성 및 적용
+date: "2022"
+category: FE 기술
+badge: proposal
+description: PNG 이미지 스프라이트를 벡터 기반 SVG Sprite로 전환하여 관리 효율성과 품질을 개선
+context: 모바일웹 빌드 환경
+backHref: /career
+backLabel: 경력기술서
+---
+
+<DocDiagram title="PNG Sprite vs SVG Sprite 비교">
+<svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+  <rect x="20" y="15" width="300" height="150" rx="10" fill="#fef2f2" stroke="#fca5a5" strokeWidth="1.5"/>
+  <text x="170" y="40" textAnchor="middle" fontSize="13" fontWeight="700" fill="#dc2626">PNG Sprite (기존)</text>
+  <rect x="40" y="55" width="60" height="24" rx="4" fill="#fee2e2"/><text x="70" y="71" textAnchor="middle" fontSize="10" fill="#991b1b">100x20</text>
+  <rect x="110" y="55" width="90" height="36" rx="4" fill="#fee2e2"/><text x="155" y="77" textAnchor="middle" fontSize="10" fill="#991b1b">150x30</text>
+  <rect x="210" y="55" width="40" height="40" rx="4" fill="#fee2e2"/><text x="230" y="79" textAnchor="middle" fontSize="10" fill="#991b1b">40x40</text>
+  <text x="170" y="120" textAnchor="middle" fontSize="11" fill="#991b1b">크기별 별도 이미지 필요</text>
+  <text x="170" y="138" textAnchor="middle" fontSize="11" fill="#991b1b">확대 시 깨짐 발생</text>
+  <text x="170" y="155" textAnchor="middle" fontSize="10" fill="#b91c1c">444×348 / 18KB</text>
+  <rect x="380" y="15" width="300" height="150" rx="10" fill="#f0fdf4" stroke="#86efac" strokeWidth="1.5"/>
+  <text x="530" y="40" textAnchor="middle" fontSize="13" fontWeight="700" fill="#16a34a">SVG Sprite (개선)</text>
+  <rect x="440" y="55" width="60" height="60" rx="4" fill="#dcfce7" stroke="#4ade80" strokeWidth="1"/>
+  <text x="470" y="89" textAnchor="middle" fontSize="10" fill="#166534">하나의 벡터</text>
+  <text x="560" y="70" fontSize="10" fill="#166534">→ 100x20</text>
+  <text x="560" y="86" fontSize="10" fill="#166534">→ 150x30</text>
+  <text x="560" y="102" fontSize="10" fill="#166534">→ 자유 크기</text>
+  <text x="530" y="138" textAnchor="middle" fontSize="11" fill="#166534">크기 무관, 고해상도 대응</text>
+  <text x="530" y="155" textAnchor="middle" fontSize="10" fill="#15803d">194×141 / 8KB (56% 감소)</text>
+</svg>
+</DocDiagram>
+
+## 도입 배경
+
+기존에는 아이콘 이미지를 PNG 포맷의 스프라이트로 관리하고 있었습니다. 같은 아이콘이라도 크기가 다르면 별도 이미지를 제작해야 했고, 화면 확대 시 이미지가 깨지는 문제가 있었습니다. 또한 개별 SVG 파일이 늘어날수록 HTTP 요청 수 증가에 따른 성능 이슈도 발생했습니다.
+
+이를 해결하기 위해 벡터 기반 SVG 파일들을 하나의 스프라이트로 합쳐 관리하는 환경을 구축했습니다.
+
+## 체크포인트 및 목표
+
+- 같은 모양의 아이콘을 크기와 상관없이 사용 가능해야 함
+- 화면 확대 시에도 깨짐이 없어야 함
+- 기존 빌드 환경(Gulp 기반)에 자연스럽게 통합되어야 함
+- 기존 PNG Sprite와 동일한 SCSS mixin 방식으로 사용 가능해야 함
+- 서비스별로 독립 빌드가 가능해야 함
+- 캐시 무효화를 위한 타임스탬프 적용 필요
+
+## 기술 구현
+
+### 빌드 파이프라인
+
+Gulp 플러그인을 활용하여 서비스별 SVG 폴더의 개별 아이콘들을 하나의 스프라이트 이미지로 병합하는 태스크를 구성했습니다. 빌드 시 타임스탬프가 파일명에 자동 추가되어 캐시 무효화가 적용됩니다.
+
+### SCSS Mixin 자동 생성
+
+Mustache 기반 템플릿을 제작하여 스프라이트 빌드 시 SCSS 파일이 자동 생성되도록 했습니다. 생성된 mixin은 아이콘명과 원하는 크기를 인자로 받아 스프라이트 내 위치와 크기를 자동 계산합니다.
+
+```scss
+// 기본 사용
+.icon-logo {
+  @include get-sprite-서비스명('logo');
+}
+
+// 크기 변경
+.icon-logo--large {
+  @include get-sprite-position-서비스명('logo', 71);
+}
+
+// 여러 아이콘 분기
+.util-btn::before {
+  @include get-sprite-서비스명;  // 기본 선언
+}
+.util-btn--share::before {
+  @include get-sprite-position-서비스명('ic-share', 20);
+}
+.util-btn--delete::before {
+  @include get-sprite-position-서비스명('ic-delete', 40);
+}
+```
+
+### 폴더 구조
+
+```
+img/svg/sprites/
+├── serviceA/          ← 입력: 개별 SVG 아이콘
+│   ├── icon1.svg
+│   └── icon2.svg
+├── serviceB/
+│   └── icon3.svg
+├── sp_serviceA_*.svg  ← 출력: 병합된 스프라이트
+└── sp_serviceB_*.svg
+
+scss/svg/
+├── sp_serviceA.scss   ← 출력: 자동 생성된 mixin
+└── sp_serviceB.scss
+```
+
+## 벤치마킹 사례
+
+도입 전 국내외 주요 서비스의 아이콘 관리 방식을 조사했습니다.
+
+| 서비스 | 방식 | 특징 |
+|-------|------|------|
+| 대형 쇼핑 라이브 | SVG Sprite | 확대 깨짐 방지 목적의 단일 스프라이트 |
+| 대형 동영상 플랫폼 | SVG Sprite | 단일 스프라이트 파일로 아이콘 통합 관리 |
+| 글로벌 스토어 | SVG inline + 단일 SVG | 인라인 태그와 개별 파일 혼용 |
+| 글로벌 IT 기업 | Icon Font | 커스텀 심볼 폰트화, 디자이너-개발자 협업 |
+
+## 성과
+
+- 스프라이트 이미지 용량 **56% 감소** (18KB → 8KB, 럭셔리 서비스 기준)
+- 동일 아이콘의 크기별 이미지 제작 불필요 → 디자인 리소스 절감
+- 고해상도 화면(Retina) 대응 자동 해결
+- 서비스별 독립 빌드로 불필요한 아이콘 번들링 방지
+- 기존 PNG mixin과 동일한 사용법으로 학습 비용 최소화

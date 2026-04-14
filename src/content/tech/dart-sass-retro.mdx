@@ -1,0 +1,97 @@
+---
+title: CSS 전처리기 마이그레이션 회고
+date: "2025"
+category: 회고
+badge: retro
+description: 레거시 Sass 빌드 환경을 최신 Dart 기반으로 전환한 전 과정과 팀 회고
+context: 모바일웹 정적 리소스 저장소
+backHref: /career
+backLabel: 경력기술서
+---
+
+<DocDiagram title="마이그레이션 전체 흐름">
+<svg viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow1" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#6366f1"/></marker>
+  </defs>
+  <rect x="10" y="35" width="120" height="50" rx="8" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="1.5"/>
+  <text x="70" y="57" textAnchor="middle" fontSize="11" fontWeight="600" fill="#334155">기존 Node Sass</text>
+  <text x="70" y="72" textAnchor="middle" fontSize="10" fill="#64748b">@import 방식</text>
+  <line x1="130" y1="60" x2="180" y2="60" stroke="#6366f1" strokeWidth="1.5" markerEnd="url(#arrow1)"/>
+  <rect x="180" y="35" width="120" height="50" rx="8" fill="#e0e7ff" stroke="#818cf8" strokeWidth="1.5"/>
+  <text x="240" y="57" textAnchor="middle" fontSize="11" fontWeight="600" fill="#4338ca">AI 자동 변환</text>
+  <text x="240" y="72" textAnchor="middle" fontSize="10" fill="#6366f1">@use/@forward</text>
+  <line x1="300" y1="60" x2="350" y2="60" stroke="#6366f1" strokeWidth="1.5" markerEnd="url(#arrow1)"/>
+  <rect x="350" y="35" width="120" height="50" rx="8" fill="#fef3c7" stroke="#f59e0b" strokeWidth="1.5"/>
+  <text x="410" y="57" textAnchor="middle" fontSize="11" fontWeight="600" fill="#92400e">수동 검증</text>
+  <text x="410" y="72" textAnchor="middle" fontSize="10" fill="#b45309">diff 비교·수정</text>
+  <line x1="470" y1="60" x2="520" y2="60" stroke="#6366f1" strokeWidth="1.5" markerEnd="url(#arrow1)"/>
+  <rect x="520" y="35" width="160" height="50" rx="8" fill="#dcfce7" stroke="#4ade80" strokeWidth="1.5"/>
+  <text x="600" y="57" textAnchor="middle" fontSize="11" fontWeight="600" fill="#166534">Dart Sass 완료</text>
+  <text x="600" y="72" textAnchor="middle" fontSize="10" fill="#16a34a">빌드 50%↑ 개선</text>
+</svg>
+</DocDiagram>
+
+## 배경과 목표
+
+모바일웹 정적 리소스 저장소의 CSS 빌드 환경이 더 이상 유지보수되지 않는 레거시 전처리기 위에 구축되어 있었습니다. 수천 개의 SCSS 파일이 `@import` 방식으로 결합되어 있어 변수 충돌, 의도치 않은 상속, 빌드 시간 증가 등 여러 문제가 누적되고 있었습니다.
+
+이를 해결하기 위해 최신 Dart 기반 전처리기로의 전환을 추진했으며, 단순한 문법 변경을 넘어 빌드 파이프라인 전체를 재설계하는 것을 목표로 했습니다.
+
+## 주요 작업 내용
+
+- 빌드 환경을 Dart 기반으로 교체, 기존 빌드 도구와의 호환성 확보
+- 전체 SCSS 파일의 `@import`를 `@use`/`@forward`로 일괄 전환
+- AI 코딩 도구를 활용해 수천 개 파일을 일관된 규칙으로 자동 변환
+- 변환 결과물의 CSS diff를 수동 검증하여 누락·오류 수정
+- Watch 모드 및 부분 빌드 기능 개선으로 개발 시 빌드 효율 향상
+- 미사용 CSS 36개 파일 식별 및 제거
+
+## 기술적 성과
+
+**빌드 성능 비교**
+
+| 항목 | 전환 전 | 전환 후 | 개선율 |
+|------|---------|---------|--------|
+| 빌드 10회 총 소요시간 | 430초 | 196초 | **54% 단축** |
+| Watch 모드 | 미지원(수동 빌드) | 자동 감지·부분 빌드 | — |
+| 미사용 CSS 정리 | — | 36개 파일 제거 | 빌드 파이프라인 최적화 |
+
+- **네임스페이스 도입**으로 변수·믹스인 충돌 가능성 제거, 코드 가독성 향상
+- 각 partial 파일 단위로 빌드되어 의도치 않은 상속 문제 해소
+- `@use ... with` 구문으로 컨텍스트별 변수 오버라이드 가능
+
+```scss
+// 네임스페이스로 출처를 명확히 한 사용 예시
+@use "../../common/mixins" as *;
+@use "../mixins/mixins" as search_mixins;
+
+@include search_mixins.slick-dot($border-color: "none");
+
+// 엔트리에서 partial 변수를 오버라이드하는 예시
+@use "../order/component/message" as * with (
+  $gift-type: false
+);
+```
+
+## AI 활용 전략
+
+수천 개 파일의 문법 변환을 수작업으로 진행하기엔 비현실적이었기에, AI 코딩 도구의 자동 변환 기능을 적극 활용했습니다.
+
+- 팀 전용 규칙(Rule) 파일을 작성하여 AI가 일관된 변환 결과를 생성하도록 유도
+- 변환 후 반드시 빌드된 CSS diff를 사람이 검증하는 프로세스를 수립
+- AI가 불필요한 수정(주석 제거, 포맷 변경)을 하는 케이스를 발견 → 프롬프트 개선으로 해결
+
+## 팀 회고 요약
+
+### 좋았던 점
+
+AI를 활용한 대규모 일괄 변환으로 시간 단축. 프로젝트 전반의 SCSS 구조와 히스토리를 이해하는 계기가 됨. 마지막 검증·배포 과정에서 팀 전체 협업이 원활했음.
+
+### 아쉬웠던 점
+
+기존 SCSS 구조의 복잡한 의존성까지 개선하진 못함. 사전 경험 부족으로 시행착오 발생. AI 신뢰도 편차로 diff 검증 비용 증가.
+
+### 다음 시도
+
+AI 활용 표준 프롬프트 가이드 정리, SCSS 의존성 구조 개선, 내장 함수 활용 스터디, 다른 저장소 확대 적용 계획.

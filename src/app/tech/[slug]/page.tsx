@@ -5,7 +5,6 @@ import remarkGfm from "remark-gfm";
 import { getPostBySlug, getAllPosts } from "@/lib/mdx";
 import { mdxComponents } from "@/components/mdx/MDXComponents";
 
-const mdxOptions = { mdxOptions: { remarkPlugins: [remarkGfm] } } as const;
 import Link from "next/link";
 
 interface Props {
@@ -58,7 +57,7 @@ export default async function TechPostPage({ params }: Props) {
       </header>
 
       <article className="prose-sm max-w-none">
-        <MDXRemote source={post.content} components={mdxComponents} {...mdxOptions} />
+        <MDXRemote source={post.content} components={mdxComponents} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
       </article>
     </div>
   );

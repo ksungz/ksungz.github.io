@@ -1,0 +1,72 @@
+---
+title: 상품 상세 페이지 CLS 개선
+date: "2025"
+category: 성능
+badge: perf
+description: Core Web Vitals의 CLS 지표를 대폭 개선하여 사용자 경험과 Lighthouse 점수를 향상
+context: 모바일 상품 상세 페이지
+backHref: /career
+backLabel: 경력기술서
+---
+
+<DocDiagram title="CLS 개선 원리">
+<svg viewBox="0 0 700 140" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow4" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#6366f1"/></marker>
+  </defs>
+  <rect x="20" y="10" width="300" height="120" rx="10" fill="#fef2f2" stroke="#fca5a5" strokeWidth="1.5"/>
+  <text x="170" y="35" textAnchor="middle" fontSize="12" fontWeight="700" fill="#dc2626">Before</text>
+  <rect x="40" y="48" width="260" height="10" rx="2" fill="#fecaca"/>
+  <text x="310" y="57" textAnchor="end" fontSize="9" fill="#991b1b">height: 0px</text>
+  <rect x="40" y="68" width="260" height="50" rx="4" fill="#fee2e2" stroke="#fca5a5" strokeWidth="1" strokeDasharray="4"/>
+  <text x="170" y="97" textAnchor="middle" fontSize="10" fill="#991b1b">이미지 로드 후 갑자기 확장</text>
+  <text x="170" y="112" textAnchor="middle" fontSize="9" fill="#b91c1c">→ CLS 0.48 (매우 높음)</text>
+  <line x1="330" y1="70" x2="370" y2="70" stroke="#6366f1" strokeWidth="2" markerEnd="url(#arrow4)"/>
+  <rect x="380" y="10" width="300" height="120" rx="10" fill="#f0fdf4" stroke="#86efac" strokeWidth="1.5"/>
+  <text x="530" y="35" textAnchor="middle" fontSize="12" fontWeight="700" fill="#16a34a">After</text>
+  <rect x="400" y="48" width="260" height="70" rx="4" fill="#dcfce7" stroke="#4ade80" strokeWidth="1"/>
+  <text x="530" y="78" textAnchor="middle" fontSize="10" fill="#166534">padding-top: 100%</text>
+  <text x="530" y="93" textAnchor="middle" fontSize="10" fill="#166534">고정 비율로 공간 확보</text>
+  <text x="530" y="112" textAnchor="middle" fontSize="9" fill="#15803d">→ CLS 0.03 (우수)</text>
+</svg>
+</DocDiagram>
+
+## 문제 상황
+
+모바일 상품 상세 페이지의 메인 이미지 영역이 초기 렌더링 시 높이가 0px로 시작되어, 이미지가 로드되면서 급격히 확장되는 레이아웃 시프트가 발생하고 있었습니다. 이는 CLS(Cumulative Layout Shift) 점수를 크게 악화시켜 Core Web Vitals 기준에 미달했고, 사용자 입장에서도 페이지 진입 시 콘텐츠가 밀려나는 불쾌한 경험을 유발했습니다.
+
+## 개선 방법
+
+이미지 로드 전에 미리 고정 높이를 확보하는 CSS 기법을 적용했습니다.
+
+- `padding-top: 100%`를 기본값으로 적용하여 1:1 비율의 공간을 미리 확보
+- OOTD(패션 카테고리)처럼 세로형 이미지를 사용하는 경우 `padding-top: 133%`로 분기 처리
+- 직사각형 노출 영역에 대한 CSS 클래스 분기 적용
+
+### 적용 범위
+
+모든 유형의 상품 상세 페이지에 일괄 적용했습니다:
+
+- 통합 상품 상세 페이지
+- 글로벌 커머스 상품 페이지
+- 프리미엄 상품 페이지
+- 리테일 / 마트 상품 페이지
+- 패션(OOTD) 상품 페이지
+
+## 성과
+
+**주요 지표 변화 (5회 평균)**
+
+| 페이지 유형 | 개선 전 | 개선 후 | 향상 |
+|------------|---------|---------|------|
+| 마트 상품 | 28.4점 | 49.4점 | **+21.0** |
+| 스마트옵션 상품 | 29.2점 | 46.0점 | **+16.8** |
+| 리테일 상품 | 34.6점 | 51.4점 | **+16.8** |
+| 글로벌 커머스 | 38.4점 | 54.4점 | **+16.0** |
+| 프리미엄 상품 A | 37.8점 | 56.4점 | **+18.6** |
+| 프리미엄 상품 B | 29.6점 | 55.6점 | **+26.0** |
+| 카탈로그(위너) | 27.6점 | 57.2점 | **+29.6** |
+
+- ATF(Above The Fold) 영역 CLS: **0.48 → 0.03**으로 94% 감소
+- Lighthouse 성능 점수 평균 **20점 이상 향상**
+- 모든 상품 유형에서 Core Web Vitals CLS 기준 충족

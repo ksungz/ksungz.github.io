@@ -6,7 +6,7 @@ import { getAllPosts } from "@/lib/mdx";
 const careerSummary = [
   {
     period: "2020.12 ~ 현재",
-    company: "11번가 (SK플래닛)",
+    company: "11번가",
     role: "UI 개발자 · UI개발팀",
     description: "모바일웹 PDP 전담 개발, Dart Sass 마이그레이션(2,384개 파일), React 기반 이관, AI 개발 도구 체계 구축",
   },

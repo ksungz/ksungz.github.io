@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Career",
@@ -55,6 +54,68 @@ const careers = [
   },
 ];
 
+const otherProjects = [
+  { title: "LIVE 방송 운영 효율화", period: "2026.03", company: "11번가", desc: "방송 콘솔 UI 개선" },
+  { title: "판매자정보 캡차 페이지", period: "2025.08~09", company: "11번가", desc: "캡차 인증 페이지 신규 개발, 반응형" },
+  { title: "신한카드 긴급발송 서비스", period: "2025.05~06", company: "11번가", desc: "사내 업무협약 프로젝트 — 고객용/직원용 전체 화면 신규 개발, 반응형" },
+  { title: "리뷰 작성 화면 전체 개편", period: "2025.03~06", company: "11번가", desc: "UX/UI 전면 변경, 플로팅 애니메이션, 넛징 모션" },
+  { title: "패밀리플러스 서비스", period: "2024.10", company: "11번가", desc: "PDP UI, 관리자페이지, 초대 대기화면 신규 개발" },
+  { title: "11키티즈 게임", period: "2024", company: "11번가", desc: "CSS/Lottie 애니메이션 기반 게임 UI" },
+  { title: "기프티콘 앱 선물함 리뉴얼", period: "2022.08~09", company: "11번가", desc: "1차/2차 마크업" },
+  { title: "공통 UI Component 고도화", period: "2022", company: "11번가", desc: "기존 UI 컴포넌트 확장, 디자인 시스템 구축 검토" },
+  { title: "iOS/Android 크로스브라우저", period: "2021~현재", company: "11번가", desc: "iOS 15~26, Android 6~16 등 모바일 OS별 이슈 대응" },
+  { title: "Live11 전시영역 개편", period: "2021", company: "11번가", desc: "LIVE/VOD 방송화면, 편성표, 채널프로필 UI 개발" },
+  { title: "엠코르셋 쇼핑몰 구축", period: "2018.12~2019.06", company: "하이브랩", desc: "반응형 쇼핑몰 신규 구축, 성능 최적화 (이미지 최적화, 코드 압축)" },
+  { title: "NHN Ent 기업사이트 개편", period: "2018.06~2018.11", company: "하이브랩", desc: "중국지사 웹개발팀과 협업, 커뮤니케이션 주도" },
+  { title: "토스트클라우드 콘솔 개편", period: "2018.04~2018.06", company: "하이브랩", desc: "Bootstrap 기반 UI 컴포넌트 가이드 페이지 제작, 운영 병행" },
+  { title: "카카오게임즈 운영", period: "2015.09~2018.12", company: "하이브랩", desc: "홈페이지·게임별 공략·이벤트 UI 전담 운영" },
+  { title: "NHN AD 오픈애즈", period: "2016.03~2016.12", company: "하이브랩", desc: "빅데이터 마케팅 서비스 UI 개발 — i-award 전문정보분야 우수상" },
+  { title: "킹닷컴 운영", period: "2015.01~2016.07", company: "하이브랩", desc: "캔디크러시사가 등 다수 게임 이벤트·사전예약 UI 개발" },
+  { title: "잡코리아 웰던투 반응형 개편", period: "2014.09~2015.01", company: "하이브랩", desc: "PC/태블릿/모바일 단일 코드 3타입 반응형 구현" },
+];
+
+const keyDocs = [
+  {
+    category: "이슈 리포팅 · 장애 분석",
+    items: [
+      { title: "디자인 시스템 서버 간헐적 에러 분석", desc: "로드밸런서 라운드 로빈 환경에서 배포 누락으로 인한 404/403 에러 원인 진단 및 해결" },
+      { title: "통합PDP 스냅샷 제거 대응 검토", desc: "기존 PDP → 통합PDP 전환 시 화면 넘침 이슈 분석 및 해결 방안 도출" },
+      { title: "iOS 26 모바일 사파리 대응 검토", desc: "Liquid Glass UI 변경에 따른 PDP 영향도 분석 및 대응 방안 수립" },
+      { title: "사내 이미지 레지스트리 변경 대응", desc: "CI/CD 파이프라인 내 Docker 이미지 URL 변경에 따른 전체 저장소 일괄 수정" },
+      { title: "마이페이지 스크롤 불가 장애 분석", desc: "운영 장애 원인 분석, 보고, 해결 (2022)" },
+      { title: "디자인 툴 SVG 다운로드 이슈 정리", desc: "SVG 내보내기 시 폰트 깨짐·도형 변형 이슈 원인 및 해결 방법 문서화" },
+    ],
+  },
+  {
+    category: "회고 · 경험 공유",
+    items: [
+      { title: "Dart Sass 전환 회고 (with AI)", desc: "AI 코딩 도구 활용, 2,384개 SCSS 파일을 3주 만에 전환한 대규모 마이그레이션 경험 공유" },
+      { title: "AI Agent 작업 플로우 기록", desc: "기획 분석 → Plan 수립 → UI 구현 → 문서화 → PR 생성까지 AI 에이전트 실무 적용 전과정" },
+      { title: "PR Review Agent 적용 정리", desc: "8개 저장소 파이프라인 설정, 빌드 러너 구성, 파일 필터링 규칙 등 도입 과정과 결과 기록" },
+    ],
+  },
+  {
+    category: "성능 측정 · 기술 부채 해소",
+    items: [
+      { title: "PDP CLS 개선 기록", desc: "PDP 유형별 Core Web Vitals Before/After 성능 수치 기록 및 개선 사항 추적" },
+      { title: "CDN CSS 점진적 내재화 (시리즈 7편)", desc: "외부 CDN 의존 CSS를 프로젝트 내부로 이관하는 전체 로드맵을 7편으로 문서화" },
+    ],
+  },
+  {
+    category: "개선 제안 · 기술 검토",
+    items: [
+      { title: "PDP 개발 효율화 제안", desc: "HTML→React 이중 작업을 Storybook 단일 환경으로 통합하는 개선 방안" },
+      { title: "PDP Pilot 계획서", desc: "SR 접수→기획 분석→구현→PR까지 AI 기반 PDP 업무 자동화 도구 제안" },
+      { title: "SCSS 빌드/배포 프로세스 개선", desc: "컴파일 산출물 gitignore 처리로 머지 충돌 해소 + PR AI 리뷰 도입 환경 조성" },
+      { title: "코드 품질 관리 강화 방안", desc: "정적 분석 도구, 린트 도구, 코드 품질 모니터링 플랫폼 비교 검토" },
+      { title: "모노레포 구조 검토 및 전환", desc: "10개+ 분산 저장소를 모노레포로 통합하는 방안 검토" },
+      { title: "반응형 font 대응 검토", desc: "px/em/rem 단위 전환 함수 비교, 뷰포트 기반 유동적 타이포그래피 가이드" },
+      { title: "마이페이지 반응형 검토", desc: "모바일/PC UX 일원화를 위한 부분 반응형 적용 방안 기술 검토" },
+      { title: "디자인 시스템 요구사항 정리", desc: "UI 컴포넌트 라이브러리화 검토, 디자인 시스템 전환을 위한 요구사항 정리" },
+    ],
+  },
+];
+
 const sideProjects = [
   { title: "유튜브 댓글 AI 분석기", stack: "Next.js · Gemini · YouTube API", description: "YouTube 영상 댓글을 AI로 분석·요약" },
   { title: "AI 숏츠 오케스트레이션", stack: "Next.js 15 · Supabase · Inngest", description: "AI 기반 숏츠 영상 제작 파이프라인" },
@@ -103,6 +164,56 @@ export default function CareerPage() {
                   </li>
                 ))}
               </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 기타 프로젝트 */}
+      <section className="mb-12">
+        <h2 className="mb-6 text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">Other Projects</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full text-xs border-collapse">
+            <thead>
+              <tr className="border-b border-[var(--color-border)]">
+                <th className="py-2 pr-4 text-left font-semibold text-[var(--color-foreground)] w-40">프로젝트</th>
+                <th className="py-2 pr-4 text-left font-mono font-normal text-[var(--color-muted)] w-28">기간</th>
+                <th className="py-2 pr-4 text-left font-semibold text-[var(--color-foreground)] w-16">소속</th>
+                <th className="py-2 text-left font-semibold text-[var(--color-foreground)]">내용</th>
+              </tr>
+            </thead>
+            <tbody>
+              {otherProjects.map((p) => (
+                <tr key={p.title + p.period} className="border-b border-[var(--color-border)] last:border-0">
+                  <td className="py-2.5 pr-4 font-medium text-[var(--color-foreground)]">{p.title}</td>
+                  <td className="py-2.5 pr-4 font-mono text-[var(--color-muted)]">{p.period}</td>
+                  <td className="py-2.5 pr-4 text-[var(--color-muted)]">{p.company}</td>
+                  <td className="py-2.5 text-[var(--color-muted)] leading-relaxed">{p.desc}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* 주요 문서 */}
+      <section className="mb-12">
+        <h2 className="mb-2 text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">Key Documents</h2>
+        <p className="mb-6 text-xs text-[var(--color-muted)]">
+          문제 해결, 기술 검토, 경험 공유를 목적으로 직접 작성한 핵심 문서입니다. Confluence 위키에 <strong className="text-[var(--color-foreground)]">70여 건</strong>을 작성했으며, 그 중 주요 문서를 정리했습니다.
+        </p>
+        <div className="space-y-8">
+          {keyDocs.map((group) => (
+            <div key={group.category}>
+              <h3 className="mb-3 text-xs font-semibold text-[var(--color-foreground)] border-l-2 border-[var(--color-foreground)] pl-3">{group.category}</h3>
+              <div className="space-y-1">
+                {group.items.map((item) => (
+                  <div key={item.title} className="grid grid-cols-[200px_1fr] gap-4 py-2 border-b border-[var(--color-border)] last:border-0 text-xs">
+                    <span className="font-medium text-[var(--color-foreground)]">{item.title}</span>
+                    <span className="text-[var(--color-muted)] leading-relaxed">{item.desc}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>

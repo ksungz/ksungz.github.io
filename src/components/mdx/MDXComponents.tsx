@@ -1,7 +1,10 @@
 import type { MDXComponents } from "mdx/types";
 import { cn } from "@/lib/utils";
+import DocDiagram from "./DocDiagram";
 
 export const mdxComponents: MDXComponents = {
+  // 커스텀 컴포넌트
+  DocDiagram,
   h1: ({ className, ...props }) => (
     <h1 className={cn("mt-8 mb-4 text-2xl font-bold tracking-tight", className)} {...props} />
   ),
@@ -35,5 +38,26 @@ export const mdxComponents: MDXComponents = {
   hr: () => <hr className="my-8 border-[var(--color-border)]" />,
   strong: ({ className, ...props }) => (
     <strong className={cn("font-semibold", className)} {...props} />
+  ),
+  // 테이블
+  table: ({ className, ...props }) => (
+    <div className="my-6 overflow-x-auto">
+      <table className={cn("w-full border-collapse text-xs", className)} {...props} />
+    </div>
+  ),
+  thead: ({ className, ...props }) => (
+    <thead className={cn("border-b border-[var(--color-border)]", className)} {...props} />
+  ),
+  tbody: ({ className, ...props }) => (
+    <tbody className={cn("[&>tr:last-child]:border-0", className)} {...props} />
+  ),
+  tr: ({ className, ...props }) => (
+    <tr className={cn("border-b border-[var(--color-border)]", className)} {...props} />
+  ),
+  th: ({ className, ...props }) => (
+    <th className={cn("py-2 pr-4 text-left font-semibold text-[var(--color-foreground)]", className)} {...props} />
+  ),
+  td: ({ className, ...props }) => (
+    <td className={cn("py-2.5 pr-4 text-[var(--color-muted)] leading-relaxed", className)} {...props} />
   ),
 };

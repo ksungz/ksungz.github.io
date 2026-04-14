@@ -1,0 +1,69 @@
+---
+title: "CDN CSS 점진적 내재화 시리즈"
+date: "2025"
+description: "외부 CDN에서 제공하던 CSS를 React 번들에 내재화하여 기술 부채를 해소한 7편의 연재 기록"
+category: "성능/기술부채"
+badge: "perf"
+context: "React 기반 상품 상세 페이지"
+backHref: "/career"
+backLabel: "경력기술서"
+---
+
+<DocDiagram title="CSS 내재화 아키텍처 전환">
+  <svg viewBox="0 0 700 130" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="arrow7" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <path d="M0,0 L8,3 L0,6" fill="#737373"/>
+      </marker>
+    </defs>
+    {/* Before */}
+    <rect x="20" y="15" width="280" height="100" rx="10" fill="#f5f5f5" stroke="#e5e5e5" strokeWidth="1.5"/>
+    <text x="160" y="38" textAnchor="middle" fontSize="12" fontWeight="700" fill="#0a0a0a">Before</text>
+    <rect x="40" y="50" width="100" height="28" rx="4" fill="#e5e5e5"/>
+    <text x="90" y="68" textAnchor="middle" fontSize="9" fill="#0a0a0a">React 번들</text>
+    <text x="155" y="68" fontSize="9" fill="#737373">+</text>
+    <rect x="170" y="50" width="110" height="28" rx="4" fill="#e5e5e5" stroke="#737373"/>
+    <text x="225" y="68" textAnchor="middle" fontSize="9" fill="#0a0a0a">CDN CSS (외부)</text>
+    <text x="160" y="100" textAnchor="middle" fontSize="9" fill="#737373">두 저장소 관리 · 배포 순서 의존성</text>
+    {/* Arrow */}
+    <line x1="310" y1="65" x2="370" y2="65" stroke="#737373" strokeWidth="2" markerEnd="url(#arrow7)"/>
+    {/* After */}
+    <rect x="380" y="15" width="300" height="100" rx="10" fill="#f5f5f5" stroke="#0a0a0a" strokeWidth="1.5"/>
+    <text x="530" y="38" textAnchor="middle" fontSize="12" fontWeight="700" fill="#0a0a0a">After</text>
+    <rect x="420" y="50" width="240" height="28" rx="4" fill="#e5e5e5" stroke="#0a0a0a"/>
+    <text x="540" y="68" textAnchor="middle" fontSize="9" fill="#0a0a0a">React 번들 (CSS 내장 — Critical / Rest 2분할)</text>
+    <text x="530" y="100" textAnchor="middle" fontSize="9" fill="#737373">단일 저장소 관리 · 독립 배포</text>
+  </svg>
+</DocDiagram>
+
+## 시리즈 개요
+
+모바일 상품 상세 페이지의 CSS가 React 컴포넌트 저장소와 별도의 정적 리소스 저장소(CDN)에 이원화되어 관리되고 있었습니다. 이로 인해 배포 순서 의존성, 스타일 충돌, 이중 관리 부담 등의 기술 부채가 누적되어 있었습니다.
+
+이 시리즈에서는 CDN에서 제공하던 CSS를 React 번들에 점진적으로 내재화하는 전 과정을 7편에 걸쳐 기록했습니다.
+
+## 시리즈 구성
+
+| 편 | 주제 | 핵심 내용 |
+|---|---|---|
+| 1편 | 현황 분석 | CSS 이원화 구조의 문제점과 기술 부채 분석 |
+| 2편 | 전략 수립 | 점진적 내재화 전략과 로드맵 설계 |
+| 3편 | 번들링 구조 | Critical CSS / Rest CSS 2분할 번들링 구조 설계 |
+| 4편 | 컴포넌트별 전환 | 블록 단위 CSS 이관 실행 및 검증 |
+| 5편 | 충돌 해결 | 기존 CDN CSS와의 스타일 우선순위 충돌 해결 |
+| 6편 | 성능 검증 | 내재화 후 성능 지표 측정 및 비교 |
+| 7편 | 마무리/회고 | 전환 완료 정리 및 향후 개선 방향 |
+
+## 핵심 기술 결정
+
+- **Critical / Rest 2분할** — ATF(Above The Fold) 영역 CSS를 Critical로 분리하여 초기 렌더링 속도 확보
+- **점진적 전환** — 한 번에 모든 CSS를 이관하지 않고, 블록(컴포넌트) 단위로 순차 이관
+- **CSS Modules 활용** — React 컴포넌트와 스타일의 결합도를 높여 스코프 격리
+- **기존 CDN CSS fallback** — 이관 완료 전까지 CDN CSS를 유지하여 안정성 확보
+
+## 성과
+
+- CSS 관리 포인트를 **2개 → 1개 저장소**로 통합
+- 배포 순서 의존성 제거로 **독립적 배포** 가능
+- 스타일 충돌 이슈 감소 및 컴포넌트별 스타일 캡슐화
+- Critical/Rest 분리로 초기 렌더링 성능 유지

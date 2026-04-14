@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import { getDocBySlug, getAllDocs } from "@/lib/docs";
 import { mdxComponents } from "@/components/mdx/MDXComponents";
+
+const mdxOptions = { mdxOptions: { remarkPlugins: [remarkGfm] } } as const;
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -63,7 +66,7 @@ export default async function DocPage({ params }: Props) {
       </header>
 
       <article>
-        <MDXRemote source={doc.content} components={mdxComponents} />
+        <MDXRemote source={doc.content} components={mdxComponents} {...mdxOptions} />
       </article>
     </div>
   );

@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import { getPostBySlug, getAllPosts } from "@/lib/mdx";
 import { mdxComponents } from "@/components/mdx/MDXComponents";
+
+const mdxOptions = { mdxOptions: { remarkPlugins: [remarkGfm] } } as const;
 import Link from "next/link";
 
 interface Props {
@@ -55,7 +58,7 @@ export default async function TechPostPage({ params }: Props) {
       </header>
 
       <article className="prose-sm max-w-none">
-        <MDXRemote source={post.content} components={mdxComponents} />
+        <MDXRemote source={post.content} components={mdxComponents} {...mdxOptions} />
       </article>
     </div>
   );

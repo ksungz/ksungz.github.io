@@ -93,7 +93,7 @@ const keyDocs = [
     items: [
       { title: "Dart Sass 전환 회고 (with AI)", desc: "AI 코딩 도구 활용, 2,384개 SCSS 파일을 3주 만에 전환한 대규모 마이그레이션 경험 공유", link: "/tech/dart-sass-retro" },
       { title: "AI Agent 작업 플로우 기록", desc: "기획 분석 → Plan 수립 → UI 구현 → 문서화 → PR 생성까지 AI 에이전트 실무 적용 전과정" },
-      { title: "PR Review Agent 적용 정리", desc: "8개 저장소 파이프라인 설정, 빌드 러너 구성, 파일 필터링 규칙 등 도입 과정과 결과 기록", link: "/tech/pr-review-agent" },
+      { title: "AI PR Review Agent 팀 도입 및 적용", desc: "사내 제공 AI Agent를 8개 저장소 파이프라인에 적용 — yml 설정, 파일 필터링 규칙, On-Demand 트리거 구성", link: "/tech/pr-review-agent" },
     ],
   },
   {

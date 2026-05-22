@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 const nav = [
   { href: "/career", label: "Career" },
   { href: "/tech", label: "Tech" },
+  { href: "/tech/digest", label: "Digest" },
   { href: "/life", label: "Life" },
 ];
 
@@ -26,7 +27,8 @@ export default function Header() {
               href={href}
               className={cn(
                 "text-sm transition-colors hover:text-[var(--color-foreground)]",
-                pathname === href || pathname.startsWith(href + "/")
+                pathname === href ||
+                (pathname.startsWith(href + "/") && !(href === "/tech" && pathname.startsWith("/tech/digest")))
                   ? "font-medium text-[var(--color-foreground)]"
                   : "text-[var(--color-muted)]"
               )}

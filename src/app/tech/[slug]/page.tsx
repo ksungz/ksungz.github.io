@@ -27,14 +27,25 @@ export default async function TechPostPage({ params }: Props) {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
+  const isDigest = post.category === "GeekNews 픽";
+
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
       <Link
-        href="/tech"
+        href={isDigest ? "/tech/digest" : "/tech"}
         className="mb-8 inline-flex items-center gap-1 text-xs text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors"
       >
-        ← Tech
+        ← {isDigest ? "Digest" : "Tech"}
       </Link>
+
+      {isDigest && (
+        <div className="mb-8 rounded-lg border border-[var(--color-border)] bg-[var(--color-accent)] px-4 py-3">
+          <p className="text-xs text-[var(--color-muted)] leading-relaxed">
+            매일 GeekNews의 최신 내용을 스크랩하여 개인 프롬프트를 활용해 분석한 포스팅입니다.
+            AI가 작성한 초안을 검토 후 게시합니다.
+          </p>
+        </div>
+      )}
 
       <header className="mb-10">
         <time className="font-mono text-xs text-[var(--color-muted)]">{post.date}</time>

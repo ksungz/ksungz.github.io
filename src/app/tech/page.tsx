@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 export default function TechPage() {
-  const posts = getAllPosts();
+  const posts = getAllPosts().filter((p) => p.category !== "GeekNews 픽");
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">

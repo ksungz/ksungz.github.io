@@ -1,0 +1,22 @@
+---
+title: "GeekNews 픽: Codex CLI /goal과 Gemma 4 MTP"
+date: "2026-05-08"
+category: "GeekNews 픽"
+badge: digest
+description: 목표를 주면 알아서 루프 도는 Codex, 3배 빨라진 로컬 Gemma 4
+tags: ["AI", "Codex", "Gemma", "LLM", "로컬LLM", "에이전트"]
+---
+
+## Codex CLI 0.128.0, /goal로 자율 루프 지원
+
+Codex CLI 0.128.0에 `/goal` 기능이 추가됐다. 목표를 설정하면 에이전트가 달성 여부를 스스로 판단하면서 루프를 반복 실행하는 구조다. "Ralph loop"라는 개념을 CLI에 적용한 것으로, 완료되지 않았더라도 토큰 예산이 소진되면 자동으로 멈춘다.
+
+구현 방식이 재미있는데, 각 턴이 끝날 때마다 두 개의 프롬프트 템플릿이 자동 주입된다. `goals/continuation.md`는 목표를 계속 이어갈지 판단하고, `goals/budget_limit.md`는 예산 한도 도달 시 처리를 담당한다. 기능 활성화는 `config.toml`에 `goals = true` 한 줄 추가하면 된다.
+
+당장 내 텔레그램 봇 작업에 써보고 싶다. 반복적인 PR 초안 생성이나 리팩터링 루프 같은 작업에 딱 맞는 구조다.
+
+## Gemma 4 MTP: 품질 손실 없이 추론 속도 3배
+
+Google이 Gemma 4 모델군에 Multi-Token Prediction(MTP) 드래프터를 공개했다. 경량 드래프터 모델이 여러 토큰을 미리 예측하고 메인 모델이 병렬로 검증하는 방식으로, 공식 수치는 최대 3배 속도 향상이다. 실제 개발자 하드웨어에선 1.7x~2.2x 정도가 현실적인 것 같다.
+
+Ollama도 이미 드래프터를 지원한다. 로컬 LLM 쓰면서 응답 속도 답답했다면 한 번 시도해볼 만하다.

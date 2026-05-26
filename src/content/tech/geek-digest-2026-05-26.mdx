@@ -1,0 +1,20 @@
+---
+title: "GeekNews 픽: AI 코딩 에이전트 비용, 덜 묻게 만들면 줄어든다 — CodeGraph"
+date: "2026-05-26"
+category: "GeekNews 픽"
+badge: digest
+description: "토큰 35% 절감, 툴 호출 70% 감소 — CodeGraph가 MCP 기반 코드 지식 그래프로 AI 에이전트 비용을 구조적으로 줄이는 방식"
+tags: ["CodeGraph", "AI에이전트", "MCP", "코드지식그래프", "ClaudeCode"]
+---
+
+Claude Code 쓰다 보면 에이전트가 같은 파일을 여러 번 읽고, 이미 본 구조를 또 탐색하는 걸 자주 목격한다. 비용이 나가는 게 느껴지는 순간이다.
+
+[CodeGraph](https://github.com/colbymchenry/codegraph)는 그 문제를 정면으로 건드린다. 코드베이스를 미리 인덱싱해서 MCP 서버로 노출하는 방식인데, 에이전트가 매번 파일 탐색 툴을 호출하는 대신 이미 구축된 그래프를 조회한다. 결과가 꽤 구체적이다 — 토큰 ~35% 절감, 툴 호출 ~70% 감소. GitHub 스타 27.6k, 363 커밋, PR 97개. 단기 화제작이 아닌 분위기다.
+
+마음에 드는 부분은 100% 로컬 실행이라는 점이다. 코드가 외부로 나가지 않으니 API 키가 박힌 프로젝트에도 쓸 수 있다. `codegraph init -i` 하나면 Claude Code, Cursor, Gemini CLI 설정을 인터랙티브하게 일괄 구성해준다.
+
+서브앱이 10개 넘는 모노레포나 obsidian-vault처럼 파일이 흩어진 구조에서 특히 효과가 클 것 같다. 조만간 실측해볼 예정이다.
+
+---
+
+* 출처 : https://github.com/colbymchenry/codegraph

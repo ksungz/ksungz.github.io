@@ -38,15 +38,6 @@ export default async function TechPostPage({ params }: Props) {
         ← {isDigest ? "Digest" : "Tech"}
       </Link>
 
-      {isDigest && (
-        <div className="mb-8 rounded-lg border border-[var(--color-border)] bg-[var(--color-accent)] px-4 py-3">
-          <p className="text-xs text-[var(--color-muted)] leading-relaxed">
-            매일 GeekNews의 최신 내용을 스크랩하여 개인 프롬프트를 활용해 분석한 포스팅입니다.
-            AI가 작성한 초안을 검토 후 게시합니다.
-          </p>
-        </div>
-      )}
-
       <header className="mb-10">
         <time className="font-mono text-xs text-[var(--color-muted)]">{post.date}</time>
         <h1 className="mt-2 text-2xl font-bold tracking-tight">{post.title}</h1>
@@ -66,6 +57,15 @@ export default async function TechPostPage({ params }: Props) {
           </div>
         )}
       </header>
+
+      {isDigest && (
+        <div className="mb-8 rounded-lg border border-[var(--color-border)] bg-[var(--color-accent)] px-4 py-3">
+          <p className="text-xs text-[var(--color-muted)] leading-relaxed">
+            매일 GeekNews의 최신 내용을 스크랩하여 개인 프롬프트를 활용해 분석한 포스팅입니다.
+            AI가 작성한 초안을 검토 후 게시하며, 원문 링크는 각 포스팅 내에서 확인할 수 있습니다.
+          </p>
+        </div>
+      )}
 
       <article className="prose-sm max-w-none">
         <MDXRemote source={post.content} components={mdxComponents} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />

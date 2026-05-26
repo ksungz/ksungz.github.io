@@ -1,5 +1,47 @@
 # CHANGELOG
 
+## 2026-05-22~23 — GeekNews Digest 전용 섹션 추가
+
+### 신규
+- `src/app/tech/digest/page.tsx` — GeekNews Digest 전용 목록 페이지
+  - `category === "GeekNews 픽"` 필터링
+  - AI 작성 안내 배너 상단 고정
+- `next.config.mjs` — `next.config.ts` 대체 (SWC 바이너리 미존재 환경 대응)
+
+### 변경
+
+**`src/components/layout/Header.tsx`**
+- Digest 메뉴 항목 추가 (`/tech/digest`)
+- active state 로직 수정: `/tech/digest` 하위 경로에서는 Tech 탭 비활성화
+
+**`src/app/tech/page.tsx`**
+- `getAllPosts()` → `getAllPosts().filter(p => p.category !== "GeekNews 픽")`
+- Digest 포스트가 Tech 목록에 노출되지 않도록 제외
+
+**`src/app/tech/[slug]/page.tsx`**
+- `isDigest = post.category === "GeekNews 픽"` 조건 추가
+- `← Tech` / `← Digest` 백링크 분기
+- AI 작성 안내 배너 위치: 헤더(제목·태그) **아래**, 본문 **위**로 배치
+- 배너 텍스트: "매일 GeekNews의 최신 내용을 스크랩하여 개인 프롬프트를 활용해 분석한 포스팅입니다. AI가 작성한 초안을 검토 후 게시하며, 원문 링크는 각 포스팅 내에서 확인할 수 있습니다."
+
+**`src/lib/mdx.ts`**
+- `PostMeta` 인터페이스에 `category?: string` 추가
+- `getAllPosts()` / `getPostBySlug()` 모두 `category` 필드 반환
+
+### GeekNews Digest MDX frontmatter 규격
+```yaml
+---
+title: "GeekNews 픽: [키워드]"
+date: "YYYY-MM-DD"
+category: "GeekNews 픽"
+badge: digest
+description: "한 줄 요약"
+tags: ["tag1", "tag2"]
+---
+```
+
+---
+
 ## 2026-04-14
 
 ### Phase 2-2 Bulk 이관 완료

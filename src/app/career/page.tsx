@@ -133,7 +133,7 @@ export default function CareerPage() {
         <p className="font-mono text-xs text-[var(--color-muted)] mb-2">경력기술서</p>
         <h1 className="text-2xl font-bold tracking-tight">김성재</h1>
         <p className="mt-2 text-sm text-[var(--color-muted)]">
-          시니어 UI 개발자 · 프론트엔드 개발 / AI 기반 개발 체계 구축 · 약 13년
+          시니어 UI 엔지니어 · 프론트엔드 개발 / AI 기반 개발 체계 구축 · 약 13년
         </p>
       </div>
 
@@ -141,7 +141,7 @@ export default function CareerPage() {
       <section className="mb-12">
         <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">About</h2>
         <div className="space-y-3 text-sm text-[var(--color-muted)] leading-relaxed">
-          <p>HTML/CSS 기반 UI 개발을 중심으로 13년간 커머스·게임·플랫폼 도메인에서 실무를 수행해온 시니어 UI 개발자입니다. 복잡한 UI를 구조적으로 정리하고, 규모가 큰 레거시를 단계적으로 개선하는 데 강점이 있습니다.</p>
+          <p>HTML/CSS 기반 UI 개발을 중심으로 13년간 커머스·게임·플랫폼 도메인에서 실무를 수행해온 시니어 UI 엔지니어입니다. 복잡한 UI를 구조적으로 정리하고, 규모가 큰 레거시를 단계적으로 개선하는 데 강점이 있습니다.</p>
           <p>현재는 11번가에서 SCSS/HTML 마크업 산출물을 React 기반 저장소로 이관하며, 레거시 CSS 축소와 컴포넌트 단위 재구성 작업을 맡고 있습니다. Cursor와 Claude를 중심으로 Jira·Confluence·Bitbucket Cloud MCP를 연동해 반복 업무를 AI 기반으로 효율화하고, 팀 내 커스텀 스킬과 룰을 직접 설계해 실무에 적용하고 있습니다.</p>
         </div>
       </section>

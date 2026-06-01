@@ -1,0 +1,18 @@
+---
+title: "GeekNews 픽: React Doctor — AI가 짠 코드, 누가 리뷰하나"
+date: "2026-06-01"
+category: "GeekNews 픽"
+badge: digest
+description: "AI 코드 생성 시대에 등장한 자동 품질 감사 도구 React Doctor, 새로운 툴링 카테고리의 시작을 보여준다"
+tags: ["React", "정적분석", "AI코드품질", "DX", "oxlint"]
+---
+
+`npx react-doctor@latest` 한 줄이면 상태 관리, 성능, 보안, 접근성을 0~100점으로 뽑아준다. GitHub Star 11.7k, v0.2.4에서 v0.2.8까지 짧은 주기로 치고 올라오는 중이다.
+
+흥미로운 건 도구 자체보다 그게 암시하는 방향이다. ESLint 규칙 하나하나 고르던 시절에서, 이제는 감사 도구가 전체 코드베이스를 통째로 채점하는 시대가 됐다. 이게 자연스럽게 느껴지는 이유는 코드를 쓰는 주체가 바뀌었기 때문이다. AI가 코드를 뽑아내면, 리뷰어도 자동화돼야 루프가 닫힌다.
+
+oxlint 기반 병렬 분석으로 대형 코드베이스에서 3~4배 빠르다는 점도 실용적이고, Claude Code나 Cursor에 skill로 설치해서 `/goal 점수 100 달성` 프롬프트로 자율 수정 루프를 돌릴 수 있다는 건 꽤 재밌는 그림이다. AI가 짜고, AI가 고치고, 사람은 점수만 본다.
+
+---
+
+* 출처 : https://github.com/millionco/react-doctor

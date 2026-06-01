@@ -1,0 +1,22 @@
+---
+title: "GeekNews 픽: Claude Opus 4.8 — fast mode 3× 가격 인하가 바꾸는 에이전트 비용 구조"
+date: "2026-06-01"
+category: "GeekNews 픽"
+badge: digest
+description: "성능 업그레이드보다 훨씬 조용하게, 에이전트 자동화의 경제성이 바뀌고 있다"
+tags: ["Claude", "Anthropic", "LLM", "AI에이전트", "Claude Code"]
+---
+
+오늘 Anthropic이 Claude Opus 4.8을 내놨다. 벤치마크 개선, 협업 능력 강화 — 뻔한 릴리즈 노트처럼 읽힐 수 있는데, 진짜 주목할 건 따로 있다.
+
+Fast mode가 2.5배 빠르면서 비용은 3배 저렴해졌다. 동일한 Opus 성능을 3분의 1 가격에 쓸 수 있다는 얘기다. 지금까지 Opus를 에이전트 파이프라인에 풀로 돌리기엔 토큰 비용이 부담스러워서 Sonnet으로 타협하던 케이스들이 있었는데, 이 갭이 상당히 좁혀진다. 내 telegram-bot hada-digest 파이프라인도 당장 교체 대상이다.
+
+Claude Code에 들어온 dynamic workflows도 흥미롭다. 대규모 멀티파일 작업을 알아서 분해해서 처리한다는 건데, 실제로 ai-content-tools에서 긴 글 생성·편집 작업이 단일 프롬프트 한계에 부딪히는 경우가 있었다. 이게 실용 수준이면 파이프라인 구조 자체를 다시 생각해볼 만하다.
+
+온라인 브라우저 에이전트 벤치마크인 Online-Mind2Web에서 84%로 GPT-5.5를 앞섰다는 것도 눈여겨볼 수치다. 웹 자동화 쪽이 실제로 쓸 수 있는 수준으로 올라오고 있다는 신호다.
+
+한편으로 이번 발표엔 'Claude Mythos'(Project Glasswing) 예고도 섞여 있다. Opus보다 높은 지능의 새 모델 클래스라는데, 지금은 사이버보안 테스트 중이고 몇 주 내 공개 예정이라고. 4.7의 실망감 이후 커뮤니티 반응은 조심스러운 기대 반, 피로감 반이다. 솔직히 나도 비슷한 심정인데 — fast mode 가격 인하는 그냥 좋다.
+
+---
+
+* 출처 : http://anthropic.com/news/claude-opus-4-8

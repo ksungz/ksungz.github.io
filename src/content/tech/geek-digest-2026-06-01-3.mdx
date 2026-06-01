@@ -1,0 +1,22 @@
+---
+title: "GeekNews 픽: 백엔드 없이 브라우저 탭 하나로 오디오 편집 — AudioMass가 증명한 것"
+date: "2026-06-01"
+category: "GeekNews 픽"
+badge: digest
+description: "서버 없이 멀티트랙 편집·크로스페이드·FLAC 처리까지 — Web Audio API가 어디까지 왔는지 확인하고 싶다면"
+tags: ["오픈소스", "Web Audio API", "브라우저", "오디오편집", "JavaScript"]
+---
+
+AudioMass를 처음 봤을 때 솔직히 반신반의했다. GitHub stars 2.7k짜리 브라우저 오디오 에디터인데, 멀티트랙에 크로스페이드에 FLAC 처리까지 된다고? 근데 실제로 열어보면 Audacity나 Cool Edit Pro랑 비교해도 손색없다는 커뮤니티 반응이 괜히 나온 게 아니다.
+
+코드베이스를 보면 JavaScript 92.4% 단일 언어, 모던 프레임워크 없이 var 선언과 클로저 패턴으로 가득 찬 클래식 스타일이다. 번들러도 uglifyjs. 그런데 이게 오히려 핵심 메시지처럼 느껴진다 — Web Audio API 자체가 이미 충분히 성숙해서 복잡한 툴체인 없이도 전문가급 오디오 편집 도구를 만들 수 있다는 것.
+
+커뮤니티에서 'RiffHub'라는 콘셉트 제안이 나온 것도 흥미롭다. 음악 트랙을 git처럼 브랜치 치고 협업하는 클라우드 레이어. 이미 편집 엔진은 브라우저 안에 있으니, 거기에 저장·버전 관리·공유만 얹으면 된다는 발상이다.
+
+나한테는 좀 더 실용적인 접점이 보인다. shorts-planner에서 배경음악 트리밍·페이드 처리를 지금은 서버에서 ffmpeg으로 돌리고 있는데, 이걸 클라이언트에서 Web Audio API로 처리하면 서버 부하도 줄고 반응성도 올라간다. ai-content-tools 워크플로우에 보이스오버 녹음부터 편집·업로드까지 인브라우저로 끝내는 흐름도 생각해볼 수 있겠다.
+
+Adobe 없어도, Audacity 설치 없어도 되는 시대가 됐다는 걸 AudioMass는 조용히 증명하고 있다.
+
+---
+
+* 출처 : https://github.com/pkalogiros/AudioMass

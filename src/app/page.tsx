@@ -8,7 +8,7 @@ const careerSummary = [
     period: "2020.12 ~ 현재",
     company: "11번가",
     role: "UI 개발자 · UI개발팀",
-    description: "모바일웹 PDP 전담 개발, Dart Sass 마이그레이션(2,384개 파일), React 기반 이관, AI 개발 도구 체계 구축",
+    description: "모바일웹 PDP 전담 개발, Dart Sass 마이그레이션(2,384개 파일), React 기반 이관, AI 기반 개발 환경 구축",
   },
   {
     period: "2019.10 ~ 2020.12",
@@ -24,13 +24,13 @@ const careerSummary = [
   },
 ];
 
-const PRIMARY_SKILLS = new Set(["HTML5", "SCSS/Sass", "React 18", "TypeScript", "Cursor AI"]);
+const PRIMARY_SKILLS = new Set(["HTML5", "SCSS/Sass", "React", "TypeScript", "Claude Code", "Cursor AI"]);
 
 const skills = [
   { label: "마크업/스타일링", items: ["HTML5", "SCSS/Sass", "CSS Modules", "BEM", "반응형 웹", "웹 접근성"] },
-  { label: "프레임워크", items: ["React 18", "TypeScript", "Next.js", "Storybook"] },
-  { label: "빌드/배포", items: ["Vite", "Gulp", "Docker", "Bitbucket Pipelines", "Playwright"] },
-  { label: "AI/자동화", items: ["Cursor AI", "Claude Code", "MCP 연동", "AI PR Review"] },
+  { label: "프레임워크", items: ["React", "TypeScript", "Next.js", "Storybook", "Electron"] },
+  { label: "빌드/배포", items: ["Vite", "Gulp", "Docker", "Bitbucket Pipelines", "Vercel"] },
+  { label: "AI 에이전트", items: ["Claude Code", "Cursor AI", "Codex", "OpenClaw", "Ollama"] },
 ];
 
 export default async function Home() {
@@ -41,11 +41,12 @@ export default async function Home() {
 
       {/* Hero */}
       <section className="mb-16">
-        <p className="font-mono text-xs text-[var(--color-muted)] mb-3">시니어 UI 엔지니어</p>
+        <p className="font-mono text-xs text-[var(--color-muted)] mb-3">UI / Frontend 개발 · AI 에이전트 활용</p>
         <h1 className="text-3xl font-bold tracking-tight mb-4">김성재</h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
-          HTML/CSS 기반 UI 개발을 중심으로 13년간 커머스·게임·플랫폼 도메인에서 실무를 수행해온 시니어 UI 엔지니어입니다.
+          커머스, 게임, 플랫폼 서비스에서 13년간 UI를 만들어온 개발자입니다.
           복잡한 UI를 구조적으로 정리하고, 규모가 큰 레거시를 단계적으로 개선하는 데 강점이 있습니다.
+          현재는 AI 에이전트를 워크플로우 중심에 두고 일하고 있습니다.
         </p>
         <div className="mt-6 flex gap-3">
           <Link

@@ -1,42 +1,42 @@
 ---
-title: AI 기반 개발 도구 체계 구축 및 팀 전파
+title: AI 기반 개발 환경 구축
 period: 2025.10 ~ 현재
 company: 11번가 UI개발팀
-role: AI 도구 체계 설계, 파이프라인 구축, 팀 배포
-description: Cursor AI를 업무 전반에 도입하여 개발 생산성을 향상시키고, 팀 차원의 AI 도구 체계를 구축
+role: AI 개발 환경 구축, 스킬·규칙 설계, 파이프라인 적용
+description: Cursor AI 기반 개발 환경을 구축하고, UI 개발에 특화된 스킬과 규칙을 직접 설계해 팀 내 공유
 tags: [Cursor AI, Bitbucket Pipelines, MCP, Node.js]
 ---
 
 ## 담당 업무
 
-Cursor AI를 업무 전반에 도입하여 개발 생산성을 향상시키고, 팀 차원의 AI 도구 체계를 구축했습니다. 코드 리뷰, 문서화, 커밋, PR 생성, 구현 계획 수립 등 반복적인 작업을 자동화하고, 8개 저장소에 AI PR Review Agent를 일괄 적용했습니다.
+Cursor AI 기반 개발 환경을 구축하고, UI 개발에 특화된 스킬과 규칙을 직접 설계해 팀 내 공유하고 있습니다. MCP를 활용한 업무 자동화 환경을 구성하고, 사내 제공 AI PR Review Agent를 8개 저장소에 적용·운영하고 있습니다.
 
 ## 주요 성과
 
-- **14개 커스텀 스킬** 직접 설계 — 커밋, PR, 코드리뷰, 위키, Jira, 구현계획, QA, Slack 연동 등 워크플로우 전반 자동화
-- **15개 커스텀 규칙** 설정 — Git 워크플로우, 코드 품질, 협업, 인프라 일관 규칙 체계
-- **AI PR Review Agent** — Bitbucket Pipelines에 통합, 8개 저장소 일괄 적용, On-Demand 방식으로 전환
-- **ui-scripts 패키지** — UI개발팀 전용 Cursor AI 설정 관리/배포 패키지 (사내 패키지 레지스트리 배포, 저장소 일괄 동기화)
-- **MCP 연동** — Bitbucket, Jira, Confluence, Slack 통합 업무 환경 구현
+- **UI 개발 특화 스킬·규칙 직접 설계** — Figma 연동 규칙, SCSS/마크업/접근성 코드 리뷰, UI 파트 PR 양식 자동화 등
+- **AI PR Review Agent 적용·운영** — 사내 제공 Agent를 Bitbucket Pipelines에 적용, 8개 저장소 일괄 운영, On-Demand 방식 전환
+- **팀 전용 Cursor AI 설정 배포 도구** — 스킬·규칙 관리 및 저장소 일괄 동기화 도구 구축 (사내 패키지 레지스트리 배포)
+- **MCP 연동** — Bitbucket, Jira, Confluence, Slack 통합 업무 환경 구성
 
-## 커스텀 스킬 체계 (14개)
+## 팀 Cursor 스킬·규칙 체계
 
-| 분류 | 스킬 |
+팀 내에서 운영 중인 Cursor 스킬·규칙 체계에 참여하고 있으며, 그 중 UI 개발에 특화된 항목을 직접 설계했습니다.
+
+### 직접 설계한 항목
+
+| 분류 | 내용 |
 |------|------|
-| Git/PR | 커밋 메시지 자동 생성 (husky 규칙 연동), PR 디스크립션 자동 생성 및 원스텝 PR 생성/업데이트 |
-| 코드 리뷰 | SCSS/마크업/접근성 체크리스트 기반 코드 리뷰 자동화 |
-| 문서/이슈 | Confluence 위키 읽기/작성/수정 자동화, Jira 이슈 생성 자동화, 작업시간 기록 자동화 |
-| 계획/검증 | 스펙 기반 구현 계획 수립 및 영향범위 분석, QA 검증 자동화 (사이드이펙트/런타임 에러 검사) |
-| 커뮤니케이션 | Slack 메시지 읽기, 대화/허들 요약, 주간 다이제스트 자동 생성 |
-| 인프라/도구 | Sentry 에러 모니터링 설치 자동화, 에이전트 컨텍스트 관리, 스킬 생성 메타 도구 |
+| 스킬 | UI파트 PR 양식 자동화, SCSS/마크업/접근성 코드 리뷰, Storybook 검수 가이드 생성, Figma 디자인 스펙 연동 |
+| 규칙 | Figma 기반 UI 구현 규칙, BEM/접근성/SCSS 코딩 규칙, 반응형 마크업 규칙 |
 
-## 커스텀 규칙 체계 (15개)
+### 팀 전체 체계 (참여·의견 제안)
 
-| 분류 | 규칙 |
+| 분류 | 항목 |
 |------|------|
-| Git 워크플로우 | push 검증, merge 충돌 해결, husky 에러 대응, 브랜치 네이밍 |
-| 코드 품질 | 코드 주석 원칙, 코드 리뷰 원칙 |
-| 협업 | Jira 티켓 생성 확인, Bitbucket PR 워크플로우, Confluence 위키 규칙 |
+| Git/PR | 커밋 메시지 자동 생성, PR 디스크립션 자동 생성, 브랜치 네이밍 |
+| 문서/이슈 | Confluence 위키 자동화, Jira 이슈 생성, 작업시간 기록 |
+| 계획/검증 | 구현 계획 수립, QA 검증 자동화 |
+| 커뮤니케이션 | Slack 메시지 읽기·요약, 주간 다이제스트 |
 | 인프라 | Bitbucket Pipelines 규칙, CLI 도구 사용 규칙 |
 
 ## AI 활용 실무 적용 사례
@@ -50,11 +50,11 @@ Cursor AI를 업무 전반에 도입하여 개발 생산성을 향상시키고, 
 | 접근성 점검 | ARIA, 시맨틱 HTML, 대체 텍스트, 키보드 내비게이션 자동 점검 |
 
 
-## ui-scripts 패키지
+## 팀 전용 Cursor AI 설정 배포 도구
 
-`2025.01 ~ 현재` · `ui-scripts`
+`2025.01 ~ 현재`
 
 - 팀 전용 NPM 패키지 초기 구성 및 사내 패키지 레지스트리 배포 파이프라인 설정
-- `sync-repos` 스크립트 — 저장소 일괄 동기화 (--merge, origin/main pull)
+- 저장소 일괄 동기화 스크립트 구축 (--merge, origin/main pull)
 - UI 전용 규칙 (BEM, 접근성, SCSS, 반응형) frontmatter 추가
 - Slack PR Bot 자동화 설정

@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Career",
-  description: "김성재의 경력기술서 — 13년 UI/Frontend 개발 경력",
+  description: "김성재의 경력기술서 — 13년 UI/Frontend 개발 · AI 에이전트 활용",
 };
 
 const careers = [
@@ -14,13 +14,13 @@ const careers = [
     period: "2020.12 ~ 현재",
     role: "UI 개발자",
     description:
-      "국내 주요 이커머스 서비스인 11번가에서 트래픽이 집중되는 모바일웹 상품상세페이지(PDP)를 포함한 핵심 서비스 UI를 전담 개발하고 있습니다. SCSS→Dart Sass 전환(2,384개 파일), React 기반 PDP 마이그레이션 등 레거시 개선 작업을 주도했으며, AI 기반 개발 도구 체계를 구축해 팀 내 전파하는 등 개발 생산성 향상에 기여하고 있습니다.",
+      "국내 주요 이커머스 서비스인 11번가에서 트래픽이 집중되는 모바일웹 상품상세페이지(PDP)를 포함한 핵심 서비스 UI를 전담 개발하고 있습니다. SCSS→Dart Sass 전환(2,384개 파일), React 기반 환경에 SCSS 마이그레이션 등 레거시 개선 작업을 주도했으며, Cursor에서 Jira·Confluence·Bitbucket Cloud MCP를 연동한 AI 기반 개발 환경을 구축하고, UI 개발에 특화된 스킬과 규칙을 직접 설계해 팀 내 공유하고 있습니다.",
     projects: [
+      { period: "2025.10 ~ 현재", title: "AI 기반 개발 환경 구축 — Cursor MCP 연동, PR Review Agent 적용, 스킬·규칙 설계", link: "/tech/ai-tools" },
+      { period: "2025.06 ~ 2025.07", title: "Dart Sass 마이그레이션 — 2,384개 파일, 3주 완료", link: "/tech/dart-sass" },
+      { period: "2026.01 ~ 현재", title: "React 기반 PDP 컴포넌트 개발", link: "/tech/react-pdp" },
       { period: "2020.12 ~ 현재", title: "모바일웹 상품상세(PDP) 전체 UI 개발", link: "/tech/pdp-ui" },
       { period: "2025.11 ~ 2026.04", title: "체험단 서비스 전체 신규 구축", link: "/tech/sample-service" },
-      { period: "2026.01 ~ 현재", title: "React 기반 PDP 컴포넌트 개발", link: "/tech/react-pdp" },
-      { period: "2025.06 ~ 2025.07", title: "Dart Sass 마이그레이션", link: "/tech/dart-sass" },
-      { period: "2025.10 ~ 현재", title: "AI 기반 개발 도구 체계 구축 및 팀 전파", link: "/tech/ai-tools" },
       { period: "2021.09 ~ 현재", title: "서버/인프라 관리 및 환경 업데이트", link: "/tech/infra" },
       { period: "2021.11 ~ 2022.12", title: "반응형 웹 전환 추진 및 기반 구축", link: "/tech/responsive" },
     ],
@@ -93,7 +93,7 @@ const keyDocs = [
     items: [
       { title: "Dart Sass 전환 회고 (with AI)", desc: "AI 코딩 도구 활용, 2,384개 SCSS 파일을 3주 만에 전환한 대규모 마이그레이션 경험 공유", link: "/tech/dart-sass-retro" },
       { title: "AI Agent 작업 플로우 기록", desc: "기획 분석 → Plan 수립 → UI 구현 → 문서화 → PR 생성까지 AI 에이전트 실무 적용 전과정" },
-      { title: "AI PR Review Agent 팀 도입 및 적용", desc: "사내 제공 AI Agent를 8개 저장소 파이프라인에 적용 — yml 설정, 파일 필터링 규칙, On-Demand 트리거 구성", link: "/tech/pr-review-agent" },
+      { title: "AI PR Review Agent 적용 및 운영", desc: "사내 제공 AI Agent를 8개 저장소 파이프라인에 적용 — yml 설정, 파일 필터링 규칙, On-Demand 트리거 구성", link: "/tech/pr-review-agent" },
     ],
   },
   {
@@ -119,9 +119,9 @@ const keyDocs = [
 ];
 
 const sideProjects = [
-  { title: "유튜브 댓글 AI 분석기", stack: "Next.js · Gemini · YouTube API", description: "YouTube 영상 댓글을 AI로 분석·요약" },
-  { title: "AI 숏츠 오케스트레이션", stack: "Next.js 15 · Supabase · Inngest", description: "AI 기반 숏츠 영상 제작 파이프라인" },
-  { title: "텔레그램 Claude 봇", stack: "Node.js · Telegraf · Claude CLI", description: "텔레그램으로 Claude CLI를 제어하는 자동화 봇" },
+  { title: "하네스 엔지니어링", stack: "OpenClaw · Ollama Cloud · Obsidian · Discord", description: "오픈소스 로컬 LLM 기반 에이전트 환경 구축. 시스템 프롬프트·컨텍스트·메모리 구조 설계." },
+  { title: "AI 코딩 에이전트 활용", stack: "Claude Code · Codex · Next.js · Supabase · Vercel", description: "AI 에이전트로 서비스를 기획부터 배포·운영까지 직접 구축. 다수 실서비스 운영 중." },
+  { title: "AI 기반 자동화 설계", stack: "Python · Node.js · Ollama Cloud · PM2", description: "데이터 수집 → AI 판단 → 실행까지 End-to-End 자동화 파이프라인 설계·운영." },
 ];
 
 export default function CareerPage() {
@@ -133,7 +133,7 @@ export default function CareerPage() {
         <p className="font-mono text-xs text-[var(--color-muted)] mb-2">경력기술서</p>
         <h1 className="text-2xl font-bold tracking-tight">김성재</h1>
         <p className="mt-2 text-sm text-[var(--color-muted)]">
-          시니어 UI 엔지니어 · 프론트엔드 개발 / AI 기반 개발 체계 구축 · 약 13년
+          UI / Frontend 개발 · AI 에이전트 활용 · 약 13년
         </p>
       </div>
 
@@ -141,8 +141,9 @@ export default function CareerPage() {
       <section className="mb-12">
         <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">About</h2>
         <div className="space-y-3 text-sm text-[var(--color-muted)] leading-relaxed">
-          <p>HTML/CSS 기반 UI 개발을 중심으로 13년간 커머스·게임·플랫폼 도메인에서 실무를 수행해온 시니어 UI 엔지니어입니다. 복잡한 UI를 구조적으로 정리하고, 규모가 큰 레거시를 단계적으로 개선하는 데 강점이 있습니다.</p>
-          <p>현재는 11번가에서 SCSS/HTML 마크업 산출물을 React 기반 저장소로 이관하며, 레거시 CSS 축소와 컴포넌트 단위 재구성 작업을 맡고 있습니다. Cursor와 Claude를 중심으로 Jira·Confluence·Bitbucket Cloud MCP를 연동해 반복 업무를 AI 기반으로 효율화하고, 팀 내 커스텀 스킬과 룰을 직접 설계해 실무에 적용하고 있습니다.</p>
+          <p>커머스, 게임, 플랫폼 서비스에서 13년간 UI를 만들어온 개발자입니다. 복잡한 UI를 구조적으로 정리하고, 규모가 큰 레거시를 단계적으로 개선하는 데 강점이 있습니다.</p>
+          <p>현재는 11번가에서 SCSS/HTML 마크업 산출물을 React 기반 저장소로 이관하며, 레거시 CSS 축소와 컴포넌트 단위 재구성 작업을 맡고 있습니다. Cursor에서 Jira·Confluence·Bitbucket Cloud MCP를 연동해 반복 업무를 자동화하고, UI 개발에 특화된 스킬과 규칙을 직접 설계해 팀 내 공유하고 있습니다.</p>
+          <p>개인적으로는 Claude Code, Codex, OpenClaw 등 AI 코딩 에이전트를 활용해 Next.js 기반 서비스를 기획부터 배포·운영까지 직접 구축하고 있으며, OpenClaw + Ollama Cloud 기반의 로컬 AI 에이전트 환경에서 하네스 엔지니어링을 직접 설계·적용하고 있습니다.</p>
         </div>
       </section>
 

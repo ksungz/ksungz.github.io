@@ -22,7 +22,7 @@ const notoSansKR = Noto_Sans_KR({
 
 export const metadata: Metadata = {
   title: { default: "ksungz", template: "%s · ksungz" },
-  description: "김성재 — UI/Frontend 개발 · AI 에이전트 활용 · 약 13년",
+  description: "김성재 — UI/Frontend 개발 · AI 에이전트 활용",
 };
 
 export default function RootLayout({

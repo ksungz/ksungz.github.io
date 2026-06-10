@@ -44,7 +44,7 @@ export default async function Home() {
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">UI / Frontend 개발 · AI 에이전트 활용</p>
         <h1 className="text-3xl font-bold tracking-tight mb-4">김성재</h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
-          커머스, 게임, 플랫폼 서비스에서 13년간 UI를 만들어온 개발자입니다.
+          커머스, 게임, 플랫폼 서비스에서 다년간 UI를 만들어온 개발자입니다.
           복잡한 UI를 구조적으로 정리하고, 규모가 큰 레거시를 단계적으로 개선하는 데 강점이 있습니다.
           현재는 AI 에이전트를 워크플로우 중심에 두고 일하고 있습니다.
         </p>

@@ -17,7 +17,7 @@ export default function PortfolioPage() {
           현재는 Claude Code와 개인 멀티 모델 에이전트 시스템으로 기획부터 배포까지 직접 실행합니다.
           <br /><br />
           아래 서비스들은 전부{" "}
-          <strong>상위 기획을 던지고 AI가 코드를 작성하는 방식</strong>으로 만들었습니다.
+          <strong>본업(UI/Frontend 개발) 외 시간에, 상위 기획을 던지고 AI가 코드를 작성하는 방식</strong>으로 만들었습니다.
           초안은 보통 하루 안에 끝나고, 거기에 살을 붙이고 깎는 걸 지금까지 반복하고 있습니다.
         </p>
       </div>
@@ -42,7 +42,7 @@ export default function PortfolioPage() {
             <h4>AI 활용 포인트</h4>
             <ul>
               <li>전체 코드베이스를 Claude Code로 작성. 기획 의도를 설명하면 페이지 단위로 구현</li>
-              <li>GAS + Gemini로 가이드 글 자동 생성 → API 웹훅으로 사이트에 자동 발행 (일 5회). GAS 자동화는 이전 프로젝트(prompt-archive.site)에서 처음 도입한 이후 계속 활용 중</li>
+              <li>GAS + Gemini로 가이드 글 자동 생성 → API 웹훅으로 사이트에 자동 발행 (매일 4건, <strong>누적 183건+</strong>). GAS 자동화는 이전 프로젝트(prompt-archive.site)에서 처음 도입한 이후 계속 활용 중</li>
               <li>쿠팡 상품 검색 → 딥링크 생성 → DB 저장까지 API 하나로 자동화</li>
               <li>네이버 블로그용 제품 추천글도 Gemini로 자동 생성 (일 1회)</li>
               <li>인스타 카드뉴스·블로그 이미지 생성 도구도 별도 제작 (ai-content-tools)</li>
@@ -176,6 +176,8 @@ export default function PortfolioPage() {
               <li>중요한 의사결정에서 3개 모델이 각각 다른 관점(기술/비즈니스/구조)으로 분석</li>
               <li>각 모델이 다른 모델의 초안을 교차 비판 → 수렴 리포트 생성</li>
               <li>합의도 80% 이상이면 확정, 미달이면 재시도(최대 3회), 실패 시 사람 판단</li>
+              <li>Ollama Cloud Pro의 동시 실행 3개 제한 → 서브에이전트 순차 spawn으로 안정성 우선 설계</li>
+              <li>느리고 토큰도 많이 쓰기 때문에, 되돌리기 어려운 의사결정에만 사용</li>
               <li>단일 모델로는 못 잡는 빈틈을 구조적으로 발견하는 것이 목적</li>
             </ul>
           </div>

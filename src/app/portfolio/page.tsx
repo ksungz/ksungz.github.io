@@ -30,6 +30,7 @@ export default function PortfolioPage() {
           <div className="pf-project-header">
             <h3>베이비픽</h3>
             <a className="pf-project-link" href="https://babypick.co.kr" target="_blank" rel="noopener noreferrer">babypick.co.kr ↗</a>
+            <a className="pf-project-link" href="https://blog.naver.com/babypick_blog" target="_blank" rel="noopener noreferrer">네이버 블로그 ↗</a>
             <span className="pf-badge pf-badge-live">운영 중</span>
           </div>
           <p className="pf-project-desc">

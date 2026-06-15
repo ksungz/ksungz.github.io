@@ -130,8 +130,8 @@ export default function PortfolioPage() {
             <span className="pf-badge pf-badge-live">운영 중</span>
           </div>
           <p className="pf-project-desc">
-            쇼츠 플래너로 만든 쿠팡 제품 리뷰 영상의 랜딩 페이지. 리틀리·인포크 같은 링크인바이오 서비스는 UI 커스텀에 구독이 필요해서, 원하는 대로 자유롭게 만들기 위해 직접 구축.
-            쇼츠 영상 설명란에 이 페이지 링크를 걸어 전환 유도 중.
+            쇼츠 플래너로 만든 쿠팡 제품 리뷰 영상의 랜딩 페이지. 리틀리·인포크 같은 링크인바이오 서비스는 UI 커스텀에 구독이 필요해서, 원하는 대로 자유롭게 만들기 위해 직접 구축했습니다.
+            쇼츠 영상 설명란에 이 페이지 링크를 걸어 전환을 유도하고 있습니다.
           </p>
           <div className="pf-detail">
             <h4>AI 활용 포인트</h4>
@@ -169,8 +169,8 @@ export default function PortfolioPage() {
             <span className="pf-badge pf-badge-running">운영 중</span>
           </div>
           <p className="pf-project-desc">
-            유튜브 쇼츠 제작 파이프라인. 레퍼런스 영상 분석부터 대본·TTS·썸네일·SNS 패키지 생성까지 자동화.
-            직접 하는 건 영상 편집뿐. 매일 1편 페이스로 <strong>현재 100편 발행 완료</strong>.
+            유튜브 쇼츠 제작 파이프라인. 레퍼런스 영상 분석부터 대본·TTS·썸네일·SNS 패키지 생성까지 자동화했습니다.
+            직접 하는 건 영상 편집뿐. 매일 1편 페이스로 현재 <strong>100편을 발행했습니다</strong>.
           </p>
           <div className="pf-detail">
             <h4>AI 활용 포인트</h4>
@@ -208,8 +208,8 @@ export default function PortfolioPage() {
             <span className="pf-badge pf-badge-running">pm2 상시 실행</span>
           </div>
           <p className="pf-project-desc">
-            매일 아침 자동으로 기술 뉴스를 수집·분석·발송하는 개인 자동화 에이전트. 관심 기사를 선택하면 심층 분석 + 블로그 PR까지 자동 생성.
-            이 파이프라인으로 블로그 기술 글을 꾸준히 발행 중.
+            매일 아침 자동으로 기술 뉴스를 수집·분석·발송하는 개인 자동화 에이전트입니다. 관심 기사를 선택하면 심층 분석 + 블로그 PR까지 자동 생성합니다.
+            이 파이프라인으로 블로그 기술 글을 꾸준히 발행하고 있습니다.
           </p>
           <div className="pf-detail">
             <h4>실제 동작 흐름</h4>

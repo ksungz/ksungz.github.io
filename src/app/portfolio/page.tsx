@@ -7,17 +7,15 @@ export default function PortfolioPage() {
       <div className="pf-hero">
         <h1>김성재</h1>
         <p className="pf-hero-desc">
-          본업에서는 다년간 커머스·게임·플랫폼 서비스에서 UI/Frontend 개발을 해왔고,
-          PM·디자이너와 함께 기능을 정의하고 출시하는 과정을 반복해왔습니다.
+          다년간 커머스·게임·플랫폼 서비스에서 UI/Frontend 개발을 해왔습니다.
           <br /><br />
           동시에 개인적으로는{" "}
-          <strong>아이디어가 떠오르면 AI로 바로 만들어보는 것</strong>을 계속해왔습니다.
-          Gemini로 블로그 자동화를 시작한 이후, 커머스, 유튜브 쇼츠, 에이전트 시스템까지 —
-          되는 것도 있었고 안 되는 것도 많았지만, 도구를 바꿔가며 계속 만들어왔습니다.
+          <strong>아이디어를 빠르게 만들어보고, 반응이 있으면 고도화하는 방식</strong>으로
+          사이드프로젝트를 계속해왔습니다.
+          블로그 자동화에서 시작해 커머스, 유튜브 쇼츠, 에이전트 시스템까지 — 검증하고 남은 것들이 아래 서비스들입니다.
           <br /><br />
           현재는 Claude Code와 개인 멀티 모델 에이전트 시스템으로{" "}
           <strong>문제 정의 → 구현 → 배포 → 운영까지 End-to-End로 직접 실행</strong>합니다.
-          초안은 보통 하루 안에 끝나고, 거기에 살을 붙이고 깎는 걸 지금까지 반복하고 있습니다.
         </p>
       </div>
 
@@ -36,7 +34,8 @@ export default function PortfolioPage() {
           </div>
           <p className="pf-project-desc">
             육아용품 비교·추천 커머스. 도메인 구매부터 쿠팡 파트너스 연동, SEO, 콘텐츠 자동 발행까지 혼자 구축.
-            GAS + Gemini 자동화로 사람 개입 없이 매일 콘텐츠가 쌓이는 구조를 만들어, 수동 운영 대비 주당 약 10시간의 작업을 자동화했습니다.
+            GAS + Gemini 자동화로 사람 개입 없이 매일 콘텐츠가 쌓이는 구조를 만들어, 수동 운영 대비 주당 약 10시간의 작업을 자동화.
+            Search Console 데이터를 보면서 유입 키워드를 분석하고, 콘텐츠 방향을 조정하는 사이클을 반복하고 있습니다.
           </p>
           <div className="pf-detail">
             <h4>AI 활용 포인트</h4>
@@ -151,6 +150,7 @@ export default function PortfolioPage() {
           </div>
           <p className="pf-project-desc">
             매일 아침 자동으로 기술 뉴스를 수집·분석·발송하는 개인 자동화 에이전트. 관심 기사를 선택하면 심층 분석 + 블로그 PR까지 자동 생성.
+            이 파이프라인으로 블로그 기술 글을 꾸준히 발행 중.
           </p>
           <div className="pf-detail">
             <h4>실제 동작 흐름</h4>
@@ -198,41 +198,18 @@ export default function PortfolioPage() {
 
         <div className="pf-project">
           <p className="pf-project-desc">
-            원래는 GPT·Claude·Gemini 구독 모델들을 한 공간에서 서로 논쟁시키는 구조를 만들고 싶었는데,
-            구독 모델끼리는 API 없이 상호작용이 안 돼서 직렬 형태만 가능했습니다.
-            이 한계를 느끼고 OpenClaw + Ollama Cloud를 알게 되면서, API 기반으로 여러 모델을 자유롭게 오케스트레이션하는 현재 구조를 설계했습니다.
+            AI 에이전트를 쓰다 보니 반복되는 문제가 있었습니다 — 단일 모델은 자기 답이 맞다고 확신하고, 세션이 끝나면 맥락을 잊음.
+            이걸 해결하기 위해 여러 모델이 서로 검증하는 구조와, 세션을 넘어 학습이 쌓이는 메모리 시스템을 직접 설계했습니다.
+            실제로 프로젝트 의사결정(아키텍처 선택, 마이그레이션 판단 등)에서 활용 중입니다.
           </p>
 
           <div className="pf-detail">
-            <h4>아키텍처</h4>
+            <h4>구조</h4>
             <ul>
-              <li><strong>Discord</strong> — 작업 지시 입력. 채널별로 프로젝트가 자동 매핑되어 컨텍스트 전환 없이 작업</li>
-              <li><strong>OpenClaw Gateway</strong> — 중앙 오케스트레이터. 작업 분석, 모델 라우팅, 서브에이전트 관리</li>
-              <li><strong>Ollama Cloud</strong> — 역할별 모델 풀 (kimi-k2.6 메인, qwen3.5 한국어, deepseek-v4 장문 분석 등 5+ 모델)</li>
-              <li><strong>Obsidian Vault</strong> — 프로젝트 문서, 작업 지시서, 파일 기반 에이전트 메모리</li>
-              <li><strong>MCP</strong> — 파일시스템 접근으로 실제 코드 프로젝트를 읽고 수정</li>
-            </ul>
-          </div>
-
-          <div className="pf-detail">
-            <h4>초다중검토 — 멀티 모델 심의</h4>
-            <ul>
-              <li>중요한 의사결정에서 3개 모델이 각각 다른 관점(기술/비즈니스/구조)으로 분석</li>
-              <li>각 모델이 다른 모델의 초안을 교차 비판 → 수렴 리포트 생성</li>
-              <li>합의도 80% 이상이면 확정, 미달이면 재시도(최대 3회), 실패 시 사람 판단</li>
-              <li>Ollama Cloud Pro의 동시 실행 3개 제한 → 서브에이전트 순차 spawn으로 안정성 우선 설계</li>
-              <li>느리고 토큰도 많이 쓰기 때문에, 되돌리기 어려운 의사결정에만 사용</li>
-              <li>단일 모델로는 못 잡는 빈틈을 구조적으로 발견하는 것이 목적</li>
-            </ul>
-          </div>
-
-          <div className="pf-detail">
-            <h4>Self-Improving 메모리</h4>
-            <ul>
-              <li>에이전트는 세션마다 기억을 잃음 → 파일 기반 메모리로 해결</li>
-              <li>HOT(항상 로드, 100줄 이내) / WARM(프로젝트별) / COLD(아카이브) 3단계 티어</li>
-              <li>같은 교정이 3회 반복되면 승격 후보 → 사람 확인 후 핵심 메모리에 추가</li>
-              <li>30일 미사용 → 디모션 후보, 90일 → 아카이브. 자동 삭제 없이 항상 사람 확인</li>
+              <li><strong>Discord → OpenClaw → Ollama Cloud</strong> — 채널별 프로젝트 매핑, 역할별 모델 5개+ 자동 라우팅</li>
+              <li><strong>초다중검토</strong> — 되돌리기 어려운 판단에서 3개 모델이 교차 비판 후 합의 검증. 단일 모델이 놓치는 빈틈을 구조적으로 발견하는 것이 목적</li>
+              <li><strong>Self-Improving 메모리</strong> — 파일 기반 3단계 티어(HOT/WARM/COLD). 같은 실수가 반복되면 자동 승격 → 다음 세션부터 반영</li>
+              <li><strong>MCP + Obsidian</strong> — 실제 코드 프로젝트를 읽고 수정, 작업 히스토리 축적</li>
             </ul>
           </div>
 
@@ -256,29 +233,12 @@ export default function PortfolioPage() {
 
       {/* PoC / 실험 */}
       <section className="pf-section">
-        <h2 className="pf-section-title">아이디어 → 바로 만들어본 것들</h2>
-        <p style={{ fontSize: 14, color: "var(--text3)", marginBottom: 24, marginTop: -24 }}>
-          &quot;이런 게 있으면 어떨까?&quot; 싶으면 바로 만들어봄. 전부 Claude Code 또는 Gemini API로 구현.
+        <h2 className="pf-section-title">그 외 만들어본 것들</h2>
+        <p style={{ fontSize: 14, color: "var(--text3)", marginTop: -24 }}>
+          위 서비스 외에도 아이디어가 떠오르면 빠르게 만들어보고 검증합니다 —
+          AI 구매 합리화 서비스, 국어사전 재가공, 유튜브 댓글 분석, 콘텐츠 제작 내부 도구 등.
+          대부분 1~2일 안에 MVP를 만들고, 반응을 보고 유지하거나 접습니다.
         </p>
-
-        <div className="pf-poc-grid">
-          <div className="pf-poc-card">
-            <h4>죄책감 제로</h4>
-            <p>구매를 AI가 논리적으로 합리화해주는 유머 서비스. Gemini API + 쿠팡 파트너스 연동.</p>
-          </div>
-          <div className="pf-poc-card">
-            <h4>말랑사전</h4>
-            <p>표준국어대사전 뜻풀이를 Gemini로 부드럽게 재가공. Next.js + Supabase.</p>
-          </div>
-          <div className="pf-poc-card">
-            <h4>YT Insight</h4>
-            <p>유튜브 댓글 수집 → Gemini 분석 → 시청자 반응·FAQ·다음 주제 자동 추출.</p>
-          </div>
-          <div className="pf-poc-card">
-            <h4>AI Content Tools</h4>
-            <p>쇼츠 대본·인스타 카드뉴스·블로그 이미지 등 개인 콘텐츠 작업용 내부 도구 모음.</p>
-          </div>
-        </div>
       </section>
 
       <hr className="pf-divider" />
@@ -314,7 +274,7 @@ export default function PortfolioPage() {
         <p style={{ fontSize: 20, fontWeight: 800, color: "var(--text)", marginBottom: 8 }}>김성재</p>
         <p style={{ fontSize: 13, color: "var(--text3)", marginBottom: 12, lineHeight: 1.7 }}>
           커머스·게임·플랫폼 서비스에서 다년간 UI/Frontend 개발<br />
-          PM·디자이너와 협업하여 기능 정의 → 출시 → 개선 반복
+          아이디어 → 검증 → 고도화를 반복하는 사람
         </p>
         <p>
           <a href="mailto:k.suzkim@gmail.com">k.suzkim@gmail.com</a>

@@ -47,6 +47,45 @@ export default function PortfolioPage() {
               <li>인스타 카드뉴스·블로그 이미지 생성 도구도 별도 제작 (ai-content-tools)</li>
             </ul>
           </div>
+          <div style={{ margin: "20px 0" }}>
+            <svg viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto" }}>
+              <defs>
+                <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                  <path d="M0,0 L8,3 L0,6" fill="#7c6ff7" />
+                </marker>
+              </defs>
+              {/* Nodes */}
+              <rect x="10" y="55" width="110" height="50" rx="8" fill="#1a1a24" stroke="#2a2a3a" />
+              <text x="65" y="77" textAnchor="middle" fill="#e2e8f0" fontSize="11" fontWeight="600">Search Console</text>
+              <text x="65" y="93" textAnchor="middle" fill="#94a3b8" fontSize="10">유입 키워드 확인</text>
+
+              <rect x="150" y="55" width="110" height="50" rx="8" fill="#1a1a24" stroke="#2a2a3a" />
+              <text x="205" y="77" textAnchor="middle" fill="#e2e8f0" fontSize="11" fontWeight="600">방향 조정</text>
+              <text x="205" y="93" textAnchor="middle" fill="#94a3b8" fontSize="10">키워드·주제 선정</text>
+
+              <rect x="290" y="55" width="110" height="50" rx="8" fill="#1a1a24" stroke="#7c6ff7" strokeWidth="1.5" />
+              <text x="345" y="77" textAnchor="middle" fill="#a78bfa" fontSize="11" fontWeight="600">GAS + Gemini</text>
+              <text x="345" y="93" textAnchor="middle" fill="#94a3b8" fontSize="10">콘텐츠 자동 생성</text>
+
+              <rect x="430" y="55" width="110" height="50" rx="8" fill="#1a1a24" stroke="#2a2a3a" />
+              <text x="485" y="77" textAnchor="middle" fill="#e2e8f0" fontSize="11" fontWeight="600">자동 발행</text>
+              <text x="485" y="93" textAnchor="middle" fill="#94a3b8" fontSize="10">매일 4건 → 사이트</text>
+
+              <rect x="570" y="55" width="100" height="50" rx="8" fill="#1a1a24" stroke="#34d399" strokeWidth="1.5" />
+              <text x="620" y="77" textAnchor="middle" fill="#34d399" fontSize="11" fontWeight="600">누적 183건+</text>
+              <text x="620" y="93" textAnchor="middle" fill="#94a3b8" fontSize="10">SEO 인덱싱</text>
+
+              {/* Arrows */}
+              <line x1="120" y1="80" x2="148" y2="80" stroke="#7c6ff7" strokeWidth="1.5" markerEnd="url(#arrow)" />
+              <line x1="260" y1="80" x2="288" y2="80" stroke="#7c6ff7" strokeWidth="1.5" markerEnd="url(#arrow)" />
+              <line x1="400" y1="80" x2="428" y2="80" stroke="#7c6ff7" strokeWidth="1.5" markerEnd="url(#arrow)" />
+              <line x1="540" y1="80" x2="568" y2="80" stroke="#7c6ff7" strokeWidth="1.5" markerEnd="url(#arrow)" />
+
+              {/* Feedback loop */}
+              <path d="M620,107 L620,140 L65,140 L65,107" fill="none" stroke="#64748b" strokeWidth="1" strokeDasharray="4,3" markerEnd="url(#arrow)" />
+              <text x="340" y="153" textAnchor="middle" fill="#64748b" fontSize="9">데이터 기반 피드백 루프</text>
+            </svg>
+          </div>
           <div className="pf-screenshots">
             <div>
               <img className="pf-screenshot" src="/portfolio/babypick-guide.png" alt="베이비픽 가이드 목록 — 매일 자동 발행된 글이 날짜별로 쌓여 있는 모습" />
@@ -73,6 +112,7 @@ export default function PortfolioPage() {
           </div>
           <p className="pf-project-desc">
             쇼츠 플래너로 만든 쿠팡 제품 리뷰 영상의 랜딩 페이지. 리틀리·인포크 같은 링크인바이오 서비스는 UI 커스텀에 구독이 필요해서, 원하는 대로 자유롭게 만들기 위해 직접 구축.
+            쇼츠 영상 설명란에 이 페이지 링크를 걸어 전환 유도 중.
           </p>
           <div className="pf-detail">
             <h4>AI 활용 포인트</h4>
@@ -111,7 +151,7 @@ export default function PortfolioPage() {
           </div>
           <p className="pf-project-desc">
             유튜브 쇼츠 제작 파이프라인. 레퍼런스 영상 분석부터 대본·TTS·썸네일·SNS 패키지 생성까지 자동화.
-            직접 하는 건 영상 편집뿐.
+            직접 하는 건 영상 편집뿐. 매일 1편 페이스로 <strong>현재 100편 발행 완료</strong>.
           </p>
           <div className="pf-detail">
             <h4>AI 활용 포인트</h4>
@@ -213,6 +253,65 @@ export default function PortfolioPage() {
             </ul>
           </div>
 
+          <div style={{ margin: "20px 0" }}>
+            <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto" }}>
+              <defs>
+                <marker id="arrow2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                  <path d="M0,0 L8,3 L0,6" fill="#7c6ff7" />
+                </marker>
+                <marker id="arrow3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                  <path d="M0,0 L8,3 L0,6" fill="#64748b" />
+                </marker>
+              </defs>
+
+              {/* Discord */}
+              <rect x="20" y="70" width="100" height="60" rx="10" fill="#1a1a24" stroke="#5865F2" strokeWidth="1.5" />
+              <text x="70" y="97" textAnchor="middle" fill="#5865F2" fontSize="12" fontWeight="700">Discord</text>
+              <text x="70" y="115" textAnchor="middle" fill="#64748b" fontSize="9">작업 지시</text>
+
+              {/* OpenClaw Gateway */}
+              <rect x="180" y="50" width="140" height="100" rx="10" fill="#1a1a24" stroke="#7c6ff7" strokeWidth="2" />
+              <text x="250" y="80" textAnchor="middle" fill="#a78bfa" fontSize="12" fontWeight="700">OpenClaw</text>
+              <text x="250" y="98" textAnchor="middle" fill="#94a3b8" fontSize="9">작업 분석</text>
+              <text x="250" y="112" textAnchor="middle" fill="#94a3b8" fontSize="9">모델 라우팅</text>
+              <text x="250" y="126" textAnchor="middle" fill="#94a3b8" fontSize="9">초다중검토 오케스트레이션</text>
+
+              {/* Model Pool */}
+              <rect x="380" y="20" width="130" height="36" rx="6" fill="#1a1a24" stroke="#2a2a3a" />
+              <text x="445" y="43" textAnchor="middle" fill="#e2e8f0" fontSize="10">kimi-k2.7 · 코딩</text>
+
+              <rect x="380" y="64" width="130" height="36" rx="6" fill="#1a1a24" stroke="#2a2a3a" />
+              <text x="445" y="87" textAnchor="middle" fill="#e2e8f0" fontSize="10">qwen3.5 · 한국어</text>
+
+              <rect x="380" y="108" width="130" height="36" rx="6" fill="#1a1a24" stroke="#2a2a3a" />
+              <text x="445" y="131" textAnchor="middle" fill="#e2e8f0" fontSize="10">deepseek-v4 · 분석</text>
+
+              <rect x="380" y="152" width="130" height="36" rx="6" fill="#1a1a24" stroke="#2a2a3a" />
+              <text x="445" y="175" textAnchor="middle" fill="#e2e8f0" fontSize="10">gpt-oss · 범용</text>
+
+              <text x="445" y="12" textAnchor="middle" fill="#64748b" fontSize="10" fontWeight="600">Ollama Cloud (5+ 모델)</text>
+
+              {/* Obsidian - bottom */}
+              <rect x="180" y="165" width="140" height="30" rx="6" fill="#1a1a24" stroke="#34d399" strokeWidth="1" />
+              <text x="250" y="184" textAnchor="middle" fill="#34d399" fontSize="10" fontWeight="600">Obsidian — 메모리 축적</text>
+
+              {/* Output */}
+              <rect x="560" y="70" width="100" height="60" rx="10" fill="#1a1a24" stroke="#34d399" strokeWidth="1.5" />
+              <text x="610" y="95" textAnchor="middle" fill="#34d399" fontSize="11" fontWeight="600">실행 결과</text>
+              <text x="610" y="112" textAnchor="middle" fill="#64748b" fontSize="9">코드 수정 · 리포트</text>
+
+              {/* Arrows */}
+              <line x1="120" y1="100" x2="178" y2="100" stroke="#7c6ff7" strokeWidth="1.5" markerEnd="url(#arrow2)" />
+              <line x1="320" y1="80" x2="378" y2="42" stroke="#7c6ff7" strokeWidth="1.2" markerEnd="url(#arrow2)" />
+              <line x1="320" y1="90" x2="378" y2="82" stroke="#7c6ff7" strokeWidth="1.2" markerEnd="url(#arrow2)" />
+              <line x1="320" y1="110" x2="378" y2="122" stroke="#7c6ff7" strokeWidth="1.2" markerEnd="url(#arrow2)" />
+              <line x1="320" y1="120" x2="378" y2="166" stroke="#7c6ff7" strokeWidth="1.2" markerEnd="url(#arrow2)" />
+              <line x1="510" y1="100" x2="558" y2="100" stroke="#34d399" strokeWidth="1.5" markerEnd="url(#arrow2)" />
+
+              {/* Memory feedback */}
+              <line x1="250" y1="150" x2="250" y2="163" stroke="#64748b" strokeWidth="1" strokeDasharray="3,2" markerEnd="url(#arrow3)" />
+            </svg>
+          </div>
           <div className="pf-screenshots">
             <div>
               <img className="pf-screenshot" src="/portfolio/openclaw-discord.png" alt="OpenClaw — Discord에서 작업 지시 후 에이전트가 상태 체크하고 응답하는 실제 대화" />

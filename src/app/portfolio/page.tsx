@@ -15,7 +15,7 @@ export default function PortfolioPage() {
           블로그 자동화에서 시작해 커머스, 유튜브 쇼츠, 에이전트 시스템까지 — 검증하고 남은 것들이 아래 서비스들입니다.
           <br /><br />
           최근에는 Claude Code와 AI 에이전트를 활용해 React/Next.js 기반 서비스를 직접 기획·구현·운영하며{" "}
-          <strong>문제 정의 → 구현 → 배포 → 운영까지 End-to-End로 직접 실행</strong>하는 영역을 확장하고 있습니다.
+          <strong>문제 정의 → 구현 → 배포 → 운영까지 End-to-End로 직접 실행하는 방식</strong>으로 영역을 확장하고 있습니다.
         </p>
       </div>
 
@@ -35,7 +35,7 @@ export default function PortfolioPage() {
           </div>
           <p className="pf-project-desc">
             육아용품 비교·추천 커머스. 도메인 구매부터 쿠팡 파트너스 연동, SEO, 콘텐츠 자동 발행까지 혼자 구축.
-            GAS + Gemini 자동화로 사람 개입 없이 매일 콘텐츠가 쌓이는 구조를 만들어, 수동 운영 대비 주당 약 10시간의 작업을 자동화.
+            GAS + Gemini 자동화로 사람 개입 없이 매일 콘텐츠가 쌓이는 구조를 만들어, 수동 운영 대비 주당 약 10시간의 수작업을 줄였습니다.
             Search Console 데이터를 보면서 유입 키워드를 분석하고, 콘텐츠 방향을 조정하는 사이클을 반복하고 있습니다.
           </p>
           <div className="pf-detail">
@@ -179,7 +179,7 @@ export default function PortfolioPage() {
               <li>분석 결과 기반으로 대본 자동 생성 → TTS 변환 → 썸네일 생성</li>
               <li>SNS 패키지(제목·설명·해시태그)까지 원클릭 출력</li>
               <li>출퇴근길 모바일 분석용 페이지도 별도 구축 — 틈틈이 레퍼런스 분석 후 저장</li>
-              <li>처음엔 Google AI Studio에서 시작 → Claude Code로 마이그레이션 후 지금까지 고도화 중</li>
+              <li>처음엔 Google AI Studio에서 시작 → Claude Code로 마이그레이션해 지금까지 고도화 중</li>
             </ul>
           </div>
           <div className="pf-screenshots pf-screenshots-2">
@@ -265,7 +265,7 @@ export default function PortfolioPage() {
           <div className="pf-detail">
             <h4>구조</h4>
             <ul>
-              <li><strong>Discord → OpenClaw → Ollama Cloud</strong> — 채널별 프로젝트 매핑, 역할별 모델 5개+ 자동 라우팅</li>
+              <li><strong>Discord → OpenClaw → Ollama Cloud</strong> — 채널별 프로젝트 매핑, 5개 이상의 모델을 역할별로 자동 라우팅</li>
               <li><strong>초다중검토</strong> — 되돌리기 어려운 판단에서 3개 모델이 교차 비판 후 합의 검증. 단일 모델이 놓치는 빈틈을 구조적으로 발견하는 것이 목적</li>
               <li><strong>Self-Improving 메모리</strong> — 파일 기반 3단계 티어(HOT/WARM/COLD). 같은 실수가 반복되면 자동 승격 → 다음 세션부터 반영</li>
               <li><strong>MCP + Obsidian</strong> — 실제 코드 프로젝트를 읽고 수정, 작업 히스토리 축적</li>

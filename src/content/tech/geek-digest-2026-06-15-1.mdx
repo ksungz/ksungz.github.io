@@ -1,0 +1,24 @@
+---
+title: "GeekNews 픽: AI 모델도 수출통제 품목이 됐다 — Anthropic Fable 5·Mythos 5 전면 차단"
+date: "2026-06-15"
+category: "GeekNews 픽"
+badge: digest
+description: "정부 명령 한 통으로 특정 모델 접근이 즉시 막히는 시대, 단일 프로바이더에 의존하는 개발자가 지금 생각해야 할 것들"
+tags: ["Anthropic", "AI규제", "수출통제", "Fable5", "Mythos5"]
+---
+
+6월 12일 오후 5시 21분(ET), Anthropic은 미국 정부로부터 수출통제 명령을 수령하고 즉시 Fable 5와 Mythos 5의 모든 접근을 차단했다. 여기서 '모든'은 진짜 모든 — 미국 내에 거주하는 외국인 Anthropic 직원까지 포함한다. 반도체나 군사 장비에 적용되던 수출통제 체계가 소프트웨어 모델에 그대로 씌워진 순간이었다.
+
+타이밍이 묘하다. Mythos 5(구 Claude Mythos Preview)는 고급 사이버보안 역량을 전면에 내세우며 월가와 정부 기관을 공략하던 모델이었는데, '보안을 뚫는 AI'라는 마케팅이 정부 규제를 자초했다는 게 커뮤니티 반응이다. Anthropic은 현재 국방부로부터 '공급망 위험' — 외국 적대국 수준의 레이블 — 을 받아 소송 중이고, 이번 조치는 그 갈등의 연장선이다.
+
+개발자 입장에서 이 사태가 불편한 이유는 따로 있다. API 호출 몇 줄로 서비스를 연결해뒀는데, 어느 날 오후 정부 명령 하나로 그 연결이 끊길 수 있다는 걸 이번 일이 처음으로 실증했다. 트럼프 행정부의 6월 2일 행정명령과 연계된 이 조치는 앞으로도 반복될 패턴일 가능성이 높다. Anthropic 단일 의존으로 뭔가를 돌리고 있다면, 지금이 OpenAI나 Gemini 폴백 로직을 진지하게 고민할 시점이다.
+
+---
+
+* 출처 : https://www.cnbc.com/amp/2026/06/12/anthropic-disables-access-to-fable-5-and-mythos-5-to-comply-with-government-directive.html
+
+---
+
+**나의 생각**
+
+이 소식을 보면서 가장 먼저 든 건 다중 모델 대응이 더 이상 비용 문제가 아니라 생존 문제라는 점이다. 나도 주요 워크플로우를 Claude에 의존하고 있어서, fallback 우선순위와 model routing 로직을 다시 정리하는 중이다. API 키 한 개로 운영하던 방식은 위험하다.

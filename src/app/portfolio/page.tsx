@@ -84,6 +84,16 @@ export default function PortfolioPage() {
               <li>쇼츠 플래너 → 리뷰 영상 제작 → 데일리픽아이템으로 유입 유도하는 흐름</li>
             </ul>
           </div>
+          <div className="pf-screenshots pf-screenshots-2">
+            <div>
+              <img className="pf-screenshot" src="/portfolio/dailypick-mobile.png" alt="데일리픽아이템 — 모바일 랜딩 페이지" />
+              <p className="pf-screenshot-caption">모바일 랜딩 페이지</p>
+            </div>
+            <div>
+              <img className="pf-screenshot" src="/portfolio/dailypick-admin.png" alt="데일리픽아이템 — 어드민 대시보드 (통계 + 상품 관리)" />
+              <p className="pf-screenshot-caption">어드민 대시보드</p>
+            </div>
+          </div>
           <div className="pf-chips">
             <span className="pf-chip">Next.js 16</span>
             <span className="pf-chip">React 19</span>

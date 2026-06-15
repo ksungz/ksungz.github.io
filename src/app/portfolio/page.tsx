@@ -7,15 +7,15 @@ export default function PortfolioPage() {
       <div className="pf-hero">
         <h1>김성재</h1>
         <p className="pf-hero-desc">
-          다년간 커머스·게임·플랫폼 서비스에서 UI/Frontend 개발을 해왔습니다.
+          다년간 커머스·게임·플랫폼 서비스에서 UI 개발을 해왔습니다.
           <br /><br />
           동시에 개인적으로는{" "}
           <strong>아이디어를 빠르게 만들어보고, 반응이 있으면 고도화하는 방식</strong>으로
           사이드프로젝트를 계속해왔습니다.
           블로그 자동화에서 시작해 커머스, 유튜브 쇼츠, 에이전트 시스템까지 — 검증하고 남은 것들이 아래 서비스들입니다.
           <br /><br />
-          현재는 Claude Code와 개인 멀티 모델 에이전트 시스템으로{" "}
-          <strong>문제 정의 → 구현 → 배포 → 운영까지 End-to-End로 직접 실행</strong>합니다.
+          최근에는 Claude Code와 AI 에이전트를 활용해 React/Next.js 기반 서비스를 직접 기획·구현·운영하며{" "}
+          <strong>문제 정의 → 구현 → 배포 → 운영까지 End-to-End로 직접 실행</strong>하는 영역을 확장하고 있습니다.
         </p>
       </div>
 
@@ -391,7 +391,7 @@ export default function PortfolioPage() {
       <div className="pf-footer">
         <p style={{ fontSize: 20, fontWeight: 800, color: "var(--text)", marginBottom: 8 }}>김성재</p>
         <p style={{ fontSize: 13, color: "var(--text3)", marginBottom: 12, lineHeight: 1.7 }}>
-          커머스·게임·플랫폼 서비스에서 다년간 UI/Frontend 개발<br />
+          커머스·게임·플랫폼 서비스에서 다년간 UI 개발<br />
           아이디어 → 검증 → 고도화를 반복하는 사람
         </p>
         <p>

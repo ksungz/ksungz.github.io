@@ -7,17 +7,16 @@ export default function PortfolioPage() {
       <div className="pf-hero">
         <h1>김성재</h1>
         <p className="pf-hero-desc">
-          Gemini로 블로그 자동화를 시작한 이후, AI로 유튜브 쇼츠, 콘텐츠 자동화 도구, 커머스 서비스,
-          에이전트 시스템까지 직접 만들어왔습니다.
+          본업에서는 다년간 커머스·게임·플랫폼 서비스에서 UI/Frontend 개발을 해왔고,
+          PM·디자이너와 함께 기능을 정의하고 출시하는 과정을 반복해왔습니다.
           <br /><br />
-          되는 것도 있었고 안 되는 것도 많았지만,{" "}
-          <strong>아이디어가 떠오르면 AI로 바로 만들어보는 것</strong>을 반복하면서
-          Google AI Studio → Claude Code → OpenClaw + Ollama Cloud까지 도구도 계속 바꿔왔습니다.
+          동시에 개인적으로는{" "}
+          <strong>아이디어가 떠오르면 AI로 바로 만들어보는 것</strong>을 계속해왔습니다.
+          Gemini로 블로그 자동화를 시작한 이후, 커머스, 유튜브 쇼츠, 에이전트 시스템까지 —
+          되는 것도 있었고 안 되는 것도 많았지만, 도구를 바꿔가며 계속 만들어왔습니다.
           <br /><br />
-          현재는 Claude Code와 개인 멀티 모델 에이전트 시스템으로 기획부터 배포까지 직접 실행합니다.
-          <br /><br />
-          아래 서비스들은 전부{" "}
-          <strong>본업(UI/Frontend 개발) 외 시간에, 상위 기획을 던지고 AI가 코드를 작성하는 방식</strong>으로 만들었습니다.
+          현재는 Claude Code와 개인 멀티 모델 에이전트 시스템으로{" "}
+          <strong>문제 정의 → 구현 → 배포 → 운영까지 End-to-End로 직접 실행</strong>합니다.
           초안은 보통 하루 안에 끝나고, 거기에 살을 붙이고 깎는 걸 지금까지 반복하고 있습니다.
         </p>
       </div>
@@ -36,7 +35,8 @@ export default function PortfolioPage() {
             <span className="pf-badge pf-badge-live">운영 중</span>
           </div>
           <p className="pf-project-desc">
-            육아용품 비교·추천 커머스. 도메인 구매부터 쿠팡 파트너스 연동, SEO, 콘텐츠 자동 발행까지 혼자 구축한 실 수익 서비스.
+            육아용품 비교·추천 커머스. 도메인 구매부터 쿠팡 파트너스 연동, SEO, 콘텐츠 자동 발행까지 혼자 구축.
+            GAS + Gemini 자동화로 사람 개입 없이 매일 콘텐츠가 쌓이는 구조를 만들어, 수동 운영 대비 주당 약 10시간의 작업을 자동화했습니다.
           </p>
           <div className="pf-detail">
             <h4>AI 활용 포인트</h4>
@@ -312,6 +312,10 @@ export default function PortfolioPage() {
       {/* FOOTER */}
       <div className="pf-footer">
         <p style={{ fontSize: 20, fontWeight: 800, color: "var(--text)", marginBottom: 8 }}>김성재</p>
+        <p style={{ fontSize: 13, color: "var(--text3)", marginBottom: 12, lineHeight: 1.7 }}>
+          커머스·게임·플랫폼 서비스에서 다년간 UI/Frontend 개발<br />
+          PM·디자이너와 협업하여 기능 정의 → 출시 → 개선 반복
+        </p>
         <p>
           <a href="mailto:k.suzkim@gmail.com">k.suzkim@gmail.com</a>
         </p>

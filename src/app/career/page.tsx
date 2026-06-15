@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Career",
-  description: "김성재의 경력기술서 — UI/Frontend 개발 · AI 에이전트 활용",
+  description: "김성재의 경력기술서 — UI 개발 · AI 에이전트 활용",
 };
 
 const careers = [
@@ -133,7 +133,7 @@ export default function CareerPage() {
         <p className="font-mono text-xs text-[var(--color-muted)] mb-2">경력기술서</p>
         <h1 className="text-2xl font-bold tracking-tight">김성재</h1>
         <p className="mt-2 text-sm text-[var(--color-muted)]">
-          UI / Frontend 개발 · AI 에이전트 활용
+          UI 개발 · AI 에이전트 활용
         </p>
       </div>
 
@@ -143,7 +143,7 @@ export default function CareerPage() {
         <div className="space-y-3 text-sm text-[var(--color-muted)] leading-relaxed">
           <p>커머스, 게임, 플랫폼 서비스에서 다년간 UI를 만들어온 개발자입니다. 복잡한 UI를 구조적으로 정리하고, 규모가 큰 레거시를 단계적으로 개선하는 데 강점이 있습니다.</p>
           <p>현재는 11번가에서 SCSS/HTML 마크업 산출물을 React 기반 저장소로 이관하며, 레거시 CSS 축소와 컴포넌트 단위 재구성 작업을 맡고 있습니다. Cursor에서 Jira·Confluence·Bitbucket Cloud MCP를 연동해 반복 업무를 자동화하고, UI 개발에 특화된 스킬과 규칙을 직접 설계해 팀 내 공유하고 있습니다.</p>
-          <p>개인적으로는 Claude Code, Codex, OpenClaw 등 AI 코딩 에이전트를 활용해 Next.js 기반 서비스를 기획부터 배포·운영까지 직접 구축하고 있으며, OpenClaw + Ollama Cloud 기반의 로컬 AI 에이전트 환경에서 하네스 엔지니어링을 직접 설계·적용하고 있습니다.</p>
+          <p>개인적으로는 Claude Code, Codex, OpenClaw 등 AI 코딩 에이전트를 활용해 React/Next.js 기반 서비스를 기획부터 배포·운영까지 직접 구축하고 있으며, AI 에이전트와 함께 프론트엔드 영역을 빠르게 확장 중입니다. OpenClaw + Ollama Cloud 기반의 로컬 AI 에이전트 환경에서 하네스 엔지니어링을 직접 설계·적용하고 있습니다.</p>
         </div>
       </section>
 

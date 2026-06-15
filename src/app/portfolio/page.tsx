@@ -48,6 +48,12 @@ export default function PortfolioPage() {
               <li>인스타 카드뉴스·블로그 이미지 생성 도구도 별도 제작 (ai-content-tools)</li>
             </ul>
           </div>
+          <div className="pf-screenshots">
+            <div>
+              <img className="pf-screenshot" src="/portfolio/babypick-guide.png" alt="베이비픽 가이드 목록 — 매일 자동 발행된 글이 날짜별로 쌓여 있는 모습" />
+              <p className="pf-screenshot-caption">가이드 목록 — 매일 자동 발행</p>
+            </div>
+          </div>
           <div className="pf-chips">
             <span className="pf-chip">Next.js</span>
             <span className="pf-chip">TypeScript</span>
@@ -108,6 +114,16 @@ export default function PortfolioPage() {
               <li>처음엔 Google AI Studio에서 시작 → Claude Code로 마이그레이션 후 지금까지 고도화 중</li>
             </ul>
           </div>
+          <div className="pf-screenshots pf-screenshots-2">
+            <div>
+              <img className="pf-screenshot" src="/portfolio/shorts-planner-1.png" alt="쇼츠 플래너 — 영상 업로드, 자동 짜르기, 훅 생성" />
+              <p className="pf-screenshot-caption">영상 분석 + 훅 자동 생성</p>
+            </div>
+            <div>
+              <img className="pf-screenshot" src="/portfolio/shorts-planner-2.png" alt="쇼츠 플래너 — TTS, 썸네일, SNS 패키지" />
+              <p className="pf-screenshot-caption">TTS + 썸네일 + SNS 패키지</p>
+            </div>
+          </div>
           <div className="pf-chips">
             <span className="pf-chip">Next.js</span>
             <span className="pf-chip">Gemini API</span>
@@ -135,6 +151,24 @@ export default function PortfolioPage() {
               <li>기사 선택 시 → Claude가 심층 분석 → 블로그 MDX 초안 생성 → GitHub PR 자동 생성</li>
               <li>사람은 PR 리뷰·머지만 하면 블로그에 자동 배포</li>
             </ul>
+          </div>
+          <div className="pf-screenshots pf-screenshots-4">
+            <div>
+              <img className="pf-screenshot" src="/portfolio/telegram-1.png" alt="텔레그램 봇 — GeekNews 기사 목록 발송" />
+              <p className="pf-screenshot-caption">뉴스 목록 발송</p>
+            </div>
+            <div>
+              <img className="pf-screenshot" src="/portfolio/telegram-2.png" alt="텔레그램 봇 — 번호 선택 후 분석 시작" />
+              <p className="pf-screenshot-caption">기사 선택 → 분석 시작</p>
+            </div>
+            <div>
+              <img className="pf-screenshot" src="/portfolio/telegram-3.png" alt="텔레그램 봇 — 심층 분석 결과 + 지식베이스 저장" />
+              <p className="pf-screenshot-caption">심층 분석 + 지식베이스 저장</p>
+            </div>
+            <div>
+              <img className="pf-screenshot" src="/portfolio/telegram-4.png" alt="GitHub PR — 봇이 자동 생성한 블로그 포스트 PR" />
+              <p className="pf-screenshot-caption">GitHub PR 자동 생성</p>
+            </div>
           </div>
           <div className="pf-chips">
             <span className="pf-chip">Node.js</span>
@@ -192,6 +226,12 @@ export default function PortfolioPage() {
             </ul>
           </div>
 
+          <div className="pf-screenshots">
+            <div>
+              <img className="pf-screenshot" src="/portfolio/openclaw-discord.png" alt="OpenClaw — Discord에서 작업 지시 후 에이전트가 상태 체크하고 응답하는 실제 대화" />
+              <p className="pf-screenshot-caption">Discord 작업 지시 → 에이전트 자율 실행</p>
+            </div>
+          </div>
           <div className="pf-chips">
             <span className="pf-chip">OpenClaw</span>
             <span className="pf-chip">Ollama Cloud</span>

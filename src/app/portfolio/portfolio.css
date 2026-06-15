@@ -183,6 +183,45 @@ body:has(.portfolio-root) > main {
   color: var(--text3);
 }
 
+/* ── SCREENSHOTS ── */
+.pf-screenshots {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.pf-screenshots.pf-screenshots-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.pf-screenshots.pf-screenshots-4 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.pf-screenshot {
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.pf-screenshot-caption {
+  font-size: 11px;
+  color: var(--text3);
+  text-align: center;
+  margin-top: 4px;
+}
+
+@media (max-width: 600px) {
+  .pf-screenshots,
+  .pf-screenshots.pf-screenshots-2,
+  .pf-screenshots.pf-screenshots-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ── POC GRID ── */
 .pf-poc-grid {
   display: grid;

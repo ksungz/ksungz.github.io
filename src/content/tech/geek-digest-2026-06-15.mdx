@@ -1,0 +1,22 @@
+---
+title: "GeekNews 픽: GitHub에서 유통되는 가짜 Claude 모델 저장소와 서드파티 API 유도"
+date: "2026-06-15"
+category: "GeekNews 픽"
+badge: digest
+description: "존재하지 않는 AI 모델을 실제처럼 포장한 GitHub 저장소 — AI 모델 이름 하나를 검증하지 않으면 API 키를 잃는다."
+tags: ["AI모델사기", "ClaudeFake", "보안주의", "EvoLinkAI", "API피싱"]
+---
+
+GitHub에서 "Claude Fable 5 활용 사례 78개"라는 awesome-list를 발견했다. EvoLinkAI라는 곳에서 만든 건데, 코딩·에이전트·게임·3D 등 카테고리별로 꽤 그럴듯하게 정리되어 있었다.
+
+문제는 'Claude Fable 5'가 존재하지 않는다는 것. Anthropic의 실제 라인업은 Claude 3.5와 Claude 4 계열(Opus, Sonnet, Haiku)이 전부다. 'Fable 5'는 어디에도 없는 이름이다.
+
+더 수상한 건 API 엔드포인트다. 문서 곳곳에서 `direct.evolink.ai`로 접근하도록 유도하는데, 공식인 `api.anthropic.com`이 아니다. 자신의 API 키를 입력하는 순간 토큰이 탈취되거나, 무허가 프록시를 통해 요청이 중계될 가능성이 높다. 사례 수도 본문(78개)과 커뮤니티 댓글(60개)이 불일치한다.
+
+legitimate awesome-list 포맷을 정확히 모방해서 언뜻 신뢰감을 주는 게 교묘하다. AI 모델 이름이 낯설면 Anthropic 공식 릴리즈 노트와 대조하는 건 30초면 끝난다. 서드파티 API 링크가 나오는 순간, 포맷이 아무리 그럴듯해도 일단 멈추는 습관이 필요하다. 특정 공급자의 API 하나에만 의존하는 구조라면, 이런 함정에 걸렸을 때 대안 없이 전체가 흔들린다.
+
+이 소식을 보면서 단일 AI 제공자에 의존하는 것의 위험과 다중 모델 fallback의 필요성에 대해 다시 생각하게 됐다.
+
+---
+
+* 출처 : https://github.com/EvoLinkAI/awesome-claude-fable-5/blob/main/README_ko.md

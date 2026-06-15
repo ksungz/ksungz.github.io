@@ -49,42 +49,51 @@ export default function PortfolioPage() {
             </ul>
           </div>
           <div style={{ margin: "20px 0" }}>
-            <svg viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto" }}>
+            <svg viewBox="0 0 700 190" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "auto" }}>
               <defs>
                 <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
                   <path d="M0,0 L8,3 L0,6" fill="#7c6ff7" />
                 </marker>
+                <marker id="arrowGray" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                  <path d="M0,0 L8,3 L0,6" fill="#64748b" />
+                </marker>
               </defs>
-              {/* Nodes */}
-              <rect x="10" y="55" width="110" height="50" rx="8" fill="#1a1a24" stroke="#2a2a3a" />
-              <text x="65" y="77" textAnchor="middle" fill="#e2e8f0" fontSize="11" fontWeight="600">Search Console</text>
-              <text x="65" y="93" textAnchor="middle" fill="#94a3b8" fontSize="10">유입 키워드 확인</text>
+              {/* Left side: input */}
+              <rect x="10" y="70" width="110" height="50" rx="8" fill="#1a1a24" stroke="#2a2a3a" />
+              <text x="65" y="92" textAnchor="middle" fill="#e2e8f0" fontSize="11" fontWeight="600">Search Console</text>
+              <text x="65" y="108" textAnchor="middle" fill="#94a3b8" fontSize="10">유입 키워드 확인</text>
 
-              <rect x="150" y="55" width="110" height="50" rx="8" fill="#1a1a24" stroke="#2a2a3a" />
-              <text x="205" y="77" textAnchor="middle" fill="#e2e8f0" fontSize="11" fontWeight="600">방향 조정</text>
-              <text x="205" y="93" textAnchor="middle" fill="#94a3b8" fontSize="10">키워드·주제 선정</text>
+              <rect x="150" y="70" width="110" height="50" rx="8" fill="#1a1a24" stroke="#2a2a3a" />
+              <text x="205" y="92" textAnchor="middle" fill="#e2e8f0" fontSize="11" fontWeight="600">방향 조정</text>
+              <text x="205" y="108" textAnchor="middle" fill="#94a3b8" fontSize="10">키워드·주제 선정</text>
 
-              <rect x="290" y="55" width="110" height="50" rx="8" fill="#1a1a24" stroke="#7c6ff7" strokeWidth="1.5" />
-              <text x="345" y="77" textAnchor="middle" fill="#a78bfa" fontSize="11" fontWeight="600">GAS + Gemini</text>
-              <text x="345" y="93" textAnchor="middle" fill="#94a3b8" fontSize="10">콘텐츠 자동 생성</text>
+              <rect x="290" y="70" width="120" height="50" rx="8" fill="#1a1a24" stroke="#7c6ff7" strokeWidth="1.5" />
+              <text x="350" y="92" textAnchor="middle" fill="#a78bfa" fontSize="11" fontWeight="600">GAS + Gemini</text>
+              <text x="350" y="108" textAnchor="middle" fill="#94a3b8" fontSize="10">콘텐츠 자동 생성</text>
 
-              <rect x="430" y="55" width="110" height="50" rx="8" fill="#1a1a24" stroke="#2a2a3a" />
-              <text x="485" y="77" textAnchor="middle" fill="#e2e8f0" fontSize="11" fontWeight="600">자동 발행</text>
-              <text x="485" y="93" textAnchor="middle" fill="#94a3b8" fontSize="10">매일 4건 → 사이트</text>
+              {/* Branch: two channels */}
+              <rect x="460" y="35" width="130" height="44" rx="8" fill="#1a1a24" stroke="#34d399" strokeWidth="1.5" />
+              <text x="525" y="55" textAnchor="middle" fill="#34d399" fontSize="11" fontWeight="600">babypick.co.kr</text>
+              <text x="525" y="70" textAnchor="middle" fill="#94a3b8" fontSize="9">매일 4건 · 누적 183건+</text>
 
-              <rect x="570" y="55" width="100" height="50" rx="8" fill="#1a1a24" stroke="#34d399" strokeWidth="1.5" />
-              <text x="620" y="77" textAnchor="middle" fill="#34d399" fontSize="11" fontWeight="600">누적 183건+</text>
-              <text x="620" y="93" textAnchor="middle" fill="#94a3b8" fontSize="10">SEO 인덱싱</text>
+              <rect x="460" y="110" width="130" height="44" rx="8" fill="#1a1a24" stroke="#34d399" strokeWidth="1.5" />
+              <text x="525" y="130" textAnchor="middle" fill="#34d399" fontSize="11" fontWeight="600">네이버 블로그</text>
+              <text x="525" y="145" textAnchor="middle" fill="#94a3b8" fontSize="9">제품 추천글 · 일 1회</text>
 
-              {/* Arrows */}
-              <line x1="120" y1="80" x2="148" y2="80" stroke="#7c6ff7" strokeWidth="1.5" markerEnd="url(#arrow)" />
-              <line x1="260" y1="80" x2="288" y2="80" stroke="#7c6ff7" strokeWidth="1.5" markerEnd="url(#arrow)" />
-              <line x1="400" y1="80" x2="428" y2="80" stroke="#7c6ff7" strokeWidth="1.5" markerEnd="url(#arrow)" />
-              <line x1="540" y1="80" x2="568" y2="80" stroke="#7c6ff7" strokeWidth="1.5" markerEnd="url(#arrow)" />
+              {/* Arrows: linear */}
+              <line x1="120" y1="95" x2="148" y2="95" stroke="#7c6ff7" strokeWidth="1.5" markerEnd="url(#arrow)" />
+              <line x1="260" y1="95" x2="288" y2="95" stroke="#7c6ff7" strokeWidth="1.5" markerEnd="url(#arrow)" />
+
+              {/* Arrows: branch */}
+              <path d="M410,85 L435,85 L435,57 L458,57" fill="none" stroke="#7c6ff7" strokeWidth="1.5" markerEnd="url(#arrow)" />
+              <path d="M410,105 L435,105 L435,132 L458,132" fill="none" stroke="#7c6ff7" strokeWidth="1.5" markerEnd="url(#arrow)" />
+
+              {/* Label */}
+              <text x="445" y="97" textAnchor="middle" fill="#64748b" fontSize="9">멀티채널</text>
 
               {/* Feedback loop */}
-              <path d="M620,107 L620,140 L65,140 L65,107" fill="none" stroke="#64748b" strokeWidth="1" strokeDasharray="4,3" markerEnd="url(#arrow)" />
-              <text x="340" y="153" textAnchor="middle" fill="#64748b" fontSize="9">데이터 기반 피드백 루프</text>
+              <path d="M590,79 L640,79 L640,175 L65,175 L65,122" fill="none" stroke="#64748b" strokeWidth="1" strokeDasharray="4,3" markerEnd="url(#arrowGray)" />
+              <text x="350" y="187" textAnchor="middle" fill="#64748b" fontSize="9">데이터 기반 피드백 루프</text>
             </svg>
           </div>
           <div className="pf-screenshots">

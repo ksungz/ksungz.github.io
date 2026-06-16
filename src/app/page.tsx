@@ -28,7 +28,7 @@ const PRIMARY_SKILLS = new Set(["HTML5", "SCSS/Sass", "React", "TypeScript", "Cl
 
 const skills = [
   { label: "마크업/스타일링", items: ["HTML5", "SCSS/Sass", "CSS Modules", "BEM", "반응형 웹", "웹 접근성"] },
-  { label: "프레임워크", items: ["React", "TypeScript", "Next.js", "Storybook", "Electron"] },
+  { label: "프레임워크", items: ["React", "TypeScript", "Next.js", "Storybook"] },
   { label: "빌드/배포", items: ["Vite", "Gulp", "Docker", "Bitbucket Pipelines", "Vercel"] },
   { label: "AI 에이전트", items: ["Claude Code", "Cursor AI", "Codex", "OpenClaw", "Ollama"] },
 ];

@@ -402,6 +402,10 @@ export default function PortfolioPage() {
             <div className="pf-blog-title">초다중검토 — 멀티 모델 심의 시스템 설계 ↗</div>
             <div className="pf-blog-desc">3개 모델 교차 비판 + 합의 검증 프로세스, 실제 운영 트레이드오프</div>
           </a>
+          <a className="pf-blog-item" href="/tech/ai-news-agent" target="_blank" rel="noopener noreferrer">
+            <div className="pf-blog-title">텔레그램 봇으로 만드는 개인 뉴스 에이전트 ↗</div>
+            <div className="pf-blog-desc">GeekNews 크롤링 → AI 분석 → 블로그 PR 자동 생성까지, 뉴스 소비를 콘텐츠 생산으로 바꾸는 파이프라인</div>
+          </a>
           <a className="pf-blog-item" href="/tech/ai-build-in-a-day" target="_blank" rel="noopener noreferrer">
             <div className="pf-blog-title">AI로 서비스 하나를 하루 만에 만드는 실제 과정 ↗</div>
             <div className="pf-blog-desc">구독 서비스가 싫어서 직접 만든 이야기 — 기획부터 배포까지 하루 워크플로우</div>

@@ -15,7 +15,7 @@ export default function PortfolioPage() {
           블로그 자동화에서 시작해 커머스, 유튜브 쇼츠, 에이전트 시스템까지 — 검증하고 남은 것들이 아래 서비스들입니다.
           <br /><br />
           최근에는 Claude Code와 AI 에이전트를 활용해 React/Next.js 기반 서비스를 직접 기획·구현·운영하며{" "}
-          <strong>문제 정의 → 구현 → 배포 → 운영까지 End-to-End로 직접 실행하는 방식</strong>으로 영역을 확장하고 있습니다.
+          <strong>문제 정의 → 가설 → AI로 구현 → 배포 → 운영 데이터로 학습하는 End-to-End 사이클</strong>을 혼자서 돌리고 있습니다.
         </p>
       </div>
 
@@ -34,9 +34,13 @@ export default function PortfolioPage() {
             <span className="pf-badge pf-badge-live">운영 중</span>
           </div>
           <p className="pf-project-desc">
-            육아용품 비교·추천 커머스. 도메인 구매부터 쿠팡 파트너스 연동, SEO, 콘텐츠 자동 발행까지 혼자 구축.
-            GAS + Gemini 자동화로 사람 개입 없이 매일 콘텐츠가 쌓이는 구조를 만들어, 수동 운영 대비 주당 약 10시간의 수작업을 줄였습니다.
-            Search Console 데이터를 보면서 유입 키워드를 분석하고, 콘텐츠 방향을 조정하는 사이클을 반복하고 있습니다.
+            <strong>문제</strong>: 육아용품 정보가 분산돼 있고, 매일 신제품 가이드를 손으로 쓰는 건 확장 불가능했습니다.
+            <br /><br />
+            <strong>가설</strong>: Search Console 키워드 + GAS + Gemini로 콘텐츠를 자동 생성·발행하면 사람 개입 없이도 유입 기반이 쌓일 것입니다.
+            <br /><br />
+            <strong>검증</strong>: 도메인 구매부터 쿠팡 파트너스 연동, SEO, 콘텐츠 자동 발행까지 직접 구축해 매일 4건씩 가이드를 발행하고, 유입 키워드를 확인하며 콘텐츠 방향을 조정 중입니다.
+            <br /><br />
+            <strong>결과</strong>: 수동 운영 대비 주당 약 10시간의 수작업을 줄였고, 누적 183건+의 가이드가 운영되고 있습니다.
           </p>
           <div className="pf-detail">
             <h4>AI 활용 포인트</h4>
@@ -130,8 +134,13 @@ export default function PortfolioPage() {
             <span className="pf-badge pf-badge-live">운영 중</span>
           </div>
           <p className="pf-project-desc">
-            쇼츠 플래너로 만든 쿠팡 제품 리뷰 영상의 랜딩 페이지. 리틀리·인포크 같은 링크인바이오 서비스는 UI 커스텀에 구독이 필요해서, 원하는 대로 자유롭게 만들기 위해 직접 구축했습니다.
-            쇼츠 영상 설명란에 이 페이지 링크를 걸어 전환을 유도하고 있습니다.
+            <strong>문제</strong>: 쇼츠 영상에서 전환으로 이어지는 랜딩 페이지를 만들고 싶었는데, 기성 링크인바이오 서비스는 구독이 필요하고 UI 커스텀이 제한적이었습니다.
+            <br /><br />
+            <strong>가설</strong>: 직접 랜딩 페이지를 만들고 어드민까지 갖추면 영상 → 랜딩 → 쿠팡 제품 구매 전환 흐름을 내가 조율할 수 있습니다.
+            <br /><br />
+            <strong>검증</strong>: Claude Code로 Next.js 16 + Tailwind v4 기반 랜딩 페이지와 상품 등록·통계 어드민을 직접 구축했습니다.
+            <br /><br />
+            <strong>결과</strong>: 쇼츠 영상 설명란에 랜딩 링크를 걸어 전환 유도 중이며, 페이지 구조와 상품 노출을 직접 최적화할 수 있습니다.
           </p>
           <div className="pf-detail">
             <h4>AI 활용 포인트</h4>
@@ -169,8 +178,13 @@ export default function PortfolioPage() {
             <span className="pf-badge pf-badge-running">운영 중</span>
           </div>
           <p className="pf-project-desc">
-            유튜브 쇼츠 제작 파이프라인. 레퍼런스 영상 분석부터 대본·TTS·썸네일·SNS 패키지 생성까지 자동화했습니다.
-            직접 하는 건 영상 편집뿐. 매일 1편 페이스로 현재 <strong>100편을 발행했습니다</strong>.
+            <strong>문제</strong>: 쇼츠 영상 하나를 만드는 데 레퍼런스 분석, 대본, TTS, 썸네일, 해시태그까지 반복 작업이 많았습니다.
+            <br /><br />
+            <strong>가설</strong>: Gemini API + Claude Code로 레퍼런스 구조·훅을 분석하고 대본·TTS·SNS 패키지를 자동 생성하면 일일 1편 페이스가 가능합니다.
+            <br /><br />
+            <strong>검증</strong>: 처음엔 Google AI Studio에서 시작해 Claude Code로 마이그레이션하고 고도화했습니다.
+            <br /><br />
+            <strong>결과</strong>: 직접 하는 건 영상 편집뿐, 현재 <strong>100편을 발행했습니다</strong>.
           </p>
           <div className="pf-detail">
             <h4>AI 활용 포인트</h4>
@@ -208,8 +222,13 @@ export default function PortfolioPage() {
             <span className="pf-badge pf-badge-running">pm2 상시 실행</span>
           </div>
           <p className="pf-project-desc">
-            매일 아침 자동으로 기술 뉴스를 수집·분석·발송하는 개인 자동화 에이전트입니다. 관심 기사를 선택하면 심층 분석 + 블로그 PR까지 자동 생성합니다.
-            이 파이프라인으로 블로그 기술 글을 꾸준히 발행하고 있습니다.
+            <strong>문제</strong>: 매일 기술 뉴스를 확인하고 블로그 글로 정리하는 과정이 지속되지 않았습니다.
+            <br /><br />
+            <strong>가설</strong>: RSS → AI 요약 → 텔레그램 선택 → AI 심층 분석 → GitHub PR이라는 데이터 파이프라인을 만들면 사람은 선별과 리뷰만 하게 됩니다.
+            <br /><br />
+            <strong>검증</strong>: Node.js + Telegraf + Claude CLI + GitHub API로 매일 08:00 자동 수집·분석·발송 파이프라인을 구축했습니다.
+            <br /><br />
+            <strong>결과</strong>: 블로그 기술 글을 꾸준히 발행하는 파이프라인이 운영 중입니다.
           </p>
           <div className="pf-detail">
             <h4>실제 동작 흐름</h4>
@@ -257,9 +276,13 @@ export default function PortfolioPage() {
 
         <div className="pf-project">
           <p className="pf-project-desc">
-            AI 에이전트를 쓰다 보니 반복되는 문제가 있었습니다 — 단일 모델은 자기 답이 맞다고 확신하고, 세션이 끝나면 맥락을 잊음.
-            이걸 해결하기 위해 여러 모델이 서로 검증하는 구조와, 세션을 넘어 학습이 쌓이는 메모리 시스템을 직접 설계했습니다.
-            실제로 프로젝트 의사결정(아키텍처 선택, 마이그레이션 판단 등)에서 활용 중입니다.
+            <strong>문제</strong>: 단일 AI 모델은 자기 답이 맞다고 확신하고, 세션이 끝나면 맥락을 잊어 반복 실수가 생겼습니다.
+            <br /><br />
+            <strong>가설</strong>: 여러 모델이 서로 검증하고, 세션을 넘어 메모리가 쌓이는 구조를 만들면 되돌리기 어려운 판단의 품질이 높아집니다.
+            <br /><br />
+            <strong>검증</strong>: Discord → OpenClaw → Ollama Cloud로 역할별 모델 라우팅 + 초다중검토 + Self-Improving 메모리 시스템을 직접 설계하고 운영 중입니다.
+            <br /><br />
+            <strong>결과</strong>: 실제 프로젝트 의사결정(아키텍처 선택, 마이그레이션 판단, 코드 리뷰)에서 활용하며, 같은 실수 반복을 줄이고 있습니다.
           </p>
 
           <div className="pf-detail">
@@ -351,11 +374,12 @@ export default function PortfolioPage() {
 
       {/* PoC / 실험 */}
       <section className="pf-section">
-        <h2 className="pf-section-title">그 외 만들어본 것들</h2>
+        <h2 className="pf-section-title">빠른 검증을 반복합니다</h2>
         <p style={{ fontSize: 14, color: "var(--text3)", marginTop: -24 }}>
-          위 서비스 외에도 아이디어가 떠오르면 빠르게 만들어보고 검증합니다 —
-          AI 구매 합리화 서비스, 국어사전 재가공, 유튜브 댓글 분석, 콘텐츠 제작 내부 도구 등.
-          대부분 1~2일 안에 MVP를 만들고, 반응을 보고 유지하거나 접습니다.
+          위 서비스 외에도 아이디어가 떠오르면 1~2일 안에 MVP를 만들어 검증합니다 —
+          AI 구매 합리화, 국어사전 재가공, 유튜브 댓글 분석, 콘텐츠 제작 내부 도구 등.
+          반응이 있는 것은 고도화하고, 없는 것은 빠르게 접어 다음 가설을 테스트합니다.
+          이 과정이 제품 감각을 만들고, 기술로 문제를 푸는 방식을 단련합니다.
         </p>
       </section>
 

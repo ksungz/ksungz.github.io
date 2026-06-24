@@ -226,17 +226,17 @@ export default function PortfolioPage() {
             <br /><br />
             <strong>가설</strong>: RSS → AI 요약 → 텔레그램 선택 → AI 심층 분석 → GitHub PR이라는 데이터 파이프라인을 만들면 사람은 선별과 리뷰만 하게 됩니다.
             <br /><br />
-            <strong>검증</strong>: Node.js + Telegraf + Claude CLI + GitHub API로 매일 08:00 자동 수집·분석·발송 파이프라인을 구축했습니다.
+            <strong>검증</strong>: Node.js + Telegraf + Claude CLI + GitHub API로 매일 08:00 자동 수집·발송 파이프라인을 구축했습니다.
             <br /><br />
             <strong>결과</strong>: 블로그 기술 글을 꾸준히 발행하는 파이프라인이 운영 중입니다.
           </p>
           <div className="pf-detail">
             <h4>실제 동작 흐름</h4>
             <ul>
-              <li>매일 08:00 — Hacker News Korea RSS 크롤링</li>
-              <li>Claude CLI로 기사 요약·분류·관심도 판단</li>
-              <li>텔레그램으로 요약 카드 발송</li>
-              <li>기사 선택 시 → Claude가 심층 분석 → 블로그 MDX 초안 생성 → GitHub PR 자동 생성</li>
+              <li>매일 08:00 — GeekNews 크롤링</li>
+              <li>텔레그램으로 기사 제목 목록 발송</li>
+              <li>번호 선택 시 → Claude CLI로 심층 분석 + 지식베이스 저장</li>
+              <li>블로그 MDX 초안 생성 → GitHub PR 자동 생성</li>
               <li>사람은 PR 리뷰·머지만 하면 블로그에 자동 배포</li>
             </ul>
           </div>

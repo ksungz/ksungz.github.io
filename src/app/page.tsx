@@ -41,12 +41,12 @@ export default async function Home() {
 
       {/* Hero */}
       <section className="mb-16">
-        <p className="font-mono text-xs text-[var(--color-muted)] mb-3">UI / Frontend 개발 · AI 에이전트 활용</p>
+        <p className="font-mono text-xs text-[var(--color-muted)] mb-3">Frontend 개발 · AI Transformation · 팀 리더십</p>
         <h1 className="text-3xl font-bold tracking-tight mb-4">김성재</h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
-          커머스, 게임, 플랫폼 서비스에서 다년간 UI를 만들어온 개발자입니다.
-          복잡한 UI를 구조적으로 정리하고, 규모가 큰 레거시를 단계적으로 개선하는 데 강점이 있습니다.
-          현재는 AI 에이전트를 워크플로우 중심에 두고 일하고 있습니다.
+          커머스, 게임, 플랫폼 서비스에서 다년간 UI/Frontend 개발을 해왔습니다.
+          HTML/CSS 기반의 정교한 마크업부터 React 컴포넌트 설계, 대규모 레거시 개선까지 폭넓은 프론트엔드 실무를 다뤄왔으며,
+          현재는 AI 에이전트를 개발 워크플로우 중심에 두고 팀 생산성과 개발 문화를 함께 만들어가고 있습니다.
         </p>
         <div className="mt-6 flex gap-3">
           <Link

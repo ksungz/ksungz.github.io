@@ -1,1 +1,0 @@
-import{j as t}from"./index-DuyCbsqK.js";import{Q as i}from"./Quiz-Dg_OpTaO.js";const o=[{id:"q1",question:"하이브리드 검색은 무엇을 결합하는가?",options:[{id:"a",text:"의미 검색과 키워드 검색"},{id:"b",text:"두 개의 다른 LLM"},{id:"c",text:"CPU와 GPU"}],correctId:"a",explanation:"하이브리드 검색은 벡터 의미 검색과 BM25 같은 키워드 검색을 결합합니다."}];function n(){return t.jsx(i,{questions:o})}export{n as default};

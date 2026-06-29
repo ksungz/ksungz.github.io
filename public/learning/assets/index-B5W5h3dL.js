@@ -1,1 +1,0 @@
-import{j as t}from"./index-DuyCbsqK.js";import{Q as e}from"./Quiz-Dg_OpTaO.js";const i=[{id:"q1",question:"fetch API의 기본 HTTP 메서드는?",options:[{id:"a",text:"POST"},{id:"b",text:"GET"},{id:"c",text:"DELETE"}],correctId:"b",explanation:"fetch()는 기본적으로 GET 요청을 보냅니다."}];function s(){return t.jsx(e,{questions:i})}export{s as default};

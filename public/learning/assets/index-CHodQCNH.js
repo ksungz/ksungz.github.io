@@ -1,0 +1,1 @@
+import{j as t}from"./index-D6oqG16r.js";import{Q as i}from"./Quiz-D5E20Evm.js";const o=[{id:"q1",question:"좋은 FE 개발자가 갖춰야 할 역량으로 거리가 먼 것은?",options:[{id:"a",text:"브라우저 렌더링 원리 이해"},{id:"b",text:"UX와 접근성에 대한 관심"},{id:"c",text:"DB 스키마 설계 능력"}],correctId:"c",explanation:"DB 스키마 설계는 백엔드/데이터 엔지니어 영역에 더 가깝습니다."}];function s(){return t.jsx(i,{questions:o})}export{s as default};

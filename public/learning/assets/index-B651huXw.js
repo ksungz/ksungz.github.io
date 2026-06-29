@@ -1,1 +1,0 @@
-import{j as t}from"./index-BMxYCY3a.js";import{Q as i}from"./Quiz-DWuPfrFR.js";const o=[{id:"q1",question:"React Testing Library의 핵심 원칙은?",options:[{id:"a",text:"구현 세부사항보다 사용자 관점의 테스트"},{id:"b",text:"모든 함수를 mock 처리"},{id:"c",text:"DOM 구조를 정확히 검증"}],correctId:"a",explanation:"RTL은 사용자가 보는 방식으로 테스트합니다."}];function s(){return t.jsx(i,{questions:o})}export{s as default};

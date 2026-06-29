@@ -1,1 +1,0 @@
-import{j as t}from"./index-D6oqG16r.js";import{Q as i}from"./Quiz-D5E20Evm.js";const o=[{id:"q1",question:"JSX에서 JavaScript 표현식을 감싸는 기호는?",options:[{id:"a",text:"{}"},{id:"b",text:"()"},{id:"c",text:"[]"}],correctId:"a",explanation:"JSX에서 {} 안에 JavaScript 표현식을 넣습니다."}];function e(){return t.jsx(i,{questions:o})}export{e as default};

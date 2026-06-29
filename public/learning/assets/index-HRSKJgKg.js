@@ -1,1 +1,0 @@
-import{j as t}from"./index-D6oqG16r.js";import{Q as o}from"./Quiz-D5E20Evm.js";const i=[{id:"q1",question:"LLM 엔지니어의 주요 역할은?",options:[{id:"a",text:"새로운 Transformer 아키텍처를 발명한다"},{id:"b",text:"모델을 잘 쓰는 시스템을 설계하고 운영한다"},{id:"c",text:"데이터 센터를 짓는다"}],correctId:"b",explanation:"LLM 엔지니어는 모델 기반 애플리케이션과 인프라를 만듭니다."}];function s(){return t.jsx(o,{questions:i})}export{s as default};

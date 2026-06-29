@@ -1,1 +1,0 @@
-import{j as t}from"./index-D6oqG16r.js";import{Q as i}from"./Quiz-D5E20Evm.js";const o=[{id:"q1",question:"파인튜닝보다 먼저 고려해야 할 것은?",options:[{id:"a",text:"RAG, 프롬프트, 평가"},{id:"b",text:"GPU 클러스터 구매"},{id:"c",text:"새로운 모델 아키텍처 설계"}],correctId:"a",explanation:"대부분의 문제는 프롬프트와 RAG만으로 해결됩니다. 파인튜닝은 그 다음 단계입니다."}];function n(){return t.jsx(i,{questions:o})}export{n as default};

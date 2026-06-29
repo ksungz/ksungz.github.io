@@ -1,1 +1,0 @@
-import{j as t}from"./index-CLtVexSo.js";import{Q as e}from"./Quiz-Df0NqOTL.js";const i=[{id:"q1",question:"Vite와 Webpack의 공통점은?",options:[{id:"a",text:"둘 다 FE 빌드 도구"},{id:"b",text:"둘 다 백엔드 프레임워크"},{id:"c",text:"둘 다 CSS 전처리기"}],correctId:"a",explanation:"Vite와 Webpack은 모던 FE 프로젝트의 빌드/번들링 도구입니다."}];function r(){return t.jsx(e,{questions:i})}export{r as default};

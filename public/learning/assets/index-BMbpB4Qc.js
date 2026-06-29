@@ -1,0 +1,1 @@
+import{j as t}from"./index-DuyCbsqK.js";import{Q as i}from"./Quiz-Dg_OpTaO.js";const o=[{id:"q1",question:"Quantization의 목적은?",options:[{id:"a",text:"모델 정확도를 무조건 높인다"},{id:"b",text:"메모리와 연산량을 줄인다"},{id:"c",text:"학습 데이터를 늘린다"}],correctId:"b",explanation:"양자화는 가중치 정밀도를 낮춰 메모리와 연산량을 절감합니다."}];function s(){return t.jsx(i,{questions:o})}export{s as default};

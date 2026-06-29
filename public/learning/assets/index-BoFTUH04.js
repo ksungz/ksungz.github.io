@@ -1,1 +1,0 @@
-import{j as t}from"./index-CLtVexSo.js";import{Q as e}from"./Quiz-Df0NqOTL.js";const s=[{id:"q1",question:"useState가 반환하는 두 번째 값의 역할은?",options:[{id:"a",text:"현재 상태 값"},{id:"b",text:"상태를 변경하는 setter 함수"},{id:"c",text:"이전 상태 값"}],correctId:"b",explanation:"useState는 [state, setState] 형태로 현재 값과 변경 함수를 반환합니다."}];function a(){return t.jsx(e,{questions:s})}export{a as default};

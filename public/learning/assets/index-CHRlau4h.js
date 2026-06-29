@@ -1,1 +1,0 @@
-import{j as t}from"./index-CLtVexSo.js";import{Q as i}from"./Quiz-Df0NqOTL.js";const o=[{id:"q1",question:"FE 개발의 핵심 전환으로 옳은 것은?",options:[{id:"a",text:"DOM 직접 조작에서 상태 관리로"},{id:"b",text:"HTML 파일 개수를 늘린다"},{id:"c",text:"서버에서 모든 UI를 렌더한다"}],correctId:"a",explanation:"FE는 상태를 기반으로 UI를 선언적으로 렌더링합니다."}];function s(){return t.jsx(i,{questions:o})}export{s as default};

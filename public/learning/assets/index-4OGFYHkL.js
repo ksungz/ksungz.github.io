@@ -1,0 +1,1 @@
+import{j as t}from"./index-CLtVexSo.js";import{Q as o}from"./Quiz-Df0NqOTL.js";const i=[{id:"q1",question:"스트리밍의 주요 이점은?",options:[{id:"a",text:"API 비용을 절반으로 줄인다"},{id:"b",text:"사용자가 응답 생성을 실시간으로 볼 수 있다"},{id:"c",text:"모덑 정확도를 자동으로 높인다"}],correctId:"b",explanation:"스트리밍은 token이 생성되는 대로 전달해 UX를 개선합니다."}];function s(){return t.jsx(o,{questions:i})}export{s as default};

@@ -1,0 +1,1 @@
+import{j as t}from"./index-CLtVexSo.js";import{Q as i}from"./Quiz-Df0NqOTL.js";const o=[{id:"q1",question:"파일럿의 주요 목표는?",options:[{id:"a",text:"완벽한 제품을 만드는 것"},{id:"b",text:"작게 검증하며 학습하는 것"},{id:"c",text:"모든 직원을 즉시 교육하는 것"}],correctId:"b",explanation:"파일럿은 전체 도입 전 성공 증거와 학습을 얻는 단계입니다."}];function n(){return t.jsx(i,{questions:o})}export{n as default};

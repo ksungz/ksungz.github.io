@@ -1,1 +1,0 @@
-import{j as t}from"./index-BsC_isQN.js";import{Q as o}from"./Quiz-CABouyTy.js";const i=[{id:"q1",question:"Context API의 주된 용도는?",options:[{id:"a",text:"컴포넌트 트리 전체에 데이터를 공유하는 것"},{id:"b",text:"API 요청을 보내는 것"},{id:"c",text:"CSS를 모듈화하는 것"}],correctId:"a",explanation:"Context API는 props drilling 없이 전역 상태를 공유합니다."}];function r(){return t.jsx(o,{questions:i})}export{r as default};

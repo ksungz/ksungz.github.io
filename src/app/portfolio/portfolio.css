@@ -167,6 +167,33 @@ body:has(.portfolio-root) > main {
 
 .pf-detail li strong { color: var(--text); font-weight: 600; }
 
+.pf-focus-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.pf-focus-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.pf-focus-card h3 {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.pf-focus-card p {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.65;
+  margin: 0;
+}
+
 .pf-chips {
   display: flex;
   flex-wrap: wrap;
@@ -302,5 +329,6 @@ body:has(.portfolio-root) > main {
 /* ── RESPONSIVE ── */
 @media (max-width: 600px) {
   .pf-project-header { flex-direction: column; gap: 6px; }
+  .pf-focus-grid { grid-template-columns: 1fr; }
   .pf-poc-grid { grid-template-columns: 1fr; }
 }

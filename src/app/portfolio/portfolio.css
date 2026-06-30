@@ -75,6 +75,13 @@ body:has(.portfolio-root) > main {
   border-bottom: 1px solid var(--border);
 }
 
+.pf-section-lead {
+  font-size: 14px;
+  color: var(--text3);
+  line-height: 1.7;
+  margin: -24px 0 28px;
+}
+
 /* ── DIVIDER ── */
 .pf-divider {
   border: none;
@@ -86,6 +93,10 @@ body:has(.portfolio-root) > main {
 /* ── PROJECT CARD ── */
 .pf-project {
   margin-bottom: 56px;
+}
+
+.pf-project-compact {
+  margin-bottom: 24px;
 }
 
 .pf-project-header {
@@ -210,6 +221,44 @@ body:has(.portfolio-root) > main {
   color: var(--text3);
 }
 
+.pf-service-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.pf-service-card {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 18px;
+  align-items: start;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.pf-service-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  display: block;
+}
+
+.pf-service-card h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.pf-service-card p {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.65;
+  margin: 8px 0 0;
+}
+
 /* ── SCREENSHOTS ── */
 .pf-screenshots {
   display: grid;
@@ -330,5 +379,6 @@ body:has(.portfolio-root) > main {
 @media (max-width: 600px) {
   .pf-project-header { flex-direction: column; gap: 6px; }
   .pf-focus-grid { grid-template-columns: 1fr; }
+  .pf-service-card { grid-template-columns: 1fr; }
   .pf-poc-grid { grid-template-columns: 1fr; }
 }

@@ -1,1 +1,0 @@
-import{j as t}from"./index-BWQnAhl7.js";import{Q as o}from"./Quiz-DmO6Aiub.js";const i=[{id:"q1",question:"CSS Modules의 주요 장점은?",options:[{id:"a",text:"클래스 이름 충돌 방지"},{id:"b",text:"CSS를 전역으로 강제 적용"},{id:"c",text:"JavaScript 문법으로 CSS 작성"}],correctId:"a",explanation:"CSS Modules는 로컬 스코프 클래스 이름을 생성해 충돌을 방지합니다."}];function r(){return t.jsx(o,{questions:i})}export{r as default};

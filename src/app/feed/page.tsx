@@ -1,81 +1,14 @@
-"use client";
-
-import { useState } from "react";
-import { FeedPage } from "./FeedPage";
-import { ReaderPage } from "./ReaderPage";
-import { AnalyzedPage } from "./AnalyzedPage";
+import { fetchArticles, fetchAnalyzedArticles } from "@/lib/feed-data";
+import { FeedClient } from "./FeedClient";
 import "./feed.css";
 
-export default function Feed() {
-  const initialHash =
-    typeof window !== "undefined"
-      ? window.location.hash.replace("#", "")
-      : "";
-  const [view, setView] = useState<"feed" | "reader" | "analyzed">(
-    initialHash === "analyzed" ? "analyzed" : "feed"
-  );
-  const [selectedId, setSelectedId] = useState<number | null>(null);
-  const [statusFilter, setStatusFilter] = useState("all");
-  const [catFilter, setCatFilter] = useState("all");
+export const dynamic = "force-dynamic";
 
-  const openReader = (id: number) => {
-    setSelectedId(id);
-    setView("reader");
-    window.scrollTo(0, 0);
-  };
+export default async function FeedPage() {
+  const [articles, analyzed] = await Promise.all([
+    fetchArticles("all", "all"),
+    fetchAnalyzedArticles(),
+  ]);
 
-  const backToList = () => {
-    setView("feed");
-    setSelectedId(null);
-    window.scrollTo(0, 0);
-  };
-
-  const goAnalyzed = () => {
-    setView("analyzed");
-    window.location.hash = "analyzed";
-    window.scrollTo(0, 0);
-  };
-
-  const goFeed = () => {
-    setView("feed");
-    window.location.hash = "";
-    window.scrollTo(0, 0);
-  };
-
-  return (
-    <>
-      {view === "feed" && (
-        <FeedPage
-          onOpenReader={openReader}
-          statusFilter={statusFilter}
-          setStatusFilter={setStatusFilter}
-          catFilter={catFilter}
-          setCatFilter={setCatFilter}
-        />
-      )}
-      {view === "reader" && selectedId !== null && (
-        <ReaderPage articleId={selectedId} onBack={backToList} />
-      )}
-      {view === "analyzed" && <AnalyzedPage onBack={goFeed} />}
-
-      {/* 하단 탭바 */}
-      <div className="feed-tabbar">
-        <button
-          className={`feed-tab ${view === "feed" ? "active" : ""}`}
-          onClick={goFeed}
-        >
-          <span className="feed-tab-icon">📰</span>피드
-        </button>
-        <button
-          className={`feed-tab ${view === "analyzed" ? "active" : ""}`}
-          onClick={goAnalyzed}
-        >
-          <span className="feed-tab-icon">📝</span>대기
-        </button>
-        <button className="feed-tab" onClick={() => alert("설정 화면 (예정)")}>
-          <span className="feed-tab-icon">⚙️</span>설정
-        </button>
-      </div>
-    </>
-  );
+  return <FeedClient initialArticles={articles} initialAnalyzed={analyzed} />;
 }

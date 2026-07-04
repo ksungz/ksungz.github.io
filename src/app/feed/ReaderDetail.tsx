@@ -49,6 +49,14 @@ export function ReaderDetail({ article, onBack }: ReaderDetailProps) {
       </div>
 
       <div className="reader-body">
+        {article.summary && (
+          <div className="analysis-box">
+            <h4>📋 AI 요약</h4>
+            <p style={{ color: "#ccc", fontSize: "14px", whiteSpace: "pre-wrap" }}>
+              {article.summary}
+            </p>
+          </div>
+        )}
         {article.content ? (
           <p>{article.content}</p>
         ) : (

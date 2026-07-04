@@ -7,6 +7,8 @@ export interface FeedArticle {
   url: string;
   source_url: string | null;
   content: string | null;
+  summary: string | null;
+  importance_score: number;
   points: number;
   status: string;
   tags: string[];
@@ -27,6 +29,8 @@ interface RawArticleRow {
   url: string;
   source_url: string | null;
   content: string | null;
+  summary: string | null;
+  importance_score: number | null;
   points: number | null;
   status: string;
   tags: string[] | null;
@@ -47,6 +51,8 @@ function toFeedArticle(a: RawArticleRow): FeedArticle {
     url: a.url,
     source_url: a.source_url,
     content: a.content,
+    summary: a.summary,
+    importance_score: a.importance_score || 0,
     points: a.points || 0,
     status: a.status,
     tags: a.tags || [],
@@ -70,7 +76,7 @@ export async function fetchArticles(
     .from("feed_articles")
     .select(
       `
-      id, source_id, title, url, source_url, content, points,
+      id, source_id, title, url, source_url, content, summary, importance_score, points,
       status, tags, published_at, collected_at, read_at, analyzed_at, posted_at,
       feed_sources!inner(name, category)
     `
@@ -106,7 +112,7 @@ export async function fetchArticleById(
     .from("feed_articles")
     .select(
       `
-      id, source_id, title, url, source_url, content, points,
+      id, source_id, title, url, source_url, content, summary, importance_score, points,
       status, tags, published_at, collected_at, read_at, analyzed_at, posted_at,
       feed_sources!inner(name, category)
     `

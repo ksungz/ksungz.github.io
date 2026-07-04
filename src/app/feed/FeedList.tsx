@@ -102,7 +102,13 @@ export function FeedList({
               </span>
             </div>
             <h3>{a.title}</h3>
-            {a.content && (
+            {a.summary && (
+              <p className="feed-card-summary">
+                {a.summary.slice(0, 150)}
+                {a.summary.length > 150 ? "..." : ""}
+              </p>
+            )}
+            {!a.summary && a.content && (
               <p className="feed-card-summary">
                 {a.content.slice(0, 120)}
                 {a.content.length > 120 ? "..." : ""}

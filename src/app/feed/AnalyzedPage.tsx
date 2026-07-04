@@ -35,10 +35,10 @@ const MOCK_ANALYZED: AnalyzedItem[] = [
 ];
 
 interface AnalyzedPageProps {
-  onBack: () => void;
+  onBack?: () => void;
 }
 
-export function AnalyzedPage({ onBack: _onBack }: AnalyzedPageProps) {
+export function AnalyzedPage({}: AnalyzedPageProps) {
   return (
     <>
       <div className="feed-header">

@@ -1,22 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FeedPage } from "./FeedPage";
 import { ReaderPage } from "./ReaderPage";
 import { AnalyzedPage } from "./AnalyzedPage";
 import "./feed.css";
 
 export default function Feed() {
-  const [view, setView] = useState<"feed" | "reader" | "analyzed">("feed");
+  const initialHash =
+    typeof window !== "undefined"
+      ? window.location.hash.replace("#", "")
+      : "";
+  const [view, setView] = useState<"feed" | "reader" | "analyzed">(
+    initialHash === "analyzed" ? "analyzed" : "feed"
+  );
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [statusFilter, setStatusFilter] = useState("all");
   const [catFilter, setCatFilter] = useState("all");
-
-  // URL 해시로 뷰 동기화 (뒤로가기 지원)
-  useEffect(() => {
-    const hash = window.location.hash.replace("#", "");
-    if (hash === "analyzed") setView("analyzed");
-  }, []);
 
   const openReader = (id: number) => {
     setSelectedId(id);

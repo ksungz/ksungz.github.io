@@ -1,0 +1,338 @@
+@import "tailwindcss";
+
+/* ════════ Feed Reader UI ════════ */
+
+.feed-root {
+  --feed-bg: #0a0a0a;
+  --feed-surface: #111;
+  --feed-border: #1f1f1f;
+  --feed-text: #e4e4e4;
+  --feed-muted: #666;
+  --feed-dim: #999;
+
+  min-height: 100vh;
+  background: var(--feed-bg);
+  color: var(--feed-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 헤더 */
+.feed-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--feed-bg);
+  border-bottom: 1px solid var(--feed-border);
+  padding: 16px 20px;
+}
+
+.feed-header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.feed-header-desc {
+  font-size: 13px;
+  color: var(--feed-muted);
+  margin-top: 4px;
+}
+
+/* 필터 행 */
+.feed-filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+.feed-filters::-webkit-scrollbar { display: none; }
+
+.filter-pill {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid #2a2a2a;
+  background: transparent;
+  color: var(--feed-dim);
+  font-size: 13px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.filter-pill:hover:not(.active) {
+  border-color: #444;
+  color: #ccc;
+}
+.filter-pill.active {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+/* 카테고리 필터 */
+.feed-cats {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+.cat-pill {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.cat-pill[data-cat="all"] { background: #222; color: #888; }
+.cat-pill[data-cat="dev"] { background: #1a3a5c; color: #4dabf7; }
+.cat-pill[data-cat="business"] { background: #3c2a1a; color: #ffa94d; }
+.cat-pill[data-cat="youtube"] { background: #3c1a1a; color: #ff6b6b; }
+.cat-pill[data-cat="social"] { background: #2a1a3c; color: #b197fc; }
+
+/* 피드 리스트 */
+.feed-list { padding: 0 20px 80px; }
+
+.feed-card {
+  border-bottom: 1px solid #1a1a1a;
+  padding: 16px 0;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.feed-card:hover {
+  background: #111;
+  margin: 0 -20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.feed-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.source-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.source-badge.dev { background: #1a3a5c; color: #4dabf7; }
+.source-badge.business { background: #3c2a1a; color: #ffa94d; }
+.source-badge.youtube { background: #3c1a1a; color: #ff6b6b; }
+.source-badge.social { background: #2a1a3c; color: #b197fc; }
+
+.card-time {
+  font-size: 12px;
+  color: var(--feed-muted);
+}
+
+.status-badge {
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.status-unread { background: #1c1c1c; color: #888; }
+.status-read { background: transparent; color: #555; border: 1px solid #333; }
+.status-analyzed { background: #1a2c1a; color: #69db7c; }
+.status-posted { background: #1c2a3c; color: #4dabf7; }
+
+.feed-card h3 {
+  font-size: 15px;
+  line-height: 1.4;
+  margin-bottom: 4px;
+  color: var(--feed-text);
+}
+.feed-card-summary {
+  font-size: 13px;
+  color: #888;
+  line-height: 1.5;
+}
+
+/* 빈 상태 */
+.feed-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--feed-muted);
+  font-size: 14px;
+}
+
+/* ════════ Reader View ════════ */
+
+.feed-reader { padding: 0 20px 80px; }
+
+.reader-back {
+  font-size: 13px;
+  color: var(--feed-muted);
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 12px;
+  margin-top: 20px;
+}
+.reader-back:hover { color: #ccc; }
+
+.reader-header-box {
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--feed-border);
+  margin-bottom: 20px;
+}
+.reader-header-box h2 {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+.reader-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.reader-meta a {
+  font-size: 12px;
+  color: #555;
+  text-decoration: none;
+}
+.reader-meta a:hover { color: #888; }
+
+.reader-body {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #ccc;
+}
+.reader-body p { margin-bottom: 16px; }
+.reader-body h4 {
+  font-size: 16px;
+  margin: 24px 0 8px;
+  color: #fff;
+}
+
+/* 분석 결과 박스 */
+.analysis-box {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 24px 0;
+}
+.analysis-box h4 {
+  font-size: 14px;
+  color: #69db7c;
+  margin-bottom: 12px;
+}
+.analysis-insight {
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 6px;
+  padding-left: 16px;
+  position: relative;
+}
+.analysis-insight::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: #69db7c;
+}
+.analysis-angle {
+  font-size: 13px;
+  color: #4dabf7;
+  margin-top: 12px;
+  padding: 10px;
+  background: #0a1a2c;
+  border-radius: 6px;
+}
+
+/* 액션 버튼 영역 */
+.feed-actions {
+  position: sticky;
+  bottom: 0;
+  background: var(--feed-bg);
+  border-top: 1px solid var(--feed-border);
+  padding: 12px 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.action-btn:hover { opacity: 0.85; }
+.action-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.btn-analyze { background: #1a2c1a; color: #69db7c; border: 1px solid #2a4a2a; }
+.btn-blog { background: #1c2a3c; color: #4dabf7; border: 1px solid #2a4a5c; }
+.btn-archive { background: #1c1c1c; color: #888; border: 1px solid #333; }
+
+/* ════════ Analyzed List ════════ */
+
+.analyzed-list { padding: 0 20px 80px; }
+
+.analyzed-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #1a1a1a;
+}
+.analyzed-item .ai-title {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.pr-btn {
+  padding: 6px 12px;
+  background: #1c2a3c;
+  color: #4dabf7;
+  border: 1px solid #2a4a5c;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.pr-btn:hover { opacity: 0.85; }
+
+/* ════════ Tabbar ════════ */
+
+.feed-tabbar {
+  position: sticky;
+  bottom: 0;
+  background: var(--feed-bg);
+  border-top: 1px solid var(--feed-border);
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+}
+
+.feed-tab {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  color: var(--feed-muted);
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+  transition: color 0.15s;
+}
+.feed-tab.active { color: #fff; }
+.feed-tab-icon { font-size: 18px; display: block; margin-bottom: 2px; }
+
+/* ════════ Responsive ════════ */
+
+@media (min-width: 768px) {
+  .feed-root {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+}

@@ -19,6 +19,47 @@ export interface FeedArticle {
   source_category: string;
 }
 
+// Supabase join 결과: feed_sources는 배열로 옴
+interface RawArticleRow {
+  id: number;
+  source_id: number;
+  title: string;
+  url: string;
+  source_url: string | null;
+  content: string | null;
+  points: number | null;
+  status: string;
+  tags: string[] | null;
+  published_at: string | null;
+  collected_at: string;
+  read_at: string | null;
+  analyzed_at: string | null;
+  posted_at: string | null;
+  feed_sources: { name: string; category: string }[];
+}
+
+function toFeedArticle(a: RawArticleRow): FeedArticle {
+  const src = a.feed_sources?.[0];
+  return {
+    id: a.id,
+    source_id: a.source_id,
+    title: a.title,
+    url: a.url,
+    source_url: a.source_url,
+    content: a.content,
+    points: a.points || 0,
+    status: a.status,
+    tags: a.tags || [],
+    published_at: a.published_at,
+    collected_at: a.collected_at,
+    read_at: a.read_at,
+    analyzed_at: a.analyzed_at,
+    posted_at: a.posted_at,
+    source_name: src?.name || "",
+    source_category: src?.category || "dev",
+  };
+}
+
 export async function fetchArticles(
   statusFilter: string = "all",
   catFilter: string = "all"
@@ -47,28 +88,7 @@ export async function fetchArticles(
     return [];
   }
 
-  type ArticleRow = Record<string, unknown> & {
-    feed_sources?: { name: string; category: string } | null;
-  };
-
-  let articles = (data || []).map((a: ArticleRow) => ({
-    id: a.id as number,
-    source_id: a.source_id as number,
-    title: a.title as string,
-    url: a.url as string,
-    source_url: (a.source_url as string) || null,
-    content: (a.content as string) || null,
-    points: (a.points as number) || 0,
-    status: a.status as string,
-    tags: (a.tags as string[]) || [],
-    published_at: (a.published_at as string) || null,
-    collected_at: a.collected_at as string,
-    read_at: (a.read_at as string) || null,
-    analyzed_at: (a.analyzed_at as string) || null,
-    posted_at: (a.posted_at as string) || null,
-    source_name: a.feed_sources?.name || "",
-    source_category: a.feed_sources?.category || "dev",
-  })) as FeedArticle[];
+  let articles = (data as unknown as RawArticleRow[] || []).map(toFeedArticle);
 
   if (catFilter !== "all") {
     articles = articles.filter((a) => a.source_category === catFilter);
@@ -96,27 +116,7 @@ export async function fetchArticleById(
 
   if (error || !data) return null;
 
-  const a = data as Record<string, unknown> & {
-    feed_sources?: { name: string; category: string } | null;
-  };
-  return {
-    id: a.id as number,
-    source_id: a.source_id as number,
-    title: a.title as string,
-    url: a.url as string,
-    source_url: (a.source_url as string) || null,
-    content: (a.content as string) || null,
-    points: (a.points as number) || 0,
-    status: a.status as string,
-    tags: (a.tags as string[]) || [],
-    published_at: (a.published_at as string) || null,
-    collected_at: a.collected_at as string,
-    read_at: (a.read_at as string) || null,
-    analyzed_at: (a.analyzed_at as string) || null,
-    posted_at: (a.posted_at as string) || null,
-    source_name: a.feed_sources?.name || "",
-    source_category: a.feed_sources?.category || "dev",
-  } as FeedArticle;
+  return toFeedArticle(data as unknown as RawArticleRow);
 }
 
 export async function fetchAnalyzedArticles(): Promise<FeedArticle[]> {
@@ -135,24 +135,5 @@ export async function fetchAnalyzedArticles(): Promise<FeedArticle[]> {
 
   if (error) return [];
 
-  return (data || []).map((a: Record<string, unknown> & {
-    feed_sources?: { name: string; category: string } | null;
-  }) => ({
-    id: a.id as number,
-    source_id: 0,
-    title: a.title,
-    url: a.url,
-    source_url: null,
-    content: null,
-    points: 0,
-    status: "analyzed",
-    tags: [],
-    published_at: null,
-    collected_at: "",
-    read_at: null,
-    analyzed_at: null,
-    posted_at: null,
-    source_name: a.feed_sources?.name || "",
-    source_category: a.feed_sources?.category || "dev",
-  })) as FeedArticle[];
+  return (data as unknown as RawArticleRow[] || []).map(toFeedArticle);
 }

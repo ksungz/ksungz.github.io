@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import type { FeedArticle } from "@/lib/feed-data";
 import { FeedList } from "./FeedList";
 import { ReaderDetail } from "./ReaderDetail";
@@ -22,12 +22,30 @@ export function FeedClient({
   const [analyzed] = useState<FeedArticle[]>(initialAnalyzed);
   const [statusFilter, setStatusFilter] = useState("all");
   const [catFilter, setCatFilter] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [displayCount, setDisplayCount] = useState(20);
 
-  const filtered = articles.filter((a) => {
-    if (statusFilter !== "all" && a.status !== statusFilter) return false;
-    if (catFilter !== "all" && a.source_category !== catFilter) return false;
-    return true;
-  });
+  const filtered = useMemo(() => {
+    return articles.filter((a) => {
+      if (statusFilter !== "all" && a.status !== statusFilter) return false;
+      if (catFilter !== "all" && a.source_category !== catFilter) return false;
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase().trim();
+        if (
+          !a.title?.toLowerCase().includes(q) &&
+          !a.summary?.toLowerCase().includes(q) &&
+          !a.content?.toLowerCase().includes(q)
+        ) {
+          return false;
+        }
+      }
+      return true;
+    });
+  }, [articles, statusFilter, catFilter, searchQuery]);
+
+  // 더보기 — displayCount만큼만 표시
+  const visibleArticles = filtered.slice(0, displayCount);
+  const hasMore = filtered.length > displayCount;
 
   const openReader = (id: number) => {
     setSelectedId(id);
@@ -57,12 +75,17 @@ export function FeedClient({
     <>
       {view === "feed" && (
         <FeedList
-          articles={filtered}
+          articles={visibleArticles}
+          totalCount={filtered.length}
           statusFilter={statusFilter}
           setStatusFilter={setStatusFilter}
           catFilter={catFilter}
           setCatFilter={setCatFilter}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
           onOpenReader={openReader}
+          hasMore={hasMore}
+          onLoadMore={() => setDisplayCount((c) => c + 20)}
         />
       )}
       {view === "reader" && selectedArticle && (

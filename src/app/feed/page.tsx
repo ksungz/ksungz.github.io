@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 export default async function FeedPage() {
   const [articles, analyzed] = await Promise.all([
-    fetchArticles("all", "all"),
+    fetchArticles("all", "all", ""),
     fetchAnalyzedArticles(),
   ]);
 

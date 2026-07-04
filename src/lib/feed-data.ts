@@ -68,7 +68,8 @@ function toFeedArticle(a: RawArticleRow): FeedArticle {
 
 export async function fetchArticles(
   statusFilter: string = "all",
-  catFilter: string = "all"
+  catFilter: string = "all",
+  searchQuery: string = ""
 ): Promise<FeedArticle[]> {
   const supabase = createClient();
 
@@ -81,8 +82,8 @@ export async function fetchArticles(
       feed_sources!inner(name, category)
     `
     )
-    .order("collected_at", { ascending: false })
-    .limit(100);
+    .order("importance_score", { ascending: false })
+    .limit(50);
 
   if (statusFilter !== "all") {
     query = query.eq("status", statusFilter);
@@ -98,6 +99,17 @@ export async function fetchArticles(
 
   if (catFilter !== "all") {
     articles = articles.filter((a) => a.source_category === catFilter);
+  }
+
+  // 검색 — title, summary, content에서 매칭
+  if (searchQuery.trim()) {
+    const q = searchQuery.toLowerCase().trim();
+    articles = articles.filter(
+      (a) =>
+        a.title?.toLowerCase().includes(q) ||
+        a.summary?.toLowerCase().includes(q) ||
+        a.content?.toLowerCase().includes(q)
+    );
   }
 
   return articles;

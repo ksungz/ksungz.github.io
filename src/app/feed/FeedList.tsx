@@ -22,25 +22,56 @@ function timeAgo(dateStr: string): string {
 
 interface FeedListProps {
   articles: FeedArticle[];
+  totalCount: number;
   statusFilter: string;
   setStatusFilter: (s: string) => void;
   catFilter: string;
   setCatFilter: (c: string) => void;
+  searchQuery: string;
+  setSearchQuery: (s: string) => void;
   onOpenReader: (id: number) => void;
+  hasMore: boolean;
+  onLoadMore: () => void;
 }
 
 export function FeedList({
   articles,
+  totalCount,
   statusFilter,
   setStatusFilter,
   catFilter,
   setCatFilter,
+  searchQuery,
+  setSearchQuery,
   onOpenReader,
+  hasMore,
+  onLoadMore,
 }: FeedListProps) {
   return (
     <>
       <div className="feed-header">
         <h1>📖 Info Feed</h1>
+
+        {/* 검색 */}
+        <input
+          type="text"
+          className="feed-search"
+          placeholder="🔍 검색..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "8px 12px",
+            marginBottom: "8px",
+            borderRadius: "8px",
+            border: "1px solid #2a2a2a",
+            background: "#111",
+            color: "#e4e4e4",
+            fontSize: "14px",
+            outline: "none",
+          }}
+        />
+
         <div className="feed-filters">
           {[
             { key: "all", label: "전체" },
@@ -84,7 +115,9 @@ export function FeedList({
 
       <div className="feed-list">
         {articles.length === 0 && (
-          <div className="feed-empty">필터 조건에 맞는 글이 없습니다.</div>
+          <div className="feed-empty">
+            {searchQuery ? "검색 결과가 없습니다." : "필터 조건에 맞는 글이 없습니다."}
+          </div>
         )}
         {articles.map((a) => (
           <div
@@ -116,6 +149,26 @@ export function FeedList({
             )}
           </div>
         ))}
+
+        {/* 더보기 */}
+        {hasMore && (
+          <button
+            onClick={onLoadMore}
+            style={{
+              width: "100%",
+              padding: "12px",
+              marginTop: "16px",
+              borderRadius: "8px",
+              border: "1px solid #2a2a2a",
+              background: "#111",
+              color: "#999",
+              fontSize: "14px",
+              cursor: "pointer",
+            }}
+          >
+            더 보기 ({totalCount - articles.length}개 남음)
+          </button>
+        )}
       </div>
     </>
   );

@@ -204,6 +204,41 @@
   color: #ccc;
 }
 .reader-body p { margin-bottom: 16px; }
+
+/* 본문 토글 */
+.reader-content-toggle {
+  margin: 16px 0;
+  border: 1px solid #222;
+  border-radius: 8px;
+  background: #111;
+  overflow: hidden;
+}
+.reader-content-toggle summary {
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #888;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.15s, background 0.15s;
+}
+.reader-content-toggle summary:hover {
+  color: #ccc;
+  background: #161616;
+}
+.reader-content-toggle[open] summary {
+  border-bottom: 1px solid #222;
+}
+.reader-content-text {
+  padding: 16px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #999;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 400px;
+  overflow-y: auto;
+}
 .reader-body h4 {
   font-size: 16px;
   margin: 24px 0 8px;
@@ -327,6 +362,12 @@
 }
 .feed-tab.active { color: #fff; }
 .feed-tab-icon { font-size: 18px; display: block; margin-bottom: 2px; }
+
+/* ════════ Hide global footer on /feed ════════ */
+
+body:has(.feed-root) > footer {
+  display: none !important;
+}
 
 /* ════════ Responsive ════════ */
 

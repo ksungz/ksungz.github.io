@@ -127,7 +127,10 @@ export function ReaderDetail({ article, onBack }: ReaderDetailProps) {
 
         {/* 본문 */}
         {article.content ? (
-          <p>{article.content}</p>
+          <details className="reader-content-toggle">
+            <summary>📄 본문 전체 보기</summary>
+            <p className="reader-content-text">{article.content}</p>
+          </details>
         ) : (
           <p style={{ color: "#666" }}>
             본문 내용이 없습니다. 원문 링크에서 확인하세요.

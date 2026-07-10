@@ -31,6 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} ${notoSansKR.variable} h-full antialiased`}
     >
       <body suppressHydrationWarning className="flex min-h-full flex-col bg-[var(--color-background)] text-[var(--color-foreground)]">

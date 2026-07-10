@@ -1,53 +1,55 @@
-"use client";
-
 import Link from "next/link";
+import { Archive, BarChart3, Library, ShieldCheck } from "lucide-react";
+import type { FeedCounts } from "@/lib/feed-data";
 
 interface FeedSidebarProps {
-  totalCount: number;
-  analyzedCount: number;
-  postedCount: number;
+  counts: FeedCounts;
 }
 
-export function FeedSidebar({
-  totalCount,
-  analyzedCount,
-  postedCount,
-}: FeedSidebarProps) {
+export function FeedSidebar({ counts }: FeedSidebarProps) {
   return (
-    <div className="feed-right-sidebar">
+    <aside className="feed-right-sidebar" aria-label="피드 정보">
       <div className="feed-right-sidebar-inner">
-        {/* 통계 */}
-        <div className="sidebar-card">
-          <div className="sidebar-card-title">📊 통계</div>
-          <div className="sidebar-stat-row">
-            <span className="sidebar-stat-label">전체 기사</span>
-            <span className="sidebar-stat-value">{totalCount.toLocaleString()}</span>
+        <section className="sidebar-card">
+          <div className="sidebar-card-title">
+            <BarChart3 aria-hidden="true" size={15} />
+            현황
           </div>
           <div className="sidebar-stat-row">
-            <span className="sidebar-stat-label">분석 완료</span>
-            <span className="sidebar-stat-value" style={{ color: "#69db7c" }}>
-              {analyzedCount.toLocaleString()}
-            </span>
+            <span className="sidebar-stat-label">수집 기사</span>
+            <span className="sidebar-stat-value">{counts.total.toLocaleString()}</span>
           </div>
           <div className="sidebar-stat-row">
-            <span className="sidebar-stat-label">포스팅됨</span>
-            <span className="sidebar-stat-value" style={{ color: "#4dabf7" }}>
-              {postedCount.toLocaleString()}
-            </span>
+            <span className="sidebar-stat-label">상세 분석</span>
+            <span className="sidebar-stat-value success">{counts.analyzed.toLocaleString()}</span>
           </div>
-        </div>
+          <div className="sidebar-stat-row">
+            <span className="sidebar-stat-label">블로그 PR</span>
+            <span className="sidebar-stat-value info">{counts.posted.toLocaleString()}</span>
+          </div>
+        </section>
 
-        {/* 바로가기 */}
-        <div className="sidebar-card">
-          <div className="sidebar-card-title">🔗 바로가기</div>
+        <section className="sidebar-card">
+          <div className="sidebar-card-title">
+            <ShieldCheck aria-hidden="true" size={15} />
+            원문 우선
+          </div>
+          <p className="sidebar-trust-copy">
+            자동 생성된 요약과 분석은 원문 링크와 분리해 제공합니다.
+          </p>
+        </section>
+
+        <nav className="sidebar-card" aria-label="피드 바로가기">
           <Link href="/feed/sources" className="sidebar-link">
-            📋 큐레이션 출처
+            <Library aria-hidden="true" size={14} />
+            큐레이션 출처
           </Link>
           <Link href="/feed/archive" className="sidebar-link">
-            📦 전체 아카이브
+            <Archive aria-hidden="true" size={14} />
+            전체 아카이브
           </Link>
-        </div>
+        </nav>
       </div>
-    </div>
+    </aside>
   );
 }

@@ -1,20 +1,22 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { hasFeedAdminSession } from "@/lib/feed-admin-auth";
 import {
   fetchArticleById,
   fetchCategories,
   fetchFeedCounts,
-  toPublicFeedArticle,
 } from "@/lib/feed-data";
-import { ArticleDetail } from "./ArticleDetail";
-import "../feed.css";
+import { ArticleDetail } from "../../[id]/ArticleDetail";
+import "../../feed.css";
 
 export const dynamic = "force-dynamic";
 
-export default async function FeedDetailPage({
+export default async function FeedStudioDetailPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
+  if (!(await hasFeedAdminSession())) redirect("/feed/studio");
+
   const { id } = await params;
   const articleId = Number.parseInt(id, 10);
   const [article, counts, categories] = await Promise.all([
@@ -23,12 +25,13 @@ export default async function FeedDetailPage({
     fetchCategories(),
   ]);
 
-  if (!article || article.status === "archived") notFound();
+  if (!article) notFound();
   return (
     <ArticleDetail
-      article={toPublicFeedArticle(article)}
+      article={article}
       counts={counts}
       categories={categories}
+      manage
     />
   );
 }

@@ -1,8 +1,13 @@
-import { fetchArchivedArticles } from "@/lib/feed-data";
+import { fetchArticlesPage } from "@/lib/feed-data";
 
 export const dynamic = "force-dynamic";
 
-const SITE_URL = "https://ksungz.github.io";
+const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "https://ksungz-github-io.vercel.app")
+).replace(/\/$/, "");
 const FEED_URL = `${SITE_URL}/feed/feed.xml`;
 
 function escapeXml(str: string): string {
@@ -21,7 +26,7 @@ function toIso8601(dateStr: string): string {
 }
 
 export async function GET() {
-  const articles = await fetchArchivedArticles(30, 0);
+  const { articles } = await fetchArticlesPage({ limit: 30, order: "latest" });
 
   const now = new Date().toISOString();
   const latestUpdated =
@@ -45,7 +50,7 @@ export async function GET() {
   xml += `  </author>\n`;
 
   for (const article of articles) {
-    const articleId = `${SITE_URL}/feed/feed.xml#entry-${article.id}`;
+    const articleId = `${SITE_URL}/feed/${article.id}`;
     const published = toIso8601(
       article.published_at || article.collected_at
     );
@@ -56,7 +61,8 @@ export async function GET() {
     xml += `  <entry>\n`;
     xml += `    <id>${articleId}</id>\n`;
     xml += `    <title>${escapeXml(article.title)}</title>\n`;
-    xml += `    <link href="${escapeXml(article.url)}" rel="alternate" type="text/html"/>\n`;
+    xml += `    <link href="${articleId}" rel="alternate" type="text/html"/>\n`;
+    xml += `    <link href="${escapeXml(article.url)}" rel="related" type="text/html"/>\n`;
     xml += `    <published>${published}</published>\n`;
     xml += `    <updated>${updated}</updated>\n`;
     xml += `    <category term="${escapeXml(category)}"/>\n`;

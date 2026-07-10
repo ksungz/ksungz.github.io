@@ -1,41 +1,45 @@
 import {
-  fetchArticles,
-  fetchAnalyzedArticles,
-  fetchSources,
+  fetchArticlesPage,
   fetchCategories,
+  fetchFeedCounts,
   fetchTopics,
+  toPublicFeedPage,
 } from "@/lib/feed-data";
 import { FeedClient } from "./FeedClient";
 import "./feed.css";
 
 export const dynamic = "force-dynamic";
 
-export default async function FeedPage() {
-  const [articles, analyzed, sources, categories, topics] = await Promise.all([
-    fetchArticles("all", "all", ""),
-    fetchAnalyzedArticles(),
-    fetchSources(),
+interface FeedPageProps {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}
+
+function firstParam(value: string | string[] | undefined): string {
+  return Array.isArray(value) ? value[0] || "" : value || "";
+}
+
+export default async function FeedPage({ searchParams }: FeedPageProps) {
+  const params = await searchParams;
+  const category = firstParam(params.category) || "all";
+  const search = firstParam(params.q).slice(0, 80);
+  const tag = firstParam(params.tag).slice(0, 80) || null;
+
+  const [initialPage, counts, categories, topics] = await Promise.all([
+    fetchArticlesPage({ category, search, tag, limit: 20, order: "latest" }),
+    fetchFeedCounts(),
     fetchCategories(),
     fetchTopics(),
   ]);
 
-  const analyzedCount = articles.filter((a) => a.status === "analyzed").length;
-  const postedCount = articles.filter((a) => a.status === "posted").length;
-
-  const counts = {
-    total: articles.length,
-    analyzed: analyzedCount,
-    posted: postedCount,
-    sourceCount: sources.length,
-    categoryCount: categories.length,
-  };
-
   return (
     <FeedClient
-      initialArticles={articles}
-      initialAnalyzed={analyzed}
+      initialPage={toPublicFeedPage(initialPage)}
       initialTopics={topics}
+      categories={categories}
       counts={counts}
+      initialCategory={category}
+      initialSearch={search}
+      initialTag={tag}
     />
   );
 }

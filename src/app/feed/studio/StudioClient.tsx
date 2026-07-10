@@ -1,8 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import { Archive, LoaderCircle, Search } from "lucide-react";
+import {
+  Archive,
+  BrainCircuit,
+  Inbox,
+  LoaderCircle,
+  LogOut,
+  Search,
+  Send,
+} from "lucide-react";
 import type {
   CategoryCount,
   FeedArticle,
@@ -10,23 +17,31 @@ import type {
   FeedCounts,
 } from "@/lib/feed-data";
 import { CategorySidebar } from "../components/CategorySidebar";
-import { FeedSidebar } from "../components/FeedSidebar";
 import { FeedCard } from "../components/FeedCard";
+import { FeedSidebar } from "../components/FeedSidebar";
 
-interface ArchiveClientProps {
+interface StudioClientProps {
   initialPage: FeedArticlePage;
   categories: CategoryCount[];
   counts: FeedCounts;
 }
 
-export function ArchiveClient({
+const STATUS_FILTERS = [
+  { key: "inbox", label: "Inbox", icon: Inbox },
+  { key: "analyzed", label: "분석됨", icon: BrainCircuit },
+  { key: "posted", label: "PR 생성", icon: Send },
+  { key: "archived", label: "보관", icon: Archive },
+];
+
+export function StudioClient({
   initialPage,
   categories,
   counts,
-}: ArchiveClientProps) {
+}: StudioClientProps) {
   const [articles, setArticles] = useState<FeedArticle[]>(initialPage.articles);
   const [total, setTotal] = useState(initialPage.total);
   const [hasMore, setHasMore] = useState(initialPage.hasMore);
+  const [status, setStatus] = useState("inbox");
   const [category, setCategory] = useState("all");
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
@@ -43,6 +58,7 @@ export function ArchiveClient({
       setError(null);
 
       const params = new URLSearchParams({
+        status,
         category,
         q: search,
         limit: "20",
@@ -50,10 +66,15 @@ export function ArchiveClient({
       });
 
       try {
-        const response = await fetch(`/api/feed-articles?${params}`, {
+        const response = await fetch(`/api/feed-admin/articles?${params}`, {
           signal: controller.signal,
         });
-        if (!response.ok) throw new Error("아카이브를 불러오지 못했습니다.");
+        if (response.status === 401) {
+          window.location.reload();
+          return;
+        }
+        if (!response.ok) throw new Error("작업 목록을 불러오지 못했습니다.");
+
         const page: FeedArticlePage = await response.json();
         setArticles((current) =>
           append ? [...current, ...page.articles] : page.articles
@@ -67,13 +88,13 @@ export function ArchiveClient({
         setError(
           requestError instanceof Error
             ? requestError.message
-            : "아카이브를 불러오지 못했습니다."
+            : "작업 목록을 불러오지 못했습니다."
         );
       } finally {
         if (abortController.current === controller) setLoading(false);
       }
     },
-    [category, search]
+    [category, search, status]
   );
 
   useEffect(() => {
@@ -81,37 +102,61 @@ export function ArchiveClient({
       mounted.current = true;
       return;
     }
+
     const timer = window.setTimeout(() => loadArticles(0, false), 200);
     return () => window.clearTimeout(timer);
   }, [loadArticles]);
 
+  const logout = async () => {
+    await fetch("/api/feed-admin/logout", { method: "POST" });
+    window.location.reload();
+  };
+
   return (
-    <div className="feed-layout">
+    <div className="feed-layout studio-layout">
       <div className="feed-left-sidebar">
         <CategorySidebar
           activeCat={category}
           categories={categories}
           totalCount={counts.total}
           onSelect={setCategory}
+          basePath="/feed/studio"
         />
       </div>
 
-      <main className="feed-main">
-        <div className="feed-breadcrumb">
-          <Link href="/feed">피드</Link>
-          <span>/</span>
-          <span className="feed-breadcrumb-current">아카이브</span>
-        </div>
-
-        <header className="feed-page-header">
-          <Archive aria-hidden="true" size={20} />
+      <main className="feed-main studio-main">
+        <header className="studio-header">
           <div>
-            <h1>전체 아카이브</h1>
-            <p className="feed-page-header-desc">{total.toLocaleString()}건</p>
+            <div className="feed-hero-label">Private workspace</div>
+            <h1>Feed Studio</h1>
+            <p>{total.toLocaleString()}건</p>
           </div>
+          <button type="button" className="icon-command" onClick={logout} title="로그아웃">
+            <LogOut aria-hidden="true" size={17} />
+            <span>로그아웃</span>
+          </button>
         </header>
 
-        <div className="feed-search-wrap">
+        <div className="studio-status-tabs" role="tablist" aria-label="작업 상태">
+          {STATUS_FILTERS.map((item) => {
+            const Icon = item.icon;
+            return (
+              <button
+                type="button"
+                role="tab"
+                aria-selected={status === item.key}
+                key={item.key}
+                className={status === item.key ? "active" : ""}
+                onClick={() => setStatus(item.key)}
+              >
+                <Icon aria-hidden="true" size={14} />
+                {item.label}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="feed-search-wrap studio-search">
           <Search aria-hidden="true" size={16} />
           <input
             type="search"
@@ -126,10 +171,16 @@ export function ArchiveClient({
 
         <div className={`feed-list ${loading ? "loading" : ""}`} aria-busy={loading}>
           {articles.length === 0 && !loading && (
-            <div className="feed-empty">표시할 기사가 없습니다.</div>
+            <div className="feed-empty">대기 중인 항목이 없습니다.</div>
           )}
           {articles.map((article, index) => (
-            <FeedCard key={article.id} article={article} index={index + 1} />
+            <FeedCard
+              key={article.id}
+              article={article}
+              index={index + 1}
+              href={`/feed/studio/${article.id}`}
+              showStatus
+            />
           ))}
           {hasMore && (
             <button

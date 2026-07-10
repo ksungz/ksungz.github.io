@@ -1,30 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isFeedAdminRequest } from "@/lib/feed-admin-auth";
 import { createClient } from "@/lib/supabase-server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export async function POST(
-  _req: NextRequest,
+  request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id: idStr } = await params;
-  const articleId = parseInt(idStr, 10);
+  if (!isFeedAdminRequest(request)) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
-  if (!articleId) {
+  const { id } = await params;
+  if (!/^\d+$/.test(id)) {
     return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
   }
 
   const supabase = createClient();
-
   const { error } = await supabase
     .from("feed_articles")
     .update({ status: "read", read_at: new Date().toISOString() })
-    .eq("id", articleId)
+    .eq("id", Number.parseInt(id, 10))
     .eq("status", "unread");
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: "Failed to update read status" }, { status: 500 });
   }
 
   return NextResponse.json({ success: true });

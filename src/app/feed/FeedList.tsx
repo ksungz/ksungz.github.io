@@ -1,141 +1,121 @@
 "use client";
 
-import type { FeedArticle, TopicCount } from "@/lib/feed-data";
+import { LoaderCircle, Search } from "lucide-react";
+import type {
+  CategoryCount,
+  FeedArticle,
+  FeedCounts,
+  TopicCount,
+} from "@/lib/feed-data";
 import { HeroSection } from "./components/HeroSection";
 import { TopicFilter } from "./components/TopicFilter";
 import { CategorySidebar } from "./components/CategorySidebar";
 import { FeedSidebar } from "./components/FeedSidebar";
 import { FeedCard } from "./components/FeedCard";
 
-export interface FeedCounts {
-  total: number;
-  analyzed: number;
-  posted: number;
-  sourceCount: number;
-  categoryCount: number;
-}
-
 interface FeedListProps {
   articles: FeedArticle[];
   totalCount: number;
-  statusFilter: string;
-  setStatusFilter: (s: string) => void;
-  catFilter: string;
-  setCatFilter: (c: string) => void;
+  categoryFilter: string;
+  setCategoryFilter: (category: string) => void;
   searchQuery: string;
-  setSearchQuery: (s: string) => void;
+  setSearchQuery: (query: string) => void;
   hasMore: boolean;
   onLoadMore: () => void;
   topics: TopicCount[];
+  categories: CategoryCount[];
   counts: FeedCounts;
   activeTag: string | null;
   setActiveTag: (tag: string | null) => void;
+  loading: boolean;
+  error: string | null;
 }
 
 export function FeedList({
   articles,
   totalCount,
-  statusFilter,
-  setStatusFilter,
-  catFilter,
-  setCatFilter,
+  categoryFilter,
+  setCategoryFilter,
   searchQuery,
   setSearchQuery,
   hasMore,
   onLoadMore,
   topics,
+  categories,
   counts,
   activeTag,
   setActiveTag,
+  loading,
+  error,
 }: FeedListProps) {
   return (
     <div className="feed-layout">
-      {/* 좌측: 카테고리 사이드바 */}
       <div className="feed-left-sidebar">
         <CategorySidebar
-          activeCat={catFilter}
-          onSelect={setCatFilter}
+          activeCat={categoryFilter}
+          categories={categories}
+          totalCount={counts.total}
+          onSelect={setCategoryFilter}
         />
       </div>
 
-      {/* 메인 */}
       <main className="feed-main">
-        {/* 히어로 섹션 */}
         <HeroSection
           sourceCount={counts.sourceCount}
           articleCount={counts.total}
           categoryCount={counts.categoryCount}
         />
 
-        {/* 토픽 필터 */}
         <TopicFilter
           topics={topics}
           activeTag={activeTag}
           onSelect={setActiveTag}
         />
 
-        {/* 검색 */}
         <div className="feed-search-wrap">
+          <Search aria-hidden="true" size={16} />
           <input
-            type="text"
+            type="search"
             className="feed-search"
-            placeholder="🔍 검색..."
+            placeholder="제목과 요약 검색"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(event) => setSearchQuery(event.target.value)}
           />
         </div>
 
-        {/* 상태 필터 */}
-        <div className="feed-filters">
-          {[
-            { key: "all", label: "전체" },
-            { key: "unread", label: "안 읽음" },
-            { key: "read", label: "읽음" },
-            { key: "analyzed", label: "분석됨" },
-            { key: "posted", label: "포스팅됨" },
-          ].map((f) => (
-            <button
-              key={f.key}
-              className={`filter-pill ${statusFilter === f.key ? "active" : ""}`}
-              onClick={() => setStatusFilter(f.key)}
-            >
-              {f.label}
-            </button>
-          ))}
+        <div className="feed-list-heading">
+          <h2>최신 뉴스</h2>
+          <span>{totalCount.toLocaleString()}건</span>
         </div>
 
-        {/* 피드 리스트 — 단일 리스트 (날짜 그룹핑 없음) */}
-        <div className="feed-list">
-          {articles.length === 0 && (
+        {error && <div className="feed-error" role="alert">{error}</div>}
+
+        <div className={`feed-list ${loading ? "loading" : ""}`} aria-busy={loading}>
+          {articles.length === 0 && !loading && (
             <div className="feed-empty">
-              {searchQuery
-                ? "검색 결과가 없습니다."
-                : "필터 조건에 맞는 글이 없습니다."}
+              {searchQuery ? "검색 결과가 없습니다." : "표시할 기사가 없습니다."}
             </div>
           )}
 
-          {articles.map((article, i) => (
-            <FeedCard
-              key={article.id}
-              article={article}
-              index={i + 1}
-            />
+          {articles.map((article, index) => (
+            <FeedCard key={article.id} article={article} index={index + 1} />
           ))}
 
           {hasMore && (
-            <button className="feed-load-more" onClick={onLoadMore}>
-              더 보기 ({totalCount - articles.length}개 남음)
+            <button
+              type="button"
+              className="feed-load-more"
+              onClick={onLoadMore}
+              disabled={loading}
+            >
+              {loading && <LoaderCircle className="spin" aria-hidden="true" size={15} />}
+              더 보기
             </button>
           )}
         </div>
       </main>
 
-      {/* 우측: 통계 사이드바 */}
-      <FeedSidebar
-        totalCount={counts.total}
-        analyzedCount={counts.analyzed}
-        postedCount={counts.posted}
-      />
+      <FeedSidebar counts={counts} />
     </div>
   );
 }

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { fetchSources } from "@/lib/feed-data";
+import { CategorySidebar } from "../components/CategorySidebar";
+import { FeedSidebar } from "../components/FeedSidebar";
 import "../feed.css";
 
 export const dynamic = "force-dynamic";
@@ -31,132 +33,82 @@ function formatDate(dateStr: string | null): string {
 
 export default async function SourcesPage() {
   const sources = await fetchSources();
+  const totalArticles = sources.reduce((sum, s) => sum + s.article_count, 0);
 
   return (
-    <div className="feed-root" style={{ paddingBottom: 80 }}>
-      {/* 헤더 */}
-      <div className="feed-header">
-        <Link
-          href="/feed"
-          className="reader-back"
-          style={{ marginBottom: 8, marginTop: 0 }}
-        >
-          ← 피드로 돌아가기
-        </Link>
-        <h1>📡 큐레이션 출처</h1>
-        <div className="feed-header-desc">
-          총 {sources.length}개 매체에서 수집 중
-        </div>
+    <div className="feed-layout">
+      {/* 좌측: 카테고리 사이드바 */}
+      <div className="feed-left-sidebar">
+        <CategorySidebar activeCat="all" />
       </div>
 
-      {/* 매체 카드 그리드 */}
-      <div style={{ padding: "20px 20px 80px" }}>
-        {sources.length === 0 ? (
-          <div className="feed-empty">
-            등록된 큐레이션 출처가 없습니다.
-          </div>
-        ) : (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-              gap: 12,
-            }}
-          >
-            {sources.map((src) => {
-              const catColor =
-                CATEGORY_COLORS[src.category] || "#888";
-              const catLabel =
-                CATEGORY_LABELS[src.category] || src.category;
+      {/* 메인 */}
+      <main className="feed-main">
+        {/* Breadcrumb */}
+        <div className="feed-breadcrumb">
+          <Link href="/feed">홈</Link>
+          <span>/</span>
+          <span className="feed-breadcrumb-current">출처</span>
+        </div>
+
+        {/* 페이지 헤더 */}
+        <div className="feed-page-header">
+          <h1>📡 큐레이션 출처</h1>
+          <p className="feed-page-header-desc">
+            총 {sources.length}개 매체 · {totalArticles.toLocaleString()}건 기사 수집 중
+          </p>
+        </div>
+
+        {/* 매체 리스트 */}
+        <div className="source-list">
+          {sources.length === 0 ? (
+            <div className="feed-empty">
+              등록된 큐레이션 출처가 없습니다.
+            </div>
+          ) : (
+            sources.map((src) => {
+              const catColor = CATEGORY_COLORS[src.category] || "#888";
+              const catLabel = CATEGORY_LABELS[src.category] || src.category;
               return (
-                <div
-                  key={src.id}
-                  style={{
-                    background: "#111",
-                    border: "1px solid #1f1f1f",
-                    borderRadius: 10,
-                    padding: 16,
-                    transition: "border-color 0.15s",
-                  }}
-                >
-                  {/* 상단: 매체명 + 카테고리 배지 */}
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      justifyContent: "space-between",
-                      marginBottom: 12,
-                    }}
-                  >
-                    <h3
-                      style={{
-                        fontSize: 15,
-                        fontWeight: 700,
-                        color: "#e4e4e4",
-                        lineHeight: 1.3,
-                        flex: 1,
-                        paddingRight: 8,
-                      }}
-                    >
-                      {src.name}
-                    </h3>
-                    <span
-                      style={{
-                        fontSize: 11,
-                        fontWeight: 600,
-                        padding: "2px 8px",
-                        borderRadius: 4,
-                        background: `${catColor}22`,
-                        color: catColor,
-                        whiteSpace: "nowrap",
-                        border: `1px solid ${catColor}44`,
-                      }}
-                    >
-                      {catLabel}
-                    </span>
+                <div key={src.id} className="source-item">
+                  <div style={{ flex: 1 }}>
+                    <div className="source-item-name">{src.name}</div>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 4 }}>
+                      <span
+                        style={{
+                          fontSize: 10,
+                          fontWeight: 600,
+                          padding: "2px 8px",
+                          borderRadius: 4,
+                          background: `${catColor}22`,
+                          color: catColor,
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {catLabel}
+                      </span>
+                      <span style={{ fontSize: 11, color: "#666" }}>
+                        🕐 {formatDate(src.latest_collected)}
+                      </span>
+                    </div>
                   </div>
-
-                  {/* 기사 수 */}
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 6,
-                      marginBottom: 8,
-                    }}
-                  >
-                    <span style={{ fontSize: 13, color: "#999" }}>
-                      📄 기사
-                    </span>
-                    <span
-                      style={{
-                        fontSize: 16,
-                        fontWeight: 700,
-                        color: "#e4e4e4",
-                      }}
-                    >
-                      {src.article_count}
-                    </span>
-                    <span style={{ fontSize: 12, color: "#666" }}>개</span>
+                  <div style={{ textAlign: "right", flexShrink: 0 }}>
+                    <span className="source-item-count">{src.article_count}</span>
+                    <span className="source-item-count-label">개</span>
                   </div>
-
-                  {/* 최근 수집 시간 */}
-                  <div
-                    style={{
-                      fontSize: 12,
-                      color: "#666",
-                      marginBottom: 12,
-                    }}
-                  >
-                    🕐 최근 수집: {formatDate(src.latest_collected)}
-                  </div>
-
                 </div>
               );
-            })}
-          </div>
-        )}
-      </div>
+            })
+          )}
+        </div>
+      </main>
+
+      {/* 우측: 사이드바 */}
+      <FeedSidebar
+        totalCount={totalArticles}
+        analyzedCount={0}
+        postedCount={0}
+      />
     </div>
   );
 }

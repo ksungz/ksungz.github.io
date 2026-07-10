@@ -34,7 +34,6 @@ export default async function FeedPage() {
     <FeedClient
       initialArticles={articles}
       initialAnalyzed={analyzed}
-      initialCategories={categories}
       initialTopics={topics}
       counts={counts}
     />

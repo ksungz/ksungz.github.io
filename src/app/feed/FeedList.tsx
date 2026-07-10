@@ -1,13 +1,13 @@
 "use client";
 
-import type { FeedArticle, CategoryCount, TopicCount } from "@/lib/feed-data";
+import type { FeedArticle, TopicCount } from "@/lib/feed-data";
 import { HeroSection } from "./components/HeroSection";
 import { TopicFilter } from "./components/TopicFilter";
 import { CategorySidebar } from "./components/CategorySidebar";
 import { FeedSidebar } from "./components/FeedSidebar";
 import { FeedCard } from "./components/FeedCard";
 
-interface FeedCounts {
+export interface FeedCounts {
   total: number;
   analyzed: number;
   posted: number;
@@ -24,27 +24,12 @@ interface FeedListProps {
   setCatFilter: (c: string) => void;
   searchQuery: string;
   setSearchQuery: (s: string) => void;
-  onOpenReader: (id: number) => void;
   hasMore: boolean;
   onLoadMore: () => void;
-  categories: CategoryCount[];
   topics: TopicCount[];
   counts: FeedCounts;
   activeTag: string | null;
   setActiveTag: (tag: string | null) => void;
-}
-
-function formatDateGroup(dateStr: string): string {
-  const d = new Date(dateStr);
-  const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const yesterday = new Date(today.getTime() - 86400000);
-  const dateOnly = new Date(d.getFullYear(), d.getMonth(), d.getDate());
-
-  if (dateOnly.getTime() === today.getTime()) return "오늘";
-  if (dateOnly.getTime() === yesterday.getTime()) return "어제";
-
-  return `${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일`;
 }
 
 export function FeedList({
@@ -56,33 +41,18 @@ export function FeedList({
   setCatFilter,
   searchQuery,
   setSearchQuery,
-  onOpenReader,
   hasMore,
   onLoadMore,
-  categories,
   topics,
   counts,
   activeTag,
   setActiveTag,
 }: FeedListProps) {
-  // 날짜 그룹핑 (collected_at 기준)
-  const groups: { label: string; articles: FeedArticle[] }[] = [];
-  let currentLabel = "";
-  for (const article of articles) {
-    const label = formatDateGroup(article.collected_at);
-    if (label !== currentLabel) {
-      groups.push({ label, articles: [] });
-      currentLabel = label;
-    }
-    groups[groups.length - 1].articles.push(article);
-  }
-
   return (
     <div className="feed-layout">
       {/* 좌측: 카테고리 사이드바 */}
       <div className="feed-left-sidebar">
         <CategorySidebar
-          categories={categories}
           activeCat={catFilter}
           onSelect={setCatFilter}
         />
@@ -90,21 +60,21 @@ export function FeedList({
 
       {/* 메인 */}
       <main className="feed-main">
-        {/* 헤더: HeroSection + TopicFilter + 검색 + 상태 필터 */}
+        {/* 히어로 섹션 */}
         <HeroSection
           sourceCount={counts.sourceCount}
           articleCount={counts.total}
           categoryCount={counts.categoryCount}
         />
 
-        <div className="feed-topic-filter">
-          <TopicFilter
-            topics={topics}
-            activeTag={activeTag}
-            onSelect={setActiveTag}
-          />
-        </div>
+        {/* 토픽 필터 */}
+        <TopicFilter
+          topics={topics}
+          activeTag={activeTag}
+          onSelect={setActiveTag}
+        />
 
+        {/* 검색 */}
         <div className="feed-search-wrap">
           <input
             type="text"
@@ -115,6 +85,7 @@ export function FeedList({
           />
         </div>
 
+        {/* 상태 필터 */}
         <div className="feed-filters">
           {[
             { key: "all", label: "전체" },
@@ -133,7 +104,7 @@ export function FeedList({
           ))}
         </div>
 
-        {/* 피드 리스트 — 날짜 그룹핑 */}
+        {/* 피드 리스트 — 단일 리스트 (날짜 그룹핑 없음) */}
         <div className="feed-list">
           {articles.length === 0 && (
             <div className="feed-empty">
@@ -143,17 +114,12 @@ export function FeedList({
             </div>
           )}
 
-          {groups.map((group, gi) => (
-            <div key={`${group.label}-${gi}`} className="feed-date-group">
-              <h3 className="feed-date-label">{group.label}</h3>
-              {group.articles.map((article) => (
-                <FeedCard
-                  key={article.id}
-                  article={article}
-                  onClick={onOpenReader}
-                />
-              ))}
-            </div>
+          {articles.map((article, i) => (
+            <FeedCard
+              key={article.id}
+              article={article}
+              index={i + 1}
+            />
           ))}
 
           {hasMore && (

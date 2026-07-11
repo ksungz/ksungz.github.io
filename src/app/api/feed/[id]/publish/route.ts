@@ -3,6 +3,7 @@ import { isFeedAdminRequest } from "@/lib/feed-admin-auth";
 import {
   getContentQuality,
   getEditorialState,
+  getVerificationState,
   setFeedVisibility,
 } from "@/lib/feed-taxonomy";
 import { createClient } from "@/lib/supabase-server";
@@ -46,6 +47,12 @@ export async function POST(
   if (getEditorialState(article.tags as string[] | null) !== "ready") {
     return NextResponse.json(
       { error: "공개 전 편집 분석을 완료한 기사만 공개할 수 있습니다." },
+      { status: 409 }
+    );
+  }
+  if (getVerificationState(article.tags as string[] | null) !== "passed") {
+    return NextResponse.json(
+      { error: "원문 근거와 편집 품질 검증을 통과한 기사만 공개할 수 있습니다." },
       { status: 409 }
     );
   }

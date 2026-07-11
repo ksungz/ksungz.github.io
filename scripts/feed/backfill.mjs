@@ -6,9 +6,11 @@ import {
   canGenerateEditorialAnalysis,
   classifyBatch,
   createFeedStore,
+  createVerifiedEditorial,
   enrichArticleContent,
   fallbackClassification,
   inferContentKind,
+  isAutoPublishEvidenceEligible,
   serializeQuickFeedSummary,
 } from "./lib.mjs";
 
@@ -93,6 +95,20 @@ async function backfill() {
     targets.map((article) => [article.id, fallbackClassification(article)])
   );
   for (const result of results) resultMap.set(result.id, result);
+  for (let index = 0; index < analysisTargets.length; index += 2) {
+    const batch = analysisTargets.slice(index, index + 2);
+    const verified = await Promise.all(
+      batch.map((article) =>
+        createVerifiedEditorial(article, resultMap.get(article.id))
+      )
+    );
+    for (let offset = 0; offset < batch.length; offset += 1) {
+      resultMap.set(batch[offset].id, verified[offset]);
+    }
+    console.log(
+      `[backfill] 근거·편집 검증 ${Math.min(index + 2, analysisTargets.length)}/${analysisTargets.length}`
+    );
+  }
   const byDay = new Map();
   for (const article of targets) {
     const day = dayInSeoul(article.published_at || article.collected_at);
@@ -126,10 +142,17 @@ async function backfill() {
         article.content_kind
       );
       const editorialState =
-        !result.used_fallback && contentQuality.complete ? "ready" : "pending";
+        !result.used_fallback &&
+        contentQuality.complete &&
+        result.verification_state === "passed"
+          ? "ready"
+          : "pending";
+      const verificationState = result.verification_state || "pending";
       const publish =
         contentQuality.complete &&
         editorialState === "ready" &&
+        verificationState === "passed" &&
+        isAutoPublishEvidenceEligible(article.content, article.content_kind) &&
         (manuallyCurated ||
           (result.auto_publish &&
             publicCount < QUALITY.dailyPublicLimit &&
@@ -168,7 +191,8 @@ async function backfill() {
           result.topics,
           contentQuality.quality,
           article.content_kind,
-          editorialState
+          editorialState,
+          verificationState
         ),
         summary: serializeQuickFeedSummary(result),
         content: article.content,

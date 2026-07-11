@@ -9,10 +9,12 @@ import {
   canGenerateEditorialAnalysis,
   canonicalizeUrl,
   classifyBatch,
+  createVerifiedEditorial,
   createFeedStore,
   enrichArticleContent,
   fallbackClassification,
   fetchWithRetry,
+  isAutoPublishEvidenceEligible,
   normalizedTitle,
   parseFeed,
   serializeQuickFeedSummary,
@@ -50,6 +52,26 @@ function youtubeTranscript(value) {
   }
 }
 
+function verificationAttempts(value) {
+  try {
+    const parsed = JSON.parse(value || "{}");
+    return Number.isFinite(parsed.verification_attempts)
+      ? Math.max(0, Math.floor(parsed.verification_attempts))
+      : 0;
+  } catch {
+    return 0;
+  }
+}
+
+function contentKindFromTags(tags) {
+  const value = (tags || [])
+    .find((tag) => tag.startsWith("content:"))
+    ?.slice("content:".length);
+  return ["jsonld", "transcript", "rss", "missing"].includes(value)
+    ? value
+    : "missing";
+}
+
 async function collect() {
   const [sources, existing] = await Promise.all([
     store.getAll(
@@ -58,7 +80,7 @@ async function collect() {
     ),
     store.getAll(
       "feed_articles",
-      "select=id,source_id,url,source_url,title,tags,collected_at&order=id"
+      "select=id,source_id,url,source_url,title,content,summary,status,tags,published_at,collected_at&order=id"
     ),
   ]);
   const activeSources = sources.filter(
@@ -125,10 +147,77 @@ async function collect() {
     }
   }
 
+  const sourceMap = new Map(activeSources.map((source) => [source.id, source]));
+  const retryRows = existing
+    .filter((article) => {
+      const state = (article.tags || []).find((tag) =>
+        tag.startsWith("verification:")
+      );
+      return (
+        article.status !== "archived" &&
+        sourceMap.has(article.source_id) &&
+        (state === "verification:pending" || state === "verification:failed") &&
+        verificationAttempts(article.summary) < QUALITY.maxVerificationRuns
+      );
+    })
+    .sort((left, right) => right.id - left.id)
+    .slice(0, QUALITY.retryPerRun);
+
+  for (const article of retryRows) {
+    const source = sourceMap.get(article.source_id);
+    const transcript =
+      source.type === "youtube" ? youtubeTranscript(article.url) : "";
+    const content = transcript || article.content || "";
+    const contentKind = transcript
+      ? "transcript"
+      : source.type === "youtube"
+        ? "missing"
+        : contentKindFromTags(article.tags);
+    rawCandidates.push(
+      await enrichArticleContent({
+        ...article,
+        id: -article.id,
+        existing_id: article.id,
+        existing_status: article.status,
+        content,
+        content_kind: contentKind,
+        source_name: source.name,
+        source,
+        verification_attempts: verificationAttempts(article.summary),
+      })
+    );
+  }
+  if (retryRows.length > 0) {
+    console.log(`[collector] 자동 재시도 후보 ${retryRows.length}개`);
+  }
+
   const resultMap = new Map();
-  const analysisCandidates = rawCandidates.filter((candidate) =>
+  const eligibleCandidates = rawCandidates.filter((candidate) =>
     canGenerateEditorialAnalysis(candidate.content, candidate.content_kind)
   );
+  const candidatesBySource = new Map();
+  for (const candidate of eligibleCandidates) {
+    const rows = candidatesBySource.get(candidate.source.id) || [];
+    rows.push(candidate);
+    candidatesBySource.set(candidate.source.id, rows);
+  }
+  for (const rows of candidatesBySource.values()) {
+    rows.sort(
+      (left, right) => Number(Boolean(right.existing_id)) - Number(Boolean(left.existing_id))
+    );
+  }
+  const analysisCandidates = [];
+  while (analysisCandidates.length < QUALITY.maxAnalysisPerRun) {
+    let selected = false;
+    for (const source of activeSources) {
+      const candidate = candidatesBySource.get(source.id)?.shift();
+      if (!candidate) continue;
+      analysisCandidates.push(candidate);
+      selected = true;
+      if (analysisCandidates.length >= QUALITY.maxAnalysisPerRun) break;
+    }
+    if (!selected) break;
+  }
   const batchSize = 4;
   const concurrentBatches = 2;
   for (
@@ -152,10 +241,34 @@ async function collect() {
       `[collector] 편집 분석 ${Math.min(index + batchSize * concurrentBatches, analysisCandidates.length)}/${analysisCandidates.length}`
     );
   }
+  for (let index = 0; index < analysisCandidates.length; index += 2) {
+    const batch = analysisCandidates.slice(index, index + 2);
+    const verified = await Promise.all(
+      batch.map((candidate) =>
+        createVerifiedEditorial(candidate, resultMap.get(candidate.id))
+      )
+    );
+    for (let offset = 0; offset < batch.length; offset += 1) {
+      resultMap.set(batch[offset].id, verified[offset]);
+    }
+    console.log(
+      `[collector] 근거·편집 검증 ${Math.min(index + 2, analysisCandidates.length)}/${analysisCandidates.length}`
+    );
+  }
+
   const candidates = rawCandidates.map((candidate) => ({
     ...candidate,
-    classification:
-      resultMap.get(candidate.id) || fallbackClassification(candidate),
+    classification: (() => {
+      const result = resultMap.get(candidate.id) || fallbackClassification(candidate);
+      return {
+        ...result,
+        verification_attempts:
+          result.verification_attempts ??
+          (candidate.existing_id
+            ? (candidate.verification_attempts || 0) + 1
+            : 0),
+      };
+    })(),
   }));
 
   const today = startOfTodayInSeoul();
@@ -181,6 +294,8 @@ async function collect() {
     rejected: 0,
     incomplete: 0,
     editorialPending: 0,
+    verificationFailed: 0,
+    reprocessed: 0,
   };
 
   candidates.sort(
@@ -196,15 +311,18 @@ async function collect() {
       candidate.content_kind
     );
     const editorialState =
-      !classification.used_fallback && contentQuality.complete
+      !classification.used_fallback &&
+      contentQuality.complete &&
+      classification.verification_state === "passed"
         ? "ready"
         : "pending";
+    const verificationState = classification.verification_state || "pending";
     const reject =
       classification.relevance_score < QUALITY.reviewScore ||
       (classification.category === "other" &&
         classification.relevance_score < QUALITY.publicScore);
     if (reject) {
-      const rejected = await store.insertArticle({
+      const rejectedData = {
         source_id: source.id,
         title: candidate.title,
         url: candidate.url,
@@ -218,12 +336,19 @@ async function collect() {
           classification.topics,
           contentQuality.quality,
           candidate.content_kind,
-          editorialState
+          editorialState,
+          verificationState
         ),
         published_at: candidate.published_at,
         status: "archived",
-      });
-      if (rejected?.length) stats.inserted += 1;
+      };
+      if (candidate.existing_id) {
+        await store.updateArticle(candidate.existing_id, rejectedData);
+        stats.reprocessed += 1;
+      } else {
+        const rejected = await store.insertArticle(rejectedData);
+        if (rejected?.length) stats.inserted += 1;
+      }
       stats.rejected += 1;
       console.log(
         `[collector] 제외 ${classification.relevance_score}점: ${candidate.title}`
@@ -234,12 +359,14 @@ async function collect() {
     const sourcePublicCount = publicBySource.get(source.id) || 0;
     const publish =
       classification.auto_publish &&
+      verificationState === "passed" &&
       editorialState === "ready" &&
       contentQuality.complete &&
+      isAutoPublishEvidenceEligible(candidate.content, candidate.content_kind) &&
       publicSlots > 0 &&
       sourcePublicCount < QUALITY.perSourceLimit;
     const visibility = publish ? "public" : "review";
-    const inserted = await store.insertArticle({
+    const articleData = {
       source_id: source.id,
       title: candidate.title,
       url: candidate.url,
@@ -253,14 +380,20 @@ async function collect() {
         classification.topics,
         contentQuality.quality,
         candidate.content_kind,
-        editorialState
+        editorialState,
+        verificationState
       ),
       published_at: candidate.published_at,
-      status: "unread",
-    });
-    if (!inserted?.length) continue;
-
-    stats.inserted += 1;
+      status: candidate.existing_status || "unread",
+    };
+    if (candidate.existing_id) {
+      await store.updateArticle(candidate.existing_id, articleData);
+      stats.reprocessed += 1;
+    } else {
+      const inserted = await store.insertArticle(articleData);
+      if (!inserted?.length) continue;
+      stats.inserted += 1;
+    }
     if (publish) {
       stats.published += 1;
       publicSlots -= 1;
@@ -269,10 +402,12 @@ async function collect() {
       stats.review += 1;
       if (!contentQuality.complete) stats.incomplete += 1;
       if (editorialState === "pending") stats.editorialPending += 1;
+      if (verificationState === "failed") stats.verificationFailed += 1;
     }
     console.log(
       `[collector] ${visibility} ${classification.relevance_score}점 ${classification.category} ` +
-        `${candidate.content_kind}/${editorialState} ` +
+        `${candidate.content_kind}/${editorialState}/${verificationState} ` +
+        `근거 ${classification.evidence_score || 0} · 편집 ${classification.editorial_score || 0} ` +
         `${contentQuality.complete ? "근거완료" : contentQuality.reasons.join(", ")}: ${candidate.title}`
     );
   }

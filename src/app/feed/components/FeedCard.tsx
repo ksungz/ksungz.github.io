@@ -79,6 +79,17 @@ export function FeedCard({
           {showStatus && article.editorial_state !== "ready" && (
             <span className="feed-card-editorial">편집 분석 대기</span>
           )}
+          {showStatus && article.verification_state !== "passed" && (
+            <span className="feed-card-editorial">근거 검증 대기</span>
+          )}
+          {showStatus &&
+            article.verification_state === "passed" &&
+            article.evidence_score !== null &&
+            article.editorial_score !== null && (
+              <span className="feed-card-quality">
+                근거 {article.evidence_score} · 편집 {article.editorial_score}
+              </span>
+            )}
           {showStatus && (
             <span className={`feed-card-status ${article.status}`}>
               {statusLabel(article.status)}

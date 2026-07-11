@@ -5,12 +5,13 @@ import {
   assessContentQuality,
   buildTags,
   canGenerateEditorialAnalysis,
-  classifyArticle,
   classifyBatch,
+  createVerifiedEditorial,
   createFeedStore,
   enrichArticleContent,
   fallbackClassification,
   inferContentKind,
+  isAutoPublishEvidenceEligible,
   serializeQuickFeedSummary,
 } from "./lib.mjs";
 
@@ -23,6 +24,13 @@ if (!getFeedLlmProviderInfo().configured) {
 }
 const applyChanges = process.argv.includes("--apply");
 const recheckTagged = process.argv.includes("--recheck-tagged");
+const targetIdArg = process.argv.find((value) => value.startsWith("--id="));
+const targetId = targetIdArg
+  ? Number.parseInt(targetIdArg.slice("--id=".length), 10)
+  : null;
+if (targetIdArg && (!Number.isInteger(targetId) || targetId <= 0)) {
+  throw new Error("--id에는 양의 기사 ID가 필요합니다.");
+}
 const store = createFeedStore();
 
 async function qualityBackfill() {
@@ -41,6 +49,7 @@ async function qualityBackfill() {
     .filter(
       (article) =>
         sourceMap.has(article.source_id) &&
+        (targetId === null || article.id === targetId) &&
         (recheckTagged
           ? (article.tags || []).some((tag) => tag.startsWith("quality:"))
           : (article.tags || []).includes("visibility:public"))
@@ -83,26 +92,18 @@ async function qualityBackfill() {
     enriched.map((article) => [article.id, fallbackClassification(article)])
   );
   for (const result of classified) resultMap.set(result.id, result);
-  const initialFallbacks = classified.filter((result) => result.used_fallback);
-  for (let index = 0; index < initialFallbacks.length; index += 2) {
-    const retried = await Promise.all(
-      initialFallbacks.slice(index, index + 2).map((result) =>
-        classifyArticle(enriched.find((article) => article.id === result.id))
+  for (let index = 0; index < analysisTargets.length; index += 2) {
+    const batch = analysisTargets.slice(index, index + 2);
+    const verified = await Promise.all(
+      batch.map((article) =>
+        createVerifiedEditorial(article, resultMap.get(article.id))
       )
     );
-    for (let offset = 0; offset < retried.length; offset += 1) {
-      resultMap.set(initialFallbacks[index + offset].id, retried[offset]);
+    for (let offset = 0; offset < batch.length; offset += 1) {
+      resultMap.set(batch[offset].id, verified[offset]);
     }
     console.log(
-      `[quality-backfill] 단건 재시도 ${Math.min(index + 2, initialFallbacks.length)}/${initialFallbacks.length}`
-    );
-  }
-  const fallbackResults = [...resultMap.values()].filter(
-    (result) => result.used_fallback
-  );
-  if (fallbackResults.length > 0) {
-    throw new Error(
-      `LLM 구조화 요약 실패 ${fallbackResults.length}건. 데이터 반영을 중단합니다.`
+      `[quality-backfill] 근거·편집 검증 ${Math.min(index + 2, analysisTargets.length)}/${analysisTargets.length}`
     );
   }
 
@@ -114,11 +115,18 @@ async function qualityBackfill() {
       article.content_kind
     );
     const editorialState =
-      !classification.used_fallback && quality.complete ? "ready" : "pending";
+      !classification.used_fallback &&
+      quality.complete &&
+      classification.verification_state === "passed"
+        ? "ready"
+        : "pending";
+    const verificationState = classification.verification_state || "pending";
     const visibility =
       quality.complete &&
       classification.auto_publish &&
-      editorialState === "ready"
+      editorialState === "ready" &&
+      verificationState === "passed" &&
+      isAutoPublishEvidenceEligible(article.content, article.content_kind)
         ? "public"
         : "review";
     return {
@@ -139,7 +147,8 @@ async function qualityBackfill() {
           classification.topics,
           quality.quality,
           article.content_kind,
-          editorialState
+          editorialState,
+          verificationState
         ),
       },
     };
@@ -155,13 +164,25 @@ async function qualityBackfill() {
         editorialPending: updates.filter(
           (item) => item.data.tags.includes("editorial:pending")
         ).length,
+        verificationFailed: updates.filter(
+          (item) => item.data.tags.includes("verification:failed")
+        ).length,
         demoted: updates
           .filter((item) => item.visibility === "review")
           .map((item) => ({
             id: item.id,
             title: item.title,
             score: item.score,
+            evidenceScore: item.data.summary
+              ? JSON.parse(item.data.summary).evidence_score
+              : 0,
+            editorialScore: item.data.summary
+              ? JSON.parse(item.data.summary).editorial_score
+              : 0,
             reasons: item.quality.reasons,
+            verificationIssues: item.data.summary
+              ? JSON.parse(item.data.summary).verification_issues
+              : [],
           })),
       },
       null,

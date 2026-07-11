@@ -201,9 +201,25 @@ export function ArticleDetail({
           {article.summary && (
             <section className="feed-summary" aria-labelledby="summary-title">
               <div id="summary-title" className="feed-section-label">
-                자동 요약
+                편집 해설
               </div>
               <p>{article.summary}</p>
+
+              {article.context && (
+                <div className="feed-quick-section">
+                  <h2>먼저 이해할 배경</h2>
+                  <p>{article.context}</p>
+                </div>
+              )}
+
+              {article.explanation.length > 0 && (
+                <div className="feed-quick-section">
+                  <h2>쉽게 이해하기</h2>
+                  {article.explanation.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              )}
 
               {article.key_points.length > 0 && (
                 <div className="feed-quick-section">
@@ -238,6 +254,26 @@ export function ArticleDetail({
                       <li key={caveat}>{caveat}</li>
                     ))}
                   </ul>
+                </div>
+              )}
+
+              {manage && (
+                <div className="feed-verification-status">
+                  <strong>
+                    근거 {article.evidence_score ?? 0} · 편집 {article.editorial_score ?? 0}
+                  </strong>
+                  <span>
+                    {article.verification_state === "passed"
+                      ? "검증 통과"
+                      : "공개 기준 미달"}
+                  </span>
+                  {article.verification_issues.length > 0 && (
+                    <ul>
+                      {article.verification_issues.map((issue) => (
+                        <li key={issue}>{issue}</li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               )}
             </section>
@@ -359,7 +395,8 @@ export function ArticleDetail({
                   publishing ||
                   visibility === "public" ||
                   article.content_quality !== "complete" ||
-                  article.editorial_state !== "ready"
+                  article.editorial_state !== "ready" ||
+                  article.verification_state !== "passed"
                 }
               >
                 {publishing ? (
@@ -375,6 +412,8 @@ export function ArticleDetail({
                     ? "본문 보강 필요"
                     : article.editorial_state !== "ready"
                       ? "편집 분석 필요"
+                      : article.verification_state !== "passed"
+                        ? "근거 검증 필요"
                     : "공개 승인"}
               </button>
               <button

@@ -5,11 +5,13 @@ const VISIBILITY_PREFIX = "visibility:";
 const QUALITY_PREFIX = "quality:";
 const CONTENT_PREFIX = "content:";
 const EDITORIAL_PREFIX = "editorial:";
+const VERIFICATION_PREFIX = "verification:";
 
 export type FeedVisibility = "public" | "review";
 export type FeedContentQuality = "complete" | "incomplete";
 export type FeedContentKind = "jsonld" | "transcript" | "rss" | "missing";
 export type FeedEditorialState = "ready" | "pending";
+export type FeedVerificationState = "passed" | "pending" | "failed";
 
 export const FEED_CATEGORIES = taxonomy.categories;
 export const FEED_TOPICS = taxonomy.topics;
@@ -35,6 +37,10 @@ export function contentTag(contentKind: FeedContentKind): string {
 
 export function editorialTag(state: FeedEditorialState): string {
   return `${EDITORIAL_PREFIX}${state}`;
+}
+
+export function verificationTag(state: FeedVerificationState): string {
+  return `${VERIFICATION_PREFIX}${state}`;
 }
 
 export function getPrimaryCategory(
@@ -84,6 +90,17 @@ export function getEditorialState(
   return value === "ready" || value === "pending" ? value : null;
 }
 
+export function getVerificationState(
+  tags: string[] | null | undefined
+): FeedVerificationState | null {
+  const value = (tags || [])
+    .find((item) => item.startsWith(VERIFICATION_PREFIX))
+    ?.slice(VERIFICATION_PREFIX.length);
+  return value === "passed" || value === "pending" || value === "failed"
+    ? value
+    : null;
+}
+
 export function getDisplayTags(tags: string[] | null | undefined): string[] {
   return (tags || []).filter(
     (tag) =>
@@ -91,7 +108,8 @@ export function getDisplayTags(tags: string[] | null | undefined): string[] {
       !tag.startsWith(VISIBILITY_PREFIX) &&
       !tag.startsWith(QUALITY_PREFIX) &&
       !tag.startsWith(CONTENT_PREFIX) &&
-      !tag.startsWith(EDITORIAL_PREFIX)
+      !tag.startsWith(EDITORIAL_PREFIX) &&
+      !tag.startsWith(VERIFICATION_PREFIX)
   );
 }
 
@@ -105,7 +123,8 @@ export function mergeSystemTags(
       tag.startsWith(VISIBILITY_PREFIX) ||
       tag.startsWith(QUALITY_PREFIX) ||
       tag.startsWith(CONTENT_PREFIX) ||
-      tag.startsWith(EDITORIAL_PREFIX)
+      tag.startsWith(EDITORIAL_PREFIX) ||
+      tag.startsWith(VERIFICATION_PREFIX)
   );
   return [...new Set([...systemTags, ...displayTags])];
 }

@@ -976,6 +976,10 @@ body:has(.feed-root) > footer {
   margin-top: 18px;
 }
 
+.feed-quick-section p + p {
+  margin-top: 10px;
+}
+
 .feed-quick-section h2 {
   margin-bottom: 8px;
   color: #8d8d8d;
@@ -996,6 +1000,28 @@ body:has(.feed-root) > footer {
   padding: 12px 14px;
   border-left: 2px solid #6f6548;
   background: #171611;
+}
+
+.feed-verification-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 12px;
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid #343434;
+  color: #8d8d8d;
+  font-size: 12px;
+}
+
+.feed-verification-status strong {
+  color: #78c990;
+}
+
+.feed-verification-status ul {
+  flex-basis: 100%;
+  padding-left: 18px;
+  line-height: 1.6;
 }
 
 .feed-original-links {
@@ -1761,6 +1787,15 @@ body:has(.feed-root) > footer {
 .feed-quick-caveats {
   border-left-color: #d8c58e;
   background: #fffaf0;
+}
+
+.feed-verification-status {
+  border-top-color: #dce2e7;
+  color: #64717a;
+}
+
+.feed-verification-status strong {
+  color: #277d4c;
 }
 
 .sidebar-card-title,

@@ -8,12 +8,14 @@ import {
   getEditorialState,
   getFeedVisibility,
   getPrimaryCategory,
+  getVerificationState,
   qualityTag,
   visibilityTag,
   type FeedContentKind,
   type FeedContentQuality,
   type FeedEditorialState,
   type FeedVisibility,
+  type FeedVerificationState,
 } from "@/lib/feed-taxonomy";
 import { parseQuickFeedSummary } from "@/lib/feed-summary";
 
@@ -42,10 +44,16 @@ export interface FeedArticle {
   source_url: string | null;
   content: string | null;
   summary: string | null;
+  context: string;
+  explanation: string[];
   key_points: string[];
   why_it_matters: string;
   practical_takeaway: string;
   caveats: string[];
+  evidence_score: number | null;
+  editorial_score: number | null;
+  verification_issues: string[];
+  verification_attempts: number;
   importance_score: number;
   points: number;
   status: string;
@@ -63,6 +71,7 @@ export interface FeedArticle {
   content_quality: FeedContentQuality | null;
   content_kind: FeedContentKind | null;
   editorial_state: FeedEditorialState | null;
+  verification_state: FeedVerificationState | null;
   analysis: FeedAnalysis | null;
   post: FeedPost | null;
 }
@@ -165,10 +174,16 @@ function toFeedArticle(row: RawArticleRow): FeedArticle {
     source_url: row.source_url,
     content: row.content ?? null,
     summary: quickSummary.summary || null,
+    context: quickSummary.context,
+    explanation: quickSummary.explanation,
     key_points: quickSummary.keyPoints,
     why_it_matters: quickSummary.whyItMatters,
     practical_takeaway: quickSummary.practicalTakeaway,
     caveats: quickSummary.caveats,
+    evidence_score: quickSummary.evidenceScore,
+    editorial_score: quickSummary.editorialScore,
+    verification_issues: quickSummary.verificationIssues,
+    verification_attempts: quickSummary.verificationAttempts,
     importance_score: row.importance_score || 0,
     points: row.points || 0,
     status: row.status,
@@ -186,6 +201,7 @@ function toFeedArticle(row: RawArticleRow): FeedArticle {
     content_quality: getContentQuality(rawTags),
     content_kind: getContentKind(rawTags),
     editorial_state: getEditorialState(rawTags),
+    verification_state: getVerificationState(rawTags),
     analysis: analysis
       ? {
           summary: analysis.summary || "",
@@ -230,6 +246,10 @@ export function toPublicFeedArticle(article: FeedArticle): FeedArticle {
   return {
     ...article,
     content: null,
+    evidence_score: null,
+    editorial_score: null,
+    verification_issues: [],
+    verification_attempts: 0,
     read_at: null,
     analysis: article.analysis
       ? {

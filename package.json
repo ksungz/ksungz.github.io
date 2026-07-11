@@ -8,6 +8,7 @@
     "feed:backfill": "node scripts/feed/backfill.mjs",
     "feed:collect": "node scripts/feed/collector.mjs",
     "feed:quality-backfill": "node scripts/feed/quality-backfill.mjs",
+    "feed:test": "node --test scripts/feed/*.test.mjs",
     "start": "next start",
     "lint": "eslint"
   },

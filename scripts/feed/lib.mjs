@@ -556,6 +556,61 @@ function numberTokens(value) {
   );
 }
 
+function hasUnsupportedNumbers(value, sourceNumbers) {
+  return [...numberTokens(value || "")].some((item) => !sourceNumbers.has(item));
+}
+
+function removeUnsupportedNumberSentences(value, sourceNumbers) {
+  if (typeof value !== "string" || !value.trim()) return "";
+  return value
+    .split(/(?<=[.!?。]|다\.)\s+/)
+    .filter((sentence) => !hasUnsupportedNumbers(sentence, sourceNumbers))
+    .join(" ")
+    .trim();
+}
+
+export function sanitizeEditorialDraft(article, classification) {
+  const sourceText = normalizedEvidenceText(
+    `${article.title || ""} ${article.content || article.summary || ""}`
+  );
+  const sourceNumbers = numberTokens(sourceText);
+  const cleanArray = (value) =>
+    (Array.isArray(value) ? value : []).filter(
+      (item) => !hasUnsupportedNumbers(item, sourceNumbers)
+    );
+  const claims = cleanClaims(classification.claims).filter((item) => {
+    const evidence = normalizedEvidenceText(item.evidence);
+    return (
+      evidence.length >= 20 &&
+      sourceText.includes(evidence) &&
+      !hasUnsupportedNumbers(item.claim, sourceNumbers)
+    );
+  });
+  return {
+    ...classification,
+    summary: removeUnsupportedNumberSentences(
+      classification.summary,
+      sourceNumbers
+    ),
+    context: removeUnsupportedNumberSentences(
+      classification.context,
+      sourceNumbers
+    ),
+    explanation: cleanArray(classification.explanation),
+    key_points: cleanArray(classification.key_points),
+    why_it_matters: removeUnsupportedNumberSentences(
+      classification.why_it_matters,
+      sourceNumbers
+    ),
+    practical_takeaway: removeUnsupportedNumberSentences(
+      classification.practical_takeaway,
+      sourceNumbers
+    ),
+    caveats: cleanArray(classification.caveats),
+    claims,
+  };
+}
+
 export function assessEditorialGrounding(article, classification) {
   const sourceText = normalizedEvidenceText(
     `${article.title || ""} ${article.content || article.summary || ""}`
@@ -660,10 +715,12 @@ ${JSON.stringify({
 
 판정 원칙:
 - 모든 사실성 문장이 원문에서 직접 지지되는지 검사한다.
+- 문서가 직접 주장하는 내용은 외부 자료로 사실 확인하라고 요구하지 말고, 초안이 그 주장을 정확히 전달했는지만 판단한다.
 - 쉬운 설명은 허용하지만 원문에 없는 성능·숫자·사례·인과관계는 허용하지 않는다.
 - context와 explanation이 배경지식이 적은 독자도 이해할 만큼 명확하고 구체적인지 평가한다.
 - 핵심 포인트와 문단이 서로 같은 말을 반복하면 감점한다.
 - 어떤 기술 글에도 붙일 수 있는 일반적인 실무 조언은 실용성 점수를 낮춘다.
+- critical_issues에는 원문과 충돌하는 사실, 지원되지 않는 인과관계, 과장만 넣고 문장 개선 제안과 섹션 중복은 improvement_notes에 넣는다.
 
 각 점수는 반드시 0~100 사이 정수로 평가해.
 JSON으로만 응답해:
@@ -714,6 +771,7 @@ export async function createVerifiedEditorial(article, initialDraft = null) {
     if (draft.used_fallback) {
       draft = await classifyArticle(article, ["필수 해설과 원문 근거를 모두 채운다."]);
     }
+    draft = sanitizeEditorialDraft(article, draft);
     const verified = await verifyEditorialDraft(article, draft);
     if (verified.verification_state === "passed") {
       return { ...verified, verification_attempts: verificationAttempts };

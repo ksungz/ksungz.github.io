@@ -7,6 +7,7 @@ import {
   isAutoPublishEvidenceEligible,
   parseClassification,
   parseEditorialVerification,
+  sanitizeEditorialDraft,
   serializeQuickFeedSummary,
 } from "./lib.mjs";
 
@@ -73,6 +74,22 @@ test("원문에 없는 숫자와 근거 인용은 공개 검증에서 차단한�
   assert.equal(result.passed, false);
   assert.equal(result.quoteCoverage, 67);
   assert.deepEqual(result.addedNumbers, ["99%"]);
+});
+
+test("원문에 없는 숫자 문장과 부정확한 근거 인용을 검증 전에 제거한다", () => {
+  const draft = groundedDraft();
+  draft.summary = `${draft.summary} 정확도는 99%다.`;
+  draft.key_points.push("처리량은 1,500건이다.");
+  draft.claims.push({
+    id: "C4",
+    claim: "정확도는 99%다.",
+    evidence: "원문에 존재하지 않는 숫자 근거 문장이다.",
+  });
+  const sanitized = sanitizeEditorialDraft(article, draft);
+  assert.equal(sanitized.summary.includes("99%"), false);
+  assert.equal(sanitized.key_points.some((item) => item.includes("1,500")), false);
+  assert.equal(sanitized.claims.length, 3);
+  assert.equal(assessEditorialGrounding(article, sanitized).passed, true);
 });
 
 test("범용적인 실무 조언은 최종 글 품질 검사에서 차단한다", () => {

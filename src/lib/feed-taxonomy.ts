@@ -10,6 +10,8 @@ export type FeedContentQuality = "complete" | "incomplete";
 export const FEED_CATEGORIES = taxonomy.categories;
 export const FEED_TOPICS = taxonomy.topics;
 export const FEED_QUALITY = taxonomy.quality;
+export const FEED_SOURCE_POLICIES = taxonomy.sourcePolicies;
+export const FEED_REVIEW_TITLE_PATTERNS = taxonomy.reviewTitlePatterns;
 
 export function categoryTag(category: string): string {
   return `${CATEGORY_PREFIX}${category}`;

@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isFeedAdminRequest } from "@/lib/feed-admin-auth";
+import {
+  generateFeedJson,
+  getFeedLlmProviderInfo,
+} from "@/lib/feed-llm-provider";
 import { mergeSystemTags } from "@/lib/feed-taxonomy";
 import { createClient } from "@/lib/supabase-server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-const OLLAMA_HOST = process.env.OLLAMA_HOST || "https://ollama.com";
-const OLLAMA_MODEL = process.env.OLLAMA_MODEL || "kimi-k2.7-code:cloud";
 
 interface AnalysisPayload {
   summary: string;
@@ -114,8 +115,7 @@ export async function POST(
     return NextResponse.json({ error: "Invalid article ID" }, { status: 400 });
   }
 
-  const ollamaKey = process.env.OLLAMA_API_KEY;
-  if (!ollamaKey) {
+  if (!getFeedLlmProviderInfo().configured) {
     return NextResponse.json(
       { error: "Analysis provider is not configured" },
       { status: 503 }
@@ -169,30 +169,7 @@ ${content.slice(0, 6_000)}
 }`;
 
   try {
-    const ollamaResponse = await fetch(`${OLLAMA_HOST}/api/chat`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${ollamaKey}`,
-      },
-      body: JSON.stringify({
-        model: OLLAMA_MODEL,
-        messages: [{ role: "user", content: prompt }],
-        stream: false,
-        format: "json",
-      }),
-      signal: AbortSignal.timeout(120_000),
-    });
-
-    if (!ollamaResponse.ok) {
-      return NextResponse.json(
-        { error: `Analysis provider returned ${ollamaResponse.status}` },
-        { status: 502 }
-      );
-    }
-
-    const ollamaData = await ollamaResponse.json();
-    const analysis = parseAnalysis(ollamaData.message?.content || "");
+    const analysis = parseAnalysis(await generateFeedJson(prompt, 120_000));
     if (!analysis) {
       return NextResponse.json(
         { error: "Analysis response did not match the required schema" },

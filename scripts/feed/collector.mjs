@@ -1,6 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import nextEnv from "@next/env";
+import { getFeedLlmProviderInfo } from "./llm-provider.mjs";
 import {
   QUALITY,
   assessContentQuality,
@@ -142,7 +143,7 @@ async function collect() {
       }
     }
     console.log(
-      `[collector] 품질 분류 ${Math.min(index + batchSize * concurrentBatches, rawCandidates.length)}/${rawCandidates.length}`
+      `[collector] 구조화 요약 ${Math.min(index + batchSize * concurrentBatches, rawCandidates.length)}/${rawCandidates.length}`
     );
   }
 
@@ -213,7 +214,8 @@ async function collect() {
 
     const sourcePublicCount = publicBySource.get(source.id) || 0;
     const publish =
-      classification.relevance_score >= QUALITY.publicScore &&
+      classification.auto_publish &&
+      !classification.used_fallback &&
       contentQuality.complete &&
       publicSlots > 0 &&
       sourcePublicCount < QUALITY.perSourceLimit;
@@ -255,6 +257,7 @@ async function collect() {
   const summary = {
     ...stats,
     sources: activeSources.length,
+    llmProvider: getFeedLlmProviderInfo(),
     sourceErrors,
     completedAt: new Date().toISOString(),
   };

@@ -74,7 +74,7 @@ async function backfill() {
     const classified = await Promise.all(batches.map(classifyBatch));
     results.push(...classified.flat());
     console.log(
-      `[backfill] 분류 ${Math.min(index + batchSize * concurrentBatches, targets.length)}/${targets.length}`
+      `[backfill] 구조화 요약 ${Math.min(index + batchSize * concurrentBatches, targets.length)}/${targets.length}`
     );
   }
 
@@ -110,7 +110,8 @@ async function backfill() {
       const publish =
         contentQuality.complete &&
         (manuallyCurated ||
-          (result.relevance_score >= QUALITY.publicScore &&
+          (result.auto_publish &&
+            !result.used_fallback &&
             publicCount < QUALITY.dailyPublicLimit &&
             sourcePublic < QUALITY.perSourceLimit));
       const rejected =

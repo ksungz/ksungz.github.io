@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isFeedAdminRequest } from "@/lib/feed-admin-auth";
 import {
+  generateFeedJson,
+  getFeedLlmProviderInfo,
+} from "@/lib/feed-llm-provider";
+import {
   createDraftPullRequest,
   isGitHubDraftConfigured,
 } from "@/lib/github-draft-pr";
@@ -8,9 +12,6 @@ import { createClient } from "@/lib/supabase-server";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-const OLLAMA_HOST = process.env.OLLAMA_HOST || "https://ollama.com";
-const OLLAMA_MODEL = process.env.OLLAMA_MODEL || "kimi-k2.7-code:cloud";
 
 interface GeneratedDraft {
   title: string;
@@ -132,8 +133,7 @@ export async function POST(
     );
   }
 
-  const ollamaKey = process.env.OLLAMA_API_KEY;
-  if (!ollamaKey) {
+  if (!getFeedLlmProviderInfo().configured) {
     return NextResponse.json(
       { error: "Draft provider is not configured" },
       { status: 503 }
@@ -204,30 +204,7 @@ export async function POST(
 }`;
 
   try {
-    const ollamaResponse = await fetch(`${OLLAMA_HOST}/api/chat`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${ollamaKey}`,
-      },
-      body: JSON.stringify({
-        model: OLLAMA_MODEL,
-        messages: [{ role: "user", content: prompt }],
-        stream: false,
-        format: "json",
-      }),
-      signal: AbortSignal.timeout(120_000),
-    });
-
-    if (!ollamaResponse.ok) {
-      return NextResponse.json(
-        { error: `Draft provider returned ${ollamaResponse.status}` },
-        { status: 502 }
-      );
-    }
-
-    const ollamaData = await ollamaResponse.json();
-    const draft = parseDraft(ollamaData.message?.content || "");
+    const draft = parseDraft(await generateFeedJson(prompt, 120_000));
     if (!draft) {
       return NextResponse.json(
         { error: "Draft response did not match the required schema" },

@@ -1,7 +1,7 @@
 import nextEnv from "@next/env";
 import { loadEnvFile } from "node:process";
+import { getFeedLlmProviderInfo } from "./llm-provider.mjs";
 import {
-  QUALITY,
   assessContentQuality,
   buildTags,
   classifyArticle,
@@ -15,8 +15,8 @@ nextEnv.loadEnvConfig(process.cwd());
 if (process.env.FEED_SECRETS_DIR) {
   loadEnvFile(`${process.env.FEED_SECRETS_DIR}/.env`);
 }
-if (!process.env.OLLAMA_API_KEY) {
-  throw new Error("품질 백필에는 OLLAMA_API_KEY가 필요합니다.");
+if (!getFeedLlmProviderInfo().configured) {
+  throw new Error("품질 백필에는 구성된 FEED_LLM_PROVIDER가 필요합니다.");
 }
 const applyChanges = process.argv.includes("--apply");
 const recheckTagged = process.argv.includes("--recheck-tagged");
@@ -86,7 +86,7 @@ async function qualityBackfill() {
   );
   if (fallbackResults.length > 0) {
     throw new Error(
-      `LLM 구조화 분류 실패 ${fallbackResults.length}건. 데이터 반영을 중단합니다.`
+      `LLM 구조화 요약 실패 ${fallbackResults.length}건. 데이터 반영을 중단합니다.`
     );
   }
 
@@ -95,8 +95,8 @@ async function qualityBackfill() {
     const quality = assessContentQuality(article.content, classification);
     const visibility =
       quality.complete &&
-      classification.relevance_score >= QUALITY.publicScore &&
-      classification.category !== "other"
+      classification.auto_publish &&
+      !classification.used_fallback
         ? "public"
         : "review";
     return {

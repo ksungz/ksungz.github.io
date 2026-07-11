@@ -218,7 +218,7 @@ async function collect() {
     }
     if (!selected) break;
   }
-  const batchSize = 4;
+  const batchSize = 2;
   const concurrentBatches = 2;
   for (
     let index = 0;

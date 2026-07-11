@@ -195,7 +195,7 @@ async function qualityBackfill() {
     return;
   }
   const publicCount = updates.filter((item) => item.visibility === "public").length;
-  if (updates.length > 1 && publicCount === 0) {
+  if (publicCount === 0) {
     throw new Error(
       "검증 통과 공개 글이 0건이라 데이터 반영을 중단합니다. 기준과 검증 결과를 먼저 확인하세요."
     );

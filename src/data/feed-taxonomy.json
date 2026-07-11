@@ -44,11 +44,11 @@
     "minAutoPublishTranscriptLength": 600,
     "minGroundedClaims": 3,
     "minEvidenceScore": 90,
-    "minEditorialScore": 85,
+    "minEditorialScore": 82,
     "maxEditorialRewrites": 1,
     "maxVerificationRuns": 3,
     "retryPerRun": 6,
-    "maxAnalysisPerRun": 8
+    "maxAnalysisPerRun": 4
   },
   "sourcePolicies": {
     "GeekNews": { "autoPublish": true, "baseScore": 82 },

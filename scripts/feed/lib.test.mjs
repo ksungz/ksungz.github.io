@@ -4,6 +4,7 @@ import {
   assessEditorialGrounding,
   buildTags,
   fallbackClassification,
+  extractGeekNewsArticle,
   isAutoPublishEvidenceEligible,
   parseClassification,
   parseEditorialVerification,
@@ -150,4 +151,23 @@ test("자동 공개는 출처 형태별로 더 긴 근거를 요구한다", () =
 test("공개 태그에 검증 상태를 포함한다", () => {
   const tags = buildTags("ai", "public", ["LLM"], "complete", "jsonld", "ready", "passed");
   assert.ok(tags.includes("verification:passed"));
+});
+
+test("GeekNews의 기존·신규 JSON-LD 본문과 실제 원문 링크를 추출한다", () => {
+  const newsArticle = extractGeekNewsArticle(`
+    <script type="application/ld+json">
+      {"@type":"NewsArticle","articleBody":"새 형식의 충분한 기사 본문입니다.","description":"짧은 설명"}
+    </script>
+    <div class="topictitle link"><a href="https://example.com/original"><h1>제목</h1></a></div>
+  `);
+  assert.equal(newsArticle.content, "새 형식의 충분한 기사 본문입니다.");
+  assert.equal(newsArticle.originalUrl, "https://example.com/original");
+
+  const discussion = extractGeekNewsArticle(`
+    <script type="application/ld+json">
+      {"@type":"DiscussionForumPosting","text":"기존 형식의 기사 본문입니다.","sharedContent":{"url":"https://example.com/legacy"}}
+    </script>
+  `);
+  assert.equal(discussion.content, "기존 형식의 기사 본문입니다.");
+  assert.equal(discussion.originalUrl, "https://example.com/legacy");
 });

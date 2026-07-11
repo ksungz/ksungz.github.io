@@ -868,7 +868,7 @@ function jsonLdNodes(value) {
   return [value, ...graph];
 }
 
-function extractDiscussionPosting(html) {
+export function extractGeekNewsArticle(html) {
   const nodes = [];
   const scriptPattern =
     /<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi;
@@ -879,12 +879,33 @@ function extractDiscussionPosting(html) {
       // 다른 JSON-LD 블록을 계속 검사한다.
     }
   }
-  return nodes.find((node) => {
+  const posting = nodes.find((node) => {
     const types = Array.isArray(node["@type"])
       ? node["@type"]
       : [node["@type"]];
-    return types.includes("DiscussionForumPosting");
+    return types.some((type) =>
+      ["DiscussionForumPosting", "NewsArticle", "Article"].includes(type)
+    );
   });
+  if (!posting) return null;
+  const sharedContent = Array.isArray(posting.sharedContent)
+    ? posting.sharedContent[0]
+    : posting.sharedContent;
+  const headingLink = html.match(
+    /<a\s+[^>]*href=["']([^"']+)["'][^>]*>\s*<h1\b/i
+  )?.[1];
+  const originalUrl =
+    typeof sharedContent?.url === "string"
+      ? sharedContent.url
+      : /^https?:\/\//.test(headingLink || "")
+        ? headingLink
+        : null;
+  return {
+    content: stripHtml(
+      posting.articleBody || posting.text || posting.description || ""
+    ).slice(0, 12_000),
+    originalUrl,
+  };
 }
 
 export async function enrichArticleContent(article) {
@@ -913,15 +934,11 @@ export async function enrichArticleContent(article) {
       article.title
     );
     if (!response.ok) return baseArticle;
-    const posting = extractDiscussionPosting(await response.text());
-    if (!posting) return baseArticle;
+    const extracted = extractGeekNewsArticle(await response.text());
+    if (!extracted) return baseArticle;
 
-    const detailedContent = stripHtml(posting.text || "").slice(0, 12_000);
-    const sharedContent = Array.isArray(posting.sharedContent)
-      ? posting.sharedContent[0]
-      : posting.sharedContent;
-    const originalUrl =
-      typeof sharedContent?.url === "string" ? sharedContent.url : article.url;
+    const detailedContent = extracted.content;
+    const originalUrl = extracted.originalUrl || article.url;
     const useDetailedContent =
       detailedContent.length >= (article.content || "").length;
 

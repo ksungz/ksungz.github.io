@@ -30,6 +30,7 @@
 - GitHub Actions에서 매일 06:00 KST에 수집기를 실행하도록 스케줄 구성
 - Studio에서 검토 후보를 공개 피드로 승인하는 관리자 전용 기능 추가
 - GeekNews 상세 JSON-LD에서 본문과 실제 원문 URL을 보강하고 출처 URL을 분리
+- GeekNews의 신규 `NewsArticle.articleBody`와 기존 `DiscussionForumPosting.text` JSON-LD를 모두 지원
 - 자동 요약을 한줄 요약·핵심 포인트·중요성 구조로 확장
 - 본문 400자 이상, 말줄임 종료 아님, 핵심 포인트 3개 이상을 공개 필수 조건으로 적용
 - 기존 공개 45건을 재검사해 14건만 유지하고 나머지는 Studio 검토함으로 이동

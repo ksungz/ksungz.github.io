@@ -194,6 +194,12 @@ async function qualityBackfill() {
     console.log("[quality-backfill] dry-run 완료. 반영하려면 --apply를 사용하세요.");
     return;
   }
+  const publicCount = updates.filter((item) => item.visibility === "public").length;
+  if (updates.length > 1 && publicCount === 0) {
+    throw new Error(
+      "검증 통과 공개 글이 0건이라 데이터 반영을 중단합니다. 기준과 검증 결과를 먼저 확인하세요."
+    );
+  }
   for (let index = 0; index < updates.length; index += 1) {
     await store.updateArticle(updates[index].id, updates[index].data);
     if ((index + 1) % 10 === 0 || index + 1 === updates.length) {

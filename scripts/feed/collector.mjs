@@ -218,6 +218,9 @@ async function collect() {
     }
     if (!selected) break;
   }
+  const analysisCandidateIds = new Set(
+    analysisCandidates.map((candidate) => candidate.id)
+  );
   const batchSize = 2;
   const concurrentBatches = 2;
   for (
@@ -265,7 +268,14 @@ async function collect() {
         verification_attempts:
           result.verification_attempts ??
           (candidate.existing_id
-            ? (candidate.verification_attempts || 0) + 1
+            ? (candidate.verification_attempts || 0) +
+              (analysisCandidateIds.has(candidate.id) ||
+              !canGenerateEditorialAnalysis(
+                candidate.content,
+                candidate.content_kind
+              )
+                ? 1
+                : 0)
             : 0),
       };
     })(),

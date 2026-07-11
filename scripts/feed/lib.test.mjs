@@ -5,6 +5,7 @@ import {
   buildTags,
   fallbackClassification,
   extractGeekNewsArticle,
+  extractGeekNewsMarkdown,
   isAutoPublishEvidenceEligible,
   parseClassification,
   parseEditorialVerification,
@@ -170,4 +171,23 @@ test("GeekNews의 기존·신규 JSON-LD 본문과 실제 원문 링크를 추�
   `);
   assert.equal(discussion.content, "기존 형식의 기사 본문입니다.");
   assert.equal(discussion.originalUrl, "https://example.com/legacy");
+});
+
+test("GeekNews Markdown에서 댓글을 제외한 본문만 추출한다", () => {
+  const content = extractGeekNewsMarkdown(`
+# 제목
+
+## Metadata
+- Original source: [example.com](https://example.com)
+
+## Topic Body
+- **첫 번째** 핵심 내용임
+- [두 번째 내용](https://example.com/detail)은 링크를 포함함
+
+## Comments
+- 본문에 포함되면 안 되는 댓글
+  `);
+  assert.ok(content.includes("첫 번째 핵심 내용임"));
+  assert.ok(content.includes("두 번째 내용은 링크를 포함함"));
+  assert.equal(content.includes("포함되면 안 되는 댓글"), false);
 });

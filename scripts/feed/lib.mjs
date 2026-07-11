@@ -908,6 +908,36 @@ export function extractGeekNewsArticle(html) {
   };
 }
 
+function stripMarkdown(value) {
+  return stripHtml(
+    value
+      .replace(/!\[[^\]]*\]\([^)]*\)/g, " ")
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+      .replace(/^#{1,6}\s+/gm, "")
+      .replace(/^\s*(?:[-*+] |\d+\. )/gm, "")
+      .replace(/[>*_`~]/g, "")
+      .replace(/\n+/g, ". ")
+  );
+}
+
+function truncateAtSentence(value, limit = 12_000) {
+  if (value.length <= limit) return value;
+  const head = value.slice(0, limit);
+  const boundary = Math.max(
+    head.lastIndexOf(". "),
+    head.lastIndexOf("다. "),
+    head.lastIndexOf("임. "),
+    head.lastIndexOf("함. ")
+  );
+  return boundary >= limit * 0.75 ? head.slice(0, boundary + 1).trim() : head.trim();
+}
+
+export function extractGeekNewsMarkdown(markdown) {
+  if (typeof markdown !== "string") return "";
+  const body = markdown.split(/^## Topic Body\s*$/m)[1]?.split(/^## Comments\s*$/m)[0];
+  return body ? truncateAtSentence(stripMarkdown(body)) : "";
+}
+
 export async function enrichArticleContent(article) {
   const baseArticle = {
     ...article,
@@ -937,7 +967,27 @@ export async function enrichArticleContent(article) {
     const extracted = extractGeekNewsArticle(await response.text());
     if (!extracted) return baseArticle;
 
-    const detailedContent = extracted.content;
+    let detailedContent = extracted.content;
+    const topicId = parsedUrl.searchParams.get("id");
+    if (topicId && /^\d+$/.test(topicId)) {
+      try {
+        const markdownResponse = await fetchWithRetry(
+          `https://news.hada.io/topic/${topicId}.md`,
+          { headers: { "User-Agent": "ksungz-feed-collector/3.2" } },
+          `${article.title} Markdown`
+        );
+        if (markdownResponse.ok) {
+          const markdownContent = extractGeekNewsMarkdown(
+            await markdownResponse.text()
+          );
+          if (markdownContent.length > detailedContent.length) {
+            detailedContent = markdownContent;
+          }
+        }
+      } catch (error) {
+        console.warn(`[feed] Markdown 본문 보강 실패 ${article.title}: ${error.message}`);
+      }
+    }
     const originalUrl = extracted.originalUrl || article.url;
     const useDetailedContent =
       detailedContent.length >= (article.content || "").length;

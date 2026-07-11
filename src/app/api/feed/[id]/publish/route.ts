@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { isFeedAdminRequest } from "@/lib/feed-admin-auth";
 import {
   getContentQuality,
+  getEditorialState,
   setFeedVisibility,
 } from "@/lib/feed-taxonomy";
 import { createClient } from "@/lib/supabase-server";
@@ -39,6 +40,12 @@ export async function POST(
   if (getContentQuality(article.tags as string[] | null) !== "complete") {
     return NextResponse.json(
       { error: "본문 완성도 검사를 통과한 기사만 공개할 수 있습니다." },
+      { status: 409 }
+    );
+  }
+  if (getEditorialState(article.tags as string[] | null) !== "ready") {
+    return NextResponse.json(
+      { error: "공개 전 편집 분석을 완료한 기사만 공개할 수 있습니다." },
       { status: 409 }
     );
   }

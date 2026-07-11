@@ -873,7 +873,8 @@ body:has(.feed-root) > footer {
 .feed-card-analysis,
 .feed-card-status,
 .feed-card-visibility,
-.feed-card-quality {
+.feed-card-quality,
+.feed-card-editorial {
   padding: 2px 7px;
   border: 1px solid #294131;
   border-radius: 4px;
@@ -912,6 +913,11 @@ body:has(.feed-root) > footer {
 .feed-card-quality {
   border-color: #493f2a;
   color: #c0a35c;
+}
+
+.feed-card-editorial {
+  border-color: #3d3b4f;
+  color: #aaa1d4;
 }
 
 .sidebar-card-title {
@@ -984,6 +990,12 @@ body:has(.feed-root) > footer {
   color: #aaa;
   font-size: 14px;
   line-height: 1.65;
+}
+
+.feed-quick-caveats {
+  padding: 12px 14px;
+  border-left: 2px solid #6f6548;
+  background: #171611;
 }
 
 .feed-original-links {
@@ -1696,7 +1708,8 @@ body:has(.feed-root) > footer {
 .feed-card-analysis,
 .feed-card-status,
 .feed-card-visibility,
-.feed-card-quality {
+.feed-card-quality,
+.feed-card-editorial {
   border-color: #b9d9c4;
   background: #edf8f1;
   color: #277d4c;
@@ -1737,6 +1750,17 @@ body:has(.feed-root) > footer {
   border-color: #e1ce9d;
   background: #fff8e7;
   color: #86651f;
+}
+
+.feed-card-editorial {
+  border-color: #d4cbe8;
+  background: #f5f1fb;
+  color: #6e5795;
+}
+
+.feed-quick-caveats {
+  border-left-color: #d8c58e;
+  background: #fffaf0;
 }
 
 .sidebar-card-title,

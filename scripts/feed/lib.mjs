@@ -143,20 +143,39 @@ export function qualityTag(quality) {
   return `quality:${quality}`;
 }
 
+export function contentTag(contentKind) {
+  return `content:${contentKind}`;
+}
+
+export function editorialTag(state) {
+  return `editorial:${state}`;
+}
+
 export function displayTags(tags = []) {
   return tags.filter(
     (tag) =>
       !tag.startsWith("category:") &&
       !tag.startsWith("visibility:") &&
-      !tag.startsWith("quality:")
+      !tag.startsWith("quality:") &&
+      !tag.startsWith("content:") &&
+      !tag.startsWith("editorial:")
   );
 }
 
-export function buildTags(category, visibility, topics, quality = "incomplete") {
+export function buildTags(
+  category,
+  visibility,
+  topics,
+  quality = "incomplete",
+  contentKind = "missing",
+  editorialState = "pending"
+) {
   return [
     categoryTag(category),
     visibilityTag(visibility),
     qualityTag(quality),
+    contentTag(contentKind),
+    editorialTag(editorialState),
     ...normalizeTopics(topics),
   ];
 }
@@ -188,6 +207,7 @@ export function parseClassification(value, fallback) {
     if (!match) return fallback;
     const parsed = JSON.parse(match[0]);
     const keyPoints = cleanStringArray(parsed.key_points);
+    const caveats = cleanStringArray(parsed.caveats, 4, 500);
     return {
       summary:
         typeof parsed.summary === "string" && parsed.summary.trim()
@@ -201,14 +221,22 @@ export function parseClassification(value, fallback) {
         parsed.why_it_matters.trim()
           ? parsed.why_it_matters.replace(/\s+/g, " ").trim().slice(0, 800)
           : fallback.why_it_matters,
+      practical_takeaway:
+        typeof parsed.practical_takeaway === "string" &&
+        parsed.practical_takeaway.trim()
+          ? parsed.practical_takeaway.replace(/\s+/g, " ").trim().slice(0, 800)
+          : fallback.practical_takeaway,
+      caveats: caveats.length ? caveats : fallback.caveats,
       relevance_score: fallback.relevance_score,
       reason: fallback.reason,
       auto_publish: fallback.auto_publish,
       used_fallback:
         typeof parsed.summary !== "string" ||
         !Array.isArray(parsed.key_points) ||
-        keyPoints.length < QUALITY.minKeyPoints ||
-        typeof parsed.why_it_matters !== "string",
+        typeof parsed.why_it_matters !== "string" ||
+        typeof parsed.practical_takeaway !== "string" ||
+        !Array.isArray(parsed.caveats) ||
+        caveats.length === 0,
     };
   } catch {
     return fallback;
@@ -309,6 +337,8 @@ export function fallbackClassification(article) {
     topics: normalizeTopics(topics),
     key_points: keyPoints,
     why_it_matters: "실무 적용 가능성과 기존 방식과의 차이를 원문에서 확인할 필요가 있다.",
+    practical_takeaway: "원문을 확인한 뒤 실제 적용 범위와 검증 방법을 결정해야 한다.",
+    caveats: ["자동 편집 분석을 생성하지 못해 원문 검토가 필요하다."],
     relevance_score: score,
     reason: requiresReview
       ? "제목 검토 패턴에 따라 수동 확인 필요"
@@ -335,7 +365,7 @@ ${stripHtml(article.content || article.summary || "본문 없음").slice(0, 4_00
 </untrusted_document>
 
 JSON으로만 응답해:
-{"summary":"한국어 한줄 요약 1~2문장","key_points":["원문에 근거한 핵심 포인트 3~6개"],"why_it_matters":"왜 읽을 가치가 있는지 1~2문장"}`;
+{"summary":"한국어 핵심 요약 2~3문장","key_points":["원문에 근거한 핵심 포인트 3~6개"],"why_it_matters":"왜 읽을 가치가 있는지 1~2문장","practical_takeaway":"개발·제품·비즈니스 실무에서 확인할 부분 1~2문장","caveats":["원문의 한계·불확실성·확인 필요 사항 1~4개"]}`;
 
   try {
     return parseClassification(
@@ -373,7 +403,7 @@ ${JSON.stringify(input)}
 </untrusted_documents>
 
 모든 id를 빠짐없이 포함한 JSON으로만 응답해:
-{"items":[{"id":1,"summary":"한국어 한줄 요약 1~2문장","key_points":["원문에 근거한 핵심 포인트 3~6개"],"why_it_matters":"왜 읽을 가치가 있는지 1~2문장"}]}`;
+{"items":[{"id":1,"summary":"한국어 핵심 요약 2~3문장","key_points":["원문에 근거한 핵심 포인트 3~6개"],"why_it_matters":"왜 읽을 가치가 있는지 1~2문장","practical_takeaway":"개발·제품·비즈니스 실무에서 확인할 부분 1~2문장","caveats":["원문의 한계·불확실성·확인 필요 사항 1~4개"]}]}`;
 
   try {
     const raw = await generateFeedJson(prompt, 180_000);
@@ -404,25 +434,54 @@ ${JSON.stringify(input)}
 
 export function serializeQuickFeedSummary(classification) {
   return JSON.stringify({
-    version: 1,
+    version: 2,
     summary: classification.summary || "",
     key_points: cleanStringArray(classification.key_points),
     why_it_matters: classification.why_it_matters || "",
+    practical_takeaway: classification.practical_takeaway || "",
+    caveats: cleanStringArray(classification.caveats, 4, 500),
   });
 }
 
-export function assessContentQuality(content, classification) {
+export function inferContentKind(article) {
+  if (["jsonld", "transcript", "rss", "missing"].includes(article.content_kind)) {
+    return article.content_kind;
+  }
+  if (!stripHtml(article.content || "")) return "missing";
+  if (article.source?.type === "youtube" || article.source_type === "youtube") {
+    return "transcript";
+  }
+  return "rss";
+}
+
+export function assessContentQuality(
+  content,
+  classification,
+  contentKind = "rss"
+) {
   const normalized = stripHtml(content || "");
   const keyPoints = cleanStringArray(classification?.key_points);
+  const transcript = contentKind === "transcript";
+  const minLength = transcript
+    ? QUALITY.minTranscriptLength
+    : QUALITY.minContentLength;
+  const minKeyPoints = transcript
+    ? QUALITY.minTranscriptKeyPoints
+    : QUALITY.minKeyPoints;
   const reasons = [];
-  if (normalized.length < QUALITY.minContentLength) {
-    reasons.push(`본문 ${normalized.length}/${QUALITY.minContentLength}자`);
+  if (contentKind === "missing") {
+    reasons.push("근거 본문 또는 자막 없음");
+  }
+  if (normalized.length < minLength) {
+    reasons.push(
+      `${transcript ? "자막" : "본문"} ${normalized.length}/${minLength}자`
+    );
   }
   if (/(?:\.{3}|…)$/.test(normalized)) {
     reasons.push("본문이 말줄임표로 종료됨");
   }
-  if (keyPoints.length < QUALITY.minKeyPoints) {
-    reasons.push(`핵심 포인트 ${keyPoints.length}/${QUALITY.minKeyPoints}개`);
+  if (keyPoints.length < minKeyPoints) {
+    reasons.push(`핵심 포인트 ${keyPoints.length}/${minKeyPoints}개`);
   }
   return {
     complete: reasons.length === 0,
@@ -430,7 +489,21 @@ export function assessContentQuality(content, classification) {
     reasons,
     contentLength: normalized.length,
     keyPointCount: keyPoints.length,
+    contentKind,
   };
+}
+
+export function canGenerateEditorialAnalysis(content, contentKind = "rss") {
+  const normalized = stripHtml(content || "");
+  const minLength =
+    contentKind === "transcript"
+      ? QUALITY.minTranscriptLength
+      : QUALITY.minContentLength;
+  return (
+    contentKind !== "missing" &&
+    normalized.length >= minLength &&
+    !/(?:\.{3}|…)$/.test(normalized)
+  );
 }
 
 function jsonLdNodes(value) {
@@ -462,18 +535,22 @@ function extractDiscussionPosting(html) {
 }
 
 export async function enrichArticleContent(article) {
+  const baseArticle = {
+    ...article,
+    content_kind: inferContentKind(article),
+  };
   const discussionUrl = article.source_url || article.url;
   let parsedUrl;
   try {
     parsedUrl = new URL(discussionUrl);
   } catch {
-    return article;
+    return baseArticle;
   }
   if (
     parsedUrl.hostname !== "news.hada.io" ||
     parsedUrl.pathname !== "/topic"
   ) {
-    return article;
+    return baseArticle;
   }
 
   try {
@@ -482,9 +559,9 @@ export async function enrichArticleContent(article) {
       { headers: { "User-Agent": "ksungz-feed-collector/3.1" } },
       article.title
     );
-    if (!response.ok) return article;
+    if (!response.ok) return baseArticle;
     const posting = extractDiscussionPosting(await response.text());
-    if (!posting) return article;
+    if (!posting) return baseArticle;
 
     const detailedContent = stripHtml(posting.text || "").slice(0, 12_000);
     const sharedContent = Array.isArray(posting.sharedContent)
@@ -492,19 +569,22 @@ export async function enrichArticleContent(article) {
       : posting.sharedContent;
     const originalUrl =
       typeof sharedContent?.url === "string" ? sharedContent.url : article.url;
+    const useDetailedContent =
+      detailedContent.length >= (article.content || "").length;
 
     return {
       ...article,
       url: canonicalizeUrl(originalUrl),
       source_url: canonicalizeUrl(discussionUrl),
       content:
-        detailedContent.length > (article.content || "").length
+        useDetailedContent
           ? detailedContent
           : article.content,
+      content_kind: detailedContent ? "jsonld" : baseArticle.content_kind,
     };
   } catch (error) {
     console.warn(`[feed] 본문 보강 실패 ${article.title}: ${error.message}`);
-    return article;
+    return baseArticle;
   }
 }
 

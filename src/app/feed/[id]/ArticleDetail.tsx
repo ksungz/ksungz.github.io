@@ -222,6 +222,24 @@ export function ArticleDetail({
                   <p>{article.why_it_matters}</p>
                 </div>
               )}
+
+              {article.practical_takeaway && (
+                <div className="feed-quick-section">
+                  <h2>실무에서 볼 부분</h2>
+                  <p>{article.practical_takeaway}</p>
+                </div>
+              )}
+
+              {article.caveats.length > 0 && (
+                <div className="feed-quick-section feed-quick-caveats">
+                  <h2>한계·주의점</h2>
+                  <ul>
+                    {article.caveats.map((caveat) => (
+                      <li key={caveat}>{caveat}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </section>
           )}
 
@@ -340,7 +358,8 @@ export function ArticleDetail({
                 disabled={
                   publishing ||
                   visibility === "public" ||
-                  article.content_quality !== "complete"
+                  article.content_quality !== "complete" ||
+                  article.editorial_state !== "ready"
                 }
               >
                 {publishing ? (
@@ -354,6 +373,8 @@ export function ArticleDetail({
                   ? "공개됨"
                   : article.content_quality !== "complete"
                     ? "본문 보강 필요"
+                    : article.editorial_state !== "ready"
+                      ? "편집 분석 필요"
                     : "공개 승인"}
               </button>
               <button

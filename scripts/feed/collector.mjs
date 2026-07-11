@@ -6,10 +6,12 @@ import {
   QUALITY,
   assessContentQuality,
   buildTags,
+  canGenerateEditorialAnalysis,
   canonicalizeUrl,
   classifyBatch,
   createFeedStore,
   enrichArticleContent,
+  fallbackClassification,
   fetchWithRetry,
   normalizedTitle,
   parseFeed,
@@ -94,16 +96,23 @@ async function collect() {
         .slice(0, Math.max(QUALITY.perSourceLimit * 2, 10));
 
       for (const item of items) {
-        const content =
-          source.type === "youtube"
-            ? youtubeTranscript(item.url) || item.content
-            : item.content;
+        const transcript =
+          source.type === "youtube" ? youtubeTranscript(item.url) : "";
+        const content = transcript || item.content;
+        const contentKind = transcript
+          ? "transcript"
+          : source.type === "youtube"
+            ? "missing"
+            : content
+              ? "rss"
+              : "missing";
         const candidate = await enrichArticleContent({
           ...item,
           id: rawCandidates.length + 1,
           url: canonicalizeUrl(item.url),
           source_url: canonicalizeUrl(item.url),
           content,
+          content_kind: contentKind,
           source_name: source.name,
           source,
         });
@@ -116,36 +125,38 @@ async function collect() {
     }
   }
 
-  const candidates = [];
+  const resultMap = new Map();
+  const analysisCandidates = rawCandidates.filter((candidate) =>
+    canGenerateEditorialAnalysis(candidate.content, candidate.content_kind)
+  );
   const batchSize = 4;
   const concurrentBatches = 2;
   for (
     let index = 0;
-    index < rawCandidates.length;
+    index < analysisCandidates.length;
     index += batchSize * concurrentBatches
   ) {
     const batches = Array.from({ length: concurrentBatches }, (_, offset) =>
-      rawCandidates.slice(
+      analysisCandidates.slice(
         index + offset * batchSize,
         index + (offset + 1) * batchSize
       )
     ).filter((batch) => batch.length > 0);
     const classifications = await Promise.all(batches.map(classifyBatch));
     for (let batchIndex = 0; batchIndex < batches.length; batchIndex += 1) {
-      const resultMap = new Map(
-        classifications[batchIndex].map((result) => [result.id, result])
-      );
-      for (const candidate of batches[batchIndex]) {
-        candidates.push({
-          ...candidate,
-          classification: resultMap.get(candidate.id),
-        });
+      for (const result of classifications[batchIndex]) {
+        resultMap.set(result.id, result);
       }
     }
     console.log(
-      `[collector] 구조화 요약 ${Math.min(index + batchSize * concurrentBatches, rawCandidates.length)}/${rawCandidates.length}`
+      `[collector] 편집 분석 ${Math.min(index + batchSize * concurrentBatches, analysisCandidates.length)}/${analysisCandidates.length}`
     );
   }
+  const candidates = rawCandidates.map((candidate) => ({
+    ...candidate,
+    classification:
+      resultMap.get(candidate.id) || fallbackClassification(candidate),
+  }));
 
   const today = startOfTodayInSeoul();
   const existingPublicRows = existing.filter(
@@ -169,6 +180,7 @@ async function collect() {
     review: 0,
     rejected: 0,
     incomplete: 0,
+    editorialPending: 0,
   };
 
   candidates.sort(
@@ -180,8 +192,13 @@ async function collect() {
     const { classification, source } = candidate;
     const contentQuality = assessContentQuality(
       candidate.content,
-      classification
+      classification,
+      candidate.content_kind
     );
+    const editorialState =
+      !classification.used_fallback && contentQuality.complete
+        ? "ready"
+        : "pending";
     const reject =
       classification.relevance_score < QUALITY.reviewScore ||
       (classification.category === "other" &&
@@ -199,7 +216,9 @@ async function collect() {
           classification.category,
           "review",
           classification.topics,
-          contentQuality.quality
+          contentQuality.quality,
+          candidate.content_kind,
+          editorialState
         ),
         published_at: candidate.published_at,
         status: "archived",
@@ -215,7 +234,7 @@ async function collect() {
     const sourcePublicCount = publicBySource.get(source.id) || 0;
     const publish =
       classification.auto_publish &&
-      !classification.used_fallback &&
+      editorialState === "ready" &&
       contentQuality.complete &&
       publicSlots > 0 &&
       sourcePublicCount < QUALITY.perSourceLimit;
@@ -232,7 +251,9 @@ async function collect() {
         classification.category,
         visibility,
         classification.topics,
-        contentQuality.quality
+        contentQuality.quality,
+        candidate.content_kind,
+        editorialState
       ),
       published_at: candidate.published_at,
       status: "unread",
@@ -247,10 +268,12 @@ async function collect() {
     } else {
       stats.review += 1;
       if (!contentQuality.complete) stats.incomplete += 1;
+      if (editorialState === "pending") stats.editorialPending += 1;
     }
     console.log(
       `[collector] ${visibility} ${classification.relevance_score}점 ${classification.category} ` +
-        `${contentQuality.complete ? "본문완료" : contentQuality.reasons.join(", ")}: ${candidate.title}`
+        `${candidate.content_kind}/${editorialState} ` +
+        `${contentQuality.complete ? "근거완료" : contentQuality.reasons.join(", ")}: ${candidate.title}`
     );
   }
 

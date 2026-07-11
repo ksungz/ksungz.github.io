@@ -3,9 +3,12 @@ import {
   QUALITY,
   assessContentQuality,
   buildTags,
+  canGenerateEditorialAnalysis,
   classifyBatch,
   createFeedStore,
   enrichArticleContent,
+  fallbackClassification,
+  inferContentKind,
   serializeQuickFeedSummary,
 } from "./lib.mjs";
 
@@ -47,6 +50,11 @@ async function backfill() {
     .map((article) => ({
       ...article,
       source_name: sourceMap.get(article.source_id).name,
+      source_type: sourceMap.get(article.source_id).type,
+      content_kind: inferContentKind({
+        ...article,
+        source_type: sourceMap.get(article.source_id).type,
+      }),
     }));
   const targets = [];
   for (let index = 0; index < baseTargets.length; index += 4) {
@@ -57,16 +65,19 @@ async function backfill() {
     );
   }
 
+  const analysisTargets = targets.filter((article) =>
+    canGenerateEditorialAnalysis(article.content, article.content_kind)
+  );
   const results = [];
   const batchSize = 4;
   const concurrentBatches = 2;
   for (
     let index = 0;
-    index < targets.length;
+    index < analysisTargets.length;
     index += batchSize * concurrentBatches
   ) {
     const batches = Array.from({ length: concurrentBatches }, (_, offset) =>
-      targets.slice(
+      analysisTargets.slice(
         index + offset * batchSize,
         index + (offset + 1) * batchSize
       )
@@ -74,11 +85,14 @@ async function backfill() {
     const classified = await Promise.all(batches.map(classifyBatch));
     results.push(...classified.flat());
     console.log(
-      `[backfill] 구조화 요약 ${Math.min(index + batchSize * concurrentBatches, targets.length)}/${targets.length}`
+      `[backfill] 편집 분석 ${Math.min(index + batchSize * concurrentBatches, analysisTargets.length)}/${analysisTargets.length}`
     );
   }
 
-  const resultMap = new Map(results.map((result) => [result.id, result]));
+  const resultMap = new Map(
+    targets.map((article) => [article.id, fallbackClassification(article)])
+  );
+  for (const result of results) resultMap.set(result.id, result);
   const byDay = new Map();
   for (const article of targets) {
     const day = dayInSeoul(article.published_at || article.collected_at);
@@ -106,12 +120,18 @@ async function backfill() {
       const analysis = analysisMap.get(article.id);
       const sourcePublic = publicBySource.get(article.source_id) || 0;
       const manuallyCurated = Boolean(analysis);
-      const contentQuality = assessContentQuality(article.content, result);
+      const contentQuality = assessContentQuality(
+        article.content,
+        result,
+        article.content_kind
+      );
+      const editorialState =
+        !result.used_fallback && contentQuality.complete ? "ready" : "pending";
       const publish =
         contentQuality.complete &&
+        editorialState === "ready" &&
         (manuallyCurated ||
           (result.auto_publish &&
-            !result.used_fallback &&
             publicCount < QUALITY.dailyPublicLimit &&
             sourcePublic < QUALITY.perSourceLimit));
       const rejected =
@@ -146,7 +166,9 @@ async function backfill() {
           result.category,
           visibility,
           result.topics,
-          contentQuality.quality
+          contentQuality.quality,
+          article.content_kind,
+          editorialState
         ),
         summary: serializeQuickFeedSummary(result),
         content: article.content,

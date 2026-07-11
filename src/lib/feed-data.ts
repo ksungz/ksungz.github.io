@@ -1,13 +1,18 @@
 import { createClient } from "@/lib/supabase-server";
 import {
   categoryTag,
+  editorialTag,
   getContentQuality,
+  getContentKind,
   getDisplayTags,
+  getEditorialState,
   getFeedVisibility,
   getPrimaryCategory,
   qualityTag,
   visibilityTag,
+  type FeedContentKind,
   type FeedContentQuality,
+  type FeedEditorialState,
   type FeedVisibility,
 } from "@/lib/feed-taxonomy";
 import { parseQuickFeedSummary } from "@/lib/feed-summary";
@@ -39,6 +44,8 @@ export interface FeedArticle {
   summary: string | null;
   key_points: string[];
   why_it_matters: string;
+  practical_takeaway: string;
+  caveats: string[];
   importance_score: number;
   points: number;
   status: string;
@@ -54,6 +61,8 @@ export interface FeedArticle {
   source_active: boolean;
   visibility: FeedVisibility | null;
   content_quality: FeedContentQuality | null;
+  content_kind: FeedContentKind | null;
+  editorial_state: FeedEditorialState | null;
   analysis: FeedAnalysis | null;
   post: FeedPost | null;
 }
@@ -158,6 +167,8 @@ function toFeedArticle(row: RawArticleRow): FeedArticle {
     summary: quickSummary.summary || null,
     key_points: quickSummary.keyPoints,
     why_it_matters: quickSummary.whyItMatters,
+    practical_takeaway: quickSummary.practicalTakeaway,
+    caveats: quickSummary.caveats,
     importance_score: row.importance_score || 0,
     points: row.points || 0,
     status: row.status,
@@ -173,6 +184,8 @@ function toFeedArticle(row: RawArticleRow): FeedArticle {
     source_active: source?.active !== false,
     visibility: getFeedVisibility(rawTags),
     content_quality: getContentQuality(rawTags),
+    content_kind: getContentKind(rawTags),
+    editorial_state: getEditorialState(rawTags),
     analysis: analysis
       ? {
           summary: analysis.summary || "",
@@ -271,7 +284,11 @@ export async function fetchArticlesPage({
   if (publicOnly) {
     query = query
       .eq("feed_sources.active", true)
-      .contains("tags", [visibilityTag("public"), qualityTag("complete")]);
+      .contains("tags", [
+        visibilityTag("public"),
+        qualityTag("complete"),
+        editorialTag("ready"),
+      ]);
   }
 
   if (status === "inbox") {
@@ -381,7 +398,11 @@ export async function fetchFeedCounts({
     .eq("status", "posted");
 
   if (publicOnly) {
-    const publicTags = [visibilityTag("public"), qualityTag("complete")];
+    const publicTags = [
+      visibilityTag("public"),
+      qualityTag("complete"),
+      editorialTag("ready"),
+    ];
     totalQuery = totalQuery
       .eq("feed_sources.active", true)
       .contains("tags", publicTags);
@@ -463,6 +484,7 @@ export async function fetchSources({
     articleQuery = articleQuery.contains("tags", [
       visibilityTag("public"),
       qualityTag("complete"),
+      editorialTag("ready"),
     ]);
   }
 
@@ -524,6 +546,7 @@ export async function fetchCategories({
     query = query.contains("tags", [
       visibilityTag("public"),
       qualityTag("complete"),
+      editorialTag("ready"),
     ]);
   }
 
@@ -557,7 +580,11 @@ export async function fetchTopics(days: number = 7): Promise<TopicCount[]> {
     .from("feed_articles")
     .select("tags, feed_sources!inner(active)")
     .eq("feed_sources.active", true)
-    .contains("tags", [visibilityTag("public"), qualityTag("complete")])
+    .contains("tags", [
+      visibilityTag("public"),
+      qualityTag("complete"),
+      editorialTag("ready"),
+    ])
     .gte("collected_at", since)
     .neq("status", "archived");
 

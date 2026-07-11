@@ -4,10 +4,13 @@ import { getFeedLlmProviderInfo } from "./llm-provider.mjs";
 import {
   assessContentQuality,
   buildTags,
+  canGenerateEditorialAnalysis,
   classifyArticle,
   classifyBatch,
   createFeedStore,
   enrichArticleContent,
+  fallbackClassification,
+  inferContentKind,
   serializeQuickFeedSummary,
 } from "./lib.mjs";
 
@@ -45,6 +48,11 @@ async function qualityBackfill() {
     .map((article) => ({
       ...article,
       source_name: sourceMap.get(article.source_id).name,
+      source_type: sourceMap.get(article.source_id).type,
+      content_kind: inferContentKind({
+        ...article,
+        source_type: sourceMap.get(article.source_id).type,
+      }),
     }));
 
   const enriched = [];
@@ -59,14 +67,22 @@ async function qualityBackfill() {
     );
   }
 
+  const analysisTargets = enriched.filter((article) =>
+    canGenerateEditorialAnalysis(article.content, article.content_kind)
+  );
   const classified = [];
-  for (let index = 0; index < enriched.length; index += 4) {
-    classified.push(...(await classifyBatch(enriched.slice(index, index + 4))));
+  for (let index = 0; index < analysisTargets.length; index += 4) {
+    classified.push(
+      ...(await classifyBatch(analysisTargets.slice(index, index + 4)))
+    );
     console.log(
-      `[quality-backfill] 요약 생성 ${Math.min(index + 4, enriched.length)}/${enriched.length}`
+      `[quality-backfill] 편집 분석 ${Math.min(index + 4, analysisTargets.length)}/${analysisTargets.length}`
     );
   }
-  const resultMap = new Map(classified.map((result) => [result.id, result]));
+  const resultMap = new Map(
+    enriched.map((article) => [article.id, fallbackClassification(article)])
+  );
+  for (const result of classified) resultMap.set(result.id, result);
   const initialFallbacks = classified.filter((result) => result.used_fallback);
   for (let index = 0; index < initialFallbacks.length; index += 2) {
     const retried = await Promise.all(
@@ -92,11 +108,17 @@ async function qualityBackfill() {
 
   const updates = enriched.map((article) => {
     const classification = resultMap.get(article.id);
-    const quality = assessContentQuality(article.content, classification);
+    const quality = assessContentQuality(
+      article.content,
+      classification,
+      article.content_kind
+    );
+    const editorialState =
+      !classification.used_fallback && quality.complete ? "ready" : "pending";
     const visibility =
       quality.complete &&
       classification.auto_publish &&
-      !classification.used_fallback
+      editorialState === "ready"
         ? "public"
         : "review";
     return {
@@ -115,7 +137,9 @@ async function qualityBackfill() {
           classification.category,
           visibility,
           classification.topics,
-          quality.quality
+          quality.quality,
+          article.content_kind,
+          editorialState
         ),
       },
     };
@@ -128,6 +152,9 @@ async function qualityBackfill() {
         public: updates.filter((item) => item.visibility === "public").length,
         review: updates.filter((item) => item.visibility === "review").length,
         incomplete: updates.filter((item) => !item.quality.complete).length,
+        editorialPending: updates.filter(
+          (item) => item.data.tags.includes("editorial:pending")
+        ).length,
         demoted: updates
           .filter((item) => item.visibility === "review")
           .map((item) => ({

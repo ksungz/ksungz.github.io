@@ -76,6 +76,9 @@ export function FeedCard({
           {showStatus && article.content_quality === "incomplete" && (
             <span className="feed-card-quality">본문 보강 필요</span>
           )}
+          {showStatus && article.editorial_state !== "ready" && (
+            <span className="feed-card-editorial">편집 분석 대기</span>
+          )}
           {showStatus && (
             <span className={`feed-card-status ${article.status}`}>
               {statusLabel(article.status)}

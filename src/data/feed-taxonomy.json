@@ -37,7 +37,9 @@
     "dailyPublicLimit": 15,
     "perSourceLimit": 5,
     "minContentLength": 400,
-    "minKeyPoints": 3
+    "minKeyPoints": 3,
+    "minTranscriptLength": 200,
+    "minTranscriptKeyPoints": 2
   },
   "sourcePolicies": {
     "GeekNews": { "autoPublish": true, "baseScore": 82 },

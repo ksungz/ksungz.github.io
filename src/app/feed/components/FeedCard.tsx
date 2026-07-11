@@ -73,6 +73,9 @@ export function FeedCard({
               {article.visibility === "public" ? "공개" : "검토"}
             </span>
           )}
+          {showStatus && article.content_quality === "incomplete" && (
+            <span className="feed-card-quality">본문 보강 필요</span>
+          )}
           {showStatus && (
             <span className={`feed-card-status ${article.status}`}>
               {statusLabel(article.status)}

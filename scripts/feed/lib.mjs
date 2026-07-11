@@ -134,18 +134,36 @@ export function visibilityTag(visibility) {
   return `visibility:${visibility}`;
 }
 
+export function qualityTag(quality) {
+  return `quality:${quality}`;
+}
+
 export function displayTags(tags = []) {
   return tags.filter(
-    (tag) => !tag.startsWith("category:") && !tag.startsWith("visibility:")
+    (tag) =>
+      !tag.startsWith("category:") &&
+      !tag.startsWith("visibility:") &&
+      !tag.startsWith("quality:")
   );
 }
 
-export function buildTags(category, visibility, topics) {
+export function buildTags(category, visibility, topics, quality = "incomplete") {
   return [
     categoryTag(category),
     visibilityTag(visibility),
+    qualityTag(quality),
     ...normalizeTopics(topics),
   ];
+}
+
+function cleanStringArray(value, limit = 6, maxLength = 500) {
+  if (!Array.isArray(value)) return [];
+  return value
+    .filter((item) => typeof item === "string")
+    .map((item) => item.replace(/\s+/g, " ").trim().slice(0, maxLength))
+    .filter(Boolean)
+    .filter((item, index, items) => items.indexOf(item) === index)
+    .slice(0, limit);
 }
 
 export function normalizeTopics(topics) {
@@ -179,11 +197,24 @@ export function parseClassification(value, fallback) {
       topics: normalizeTopics(parsed.topics).length
         ? normalizeTopics(parsed.topics)
         : fallback.topics,
+      key_points: cleanStringArray(parsed.key_points).length
+        ? cleanStringArray(parsed.key_points)
+        : fallback.key_points,
+      why_it_matters:
+        typeof parsed.why_it_matters === "string" &&
+        parsed.why_it_matters.trim()
+          ? parsed.why_it_matters.replace(/\s+/g, " ").trim().slice(0, 800)
+          : fallback.why_it_matters,
       relevance_score: score,
       reason:
         typeof parsed.reason === "string"
           ? parsed.reason.replace(/\s+/g, " ").trim().slice(0, 300)
           : fallback.reason,
+      used_fallback:
+        !Number.isFinite(rawScore) ||
+        typeof parsed.summary !== "string" ||
+        !CATEGORY_IDS.has(parsed.category) ||
+        !Array.isArray(parsed.key_points),
     };
   } catch {
     return fallback;
@@ -246,13 +277,21 @@ export function fallbackClassification(article) {
     조코딩: 64,
   }[article.source_name] || 58;
   const depthBonus = (article.content || "").length >= 500 ? 4 : 0;
+  const keyPoints = stripHtml(article.content || "")
+    .split(/(?<=[.!?。]|다\.)\s+/)
+    .map((item) => item.trim())
+    .filter((item) => item.length >= 30)
+    .slice(0, 5);
 
   return {
     summary: stripHtml(article.summary || article.content || article.title).slice(0, 1_500),
     category,
     topics: normalizeTopics(topics),
+    key_points: keyPoints,
+    why_it_matters: "실무 적용 가능성과 기존 방식과의 차이를 원문에서 확인할 필요가 있다.",
     relevance_score: Math.min(74, sourceBase + depthBonus),
     reason: "LLM 분류 실패로 규칙 기반 검토 후보 처리",
+    used_fallback: true,
   };
 }
 
@@ -276,7 +315,7 @@ ${stripHtml(article.content || article.summary || "본문 없음").slice(0, 4_00
 </untrusted_document>
 
 JSON으로만 응답해:
-{"summary":"한국어 핵심 요약 2~4문장","category":"카테고리 id","topics":["허용 토픽 중 1~5개"],"relevance_score":0,"reason":"점수 근거 한 문장"}`;
+{"summary":"한국어 한줄 요약 1~2문장","key_points":["원문에 근거한 핵심 포인트 3~6개"],"why_it_matters":"왜 읽을 가치가 있는지 1~2문장","category":"카테고리 id","topics":["허용 토픽 중 1~5개"],"relevance_score":0,"reason":"점수 근거 한 문장"}`;
 
   try {
     const response = await fetch(`${process.env.OLLAMA_HOST || "https://ollama.com"}/api/chat`, {
@@ -318,7 +357,7 @@ export async function classifyBatch(articles) {
     id: article.id,
     source: article.source_name,
     title: article.title,
-    summary: stripHtml(article.summary || article.content || "").slice(0, 1_200),
+    content: stripHtml(article.content || article.summary || "").slice(0, 3_500),
   }));
   const prompt = `다음 기사들을 개인 기술·비즈니스 큐레이션 관점에서 각각 평가해. 질문글, 밈, 근거 없는 의견, 단순 홍보, 내용이 빈약한 글은 40점 이하로 평가해. 원문 근거, 실무 적용성, 새로움, 개발·제품·스타트업 관련성을 종합해 0~100점으로 평가해.
 
@@ -330,7 +369,7 @@ ${JSON.stringify(input)}
 </untrusted_documents>
 
 모든 id를 빠짐없이 포함한 JSON으로만 응답해:
-{"items":[{"id":1,"summary":"한국어 핵심 요약 2~4문장","category":"카테고리 id","topics":["허용 토픽 중 1~5개"],"relevance_score":0,"reason":"점수 근거"}]}`;
+{"items":[{"id":1,"summary":"한국어 한줄 요약 1~2문장","key_points":["원문에 근거한 핵심 포인트 3~6개"],"why_it_matters":"왜 읽을 가치가 있는지 1~2문장","category":"카테고리 id","topics":["허용 토픽 중 1~5개"],"relevance_score":0,"reason":"점수 근거"}]}`;
 
   try {
     const response = await fetch(`${process.env.OLLAMA_HOST || "https://ollama.com"}/api/chat`, {
@@ -372,6 +411,112 @@ ${JSON.stringify(input)}
       id: article.id,
       ...fallbacks.get(article.id),
     }));
+  }
+}
+
+export function serializeQuickFeedSummary(classification) {
+  return JSON.stringify({
+    version: 1,
+    summary: classification.summary || "",
+    key_points: cleanStringArray(classification.key_points),
+    why_it_matters: classification.why_it_matters || "",
+  });
+}
+
+export function assessContentQuality(content, classification) {
+  const normalized = stripHtml(content || "");
+  const keyPoints = cleanStringArray(classification?.key_points);
+  const reasons = [];
+  if (normalized.length < QUALITY.minContentLength) {
+    reasons.push(`본문 ${normalized.length}/${QUALITY.minContentLength}자`);
+  }
+  if (/(?:\.{3}|…)$/.test(normalized)) {
+    reasons.push("본문이 말줄임표로 종료됨");
+  }
+  if (keyPoints.length < QUALITY.minKeyPoints) {
+    reasons.push(`핵심 포인트 ${keyPoints.length}/${QUALITY.minKeyPoints}개`);
+  }
+  return {
+    complete: reasons.length === 0,
+    quality: reasons.length === 0 ? "complete" : "incomplete",
+    reasons,
+    contentLength: normalized.length,
+    keyPointCount: keyPoints.length,
+  };
+}
+
+function jsonLdNodes(value) {
+  if (Array.isArray(value)) return value.flatMap(jsonLdNodes);
+  if (!value || typeof value !== "object") return [];
+  const graph = Array.isArray(value["@graph"])
+    ? value["@graph"].flatMap(jsonLdNodes)
+    : [];
+  return [value, ...graph];
+}
+
+function extractDiscussionPosting(html) {
+  const nodes = [];
+  const scriptPattern =
+    /<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi;
+  for (const match of html.matchAll(scriptPattern)) {
+    try {
+      nodes.push(...jsonLdNodes(JSON.parse(match[1].trim())));
+    } catch {
+      // 다른 JSON-LD 블록을 계속 검사한다.
+    }
+  }
+  return nodes.find((node) => {
+    const types = Array.isArray(node["@type"])
+      ? node["@type"]
+      : [node["@type"]];
+    return types.includes("DiscussionForumPosting");
+  });
+}
+
+export async function enrichArticleContent(article) {
+  const discussionUrl = article.source_url || article.url;
+  let parsedUrl;
+  try {
+    parsedUrl = new URL(discussionUrl);
+  } catch {
+    return article;
+  }
+  if (
+    parsedUrl.hostname !== "news.hada.io" ||
+    parsedUrl.pathname !== "/topic"
+  ) {
+    return article;
+  }
+
+  try {
+    const response = await fetchWithRetry(
+      discussionUrl,
+      { headers: { "User-Agent": "ksungz-feed-collector/3.1" } },
+      article.title
+    );
+    if (!response.ok) return article;
+    const posting = extractDiscussionPosting(await response.text());
+    if (!posting) return article;
+
+    const detailedContent = stripHtml(posting.text || "").slice(0, 12_000);
+    const sharedContent = Array.isArray(posting.sharedContent)
+      ? posting.sharedContent[0]
+      : posting.sharedContent;
+    const originalUrl =
+      typeof sharedContent?.url === "string" ? sharedContent.url : article.url;
+
+    return {
+      ...article,
+      url: canonicalizeUrl(originalUrl),
+      source_url: canonicalizeUrl(discussionUrl),
+      content:
+        detailedContent.length > (article.content || "").length
+          ? detailedContent
+          : article.content,
+    };
+  } catch (error) {
+    console.warn(`[feed] 본문 보강 실패 ${article.title}: ${error.message}`);
+    return article;
   }
 }
 

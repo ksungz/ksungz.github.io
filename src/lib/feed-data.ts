@@ -1,12 +1,16 @@
 import { createClient } from "@/lib/supabase-server";
 import {
   categoryTag,
+  getContentQuality,
   getDisplayTags,
   getFeedVisibility,
   getPrimaryCategory,
+  qualityTag,
   visibilityTag,
+  type FeedContentQuality,
   type FeedVisibility,
 } from "@/lib/feed-taxonomy";
+import { parseQuickFeedSummary } from "@/lib/feed-summary";
 
 export interface FeedAnalysis {
   summary: string;
@@ -33,6 +37,8 @@ export interface FeedArticle {
   source_url: string | null;
   content: string | null;
   summary: string | null;
+  key_points: string[];
+  why_it_matters: string;
   importance_score: number;
   points: number;
   status: string;
@@ -47,6 +53,7 @@ export interface FeedArticle {
   source_type: string;
   source_active: boolean;
   visibility: FeedVisibility | null;
+  content_quality: FeedContentQuality | null;
   analysis: FeedAnalysis | null;
   post: FeedPost | null;
 }
@@ -131,6 +138,7 @@ function toFeedArticle(row: RawArticleRow): FeedArticle {
   const analysis = firstRelation(row.feed_analyses);
   const post = firstRelation(row.feed_posts);
   const rawTags = row.tags || [];
+  const quickSummary = parseQuickFeedSummary(row.summary);
   const legacyCategory =
     source?.category === "business"
       ? "business"
@@ -147,7 +155,9 @@ function toFeedArticle(row: RawArticleRow): FeedArticle {
     url: row.url,
     source_url: row.source_url,
     content: row.content ?? null,
-    summary: row.summary,
+    summary: quickSummary.summary || null,
+    key_points: quickSummary.keyPoints,
+    why_it_matters: quickSummary.whyItMatters,
     importance_score: row.importance_score || 0,
     points: row.points || 0,
     status: row.status,
@@ -162,6 +172,7 @@ function toFeedArticle(row: RawArticleRow): FeedArticle {
     source_type: source?.type || "rss",
     source_active: source?.active !== false,
     visibility: getFeedVisibility(rawTags),
+    content_quality: getContentQuality(rawTags),
     analysis: analysis
       ? {
           summary: analysis.summary || "",
@@ -260,7 +271,7 @@ export async function fetchArticlesPage({
   if (publicOnly) {
     query = query
       .eq("feed_sources.active", true)
-      .contains("tags", [visibilityTag("public")]);
+      .contains("tags", [visibilityTag("public"), qualityTag("complete")]);
   }
 
   if (status === "inbox") {
@@ -370,16 +381,16 @@ export async function fetchFeedCounts({
     .eq("status", "posted");
 
   if (publicOnly) {
-    const publicTag = visibilityTag("public");
+    const publicTags = [visibilityTag("public"), qualityTag("complete")];
     totalQuery = totalQuery
       .eq("feed_sources.active", true)
-      .contains("tags", [publicTag]);
+      .contains("tags", publicTags);
     analyzedQuery = analyzedQuery
       .eq("feed_sources.active", true)
-      .contains("tags", [publicTag]);
+      .contains("tags", publicTags);
     postedQuery = postedQuery
       .eq("feed_sources.active", true)
-      .contains("tags", [publicTag]);
+      .contains("tags", publicTags);
   }
 
   const [totalResult, analyzedResult, postedResult, sourcesResult, categories] =
@@ -449,7 +460,10 @@ export async function fetchSources({
     .neq("status", "archived");
 
   if (publicOnly) {
-    articleQuery = articleQuery.contains("tags", [visibilityTag("public")]);
+    articleQuery = articleQuery.contains("tags", [
+      visibilityTag("public"),
+      qualityTag("complete"),
+    ]);
   }
 
   const [sourceResult, articleResult] = await Promise.all([
@@ -507,7 +521,10 @@ export async function fetchCategories({
     .neq("status", "archived");
 
   if (publicOnly) {
-    query = query.contains("tags", [visibilityTag("public")]);
+    query = query.contains("tags", [
+      visibilityTag("public"),
+      qualityTag("complete"),
+    ]);
   }
 
   const { data, error } = await query;
@@ -540,7 +557,7 @@ export async function fetchTopics(days: number = 7): Promise<TopicCount[]> {
     .from("feed_articles")
     .select("tags, feed_sources!inner(active)")
     .eq("feed_sources.active", true)
-    .contains("tags", [visibilityTag("public")])
+    .contains("tags", [visibilityTag("public"), qualityTag("complete")])
     .gte("collected_at", since)
     .neq("status", "archived");
 

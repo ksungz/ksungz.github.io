@@ -35,6 +35,8 @@
     "reviewScore": 55,
     "publicScore": 75,
     "dailyPublicLimit": 15,
-    "perSourceLimit": 5
+    "perSourceLimit": 5,
+    "minContentLength": 400,
+    "minKeyPoints": 3
   }
 }

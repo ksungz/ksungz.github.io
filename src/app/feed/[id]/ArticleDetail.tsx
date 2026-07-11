@@ -204,6 +204,24 @@ export function ArticleDetail({
                 자동 요약
               </div>
               <p>{article.summary}</p>
+
+              {article.key_points.length > 0 && (
+                <div className="feed-quick-section">
+                  <h2>핵심 포인트</h2>
+                  <ul>
+                    {article.key_points.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {article.why_it_matters && (
+                <div className="feed-quick-section">
+                  <h2>왜 중요한가</h2>
+                  <p>{article.why_it_matters}</p>
+                </div>
+              )}
             </section>
           )}
 
@@ -319,7 +337,11 @@ export function ArticleDetail({
                 type="button"
                 className="action-btn btn-publish"
                 onClick={handlePublish}
-                disabled={publishing || visibility === "public"}
+                disabled={
+                  publishing ||
+                  visibility === "public" ||
+                  article.content_quality !== "complete"
+                }
               >
                 {publishing ? (
                   <LoaderCircle className="spin" aria-hidden="true" size={15} />
@@ -328,7 +350,11 @@ export function ArticleDetail({
                 ) : (
                   <Globe2 aria-hidden="true" size={15} />
                 )}
-                {visibility === "public" ? "공개됨" : "공개 승인"}
+                {visibility === "public"
+                  ? "공개됨"
+                  : article.content_quality !== "complete"
+                    ? "본문 보강 필요"
+                    : "공개 승인"}
               </button>
               <button
                 type="button"

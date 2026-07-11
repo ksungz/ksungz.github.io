@@ -2,8 +2,10 @@ import taxonomy from "@/data/feed-taxonomy.json";
 
 const CATEGORY_PREFIX = "category:";
 const VISIBILITY_PREFIX = "visibility:";
+const QUALITY_PREFIX = "quality:";
 
 export type FeedVisibility = "public" | "review";
+export type FeedContentQuality = "complete" | "incomplete";
 
 export const FEED_CATEGORIES = taxonomy.categories;
 export const FEED_TOPICS = taxonomy.topics;
@@ -15,6 +17,10 @@ export function categoryTag(category: string): string {
 
 export function visibilityTag(visibility: FeedVisibility): string {
   return `${VISIBILITY_PREFIX}${visibility}`;
+}
+
+export function qualityTag(quality: FeedContentQuality): string {
+  return `${QUALITY_PREFIX}${quality}`;
 }
 
 export function getPrimaryCategory(
@@ -33,10 +39,20 @@ export function getFeedVisibility(
   return value === "public" || value === "review" ? value : null;
 }
 
+export function getContentQuality(
+  tags: string[] | null | undefined
+): FeedContentQuality | null {
+  const tag = (tags || []).find((item) => item.startsWith(QUALITY_PREFIX));
+  const value = tag?.slice(QUALITY_PREFIX.length);
+  return value === "complete" || value === "incomplete" ? value : null;
+}
+
 export function getDisplayTags(tags: string[] | null | undefined): string[] {
   return (tags || []).filter(
     (tag) =>
-      !tag.startsWith(CATEGORY_PREFIX) && !tag.startsWith(VISIBILITY_PREFIX)
+      !tag.startsWith(CATEGORY_PREFIX) &&
+      !tag.startsWith(VISIBILITY_PREFIX) &&
+      !tag.startsWith(QUALITY_PREFIX)
   );
 }
 
@@ -45,7 +61,10 @@ export function mergeSystemTags(
   displayTags: string[]
 ): string[] {
   const systemTags = (currentTags || []).filter(
-    (tag) => tag.startsWith(CATEGORY_PREFIX) || tag.startsWith(VISIBILITY_PREFIX)
+    (tag) =>
+      tag.startsWith(CATEGORY_PREFIX) ||
+      tag.startsWith(VISIBILITY_PREFIX) ||
+      tag.startsWith(QUALITY_PREFIX)
   );
   return [...new Set([...systemTags, ...displayTags])];
 }

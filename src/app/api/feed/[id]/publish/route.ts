@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isFeedAdminRequest } from "@/lib/feed-admin-auth";
-import { setFeedVisibility } from "@/lib/feed-taxonomy";
+import {
+  getContentQuality,
+  setFeedVisibility,
+} from "@/lib/feed-taxonomy";
 import { createClient } from "@/lib/supabase-server";
 
 export async function POST(
@@ -30,6 +33,12 @@ export async function POST(
   if (article.status === "archived") {
     return NextResponse.json(
       { error: "Archived articles cannot be published" },
+      { status: 409 }
+    );
+  }
+  if (getContentQuality(article.tags as string[] | null) !== "complete") {
+    return NextResponse.json(
+      { error: "본문 완성도 검사를 통과한 기사만 공개할 수 있습니다." },
       { status: 409 }
     );
   }

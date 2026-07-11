@@ -1,9 +1,12 @@
 import nextEnv from "@next/env";
 import {
   QUALITY,
+  assessContentQuality,
   buildTags,
   classifyBatch,
   createFeedStore,
+  enrichArticleContent,
+  serializeQuickFeedSummary,
 } from "./lib.mjs";
 
 nextEnv.loadEnvConfig(process.cwd());
@@ -27,7 +30,7 @@ async function backfill() {
     ),
     store.getAll(
       "feed_articles",
-      "select=id,source_id,title,content,summary,status,tags,published_at,collected_at,importance_score,analyzed_at&order=id"
+      "select=id,source_id,title,url,source_url,content,summary,status,tags,published_at,collected_at,importance_score,analyzed_at&order=id"
     ),
     store.getAll("feed_analyses", "select=article_id,created_at"),
   ]);
@@ -39,15 +42,23 @@ async function backfill() {
   const analysisMap = new Map(
     analyses.map((analysis) => [analysis.article_id, analysis])
   );
-  const targets = articles
+  const baseTargets = articles
     .filter((article) => sourceMap.has(article.source_id))
     .map((article) => ({
       ...article,
       source_name: sourceMap.get(article.source_id).name,
     }));
+  const targets = [];
+  for (let index = 0; index < baseTargets.length; index += 4) {
+    targets.push(
+      ...(await Promise.all(
+        baseTargets.slice(index, index + 4).map(enrichArticleContent)
+      ))
+    );
+  }
 
   const results = [];
-  const batchSize = 12;
+  const batchSize = 4;
   const concurrentBatches = 2;
   for (
     let index = 0;
@@ -95,11 +106,13 @@ async function backfill() {
       const analysis = analysisMap.get(article.id);
       const sourcePublic = publicBySource.get(article.source_id) || 0;
       const manuallyCurated = Boolean(analysis);
+      const contentQuality = assessContentQuality(article.content, result);
       const publish =
-        manuallyCurated ||
-        (result.relevance_score >= QUALITY.publicScore &&
-          publicCount < QUALITY.dailyPublicLimit &&
-          sourcePublic < QUALITY.perSourceLimit);
+        contentQuality.complete &&
+        (manuallyCurated ||
+          (result.relevance_score >= QUALITY.publicScore &&
+            publicCount < QUALITY.dailyPublicLimit &&
+            sourcePublic < QUALITY.perSourceLimit));
       const rejected =
         !manuallyCurated && result.relevance_score < QUALITY.reviewScore;
       const visibility = publish ? "public" : "review";
@@ -118,6 +131,7 @@ async function backfill() {
           manuallyCurated ? QUALITY.publicScore : 0
         ),
         category: result.category,
+        quality: contentQuality.quality,
         visibility,
         status: rejected
           ? "archived"
@@ -127,8 +141,16 @@ async function backfill() {
         analyzed_at: manuallyCurated
           ? article.analyzed_at || analysis.created_at
           : article.analyzed_at,
-        tags: buildTags(result.category, visibility, result.topics),
-        summary: result.summary || article.summary,
+        tags: buildTags(
+          result.category,
+          visibility,
+          result.topics,
+          contentQuality.quality
+        ),
+        summary: serializeQuickFeedSummary(result),
+        content: article.content,
+        url: article.url,
+        source_url: article.source_url,
       });
     }
   }
@@ -170,6 +192,9 @@ async function backfill() {
     const update = updates[index];
     await store.updateArticle(update.id, {
       summary: update.summary,
+      content: update.content,
+      url: update.url,
+      source_url: update.source_url,
       importance_score: update.score,
       tags: update.tags,
       status: update.status,

@@ -3,13 +3,16 @@ import { fileURLToPath } from "node:url";
 import nextEnv from "@next/env";
 import {
   QUALITY,
+  assessContentQuality,
   buildTags,
   canonicalizeUrl,
   classifyBatch,
   createFeedStore,
+  enrichArticleContent,
   fetchWithRetry,
   normalizedTitle,
   parseFeed,
+  serializeQuickFeedSummary,
   startOfTodayInSeoul,
 } from "./lib.mjs";
 
@@ -94,14 +97,16 @@ async function collect() {
           source.type === "youtube"
             ? youtubeTranscript(item.url) || item.content
             : item.content;
-        rawCandidates.push({
+        const candidate = await enrichArticleContent({
           ...item,
           id: rawCandidates.length + 1,
           url: canonicalizeUrl(item.url),
+          source_url: canonicalizeUrl(item.url),
           content,
           source_name: source.name,
           source,
         });
+        rawCandidates.push(candidate);
       }
       console.log(`[collector] ${source.name}: 신규 후보 ${items.length}개`);
     } catch (error) {
@@ -111,7 +116,7 @@ async function collect() {
   }
 
   const candidates = [];
-  const batchSize = 12;
+  const batchSize = 4;
   const concurrentBatches = 2;
   for (
     let index = 0;
@@ -157,7 +162,13 @@ async function collect() {
       (publicBySource.get(article.source_id) || 0) + 1
     );
   }
-  const stats = { inserted: 0, published: 0, review: 0, rejected: 0 };
+  const stats = {
+    inserted: 0,
+    published: 0,
+    review: 0,
+    rejected: 0,
+    incomplete: 0,
+  };
 
   candidates.sort(
     (left, right) =>
@@ -166,6 +177,10 @@ async function collect() {
 
   for (const candidate of candidates) {
     const { classification, source } = candidate;
+    const contentQuality = assessContentQuality(
+      candidate.content,
+      classification
+    );
     const reject =
       classification.relevance_score < QUALITY.reviewScore ||
       (classification.category === "other" &&
@@ -175,14 +190,15 @@ async function collect() {
         source_id: source.id,
         title: candidate.title,
         url: candidate.url,
-        source_url: candidate.url,
+        source_url: candidate.source_url,
         content: candidate.content || null,
-        summary: classification.summary,
+        summary: serializeQuickFeedSummary(classification),
         importance_score: classification.relevance_score,
         tags: buildTags(
           classification.category,
           "review",
-          classification.topics
+          classification.topics,
+          contentQuality.quality
         ),
         published_at: candidate.published_at,
         status: "archived",
@@ -198,6 +214,7 @@ async function collect() {
     const sourcePublicCount = publicBySource.get(source.id) || 0;
     const publish =
       classification.relevance_score >= QUALITY.publicScore &&
+      contentQuality.complete &&
       publicSlots > 0 &&
       sourcePublicCount < QUALITY.perSourceLimit;
     const visibility = publish ? "public" : "review";
@@ -205,14 +222,15 @@ async function collect() {
       source_id: source.id,
       title: candidate.title,
       url: candidate.url,
-      source_url: candidate.url,
+      source_url: candidate.source_url,
       content: candidate.content || null,
-      summary: classification.summary,
+      summary: serializeQuickFeedSummary(classification),
       importance_score: classification.relevance_score,
       tags: buildTags(
         classification.category,
         visibility,
-        classification.topics
+        classification.topics,
+        contentQuality.quality
       ),
       published_at: candidate.published_at,
       status: "unread",
@@ -226,9 +244,11 @@ async function collect() {
       publicBySource.set(source.id, sourcePublicCount + 1);
     } else {
       stats.review += 1;
+      if (!contentQuality.complete) stats.incomplete += 1;
     }
     console.log(
-      `[collector] ${visibility} ${classification.relevance_score}점 ${classification.category}: ${candidate.title}`
+      `[collector] ${visibility} ${classification.relevance_score}점 ${classification.category} ` +
+        `${contentQuality.complete ? "본문완료" : contentQuality.reasons.join(", ")}: ${candidate.title}`
     );
   }
 

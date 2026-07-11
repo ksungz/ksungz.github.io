@@ -3,12 +3,15 @@
 import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
 import {
+  BrainCircuit,
   BriefcaseBusiness,
   Code2,
+  Database,
   FileText,
-  Link2,
   Newspaper,
-  Video,
+  PanelsTopLeft,
+  ShieldCheck,
+  Wrench,
 } from "lucide-react";
 import type { CategoryCount } from "@/lib/feed-data";
 import { getCategoryLabel } from "@/lib/feed-categories";
@@ -28,13 +31,26 @@ interface CategoryMeta {
 
 const CATEGORY_META: Record<string, CategoryMeta> = {
   all: { label: "전체", icon: Newspaper },
-  dev: { label: "개발", icon: Code2 },
+  ai: { label: "AI·LLM", icon: BrainCircuit },
+  devtools: { label: "개발 도구", icon: Wrench },
+  frontend: { label: "프론트엔드", icon: Code2 },
+  data: { label: "데이터·인프라", icon: Database },
   business: { label: "비즈니스", icon: BriefcaseBusiness },
-  youtube: { label: "YouTube", icon: Video },
-  social: { label: "소셜", icon: Link2 },
+  security: { label: "보안", icon: ShieldCheck },
+  product: { label: "제품·디자인", icon: PanelsTopLeft },
+  other: { label: "기타", icon: FileText },
 };
 
-const CATEGORY_ORDER = ["dev", "business", "youtube", "social"];
+const CATEGORY_ORDER = [
+  "ai",
+  "devtools",
+  "frontend",
+  "data",
+  "business",
+  "security",
+  "product",
+  "other",
+];
 
 export function CategorySidebar({
   activeCat,

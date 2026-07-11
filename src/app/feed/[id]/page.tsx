@@ -19,11 +19,18 @@ export default async function FeedDetailPage({
   const articleId = Number.parseInt(id, 10);
   const [article, counts, categories] = await Promise.all([
     fetchArticleById(articleId),
-    fetchFeedCounts(),
+    fetchFeedCounts({ publicOnly: true }),
     fetchCategories(),
   ]);
 
-  if (!article || article.status === "archived") notFound();
+  if (
+    !article ||
+    article.status === "archived" ||
+    !article.source_active ||
+    article.visibility !== "public"
+  ) {
+    notFound();
+  }
   return (
     <ArticleDetail
       article={toPublicFeedArticle(article)}

@@ -21,7 +21,7 @@ export default async function FeedStudioPage() {
 
   const [initialPage, categories, counts] = await Promise.all([
     fetchArticlesPage({ status: "inbox", limit: 20, order: "importance" }),
-    fetchCategories(),
+    fetchCategories({ publicOnly: false }),
     fetchFeedCounts(),
   ]);
 

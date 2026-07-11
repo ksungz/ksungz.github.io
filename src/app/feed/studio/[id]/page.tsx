@@ -22,7 +22,7 @@ export default async function FeedStudioDetailPage({
   const [article, counts, categories] = await Promise.all([
     fetchArticleById(articleId),
     fetchFeedCounts(),
-    fetchCategories(),
+    fetchCategories({ publicOnly: false }),
   ]);
 
   if (!article) notFound();

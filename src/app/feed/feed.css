@@ -871,7 +871,8 @@ body:has(.feed-root) > footer {
 }
 
 .feed-card-analysis,
-.feed-card-status {
+.feed-card-status,
+.feed-card-visibility {
   padding: 2px 7px;
   border: 1px solid #294131;
   border-radius: 4px;
@@ -895,6 +896,16 @@ body:has(.feed-root) > footer {
 .feed-card-status.archived {
   border-color: #493232;
   color: #b87979;
+}
+
+.feed-card-visibility.review {
+  border-color: #4c4228;
+  color: #b99b52;
+}
+
+.feed-card-visibility.public {
+  border-color: #29445a;
+  color: #64a9d8;
 }
 
 .sidebar-card-title {
@@ -1098,6 +1109,12 @@ body:has(.feed-root) > footer {
   margin-top: 6px;
   color: #666;
   font-size: 11px;
+}
+
+.source-type {
+  padding: 2px 7px;
+  border: 1px solid var(--feed-border);
+  border-radius: 4px;
 }
 
 .source-item-count-wrap {
@@ -1385,10 +1402,6 @@ body:has(.feed-root) > footer {
     grid-template-columns: 1fr 1fr;
   }
 
-  .btn-archive {
-    grid-column: 1 / -1;
-  }
-
   .icon-command span {
     display: none;
   }
@@ -1527,6 +1540,41 @@ body:has(.feed-root) > footer {
   color: #246c9e;
 }
 
+.feed-card-cat.ai {
+  background: #e9eefc;
+  color: #485fa8;
+}
+
+.feed-card-cat.devtools {
+  background: #e8f4f2;
+  color: #287268;
+}
+
+.feed-card-cat.frontend {
+  background: #e7f2fb;
+  color: #246c9e;
+}
+
+.feed-card-cat.data {
+  background: #e9f3ed;
+  color: #347154;
+}
+
+.feed-card-cat.security {
+  background: #fbecec;
+  color: #9b4545;
+}
+
+.feed-card-cat.product {
+  background: #f1ebfa;
+  color: #70539b;
+}
+
+.feed-card-cat.other {
+  background: #eef1f3;
+  color: #5e6971;
+}
+
 .feed-card-cat.business {
   background: #fff3da;
   color: #8a6215;
@@ -1615,7 +1663,8 @@ body:has(.feed-root) > footer {
 }
 
 .feed-card-analysis,
-.feed-card-status {
+.feed-card-status,
+.feed-card-visibility {
   border-color: #b9d9c4;
   background: #edf8f1;
   color: #277d4c;
@@ -1638,6 +1687,18 @@ body:has(.feed-root) > footer {
   border-color: #e1c4c4;
   background: #fbeeee;
   color: #9c4747;
+}
+
+.feed-card-visibility.review {
+  border-color: #e1ce9d;
+  background: #fff8e7;
+  color: #86651f;
+}
+
+.feed-card-visibility.public {
+  border-color: #b9d3e4;
+  background: #edf6fc;
+  color: #246c9e;
 }
 
 .sidebar-card-title,
@@ -1676,6 +1737,12 @@ body:has(.feed-root) > footer {
   border-color: #b9d9c4;
   background: #eaf6ee;
   color: #277d4c;
+}
+
+.btn-publish {
+  border-color: #b9d3e4;
+  background: #edf6fc;
+  color: #246c9e;
 }
 
 .btn-blog,

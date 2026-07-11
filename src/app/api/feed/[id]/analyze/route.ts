@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isFeedAdminRequest } from "@/lib/feed-admin-auth";
+import { mergeSystemTags } from "@/lib/feed-taxonomy";
 import { createClient } from "@/lib/supabase-server";
 
 export const runtime = "nodejs";
@@ -124,7 +125,7 @@ export async function POST(
   const supabase = createClient();
   const { data: article, error: fetchError } = await supabase
     .from("feed_articles")
-    .select("id, title, url, content")
+    .select("id, title, url, content, tags, status, analyzed_at")
     .eq("id", articleId)
     .single();
 
@@ -199,6 +200,27 @@ ${content.slice(0, 6_000)}
       );
     }
 
+    const analyzedAt = new Date().toISOString();
+    const nextTags = mergeSystemTags(
+      article.tags as string[] | null,
+      analysis.tags
+    );
+    const { error: articleError } = await supabase
+      .from("feed_articles")
+      .update({
+        status: "analyzed",
+        analyzed_at: analyzedAt,
+        tags: nextTags,
+      })
+      .eq("id", articleId);
+
+    if (articleError) {
+      return NextResponse.json(
+        { error: "Failed to update article status" },
+        { status: 500 }
+      );
+    }
+
     const { data: savedAnalysis, error: analysisError } = await supabase
       .from("feed_analyses")
       .upsert(
@@ -217,25 +239,16 @@ ${content.slice(0, 6_000)}
       .single();
 
     if (analysisError) {
+      await supabase
+        .from("feed_articles")
+        .update({
+          status: article.status,
+          analyzed_at: article.analyzed_at,
+          tags: article.tags,
+        })
+        .eq("id", articleId);
       return NextResponse.json(
         { error: "Failed to save analysis" },
-        { status: 500 }
-      );
-    }
-
-    const analyzedAt = new Date().toISOString();
-    const { error: articleError } = await supabase
-      .from("feed_articles")
-      .update({
-        status: "analyzed",
-        analyzed_at: analyzedAt,
-        tags: analysis.tags,
-      })
-      .eq("id", articleId);
-
-    if (articleError) {
-      return NextResponse.json(
-        { error: "Analysis was saved but article status could not be updated" },
         { status: 500 }
       );
     }

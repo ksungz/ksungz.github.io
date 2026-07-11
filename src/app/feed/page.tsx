@@ -25,8 +25,15 @@ export default async function FeedPage({ searchParams }: FeedPageProps) {
   const tag = firstParam(params.tag).slice(0, 80) || null;
 
   const [initialPage, counts, categories, topics] = await Promise.all([
-    fetchArticlesPage({ category, search, tag, limit: 20, order: "latest" }),
-    fetchFeedCounts(),
+    fetchArticlesPage({
+      category,
+      search,
+      tag,
+      limit: 20,
+      order: "latest",
+      publicOnly: true,
+    }),
+    fetchFeedCounts({ publicOnly: true }),
     fetchCategories(),
     fetchTopics(),
   ]);

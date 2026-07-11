@@ -21,6 +21,7 @@ export async function GET(request: NextRequest) {
     limit: numberParam(params.get("limit"), 20),
     offset: numberParam(params.get("offset"), 0),
     order: "latest",
+    publicOnly: true,
   });
 
   return NextResponse.json(toPublicFeedPage(page), {

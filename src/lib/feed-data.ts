@@ -1,4 +1,12 @@
 import { createClient } from "@/lib/supabase-server";
+import {
+  categoryTag,
+  getDisplayTags,
+  getFeedVisibility,
+  getPrimaryCategory,
+  visibilityTag,
+  type FeedVisibility,
+} from "@/lib/feed-taxonomy";
 
 export interface FeedAnalysis {
   summary: string;
@@ -36,6 +44,9 @@ export interface FeedArticle {
   posted_at: string | null;
   source_name: string;
   source_category: string;
+  source_type: string;
+  source_active: boolean;
+  visibility: FeedVisibility | null;
   analysis: FeedAnalysis | null;
   post: FeedPost | null;
 }
@@ -51,6 +62,7 @@ export interface FeedCounts {
 interface SourceRelation {
   name: string;
   category: string;
+  type: string;
   active?: boolean;
 }
 
@@ -96,7 +108,7 @@ interface RawArticleRow {
 const ARTICLE_LIST_SELECT = `
   id, source_id, title, url, source_url, summary, importance_score, points,
   status, tags, published_at, collected_at, read_at, analyzed_at, posted_at,
-  feed_sources!inner(name, category, active),
+  feed_sources!inner(name, category, type, active),
   feed_analyses(summary, key_insights, blog_angle, tags, relevant_projects, applicable_ideas, created_at),
   feed_posts(pr_url, branch_name, mdx_path, created_at)
 `;
@@ -104,7 +116,7 @@ const ARTICLE_LIST_SELECT = `
 const ARTICLE_DETAIL_SELECT = `
   id, source_id, title, url, source_url, content, summary, importance_score, points,
   status, tags, published_at, collected_at, read_at, analyzed_at, posted_at,
-  feed_sources!inner(name, category, active),
+  feed_sources!inner(name, category, type, active),
   feed_analyses(summary, key_insights, blog_angle, tags, relevant_projects, applicable_ideas, created_at),
   feed_posts(pr_url, branch_name, mdx_path, created_at)
 `;
@@ -118,6 +130,15 @@ function toFeedArticle(row: RawArticleRow): FeedArticle {
   const source = firstRelation(row.feed_sources);
   const analysis = firstRelation(row.feed_analyses);
   const post = firstRelation(row.feed_posts);
+  const rawTags = row.tags || [];
+  const legacyCategory =
+    source?.category === "business"
+      ? "business"
+      : source?.category === "dev"
+        ? "devtools"
+        : source?.category === "youtube"
+          ? "product"
+          : "other";
 
   return {
     id: row.id,
@@ -130,14 +151,17 @@ function toFeedArticle(row: RawArticleRow): FeedArticle {
     importance_score: row.importance_score || 0,
     points: row.points || 0,
     status: row.status,
-    tags: row.tags || analysis?.tags || [],
+    tags: getDisplayTags(rawTags),
     published_at: row.published_at,
     collected_at: row.collected_at,
     read_at: row.read_at,
     analyzed_at: row.analyzed_at,
     posted_at: row.posted_at,
     source_name: source?.name || "알 수 없는 출처",
-    source_category: source?.category || "dev",
+    source_category: getPrimaryCategory(rawTags, legacyCategory),
+    source_type: source?.type || "rss",
+    source_active: source?.active !== false,
+    visibility: getFeedVisibility(rawTags),
     analysis: analysis
       ? {
           summary: analysis.summary || "",
@@ -169,6 +193,7 @@ export interface FetchArticlesOptions {
   offset?: number;
   includeArchived?: boolean;
   order?: "latest" | "importance";
+  publicOnly?: boolean;
 }
 
 export interface FeedArticlePage {
@@ -220,34 +245,23 @@ export async function fetchArticlesPage({
   offset = 0,
   includeArchived = false,
   order = "latest",
+  publicOnly = false,
 }: FetchArticlesOptions = {}): Promise<FeedArticlePage> {
   const supabase = createClient();
   const safeLimit = Math.min(Math.max(limit, 1), 50);
   const safeOffset = Math.max(offset, 0);
-
-  let taggedArticleIds: number[] | null = null;
-  if (tag) {
-    const { data: tagRows, error: tagError } = await supabase
-      .from("feed_analyses")
-      .select("article_id")
-      .contains("tags", [tag]);
-
-    if (tagError) {
-      console.error("[feed] tag lookup error:", tagError.message);
-      return { articles: [], total: 0, hasMore: false };
-    }
-
-    taggedArticleIds = (tagRows || []).map((row) => row.article_id as number);
-    if (taggedArticleIds.length === 0) {
-      return { articles: [], total: 0, hasMore: false };
-    }
-  }
 
   let query = supabase
     .from("feed_articles")
     .select(ARTICLE_LIST_SELECT, { count: "exact" });
 
   if (!includeArchived) query = query.neq("status", "archived");
+
+  if (publicOnly) {
+    query = query
+      .eq("feed_sources.active", true)
+      .contains("tags", [visibilityTag("public")]);
+  }
 
   if (status === "inbox") {
     query = query.in("status", ["unread", "read"]);
@@ -256,11 +270,11 @@ export async function fetchArticlesPage({
   }
 
   if (category !== "all") {
-    query = query.eq("feed_sources.category", category);
+    query = query.contains("tags", [categoryTag(category)]);
   }
 
-  if (taggedArticleIds) {
-    query = query.in("id", taggedArticleIds);
+  if (tag) {
+    query = query.contains("tags", [tag]);
   }
 
   const cleanSearch = cleanSearchTerm(search);
@@ -336,27 +350,48 @@ export async function fetchAnalyzedArticles(): Promise<FeedArticle[]> {
   return page.articles;
 }
 
-export async function fetchFeedCounts(): Promise<FeedCounts> {
+export async function fetchFeedCounts({
+  publicOnly = false,
+}: {
+  publicOnly?: boolean;
+} = {}): Promise<FeedCounts> {
   const supabase = createClient();
-  const [totalResult, analyzedResult, postedResult, sourcesResult, categoriesResult] =
+  let totalQuery = supabase
+    .from("feed_articles")
+    .select("id, feed_sources!inner(active)", { count: "exact", head: true })
+    .neq("status", "archived");
+  let analyzedQuery = supabase
+    .from("feed_articles")
+    .select("id, feed_sources!inner(active)", { count: "exact", head: true })
+    .in("status", ["analyzed", "posted"]);
+  let postedQuery = supabase
+    .from("feed_articles")
+    .select("id, feed_sources!inner(active)", { count: "exact", head: true })
+    .eq("status", "posted");
+
+  if (publicOnly) {
+    const publicTag = visibilityTag("public");
+    totalQuery = totalQuery
+      .eq("feed_sources.active", true)
+      .contains("tags", [publicTag]);
+    analyzedQuery = analyzedQuery
+      .eq("feed_sources.active", true)
+      .contains("tags", [publicTag]);
+    postedQuery = postedQuery
+      .eq("feed_sources.active", true)
+      .contains("tags", [publicTag]);
+  }
+
+  const [totalResult, analyzedResult, postedResult, sourcesResult, categories] =
     await Promise.all([
-      supabase
-        .from("feed_articles")
-        .select("id", { count: "exact", head: true })
-        .neq("status", "archived"),
-      supabase
-        .from("feed_articles")
-        .select("id", { count: "exact", head: true })
-        .in("status", ["analyzed", "posted"]),
-      supabase
-        .from("feed_articles")
-        .select("id", { count: "exact", head: true })
-        .eq("status", "posted"),
+      totalQuery,
+      analyzedQuery,
+      postedQuery,
       supabase
         .from("feed_sources")
         .select("id", { count: "exact", head: true })
         .eq("active", true),
-      supabase.from("feed_sources").select("category").eq("active", true),
+      fetchCategories({ publicOnly }),
     ]);
 
   const errors = [
@@ -364,7 +399,6 @@ export async function fetchFeedCounts(): Promise<FeedCounts> {
     analyzedResult.error,
     postedResult.error,
     sourcesResult.error,
-    categoriesResult.error,
   ].filter(Boolean);
 
   if (errors.length > 0) {
@@ -374,16 +408,12 @@ export async function fetchFeedCounts(): Promise<FeedCounts> {
     );
   }
 
-  const categoryCount = new Set(
-    (categoriesResult.data || []).map((row) => row.category).filter(Boolean)
-  ).size;
-
   return {
     total: totalResult.count || 0,
     analyzed: analyzedResult.count || 0,
     posted: postedResult.count || 0,
     sourceCount: sourcesResult.count || 0,
-    categoryCount,
+    categoryCount: categories.length,
   };
 }
 
@@ -398,54 +428,62 @@ export interface FeedSourceWithCount {
   latest_collected: string | null;
 }
 
-interface RawSourceCountRow {
-  id: number;
-  name: string;
-  category: string;
-  type: string;
-  feed_url: string | null;
-  active: boolean;
-  article_count: Array<{ count: number }> | null;
-  latest_articles: Array<{ collected_at: string }> | null;
-}
-
-export async function fetchSources(
-  includeInactive: boolean = false
-): Promise<FeedSourceWithCount[]> {
+export async function fetchSources({
+  includeInactive = false,
+  publicOnly = true,
+}: {
+  includeInactive?: boolean;
+  publicOnly?: boolean;
+} = {}): Promise<FeedSourceWithCount[]> {
   const supabase = createClient();
-  let query = supabase
+  let sourceQuery = supabase
     .from("feed_sources")
-    .select(
-      `
-      id, name, category, type, feed_url, active,
-      article_count:feed_articles(count),
-      latest_articles:feed_articles(collected_at)
-    `
-    )
-    .order("name", { ascending: true })
-    .order("collected_at", {
-      ascending: false,
-      referencedTable: "latest_articles",
-    })
-    .limit(1, { referencedTable: "latest_articles" });
+    .select("id, name, category, type, feed_url, active")
+    .order("name", { ascending: true });
 
-  if (!includeInactive) query = query.eq("active", true);
+  if (!includeInactive) sourceQuery = sourceQuery.eq("active", true);
 
-  const { data, error } = await query;
-  if (error) {
-    console.error("[feed] fetchSources error:", error.message);
+  let articleQuery = supabase
+    .from("feed_articles")
+    .select("source_id, collected_at, tags")
+    .neq("status", "archived");
+
+  if (publicOnly) {
+    articleQuery = articleQuery.contains("tags", [visibilityTag("public")]);
+  }
+
+  const [sourceResult, articleResult] = await Promise.all([
+    sourceQuery,
+    articleQuery,
+  ]);
+  if (sourceResult.error || articleResult.error) {
+    console.error(
+      "[feed] fetchSources error:",
+      sourceResult.error?.message || articleResult.error?.message
+    );
     return [];
   }
 
-  return (((data as unknown as RawSourceCountRow[]) || []).map((source) => ({
-    id: source.id,
-    name: source.name,
-    category: source.category,
-    type: source.type,
-    feed_url: source.feed_url,
-    active: source.active,
-    article_count: source.article_count?.[0]?.count || 0,
-    latest_collected: source.latest_articles?.[0]?.collected_at || null,
+  const articlesBySource = new Map<
+    number,
+    { count: number; latest: string | null }
+  >();
+  for (const article of articleResult.data || []) {
+    const current = articlesBySource.get(article.source_id) || {
+      count: 0,
+      latest: null,
+    };
+    current.count += 1;
+    if (!current.latest || article.collected_at > current.latest) {
+      current.latest = article.collected_at;
+    }
+    articlesBySource.set(article.source_id, current);
+  }
+
+  return ((sourceResult.data || []).map((source) => ({
+    ...source,
+    article_count: articlesBySource.get(source.id)?.count || 0,
+    latest_collected: articlesBySource.get(source.id)?.latest || null,
   })) as FeedSourceWithCount[]).sort(
     (left, right) => right.article_count - left.article_count
   );
@@ -456,12 +494,23 @@ export interface CategoryCount {
   count: number;
 }
 
-export async function fetchCategories(): Promise<CategoryCount[]> {
+export async function fetchCategories({
+  publicOnly = true,
+}: {
+  publicOnly?: boolean;
+} = {}): Promise<CategoryCount[]> {
   const supabase = createClient();
-  const { data, error } = await supabase
-    .from("feed_sources")
-    .select("category, article_count:feed_articles(count)")
-    .eq("active", true);
+  let query = supabase
+    .from("feed_articles")
+    .select("tags, feed_sources!inner(active)")
+    .eq("feed_sources.active", true)
+    .neq("status", "archived");
+
+  if (publicOnly) {
+    query = query.contains("tags", [visibilityTag("public")]);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     console.error("[feed] fetchCategories error:", error.message);
@@ -469,14 +518,9 @@ export async function fetchCategories(): Promise<CategoryCount[]> {
   }
 
   const counts = new Map<string, number>();
-  for (const row of (data || []) as unknown as Array<{
-    category: string;
-    article_count: Array<{ count: number }> | null;
-  }>) {
-    counts.set(
-      row.category,
-      (counts.get(row.category) || 0) + (row.article_count?.[0]?.count || 0)
-    );
+  for (const row of data || []) {
+    const category = getPrimaryCategory(row.tags as string[] | null, "other");
+    counts.set(category, (counts.get(category) || 0) + 1);
   }
 
   return Array.from(counts.entries())
@@ -492,39 +536,22 @@ export interface TopicCount {
 export async function fetchTopics(days: number = 7): Promise<TopicCount[]> {
   const supabase = createClient();
   const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
-  const [analysisResult, articleResult] = await Promise.all([
-    supabase
-      .from("feed_analyses")
-      .select("article_id, tags")
-      .gte("created_at", since),
-    supabase
-      .from("feed_articles")
-      .select("id, tags")
-      .gte("collected_at", since)
-      .neq("status", "archived"),
-  ]);
+  const { data, error } = await supabase
+    .from("feed_articles")
+    .select("tags, feed_sources!inner(active)")
+    .eq("feed_sources.active", true)
+    .contains("tags", [visibilityTag("public")])
+    .gte("collected_at", since)
+    .neq("status", "archived");
 
-  if (analysisResult.error || articleResult.error) {
-    console.error(
-      "[feed] fetchTopics error:",
-      analysisResult.error?.message || articleResult.error?.message
-    );
+  if (error) {
+    console.error("[feed] fetchTopics error:", error.message);
     return [];
   }
 
-  const tagsByArticle = new Map<number, Set<string>>();
-  for (const row of analysisResult.data || []) {
-    tagsByArticle.set(row.article_id, new Set((row.tags as string[] | null) || []));
-  }
-  for (const row of articleResult.data || []) {
-    const tags = tagsByArticle.get(row.id) || new Set<string>();
-    for (const tag of (row.tags as string[] | null) || []) tags.add(tag);
-    tagsByArticle.set(row.id, tags);
-  }
-
   const tagCounts = new Map<string, number>();
-  for (const tags of tagsByArticle.values()) {
-    for (const tag of tags) {
+  for (const row of data || []) {
+    for (const tag of getDisplayTags(row.tags as string[] | null)) {
       const normalized = tag.trim();
       if (!normalized) continue;
       tagCounts.set(normalized, (tagCounts.get(normalized) || 0) + 1);

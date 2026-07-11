@@ -68,6 +68,11 @@ export function FeedCard({
             {getCategoryLabel(article.source_category)}
           </span>
           {article.analysis && <span className="feed-card-analysis">상세 분석</span>}
+          {showStatus && article.visibility && (
+            <span className={`feed-card-visibility ${article.visibility}`}>
+              {article.visibility === "public" ? "공개" : "검토"}
+            </span>
+          )}
           {showStatus && (
             <span className={`feed-card-status ${article.status}`}>
               {statusLabel(article.status)}

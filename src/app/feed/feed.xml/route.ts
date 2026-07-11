@@ -26,7 +26,11 @@ function toIso8601(dateStr: string): string {
 }
 
 export async function GET() {
-  const { articles } = await fetchArticlesPage({ limit: 30, order: "latest" });
+  const { articles } = await fetchArticlesPage({
+    limit: 30,
+    order: "latest",
+    publicOnly: true,
+  });
 
   const now = new Date().toISOString();
   const latestUpdated =

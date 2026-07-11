@@ -10,7 +10,12 @@ export async function GET(req: NextRequest) {
   const limit = Math.min(Math.max(Number.isFinite(requestedLimit) ? requestedLimit : 20, 1), 50);
   const offset = Math.max(Number.isFinite(requestedOffset) ? requestedOffset : 0, 0);
 
-  const { articles } = await fetchArticlesPage({ limit, offset, order: "latest" });
+  const { articles } = await fetchArticlesPage({
+    limit,
+    offset,
+    order: "latest",
+    publicOnly: true,
+  });
 
   return NextResponse.json(articles.map(toPublicFeedArticle), {
     headers: {

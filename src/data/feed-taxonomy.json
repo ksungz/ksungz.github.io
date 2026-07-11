@@ -1,0 +1,40 @@
+{
+  "categories": [
+    { "id": "ai", "label": "AI·LLM" },
+    { "id": "devtools", "label": "개발 도구" },
+    { "id": "frontend", "label": "프론트엔드" },
+    { "id": "data", "label": "데이터·인프라" },
+    { "id": "business", "label": "비즈니스" },
+    { "id": "security", "label": "보안" },
+    { "id": "product", "label": "제품·디자인" },
+    { "id": "other", "label": "기타" }
+  ],
+  "topics": [
+    "AI 에이전트",
+    "LLM",
+    "MCP",
+    "AI 코딩",
+    "오픈소스",
+    "자동화",
+    "개발 도구",
+    "프론트엔드",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "데이터",
+    "인프라",
+    "클라우드",
+    "보안",
+    "스타트업",
+    "SaaS",
+    "비즈니스",
+    "제품",
+    "디자인"
+  ],
+  "quality": {
+    "reviewScore": 55,
+    "publicScore": 75,
+    "dailyPublicLimit": 15,
+    "perSourceLimit": 5
+  }
+}

@@ -9,6 +9,7 @@ import {
   Check,
   ExternalLink,
   FileText,
+  Globe2,
   LoaderCircle,
   Send,
 } from "lucide-react";
@@ -47,12 +48,14 @@ export function ArticleDetail({
 }: ArticleDetailProps) {
   const router = useRouter();
   const [analyzing, setAnalyzing] = useState(false);
+  const [publishing, setPublishing] = useState(false);
   const [blogging, setBlogging] = useState(false);
   const [archiving, setArchiving] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<FeedAnalysis | null>(
     article.analysis
   );
   const [prUrl, setPrUrl] = useState<string | null>(article.post?.pr_url || null);
+  const [visibility, setVisibility] = useState(article.visibility);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -106,6 +109,29 @@ export function ArticleDetail({
       );
     } finally {
       setBlogging(false);
+    }
+  };
+
+  const handlePublish = async () => {
+    setPublishing(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`/api/feed/${article.id}/publish`, {
+        method: "POST",
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "공개 승인에 실패했습니다.");
+      setVisibility("public");
+      router.refresh();
+    } catch (requestError) {
+      setError(
+        requestError instanceof Error
+          ? requestError.message
+          : "공개 승인에 실패했습니다."
+      );
+    } finally {
+      setPublishing(false);
     }
   };
 
@@ -288,6 +314,21 @@ export function ArticleDetail({
                   <BrainCircuit aria-hidden="true" size={15} />
                 )}
                 {analysisResult ? "분석 완료" : "상세 분석"}
+              </button>
+              <button
+                type="button"
+                className="action-btn btn-publish"
+                onClick={handlePublish}
+                disabled={publishing || visibility === "public"}
+              >
+                {publishing ? (
+                  <LoaderCircle className="spin" aria-hidden="true" size={15} />
+                ) : visibility === "public" ? (
+                  <Check aria-hidden="true" size={15} />
+                ) : (
+                  <Globe2 aria-hidden="true" size={15} />
+                )}
+                {visibility === "public" ? "공개됨" : "공개 승인"}
               </button>
               <button
                 type="button"

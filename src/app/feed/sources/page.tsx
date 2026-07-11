@@ -5,7 +5,6 @@ import {
   fetchFeedCounts,
   fetchSources,
 } from "@/lib/feed-data";
-import { getCategoryLabel } from "@/lib/feed-categories";
 import { CategorySidebar } from "../components/CategorySidebar";
 import { FeedSidebar } from "../components/FeedSidebar";
 import "../feed.css";
@@ -32,7 +31,7 @@ export default async function SourcesPage() {
   const [sources, categories, counts] = await Promise.all([
     fetchSources(),
     fetchCategories(),
-    fetchFeedCounts(),
+    fetchFeedCounts({ publicOnly: true }),
   ]);
 
   return (
@@ -68,10 +67,9 @@ export default async function SourcesPage() {
               <div className="source-item-main">
                 <div className="source-item-name">{source.name}</div>
                 <div className="source-item-meta">
-                  <span className={`feed-card-cat ${source.category}`}>
-                    {getCategoryLabel(source.category)}
+                  <span className="source-type">
+                    {source.type === "youtube" ? "YouTube" : "RSS"}
                   </span>
-                  <span>{source.type.toUpperCase()}</span>
                   <span>최근 {formatDate(source.latest_collected)}</span>
                 </div>
               </div>

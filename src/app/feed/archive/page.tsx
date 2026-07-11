@@ -11,9 +11,9 @@ export const dynamic = "force-dynamic";
 
 export default async function ArchivePage() {
   const [initialPage, categories, counts] = await Promise.all([
-    fetchArticlesPage({ limit: 20, order: "latest" }),
+    fetchArticlesPage({ limit: 20, order: "latest", publicOnly: true }),
     fetchCategories(),
-    fetchFeedCounts(),
+    fetchFeedCounts({ publicOnly: true }),
   ]);
 
   return (

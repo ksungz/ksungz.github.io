@@ -77,6 +77,61 @@ export default function PortfolioPage() {
 
       <hr className="pf-divider" />
 
+      {/* 공개 UI 구현 사례 */}
+      <section className="pf-section">
+        <h2 className="pf-section-title">공개 UI 구현 사례</h2>
+        <p className="pf-section-lead">
+          상품상세 UI를 운영하며 다뤄온 옵션, 재고, 모바일 화면 전환을 공개 가능한 데이터로 다시 구현했습니다.
+          실제 서비스 코드와 자산은 사용하지 않았고, 상태를 나누는 기준과 확인 결과를 Storybook에 함께 남겼습니다.
+        </p>
+
+        <div className="pf-project">
+          <div className="pf-project-header">
+            <h3>상품 옵션 선택 화면</h3>
+            <a className="pf-project-link" href="https://ksungz-ui.vercel.app/?path=/story/patterns-commerce-상품-옵션-선택--default" target="_blank" rel="noopener noreferrer">구현 화면 ↗</a>
+            <a className="pf-project-link" href="https://ksungz-ui.vercel.app/?path=/story/case-studies-상품-옵션-선택--design-and-verification" target="_blank" rel="noopener noreferrer">설계 기록 ↗</a>
+            <a className="pf-project-link" href="https://github.com/ksungz/ksungz-ui" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <span className="pf-badge pf-badge-live">공개</span>
+          </div>
+          <p className="pf-project-desc">
+            색상과 사이즈 조합에 따라 재고와 추가 금액이 달라지는 구매 화면입니다.
+            데스크톱에서는 우측 구매 패널로, 모바일에서는 바텀시트로 제공하되 같은 선택 상태와 계산 규칙을 사용합니다.
+          </p>
+
+          <div className="pf-case-media">
+            <figure>
+              <img className="pf-screenshot" src="/portfolio/ks-ui-product-options-desktop.jpg" alt="데스크톱 상품 옵션 선택 화면" />
+              <figcaption className="pf-screenshot-caption">데스크톱 구매 패널</figcaption>
+            </figure>
+            <figure>
+              <img className="pf-screenshot" src="/portfolio/ks-ui-product-options-mobile.jpg" alt="모바일 상품 옵션 선택 바텀시트" />
+              <figcaption className="pf-screenshot-caption">모바일 바텀시트</figcaption>
+            </figure>
+          </div>
+
+          <div className="pf-detail">
+            <h4>확인한 상태</h4>
+            <ul>
+              <li>색상 변경 시 기존 사이즈가 품절이면 선택 해제</li>
+              <li>품절, 재고 부족, 옵션 추가 금액, 최대 구매 수량 처리</li>
+              <li>필수 옵션 누락 시 오류 메시지와 해당 그룹으로 포커스 이동</li>
+              <li>320px·390px·1440px 레이아웃과 모바일 하단 안전 영역 확인</li>
+              <li>Storybook 접근성 위반 0건, TypeScript·ESLint·테스트·원격 빌드 통과</li>
+            </ul>
+          </div>
+          <div className="pf-chips">
+            <span className="pf-chip">React 19</span>
+            <span className="pf-chip">TypeScript</span>
+            <span className="pf-chip">SCSS Modules</span>
+            <span className="pf-chip">Storybook</span>
+            <span className="pf-chip">Accessibility</span>
+            <span className="pf-chip">Vitest</span>
+          </div>
+        </div>
+      </section>
+
+      <hr className="pf-divider" />
+
       {/* 회사 안에서 적용한 AI 보조 흐름 */}
       <section className="pf-section">
         <h2 className="pf-section-title">반복 리뷰와 문서화를 줄인 AI 보조 흐름</h2>

@@ -81,8 +81,8 @@ export default function PortfolioPage() {
       <section className="pf-section">
         <h2 className="pf-section-title">공개 UI 구현 사례</h2>
         <p className="pf-section-lead">
-          상품상세 UI를 운영하며 다뤄온 옵션, 재고, 모바일 화면 전환을 공개 가능한 데이터로 다시 구현했습니다.
-          상태를 나누는 기준과 확인 결과를 Storybook에 함께 남겼습니다.
+          상품상세 UI를 운영하며 쌓은 경험을 바탕으로, 옵션 선택 흐름을 처음부터 새롭게 설계하고 구현했습니다.
+          색상·사이즈 조합, 재고, 추가 금액, 모바일 화면 전환처럼 운영 중 자주 마주치는 상태를 하나의 공개 사례로 정리하고 확인 결과를 Storybook에 남겼습니다.
         </p>
 
         <div className="pf-project">

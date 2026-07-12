@@ -7,14 +7,19 @@ export default function PortfolioPage() {
       <div className="pf-hero">
         <h1>김성재</h1>
         <p className="pf-hero-desc">
-          오래 운영되는 서비스에서 제품 변경이 느려지는 지점을 찾아,
-          화면·운영·협업 도구까지 함께 고치는 개발자입니다.
+          커머스, 게임, 플랫폼 서비스에서 UI 개발과 운영을 해왔습니다.
+          웹 표준, 접근성, 마크업 구조화, SCSS 설계, 반응형 UI 구현을 바탕으로
+          오래 운영되는 서비스 화면의 구조와 유지보수성을 개선해왔습니다.
           <br /><br />
-          13년 동안 커머스·게임·플랫폼 UI를 만들고 운영하며, 반복 리뷰와 문서화, 배포 확인, 레거시 변경이 제품 속도를 늦추는 장면을 많이 겪었습니다.
+          현재는 모바일웹 상품상세처럼 여러 도메인이 맞물리는 화면을 운영하며,
+          HTML/SCSS 기반 산출물을 React 환경으로 옮기고 CSS 의존성을 프로젝트 안으로 정리하는 일을 하고 있습니다.
           <br />
-          최근에는 이 문제를 작은 자동화와 개발 워크플로우 개선으로 줄이며 Product Engineer 역할로 확장하고 있습니다.
+          Storybook, 문서화, 리뷰 기준을 통해 컴포넌트 단위로 확인 가능한 협업 흐름을 만드는 데도 집중하고 있습니다.
+          <br /><br />
+          AI 도구는 전면에 세우기보다 반복 리뷰, 문서 초안, QA 체크리스트처럼
+          사람이 검토할 초안을 만드는 보조 흐름으로 다룹니다.
           <br />
-          제가 보고 싶은 결과는 새 도구 도입 자체가 아니라, 제품을 더 빨리 바꾸고 더 안전하게 검증하는 흐름입니다.
+          제가 보고 싶은 결과는 새 도구 도입 자체가 아니라, 화면을 더 안전하게 바꾸고 검증하는 흐름입니다.
         </p>
       </div>
 
@@ -25,21 +30,21 @@ export default function PortfolioPage() {
         <h2 className="pf-section-title">요즘 집중하는 것</h2>
         <div className="pf-focus-grid">
           <div className="pf-focus-card">
-            <h3>제품 변경의 영향 범위 보기</h3>
+            <h3>화면 구조와 영향 범위 보기</h3>
             <p>
               PDP처럼 여러 도메인이 맞물리는 화면에서 무엇이 바뀌고 어디까지 확인해야 하는지 먼저 나누는 데 집중합니다.
             </p>
           </div>
           <div className="pf-focus-card">
-            <h3>반복 업무를 작업 흐름으로 만들기</h3>
+            <h3>컴포넌트 단위로 확인하기</h3>
             <p>
-              리뷰, 문서화, 작업 정리처럼 매번 반복되는 일을 팀이 같은 기준으로 다시 쓸 수 있게 정리합니다.
+              Storybook과 문서화를 통해 기획, 디자인, 개발이 같은 화면 상태를 보고 이야기할 수 있게 정리합니다.
             </p>
           </div>
           <div className="pf-focus-card">
-            <h3>작게 만들고 지표로 확인하기</h3>
+            <h3>반복 확인을 줄이는 흐름 만들기</h3>
             <p>
-              개인 서비스와 자동화 도구를 직접 배포하고, 발행 수·검색 반응·클릭 흐름을 보며 다음 수정을 정합니다.
+              리뷰 기준, 작업 정리, QA 체크리스트처럼 매번 반복되는 확인 항목을 검토 가능한 초안으로 만듭니다.
             </p>
           </div>
         </div>
@@ -47,12 +52,12 @@ export default function PortfolioPage() {
 
       <hr className="pf-divider" />
 
-      {/* 제품 운영 근거 */}
+      {/* 서비스 UI 운영 근거 */}
       <section className="pf-section">
-        <h2 className="pf-section-title">제품과 운영을 함께 본 경험</h2>
+        <h2 className="pf-section-title">서비스 UI 운영과 개선 근거</h2>
         <p className="pf-section-lead">
-          Product Engineer 역할로 확장할 수 있다고 보는 근거는 AI 도구 경험보다, 오래 운영되는 제품에서 문제를 나누고 끝까지 확인해온 경험에 있습니다.
-          화면 구현에만 머무르지 않고 영향 범위, 이해관계자, 검증 기준, 운영 피드백을 같이 보려고 합니다.
+          포트폴리오에서 가장 먼저 보여주고 싶은 부분은 개인 서비스보다 오래 운영되는 화면을 안정적으로 바꿔온 경험입니다.
+          화면 구현에만 머무르지 않고 영향 범위, 이해관계자, 검증 기준, 운영 피드백을 함께 보는 방식으로 일합니다.
         </p>
         <div className="pf-poc-grid">
           <div className="pf-poc-card">
@@ -60,30 +65,30 @@ export default function PortfolioPage() {
             <p>가격, 옵션, 리뷰, 배송, 프로모션처럼 여러 도메인이 맞물리는 상품상세 UI를 맡으며 기획·디자인·백엔드와 영향 범위를 확인했습니다.</p>
           </div>
           <div className="pf-poc-card">
-            <h4>대규모 레거시 전환</h4>
-            <p>2,384개 SCSS 파일 규모의 Dart Sass 전환을 약 3주 동안 진행하며 변경 단위, 빌드 결과, CSS 산출물 차이를 나눠 검증했습니다.</p>
+            <h4>오래된 스타일 구조 개선</h4>
+            <p>2,384개 SCSS 파일 규모의 Dart Sass 전환, CSS 내재화, React 환경 이관을 진행하며 변경 단위와 산출물 차이를 나눠 검증했습니다.</p>
           </div>
           <div className="pf-poc-card">
-            <h4>작은 제품 직접 운영</h4>
-            <p>Next.js, Supabase, API 웹훅, 배치 자동화를 묶어 개인 서비스를 배포하고 콘텐츠 발행 수와 검색 반응을 보며 계속 수정하고 있습니다.</p>
+            <h4>컴포넌트 검증과 문서화</h4>
+            <p>Storybook 기반 확인 환경과 70여 건의 기술 문서로 신규 작업자 온보딩, 오래된 화면 수정, 컴포넌트 단위 커뮤니케이션을 정리했습니다.</p>
           </div>
         </div>
       </section>
 
       <hr className="pf-divider" />
 
-      {/* 회사 안에서 적용한 AI 워크플로우 */}
+      {/* 회사 안에서 적용한 AI 보조 흐름 */}
       <section className="pf-section">
-        <h2 className="pf-section-title">회사 안에서 붙여본 AI 워크플로우</h2>
+        <h2 className="pf-section-title">반복 리뷰와 문서화를 줄인 AI 보조 흐름</h2>
 
         <div className="pf-project">
           <div className="pf-project-header">
-            <h3>팀 AI 개발 환경 정리</h3>
+            <h3>팀 개발 흐름에 맞춘 AI 보조 환경 정리</h3>
             <span className="pf-badge pf-badge-running">실무 적용</span>
           </div>
           <p className="pf-project-desc">
-            팀에서 AI 코딩 도구를 쓰기 시작하면, 개인마다 프롬프트와 규칙이 흩어집니다.
-            저는 이 문제를 개인 생산성 문제가 아니라 팀 운영 문제로 보고, Cursor 규칙·스킬을 팀 기준으로 정리했습니다.
+            팀에서 AI 코딩 도구를 쓰기 시작하면 개인마다 프롬프트와 규칙이 흩어지기 쉽습니다.
+            저는 이 문제를 개인 생산성 문제가 아니라 팀 운영 문제로 보고, Cursor 규칙과 스킬을 팀 기준으로 정리했습니다.
             PR 설명, 커밋 메시지, 작업 계획, 위키 작성, QA 체크리스트처럼 매번 새로 쓰던 산출물을 먼저 대상으로 잡고,
             저장소별로 같은 기준을 재사용할 수 있는 흐름을 만들었습니다.
           </p>
@@ -123,13 +128,13 @@ export default function PortfolioPage() {
           </div>
           <p className="pf-project-desc">
             UI 개발 리뷰에서는 BEM 네이밍, SCSS 구조, 접근성 속성, 중복 스타일처럼 반복해서 보는 항목이 많습니다.
-            이 부분을 사람이 매번 처음부터 확인하지 않도록, 8개 저장소의 파이프라인에 PR diff 기반 AI 리뷰 스텝을 붙였습니다.
+            이 부분을 사람이 매번 처음부터 확인하지 않도록, 여러 저장소의 파이프라인에 PR diff 기반 AI 리뷰 스텝을 붙였습니다.
             목표는 사람 리뷰를 없애는 것이 아니라, 반복 컨벤션 체크와 사람이 판단해야 하는 설계·영향 범위 검토를 분리하는 것이었습니다.
           </p>
           <div className="pf-detail">
             <h4>한 일</h4>
             <ul>
-              <li>8개 저장소의 파이프라인에 AI 리뷰 스텝 적용</li>
+              <li>여러 저장소의 파이프라인에 AI 리뷰 스텝 적용</li>
               <li>SCSS, HTML 마크업 중심으로 파일 필터링 규칙 설정</li>
               <li>팀의 접근성, BEM, SCSS 컨벤션을 리뷰 기준에 반영</li>
               <li>자동 트리거와 수동 트리거 방식을 나눠 실제 업무 흐름에 맞게 조정</li>
@@ -160,8 +165,8 @@ export default function PortfolioPage() {
       <section className="pf-section">
         <h2 className="pf-section-title">작게 만든 제품 실험</h2>
         <p className="pf-section-lead">
-          E2E 제품 감각은 작은 서비스를 직접 만들고 운영하면서 넓히고 있습니다.
-          작은 가설을 서비스로 만들고, API·DB·배치·어드민·배포까지 묶어 운영하면서 어떤 지표를 보고 다음 수정을 할지 확인합니다.
+          업무에서는 주로 UI 운영과 개선을 맡아왔기 때문에, 개인 프로젝트에서는 API·DB·배치·배포까지 직접 다뤄보며 제품 개발 범위를 넓히고 있습니다.
+          작은 가설을 서비스로 만들고, 운영하면서 어떤 반응을 보고 다음 수정을 할지 확인합니다.
         </p>
 
         <div className="pf-service-grid">
@@ -269,8 +274,8 @@ export default function PortfolioPage() {
             <a className="pf-project-link" href="/tech/obsidian-rag" target="_blank" rel="noopener noreferrer">RAG 글 ↗</a>
           </div>
           <p className="pf-project-desc">
-            OpenClaw로 시작한 개인 에이전트 환경을 Hermes 중심으로 정리하고, Obsidian Vault를 로컬 RAG로 인덱싱했습니다.
-            초기 기준 202개 문서, 3,045개 청크를 검색 가능하게 만들며, 에이전트가 답을 만들기 전에 어떤 문서를 참고했는지 사람이 다시 확인할 수 있게 했습니다.
+            OpenClaw로 시작한 개인 에이전트 환경을 Hermes 중심으로 정리하고, Obsidian 문서를 로컬 RAG로 인덱싱했습니다.
+            에이전트가 답을 만들기 전에 어떤 문서를 참고했는지 사람이 다시 확인할 수 있게 하는 데 초점을 뒀습니다.
           </p>
           <div className="pf-detail">
             <h4>확인한 운영 조건</h4>
@@ -313,6 +318,22 @@ export default function PortfolioPage() {
         <h2 className="pf-section-title">관련 글</h2>
 
         <div className="pf-blog-list">
+          <a className="pf-blog-item" href="/tech/pdp-ui" target="_blank" rel="noopener noreferrer">
+            <div className="pf-blog-title">모바일웹 상품상세(PDP) 전체 UI 개발 ↗</div>
+            <div className="pf-blog-desc">상품상세 화면 운영, 도메인 영향 범위, 모바일 UI 구조를 정리한 기록</div>
+          </a>
+          <a className="pf-blog-item" href="/tech/react-pdp" target="_blank" rel="noopener noreferrer">
+            <div className="pf-blog-title">React 기반 PDP 컴포넌트 개발 ↗</div>
+            <div className="pf-blog-desc">HTML/SCSS 기반 산출물을 React 컴포넌트와 CSS Modules 환경으로 옮긴 작업</div>
+          </a>
+          <a className="pf-blog-item" href="/tech/dart-sass" target="_blank" rel="noopener noreferrer">
+            <div className="pf-blog-title">Dart Sass 마이그레이션 ↗</div>
+            <div className="pf-blog-desc">대규모 SCSS 전환에서 산출물 차이와 운영 화면 영향을 줄인 방식</div>
+          </a>
+          <a className="pf-blog-item" href="/tech/cdn-css-series" target="_blank" rel="noopener noreferrer">
+            <div className="pf-blog-title">CDN CSS 점진적 내재화 시리즈 ↗</div>
+            <div className="pf-blog-desc">외부 CSS 의존성을 React 번들 안으로 단계적으로 옮긴 기록</div>
+          </a>
           <a className="pf-blog-item" href="/tech/ai-tools" target="_blank" rel="noopener noreferrer">
             <div className="pf-blog-title">AI 기반 개발 환경 구축 ↗</div>
             <div className="pf-blog-desc">팀에서 쓰는 AI 규칙, 스킬, MCP 연동, PR 리뷰 흐름을 정리한 기록</div>
@@ -346,7 +367,7 @@ export default function PortfolioPage() {
       <div className="pf-footer">
         <p style={{ fontSize: 20, fontWeight: 800, color: "var(--text)", marginBottom: 8 }}>김성재</p>
         <p style={{ fontSize: 13, color: "var(--text3)", marginBottom: 12, lineHeight: 1.7 }}>
-          오래 운영되는 제품 UI 경험을 바탕으로 제품 변경 속도와 검증 흐름을 개선합니다.
+          오래 운영되는 서비스 UI 경험을 바탕으로 화면 변경과 검증 흐름을 개선합니다.
         </p>
         <p>
           <a href="mailto:k.suzkim@gmail.com">k.suzkim@gmail.com</a>

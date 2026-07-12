@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Career",
-  description: "김성재의 경력기술서 — 서비스 UI 개발 · 운영 개선 · 개발 워크플로우",
+  description: "김성재의 경력기술서 — 서비스 UI 개발 · 운영 개선 · UI 품질 관리",
 };
 
 const careers = [
@@ -14,15 +14,16 @@ const careers = [
     period: "2020.12 ~ 현재",
     role: "UI 개발자",
     description:
-      "국내 주요 이커머스 서비스인 11번가에서 트래픽이 집중되는 모바일웹 상품상세페이지(PDP)를 포함한 핵심 서비스 UI를 개발·운영하고 있습니다. SCSS→Dart Sass 전환(2,384개 파일), React 기반 컴포넌트 이관, Storybook 기반 UI 확인 환경, CDN 의존 CSS 내재화 등 오래 운영된 화면 구조를 안정적으로 개선하는 작업을 진행했습니다. 최근에는 PR 리뷰와 문서화처럼 반복되는 개발 흐름에 AI 보조 도구를 적용해 변경 비용과 협업 비용을 줄이는 방법도 함께 검토하고 있습니다.",
+      "국내 주요 이커머스 서비스인 11번가에서 모바일웹 상품상세페이지(PDP)를 포함한 핵심 서비스 UI를 개발·운영하고 있습니다. SCSS→Dart Sass 전환(2,384개 파일), CSS 내재화, React 기반 환경 개선, Storybook 기반 UI 확인 환경처럼 오래 운영된 화면 구조와 스타일 관리 흐름을 단계적으로 정리했습니다. 최근에는 PDP ATF 영역 개선을 진행하며 초기 노출 화면의 UI 구조, 스타일 의존성, 변경 범위와 검증 기준을 점검하고 있습니다.",
     projects: [
       { period: "2020.12 ~ 현재", title: "모바일웹 상품상세(PDP) 전체 UI 개발", link: "/tech/pdp-ui" },
-      { period: "2026.01 ~ 현재", title: "React 기반 PDP 컴포넌트 개발", link: "/tech/react-pdp" },
+      { period: "2026.07 ~ 현재", title: "PDP ATF 영역 개선 — React 환경 내 초기 노출 UI 구조 점검", link: "/tech/react-pdp" },
+      { period: "2026.01 ~ 현재", title: "React 기반 PDP 컴포넌트 전환 및 SCSS 내재화", link: "/tech/react-pdp" },
       { period: "2025.06 ~ 2025.07", title: "Dart Sass 마이그레이션 — 2,384개 파일, 3주 완료", link: "/tech/dart-sass" },
       { period: "2025.11 ~ 2026.04", title: "체험단 서비스 전체 신규 구축", link: "/tech/sample-service" },
       { period: "2021.11 ~ 2022.12", title: "반응형 웹 전환 추진 및 기반 구축", link: "/tech/responsive" },
       { period: "2021.09 ~ 현재", title: "서버/인프라 관리 및 환경 업데이트", link: "/tech/infra" },
-      { period: "2025.10 ~ 현재", title: "AI 보조 개발 환경 구축 — PR Review Agent 적용, 스킬·규칙 설계", link: "/tech/ai-tools" },
+      { period: "2025.10 ~ 현재", title: "AI 보조 개발 환경 정리 — 반복 리뷰·문서화 흐름 개선", link: "/tech/ai-tools" },
     ],
   },
   {
@@ -93,7 +94,7 @@ const keyDocs = [
     items: [
       { title: "Dart Sass 전환 회고 (with AI)", desc: "AI 코딩 도구 활용, 2,384개 SCSS 파일을 3주 만에 전환한 대규모 마이그레이션 경험 공유", link: "/tech/dart-sass-retro" },
       { title: "AI Agent 작업 플로우 기록", desc: "기획 분석 → Plan 수립 → UI 구현 → 문서화 → PR 생성까지 AI 에이전트 실무 적용 전과정" },
-      { title: "AI PR Review Agent 적용 및 운영", desc: "사내 제공 AI Agent를 8개 저장소 파이프라인에 적용 — yml 설정, 파일 필터링 규칙, On-Demand 트리거 구성", link: "/tech/pr-review-agent" },
+      { title: "AI PR Review Agent 적용 및 운영", desc: "사내 제공 AI Agent를 여러 저장소 파이프라인에 적용 — yml 설정, 파일 필터링 규칙, On-Demand 트리거 구성", link: "/tech/pr-review-agent" },
     ],
   },
   {
@@ -133,7 +134,7 @@ export default function CareerPage() {
         <p className="font-mono text-xs text-[var(--color-muted)] mb-2">경력기술서</p>
         <h1 className="text-2xl font-bold tracking-tight">김성재</h1>
         <p className="mt-2 text-sm text-[var(--color-muted)]">
-          서비스 UI 개발 · 운영 개선 · 개발 워크플로우
+          서비스 UI 개발 · 운영 개선 · UI 품질 관리
         </p>
       </div>
 
@@ -141,9 +142,9 @@ export default function CareerPage() {
       <section className="mb-12">
         <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">About</h2>
         <div className="space-y-3 text-sm text-[var(--color-muted)] leading-relaxed">
-          <p>커머스, 게임, 플랫폼 서비스에서 13년 이상 UI 개발과 운영을 해왔습니다. 오래 운영되는 웹·모바일 서비스에서 화면 구조를 정리하고, 레거시 UI를 개선하며, 여러 사람이 같은 기준으로 작업할 수 있는 개발 환경을 만드는 일에 강점이 있습니다.</p>
-          <p>현재는 11번가에서 모바일웹 상품상세(PDP)를 포함한 핵심 서비스 UI를 담당하고 있습니다. HTML/SCSS 기반 화면 구조를 React + TypeScript 기반 컴포넌트 구조로 옮기는 작업에 참여하고 있으며, Dart Sass 전환, Storybook 기반 UI 확인 환경, CDN 의존 CSS 내재화처럼 운영 중인 화면의 유지보수성을 높이는 일을 진행했습니다.</p>
-          <p>하이브랩에서는 약 3년간 팀장으로 업무 분배, 공수 산정, 클라이언트 커뮤니케이션, 팀원 온보딩과 품질 관리를 담당했습니다. 최근에는 PR 리뷰, 문서화, QA 체크리스트처럼 반복되는 개발 흐름에 AI 보조 도구를 적용해 리뷰 품질과 개발 속도를 높이는 방법도 함께 검토하고 있습니다.</p>
+          <p>커머스, 게임, 플랫폼 서비스에서 UI 개발과 운영을 해왔습니다. 웹 표준, 접근성, 마크업 구조화, SCSS 설계, 반응형 UI 구현을 바탕으로 오래 운영되는 웹·모바일 서비스의 화면 구조와 유지보수성을 개선해왔습니다.</p>
+          <p>현재는 11번가에서 모바일웹 상품상세(PDP)를 포함한 핵심 서비스 UI를 담당하고 있습니다. HTML/SCSS 기반 산출물을 React 기반 환경으로 옮기고, CSS 내재화와 Storybook 기반 UI 확인 환경을 통해 화면 코드와 스타일 변경 맥락을 함께 관리하는 구조를 정리하고 있습니다.</p>
+          <p>하이브랩에서는 약 3년간 팀장으로 업무 분배, 공수 산정, 클라이언트 커뮤니케이션, 팀원 온보딩과 품질 관리를 담당했습니다. 최근에는 PR 리뷰, 문서화, QA 체크리스트처럼 반복되는 개발 흐름에 AI 보조 도구를 적용해 사람이 검토할 초안과 기준을 만드는 방식도 함께 실험하고 있습니다.</p>
         </div>
       </section>
 

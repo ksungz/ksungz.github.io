@@ -8,7 +8,7 @@ const careerSummary = [
     period: "2020.12 ~ 현재",
     company: "11번가",
     role: "UI/Frontend 개발자 · UI개발팀",
-    description: "모바일웹 PDP 및 핵심 서비스 UI 운영, Dart Sass 전환(2,384개 파일), React 이관, 개발 워크플로우 개선",
+    description: "모바일웹 PDP 및 핵심 서비스 UI 운영, Dart Sass 전환, CSS 내재화, React 환경 개선",
   },
   {
     period: "2019.10 ~ 2020.12",
@@ -27,25 +27,25 @@ const careerSummary = [
 const highlights = [
   {
     title: "제품 화면 운영",
-    description: "11번가 모바일웹 PDP를 포함한 핵심 화면을 운영하며 도메인 영향 범위와 검증 기준을 맞춰 개발합니다.",
+    description: "모바일웹 핵심 화면을 운영하며 가격, 옵션, 리뷰, 배송처럼 여러 도메인의 영향 범위와 검증 기준을 맞춰 개발합니다.",
   },
   {
-    title: "변경 비용 줄이기",
-    description: "Dart Sass 전환, CSS 내재화, React 컴포넌트 이관으로 오래된 UI 구조를 단계적으로 개선했습니다.",
+    title: "오래된 UI 구조 개선",
+    description: "Dart Sass 전환, CSS 내재화, React 환경 개선으로 오래 운영된 화면 구조와 스타일 관리 흐름을 단계적으로 정리했습니다.",
   },
   {
-    title: "개발 흐름 개선",
-    description: "Storybook, 기술 문서, PR 리뷰 기준, AI 보조 도구를 정리해 반복 확인과 협업 비용을 줄입니다.",
+    title: "UI 품질과 협업 기준",
+    description: "Storybook, 기술 문서, 접근성·스타일 리뷰 기준을 정리해 컴포넌트 단위 확인과 협업 비용을 줄입니다.",
   },
 ];
 
 const PRIMARY_SKILLS = new Set(["React", "TypeScript", "SCSS/Sass", "Storybook", "웹 접근성", "반응형 UI"]);
 
 const skills = [
-  { label: "Product UI", items: ["React", "TypeScript", "JavaScript", "HTML", "CSS", "SCSS/Sass", "CSS Modules", "Storybook"] },
+  { label: "UI/Frontend", items: ["React", "TypeScript", "JavaScript", "HTML", "CSS", "SCSS/Sass", "CSS Modules", "Storybook"] },
   { label: "UI 품질/운영", items: ["웹 표준", "웹 접근성", "반응형 UI", "모바일웹", "BEM", "Lottie"] },
-  { label: "개발 워크플로우", items: ["Git", "Bitbucket", "Jira", "Confluence", "Figma", "Bitbucket Pipelines", "Vercel"] },
-  { label: "AI 보조 개발", items: ["Cursor", "Claude", "Codex", "PR Review Agent"] },
+  { label: "협업/운영 도구", items: ["Git", "Bitbucket", "Jira", "Confluence", "Figma", "Bitbucket Pipelines", "Vercel"] },
+  { label: "AI 보조 흐름", items: ["Cursor", "Claude", "Codex", "PR Review Agent"] },
 ];
 
 export default async function Home() {
@@ -59,12 +59,12 @@ export default async function Home() {
 
       {/* Hero */}
       <section className="mb-16">
-        <p className="font-mono text-xs text-[var(--color-muted)] mb-3">서비스 UI 개발 · 운영 개선 · 개발 워크플로우</p>
+        <p className="font-mono text-xs text-[var(--color-muted)] mb-3">서비스 UI 개발 · 운영 개선 · UI 품질 관리</p>
         <h1 className="text-3xl font-bold tracking-tight mb-4">김성재</h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
-          커머스, 게임, 플랫폼 서비스에서 13년 이상 UI 개발과 운영을 해왔습니다.
-          화면을 만드는 일에서 출발했지만, 최근에는 오래 운영되는 제품의 변경 비용을 줄이고 검증·협업 흐름을 정리하는 쪽으로 역할을 넓혀왔습니다.
-          React/TypeScript 기반 컴포넌트 전환, 레거시 개선, Storybook·문서·AI 보조 워크플로우로 제품을 더 안전하게 바꾸는 개발 환경을 만듭니다.
+          커머스, 게임, 플랫폼 서비스에서 UI 개발과 운영을 해왔습니다.
+          웹 표준, 접근성, 마크업 구조화, SCSS 설계, 반응형 UI 구현을 바탕으로 오래 운영되는 서비스 화면의 구조와 유지보수성을 개선해왔습니다.
+          최근에는 HTML/SCSS 중심 산출물을 React 기반 환경으로 옮기고, Storybook·문서화·리뷰 기준을 통해 컴포넌트 단위 검증과 협업 흐름을 정리하고 있습니다.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link

@@ -14,7 +14,7 @@ const careers = [
     period: "2020.12 ~ 현재",
     role: "UI 개발자",
     description:
-      "국내 주요 이커머스 서비스인 11번가에서 모바일웹 상품상세페이지(PDP)를 포함한 핵심 서비스 UI를 개발·운영하고 있습니다. SCSS→Dart Sass 전환(2,384개 파일), CSS 내재화, React 기반 환경 개선, Storybook 기반 UI 확인 환경처럼 오래 운영된 화면 구조와 스타일 관리 흐름을 단계적으로 정리했습니다. 최근에는 PDP ATF 영역 개선을 진행하며 초기 노출 화면의 UI 구조, 스타일 의존성, 변경 범위와 검증 기준을 점검하고 있습니다.",
+      "국내 주요 이커머스 서비스인 11번가에서 모바일웹 상품상세페이지(PDP)를 포함한 핵심 서비스 UI를 개발·운영하고 있습니다. SCSS→Dart Sass 전환(2,384개 파일), CSS 내재화, React 기반 환경 개선, Storybook 기반 UI 확인 환경을 통해 기존 화면 구조와 스타일 관리 흐름을 단계적으로 정리했습니다. 최근에는 PDP ATF 영역 개선을 진행하며 초기 노출 화면의 UI 구조, 스타일 의존성, 변경 범위와 검증 기준을 점검하고 있습니다.",
     projects: [
       { period: "2020.12 ~ 현재", title: "모바일웹 상품상세(PDP) 전체 UI 개발", link: "/tech/pdp-ui" },
       { period: "2026.07 ~ 현재", title: "PDP ATF 영역 개선 — React 환경 내 초기 노출 UI 구조 점검", link: "/tech/react-pdp" },
@@ -122,7 +122,7 @@ const keyDocs = [
 const sideProjects = [
   { title: "개인 서비스 구축·운영", stack: "Next.js · Supabase · Vercel · API Webhook", description: "작은 커머스/콘텐츠 서비스를 직접 만들고 배포하며 기획, 구현, 운영 피드백까지 경험하고 있습니다." },
   { title: "콘텐츠 자동화 파이프라인", stack: "Node.js · Google Apps Script · Gemini · GitHub", description: "키워드 수집, 콘텐츠 초안 생성, 블로그 PR 생성까지 이어지는 자동화 흐름을 운영하고 있습니다." },
-  { title: "AI 보조 개발 환경 실험", stack: "Claude Code · Codex · Obsidian RAG", description: "개인 지식 문서와 개발 도구를 연결해 문서 검색, 작업 정리, 코드 변경 보조 흐름을 실험하고 있습니다." },
+  { title: "AI 보조 개발 환경", stack: "Claude Code · Codex · Obsidian RAG", description: "개인 지식 문서와 개발 도구를 연결해 문서 검색, 작업 기록, 코드 변경 보조 흐름을 운영하고 있습니다." },
 ];
 
 export default function CareerPage() {
@@ -142,9 +142,9 @@ export default function CareerPage() {
       <section className="mb-12">
         <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">About</h2>
         <div className="space-y-3 text-sm text-[var(--color-muted)] leading-relaxed">
-          <p>커머스, 게임, 플랫폼 서비스에서 UI 개발과 운영을 해왔습니다. 웹 표준, 접근성, 마크업 구조화, SCSS 설계, 반응형 UI 구현을 바탕으로 오래 운영되는 웹·모바일 서비스의 화면 구조와 유지보수성을 개선해왔습니다.</p>
+          <p>커머스, 게임, 플랫폼 서비스에서 UI 개발과 운영을 해왔습니다. 웹 표준, 접근성, 마크업 구조화, SCSS 설계, 반응형 UI 구현을 바탕으로 운영 중인 웹·모바일 서비스의 화면 구조와 유지보수성을 개선해왔습니다.</p>
           <p>현재는 11번가에서 모바일웹 상품상세(PDP)를 포함한 핵심 서비스 UI를 담당하고 있습니다. HTML/SCSS 기반 산출물을 React 기반 환경으로 옮기고, CSS 내재화와 Storybook 기반 UI 확인 환경을 통해 화면 코드와 스타일 변경 맥락을 함께 관리하는 구조를 정리하고 있습니다.</p>
-          <p>하이브랩에서는 약 3년간 팀장으로 업무 분배, 공수 산정, 클라이언트 커뮤니케이션, 팀원 온보딩과 품질 관리를 담당했습니다. 최근에는 PR 리뷰, 문서화, QA 체크리스트처럼 반복되는 개발 흐름에 AI 보조 도구를 적용해 사람이 검토할 초안과 기준을 만드는 방식도 함께 실험하고 있습니다.</p>
+          <p>하이브랩에서는 약 3년간 팀장으로 업무 분배, 공수 산정, 클라이언트 커뮤니케이션, 팀원 온보딩과 품질 관리를 담당했습니다. 최근에는 PR 리뷰, 문서화, QA 체크리스트처럼 반복되는 개발 흐름에 AI 보조 도구를 적용하고, 팀에서 재사용할 수 있는 규칙과 산출물 형식을 정리하고 있습니다.</p>
         </div>
       </section>
 
@@ -208,7 +208,7 @@ export default function CareerPage() {
       <section className="mb-12">
         <h2 className="mb-2 text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">Key Documents</h2>
         <p className="mb-6 text-xs text-[var(--color-muted)]">
-          문제 해결, 기술 검토, 경험 공유를 목적으로 직접 작성한 핵심 문서입니다. Confluence 위키에 <strong className="text-[var(--color-foreground)]">70여 건</strong>을 작성했으며, 그 중 주요 문서를 정리했습니다.
+          문제 해결, 기술 검토, 경험 공유를 목적으로 직접 작성한 문서 중 주요 내용을 정리했습니다.
         </p>
         <div className="space-y-8">
           {keyDocs.map((group) => (

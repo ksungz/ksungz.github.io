@@ -30,8 +30,8 @@ const highlights = [
     description: "모바일웹 핵심 화면을 운영하며 가격, 옵션, 리뷰, 배송처럼 여러 도메인의 영향 범위와 검증 기준을 맞춰 개발합니다.",
   },
   {
-    title: "오래된 UI 구조 개선",
-    description: "Dart Sass 전환, CSS 내재화, React 환경 개선으로 오래 운영된 화면 구조와 스타일 관리 흐름을 단계적으로 정리했습니다.",
+    title: "기존 UI 구조 개선",
+    description: "Dart Sass 전환, CSS 내재화, React 환경 개선으로 화면 구조와 스타일 관리 흐름을 단계적으로 정리했습니다.",
   },
   {
     title: "UI 품질과 협업 기준",
@@ -63,7 +63,7 @@ export default async function Home() {
         <h1 className="text-3xl font-bold tracking-tight mb-4">김성재</h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
           커머스, 게임, 플랫폼 서비스에서 UI 개발과 운영을 해왔습니다.
-          웹 표준, 접근성, 마크업 구조화, SCSS 설계, 반응형 UI 구현을 바탕으로 오래 운영되는 서비스 화면의 구조와 유지보수성을 개선해왔습니다.
+          웹 표준, 접근성, 마크업 구조화, SCSS 설계, 반응형 UI 구현을 바탕으로 운영 중인 서비스 화면의 구조와 유지보수성을 개선해왔습니다.
           최근에는 HTML/SCSS 중심 산출물을 React 기반 환경으로 옮기고, Storybook·문서화·리뷰 기준을 통해 컴포넌트 단위 검증과 협업 흐름을 정리하고 있습니다.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">

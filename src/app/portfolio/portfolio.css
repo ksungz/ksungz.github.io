@@ -813,6 +813,15 @@ body:has(.portfolio-root) > main {
   line-height: 1.8;
 }
 
+.pf-footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 13px;
+  font-weight: 700;
+}
+
 .pf-footer a:hover,
 .pf-footer a:focus-visible {
   text-decoration: underline;
@@ -2196,7 +2205,6 @@ body:has(.portfolio-root) {
 }
 
 .pf-section-title {
-  grid-template-columns: 150px minmax(0, 1fr);
   margin-bottom: 46px;
   font-size: 32px;
 }
@@ -2204,10 +2212,6 @@ body:has(.portfolio-root) {
 .pf-section-title > span {
   padding-top: 7px;
   font-size: 10px;
-}
-
-.pf-section-lead {
-  margin-left: 174px;
 }
 
 .pf-footer {

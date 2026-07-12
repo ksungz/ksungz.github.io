@@ -290,11 +290,33 @@ body:has(.portfolio-root) > main {
   margin-top: 4px;
 }
 
+.pf-case-media {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(160px, 0.65fr);
+  gap: 12px;
+  align-items: start;
+  margin: 20px 0;
+}
+
+.pf-case-media figure {
+  min-width: 0;
+  margin: 0;
+}
+
 @media (max-width: 600px) {
   .pf-screenshots,
   .pf-screenshots.pf-screenshots-2,
   .pf-screenshots.pf-screenshots-4 {
     grid-template-columns: 1fr;
+  }
+
+  .pf-case-media {
+    grid-template-columns: 1fr;
+  }
+
+  .pf-case-media figure:last-child {
+    width: min(100%, 320px);
+    margin: 0 auto;
   }
 }
 

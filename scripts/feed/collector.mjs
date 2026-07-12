@@ -14,6 +14,7 @@ import {
   enrichArticleContent,
   fallbackClassification,
   fetchWithRetry,
+  isVerificationRetryReady,
   isAutoPublishEvidenceEligible,
   normalizedTitle,
   parseFeed,
@@ -157,7 +158,8 @@ async function collect() {
         article.status !== "archived" &&
         sourceMap.has(article.source_id) &&
         (state === "verification:pending" || state === "verification:failed") &&
-        verificationAttempts(article.summary) < QUALITY.maxVerificationRuns
+        verificationAttempts(article.summary) < QUALITY.maxVerificationRuns &&
+        isVerificationRetryReady(article.summary)
       );
     })
     .sort((left, right) => right.id - left.id)
@@ -263,20 +265,24 @@ async function collect() {
     ...candidate,
     classification: (() => {
       const result = resultMap.get(candidate.id) || fallbackClassification(candidate);
+      const consumedVerificationRun =
+        candidate.existing_id &&
+        (analysisCandidateIds.has(candidate.id) ||
+          !canGenerateEditorialAnalysis(
+            candidate.content,
+            candidate.content_kind
+          ));
       return {
         ...result,
         verification_attempts:
           result.verification_attempts ??
           (candidate.existing_id
             ? (candidate.verification_attempts || 0) +
-              (analysisCandidateIds.has(candidate.id) ||
-              !canGenerateEditorialAnalysis(
-                candidate.content,
-                candidate.content_kind
-              )
-                ? 1
-                : 0)
+              (consumedVerificationRun ? 1 : 0)
             : 0),
+        verification_last_attempt_at:
+          result.verification_last_attempt_at ||
+          (consumedVerificationRun ? new Date().toISOString() : ""),
       };
     })(),
   }));

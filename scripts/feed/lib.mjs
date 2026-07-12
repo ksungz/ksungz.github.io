@@ -520,7 +520,24 @@ export function serializeQuickFeedSummary(classification) {
       300
     ),
     verification_attempts: classification.verification_attempts || 0,
+    verification_last_attempt_at:
+      classification.verification_last_attempt_at || "",
   });
+}
+
+export function isVerificationRetryReady(
+  summary,
+  now = Date.now(),
+  cooldownHours = QUALITY.verificationRetryCooldownHours
+) {
+  try {
+    const parsed = JSON.parse(summary || "{}");
+    const lastAttemptAt = Date.parse(parsed.verification_last_attempt_at || "");
+    if (!Number.isFinite(lastAttemptAt)) return true;
+    return now - lastAttemptAt >= cooldownHours * 60 * 60 * 1_000;
+  } catch {
+    return true;
+  }
 }
 
 function normalizedEvidenceText(value) {
@@ -766,6 +783,7 @@ JSON으로만 응답해:
 
 export async function createVerifiedEditorial(article, initialDraft = null) {
   const verificationAttempts = (article.verification_attempts || 0) + 1;
+  const verificationLastAttemptAt = new Date().toISOString();
   let draft = initialDraft || (await classifyArticle(article));
   for (let attempt = 0; attempt <= QUALITY.maxEditorialRewrites; attempt += 1) {
     if (draft.used_fallback) {
@@ -774,14 +792,26 @@ export async function createVerifiedEditorial(article, initialDraft = null) {
     draft = sanitizeEditorialDraft(article, draft);
     const verified = await verifyEditorialDraft(article, draft);
     if (verified.verification_state === "passed") {
-      return { ...verified, verification_attempts: verificationAttempts };
+      return {
+        ...verified,
+        verification_attempts: verificationAttempts,
+        verification_last_attempt_at: verificationLastAttemptAt,
+      };
     }
     if (attempt === QUALITY.maxEditorialRewrites) {
-      return { ...verified, verification_attempts: verificationAttempts };
+      return {
+        ...verified,
+        verification_attempts: verificationAttempts,
+        verification_last_attempt_at: verificationLastAttemptAt,
+      };
     }
     draft = await classifyArticle(article, verified.verification_issues);
   }
-  return { ...draft, verification_attempts: verificationAttempts };
+  return {
+    ...draft,
+    verification_attempts: verificationAttempts,
+    verification_last_attempt_at: verificationLastAttemptAt,
+  };
 }
 
 export function inferContentKind(article) {

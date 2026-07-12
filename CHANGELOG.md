@@ -28,6 +28,7 @@
 - 공개 기준 75점, 검토 기준 55점과 일일·소스별 공개 상한을 적용해 저품질 후보 자동 제외
 - RSS 구조 파싱, URL·제목 중복 제거, Ollama 배치 분류를 포함한 버전 관리 수집기 추가
 - GitHub Actions에서 매일 06:00 KST에 수집기를 실행하도록 스케줄 구성
+- GitHub Actions 수집 주기를 3시간으로 변경하고 검증 실패 글에는 마지막 시도 기준 12시간 재시도 간격 적용
 - Studio에서 검토 후보를 공개 피드로 승인하는 관리자 전용 기능 추가
 - GeekNews 상세 JSON-LD에서 본문과 실제 원문 URL을 보강하고 출처 URL을 분리
 - GeekNews의 신규 `NewsArticle.articleBody`와 기존 `DiscussionForumPosting.text` JSON-LD를 모두 지원

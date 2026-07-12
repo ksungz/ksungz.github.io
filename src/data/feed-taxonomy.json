@@ -47,6 +47,7 @@
     "minEditorialScore": 82,
     "maxEditorialRewrites": 2,
     "maxVerificationRuns": 3,
+    "verificationRetryCooldownHours": 12,
     "retryPerRun": 6,
     "maxAnalysisPerRun": 2
   },

@@ -6,6 +6,7 @@ import {
   fallbackClassification,
   extractGeekNewsArticle,
   extractGeekNewsMarkdown,
+  isVerificationRetryReady,
   isAutoPublishEvidenceEligible,
   parseClassification,
   parseEditorialVerification,
@@ -124,6 +125,7 @@ test("v3 해설 형식과 검증 메타데이터를 직렬화한다", () => {
       evidence_score: 100,
       editorial_score: 91,
       verification_issues: [],
+      verification_last_attempt_at: "2026-07-12T00:00:00.000Z",
     })
   );
   assert.equal(serialized.version, 3);
@@ -131,6 +133,24 @@ test("v3 해설 형식과 검증 메타데이터를 직렬화한다", () => {
   assert.equal(serialized.explanation.length, 2);
   assert.equal(serialized.claims.length, 3);
   assert.equal(serialized.editorial_score, 91);
+  assert.equal(
+    serialized.verification_last_attempt_at,
+    "2026-07-12T00:00:00.000Z"
+  );
+});
+
+test("검증 실패 글은 마지막 시도 12시간 후에만 재처리한다", () => {
+  const now = Date.parse("2026-07-12T12:00:00.000Z");
+  const recent = JSON.stringify({
+    verification_last_attempt_at: "2026-07-12T01:00:01.000Z",
+  });
+  const elapsed = JSON.stringify({
+    verification_last_attempt_at: "2026-07-12T00:00:00.000Z",
+  });
+
+  assert.equal(isVerificationRetryReady(recent, now), false);
+  assert.equal(isVerificationRetryReady(elapsed, now), true);
+  assert.equal(isVerificationRetryReady("{}", now), true);
 });
 
 test("구조화 해설 파서는 필수 독자 설명과 근거를 요구한다", () => {

@@ -2,59 +2,81 @@ import "./portfolio.css";
 
 export default function PortfolioPage() {
   return (
-    <>
+    <div className="pf-workspace">
+      <header className="pf-cli-header">
+        <a className="pf-cli-brand" href="#top" aria-label="포트폴리오 처음으로">
+          <span aria-hidden="true">&gt;_</span> k.sungjae@portfolio:~$
+        </a>
+        <nav className="pf-cli-nav" aria-label="포트폴리오 탐색">
+          <a href="#top">About</a>
+          <a href="#work">Experience</a>
+          <a href="#case-study">Case Study</a>
+          <a href="#experiments">Experiments</a>
+          <a href="#writing">Writing</a>
+          <a href="mailto:k.suzkim@gmail.com">Contact</a>
+        </nav>
+        <p className="pf-cli-status"><i aria-hidden="true" /> UI / Frontend</p>
+      </header>
+
+      <main className="pf-main">
+
       {/* HERO */}
-      <div className="pf-hero">
-        <h1>김성재</h1>
-        <p className="pf-hero-desc">
-          커머스, 게임, 플랫폼 서비스에서 UI 개발과 운영을 해왔습니다.
-          웹 표준, 접근성, 마크업 구조화, SCSS 설계, 반응형 UI 구현을 바탕으로
-          오래 운영되는 서비스 화면의 구조와 유지보수성을 개선해왔습니다.
-          <br /><br />
-          현재는 모바일웹 상품상세처럼 여러 도메인이 맞물리는 화면을 운영하며,
-          HTML/SCSS 기반 산출물을 React 환경으로 옮기고 CSS 의존성을 프로젝트 안으로 정리하는 일을 하고 있습니다.
-          <br />
-          Storybook, 문서화, 리뷰 기준을 통해 컴포넌트 단위로 확인 가능한 협업 흐름을 만드는 데도 집중하고 있습니다.
-          <br /><br />
-          AI 도구는 전면에 세우기보다 반복 리뷰, 문서 초안, QA 체크리스트처럼
-          사람이 검토할 초안을 만드는 보조 흐름으로 다룹니다.
-          <br />
-          제가 보고 싶은 결과는 새 도구 도입 자체가 아니라, 화면을 더 안전하게 바꾸고 검증하는 흐름입니다.
-        </p>
-      </div>
-
-      <hr className="pf-divider" />
-
-      {/* 포커스 */}
-      <section className="pf-section">
-        <h2 className="pf-section-title">요즘 집중하는 것</h2>
-        <div className="pf-focus-grid">
-          <div className="pf-focus-card">
-            <h3>화면 구조와 영향 범위 보기</h3>
-            <p>
-              PDP처럼 여러 도메인이 맞물리는 화면에서 무엇이 바뀌고 어디까지 확인해야 하는지 먼저 나누는 데 집중합니다.
-            </p>
-          </div>
-          <div className="pf-focus-card">
-            <h3>컴포넌트 단위로 확인하기</h3>
-            <p>
-              Storybook과 문서화를 통해 기획, 디자인, 개발이 같은 화면 상태를 보고 이야기할 수 있게 정리합니다.
-            </p>
-          </div>
-          <div className="pf-focus-card">
-            <h3>반복 확인을 줄이는 흐름 만들기</h3>
-            <p>
-              리뷰 기준, 작업 정리, QA 체크리스트처럼 매번 반복되는 확인 항목을 검토 가능한 초안으로 만듭니다.
-            </p>
-          </div>
+      <header className="pf-hero" id="top">
+        <div className="pf-hero-meta">
+          <span>README.md / profile</span>
+          <span><i aria-hidden="true" /> updated · 2026</span>
         </div>
+        <p className="pf-hero-command"><span aria-hidden="true">$</span> whoami</p>
+        <h1>김성재</h1>
+        <p className="pf-hero-statement">
+          서비스 UI를 오래<br className="pf-break-mobile" />{" "}
+          운영하고,<br className="pf-break-desktop" />{" "}
+          더<br className="pf-break-mobile" />{" "}
+          안전하게 바꿉니다.
+        </p>
+        <div className="pf-hero-status" aria-label="핵심 역할과 경험">
+          <p><span>role</span><strong>UI / Frontend Developer</strong></p>
+          <p><span>scope</span><strong>모바일웹 PDP 운영</strong></p>
+          <p><span>migration</span><strong>2,384 SCSS · React 환경 이관</strong></p>
+        </div>
+        <a className="pf-scroll-link" href="#work"><span aria-hidden="true">$</span> open ./work <span aria-hidden="true">↓</span></a>
+      </header>
+
+      <section className="pf-readme-output" aria-label="포트폴리오 소개">
+        <div className="pf-readme-header">
+          <span>README.md</span>
+          <span>3 blocks</span>
+        </div>
+        <div className="pf-hero-copy">
+          <p>
+            커머스, 게임, 플랫폼 서비스에서 UI 개발과 운영을 해왔습니다.
+            웹 표준, 접근성, 마크업 구조화, SCSS 설계, 반응형 UI 구현을 바탕으로
+            서비스 화면의 구조와 유지보수성을 개선해왔습니다.
+          </p>
+          <p>
+            현재는 모바일웹 상품상세처럼 여러 도메인이 맞물리는 화면을 운영하며,
+            HTML/SCSS 기반 산출물을 React 환경으로 옮기고 CSS 의존성을 프로젝트 안으로 정리하고 있습니다.
+            Storybook과 문서화, 리뷰 기준으로 컴포넌트 단위 검증 흐름도 만들고 있습니다.
+          </p>
+          <p>
+            AI는 반복 리뷰, 문서 초안, QA 체크리스트처럼 사람이 검토할 초안을 만드는 보조 흐름으로 다룹니다.
+            새 도구 자체보다 화면을 더 안전하게 바꾸고 검증하는 결과를 중요하게 봅니다.
+          </p>
+        </div>
+      </section>
+
+      <section className="pf-metrics" aria-label="주요 경험 수치">
+        <div><span className="pf-metric-path">migration.scss</span><strong>2,384</strong><span>SCSS 파일 전환</span></div>
+        <div><span className="pf-metric-path">documentation/</span><strong>70+</strong><span>기술 문서 작성</span></div>
+        <div><span className="pf-metric-path">review-pipeline/</span><strong>8</strong><span>저장소 리뷰 흐름 적용</span></div>
+        <div><span className="pf-metric-path">leadership.log</span><strong>3년</strong><span>실무 팀 리딩</span></div>
       </section>
 
       <hr className="pf-divider" />
 
       {/* 서비스 UI 운영 근거 */}
-      <section className="pf-section">
-        <h2 className="pf-section-title">서비스 UI 운영과 개선 근거</h2>
+      <section className="pf-section pf-section-dark" id="work">
+        <h2 className="pf-section-title"><span>$ cat work.md</span>서비스 UI 운영과 개선 근거</h2>
         <p className="pf-section-lead">
           포트폴리오에서 가장 먼저 보여주고 싶은 부분은 개인 서비스보다 오래 운영되는 화면을 안정적으로 바꿔온 경험입니다.
           화면 구현에만 머무르지 않고 영향 범위, 이해관계자, 검증 기준, 운영 피드백을 함께 보는 방식으로 일합니다.
@@ -78,8 +100,8 @@ export default function PortfolioPage() {
       <hr className="pf-divider" />
 
       {/* 공개 UI 구현 사례 */}
-      <section className="pf-section">
-        <h2 className="pf-section-title">공개 UI 구현 사례</h2>
+      <section className="pf-section pf-section-feature" id="case-study">
+        <h2 className="pf-section-title"><span>$ open case-study.tsx</span>공개 UI 구현 사례</h2>
         <p className="pf-section-lead">
           상품상세 UI를 운영하며 쌓은 경험을 바탕으로, 옵션 선택 흐름을 처음부터 새롭게 설계하고 구현했습니다.
           색상·사이즈 조합, 재고, 추가 금액, 모바일 화면 전환처럼 운영 중 자주 마주치는 상태를 하나의 공개 사례로 정리하고 확인 결과를 Storybook에 남겼습니다.
@@ -99,6 +121,10 @@ export default function PortfolioPage() {
           </p>
 
           <div className="pf-case-media">
+            <div className="pf-terminal-panel-bar">
+              <span>preview/commerce-options</span>
+              <span><i aria-hidden="true" /> running</span>
+            </div>
             <figure>
               <img className="pf-screenshot" src="/portfolio/ks-ui-product-options-desktop.jpg" alt="데스크톱 상품 옵션 선택 화면" />
               <figcaption className="pf-screenshot-caption">데스크톱 구매 패널</figcaption>
@@ -132,9 +158,36 @@ export default function PortfolioPage() {
 
       <hr className="pf-divider" />
 
+      {/* 포커스 */}
+      <section className="pf-section" id="approach">
+        <h2 className="pf-section-title"><span>$ cat approach.md</span>요즘 집중하는 것</h2>
+        <div className="pf-focus-grid">
+          <div className="pf-focus-card">
+            <h3>화면 구조와 영향 범위 보기</h3>
+            <p>
+              PDP처럼 여러 도메인이 맞물리는 화면에서 무엇이 바뀌고 어디까지 확인해야 하는지 먼저 나누는 데 집중합니다.
+            </p>
+          </div>
+          <div className="pf-focus-card">
+            <h3>컴포넌트 단위로 확인하기</h3>
+            <p>
+              Storybook과 문서화를 통해 기획, 디자인, 개발이 같은 화면 상태를 보고 이야기할 수 있게 정리합니다.
+            </p>
+          </div>
+          <div className="pf-focus-card">
+            <h3>반복 확인을 줄이는 흐름 만들기</h3>
+            <p>
+              리뷰 기준, 작업 정리, QA 체크리스트처럼 매번 반복되는 확인 항목을 검토 가능한 초안으로 만듭니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <hr className="pf-divider" />
+
       {/* 회사 안에서 적용한 AI 보조 흐름 */}
-      <section className="pf-section">
-        <h2 className="pf-section-title">반복 리뷰와 문서화를 줄인 AI 보조 흐름</h2>
+      <section className="pf-section pf-section-tinted" id="workflow">
+        <h2 className="pf-section-title"><span>$ tail systems.log</span>반복 리뷰와 문서화를 줄인 AI 보조 흐름</h2>
 
         <div className="pf-project">
           <div className="pf-project-header">
@@ -217,8 +270,8 @@ export default function PortfolioPage() {
       </section>
 
       {/* 개인 서비스 실험 */}
-      <section className="pf-section">
-        <h2 className="pf-section-title">작게 만든 제품 실험</h2>
+      <section className="pf-section" id="experiments">
+        <h2 className="pf-section-title"><span>$ ls experiments/</span>작게 만든 제품 실험</h2>
         <p className="pf-section-lead">
           업무에서는 주로 UI 운영과 개선을 맡아왔기 때문에, 개인 프로젝트에서는 API·DB·배치·배포까지 직접 다뤄보며 제품 개발 범위를 넓히고 있습니다.
           작은 가설을 서비스로 만들고, 운영하면서 어떤 반응을 보고 다음 수정을 할지 확인합니다.
@@ -314,8 +367,8 @@ export default function PortfolioPage() {
       <hr className="pf-divider" />
 
       {/* 에이전트 운영 환경 */}
-      <section className="pf-section">
-        <h2 className="pf-section-title">개인 에이전트 실험에서 확인한 운영 조건</h2>
+      <section className="pf-section pf-section-dark" id="agents">
+        <h2 className="pf-section-title"><span>$ inspect agents.json</span>개인 에이전트 실험에서 확인한 운영 조건</h2>
         <p className="pf-section-lead">
           이 섹션은 회사 적용 사례가 아니라, AI 워크플로우를 제품 환경에 붙일 때 필요한 조건을 확인한 개인 실험입니다.
           도구 이름보다 문서 출처, 접근 범위, 작업 로그, 사람 검토 지점을 어떻게 남길지가 핵심이라고 봅니다.
@@ -357,8 +410,8 @@ export default function PortfolioPage() {
       <hr className="pf-divider" />
 
       {/* PoC / 실험 */}
-      <section className="pf-section">
-        <h2 className="pf-section-title">빠른 검증을 반복합니다</h2>
+      <section className="pf-section pf-section-compact" id="prototypes">
+        <h2 className="pf-section-title"><span>$ cat prototypes.md</span>빠른 검증을 반복합니다</h2>
         <p className="pf-section-lead">
           위 서비스 외에도 아이디어가 생기면 1~2일 안에 MVP를 만들어 확인합니다.
           AI 구매 합리화, 국어사전 재가공, 유튜브 댓글 분석, 콘텐츠 제작 내부 도구처럼
@@ -369,8 +422,8 @@ export default function PortfolioPage() {
       <hr className="pf-divider" />
 
       {/* 블로그 */}
-      <section className="pf-section">
-        <h2 className="pf-section-title">관련 글</h2>
+      <section className="pf-section" id="writing">
+        <h2 className="pf-section-title"><span>$ find writing/</span>관련 글</h2>
 
         <div className="pf-blog-list">
           <a className="pf-blog-item" href="/tech/pdp-ui" target="_blank" rel="noopener noreferrer">
@@ -420,63 +473,71 @@ export default function PortfolioPage() {
 
       {/* FOOTER */}
       <div className="pf-footer">
-        <p style={{ fontSize: 20, fontWeight: 800, color: "var(--text)", marginBottom: 8 }}>김성재</p>
-        <p style={{ fontSize: 13, color: "var(--text3)", marginBottom: 12, lineHeight: 1.7 }}>
+        <p className="pf-footer-name">김성재</p>
+        <p className="pf-footer-copy">
           오래 운영되는 서비스 UI 경험을 바탕으로 화면 변경과 검증 흐름을 개선합니다.
         </p>
         <p>
           <a href="mailto:k.suzkim@gmail.com">k.suzkim@gmail.com</a>
         </p>
       </div>
-    </>
+      </main>
+
+      <div className="pf-statusbar" role="status" aria-label="포트폴리오 상태">
+        <span><i aria-hidden="true" /> ready</span>
+        <span>UI / Frontend Developer</span>
+        <span>UTF-8</span>
+        <span>320 · 390 · 1440</span>
+      </div>
+    </div>
   );
 }
 
 function ObsidianRagDiagram() {
   return (
-    <div style={{ margin: "20px 0" }}>
+    <div className="pf-diagram">
       <svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Obsidian RAG 검색 레이어 구조" style={{ width: "100%", height: "auto" }}>
         <defs>
           <marker id="ragArrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-            <path d="M0,0 L8,3 L0,6" fill="#7c6ff7" />
+            <path d="M0,0 L8,3 L0,6" fill="#2457d6" />
           </marker>
           <marker id="ragArrowGreen" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-            <path d="M0,0 L8,3 L0,6" fill="#34d399" />
+            <path d="M0,0 L8,3 L0,6" fill="#2457d6" />
           </marker>
         </defs>
 
-        <rect x="20" y="70" width="130" height="70" rx="8" fill="#1a1a24" stroke="#34d399" strokeWidth="1.5" />
-        <text x="85" y="98" textAnchor="middle" fill="#34d399" fontSize="12" fontWeight="700">Obsidian Vault</text>
-        <text x="85" y="116" textAnchor="middle" fill="#94a3b8" fontSize="9">문서 · 메모 · 작업 기록</text>
+        <rect x="20" y="70" width="130" height="70" rx="8" fill="#f4f6f7" stroke="#2457d6" strokeWidth="1.5" />
+        <text x="85" y="98" textAnchor="middle" fill="#2457d6" fontSize="12" fontWeight="700">Obsidian Vault</text>
+        <text x="85" y="116" textAnchor="middle" fill="#5b6367" fontSize="9">문서 · 메모 · 작업 기록</text>
 
-        <rect x="205" y="35" width="130" height="46" rx="8" fill="#1a1a24" stroke="#2a2a3a" />
-        <text x="270" y="57" textAnchor="middle" fill="#e2e8f0" fontSize="11" fontWeight="600">Watcher</text>
-        <text x="270" y="70" textAnchor="middle" fill="#94a3b8" fontSize="9">변경 감지</text>
+        <rect x="205" y="35" width="130" height="46" rx="8" fill="#f4f6f7" stroke="#d8dee1" />
+        <text x="270" y="57" textAnchor="middle" fill="#111413" fontSize="11" fontWeight="600">Watcher</text>
+        <text x="270" y="70" textAnchor="middle" fill="#5b6367" fontSize="9">변경 감지</text>
 
-        <rect x="205" y="112" width="130" height="46" rx="8" fill="#1a1a24" stroke="#2a2a3a" />
-        <text x="270" y="134" textAnchor="middle" fill="#e2e8f0" fontSize="11" fontWeight="600">Local Embedding</text>
-        <text x="270" y="147" textAnchor="middle" fill="#94a3b8" fontSize="9">Ollama</text>
+        <rect x="205" y="112" width="130" height="46" rx="8" fill="#f4f6f7" stroke="#d8dee1" />
+        <text x="270" y="134" textAnchor="middle" fill="#111413" fontSize="11" fontWeight="600">Local Embedding</text>
+        <text x="270" y="147" textAnchor="middle" fill="#5b6367" fontSize="9">Ollama</text>
 
-        <rect x="390" y="70" width="130" height="70" rx="8" fill="#1a1a24" stroke="#7c6ff7" strokeWidth="1.5" />
-        <text x="455" y="98" textAnchor="middle" fill="#a78bfa" fontSize="12" fontWeight="700">RAG Server</text>
-        <text x="455" y="116" textAnchor="middle" fill="#94a3b8" fontSize="9">FastAPI + ChromaDB</text>
+        <rect x="390" y="70" width="130" height="70" rx="8" fill="#f4f6f7" stroke="#2457d6" strokeWidth="1.5" />
+        <text x="455" y="98" textAnchor="middle" fill="#2457d6" fontSize="12" fontWeight="700">RAG Server</text>
+        <text x="455" y="116" textAnchor="middle" fill="#5b6367" fontSize="9">FastAPI + ChromaDB</text>
 
-        <rect x="570" y="25" width="105" height="36" rx="8" fill="#1a1a24" stroke="#2a2a3a" />
-        <text x="622" y="47" textAnchor="middle" fill="#e2e8f0" fontSize="10">Claude Code</text>
-        <rect x="570" y="86" width="105" height="36" rx="8" fill="#1a1a24" stroke="#2a2a3a" />
-        <text x="622" y="108" textAnchor="middle" fill="#e2e8f0" fontSize="10">Hermes</text>
-        <rect x="570" y="147" width="105" height="36" rx="8" fill="#1a1a24" stroke="#2a2a3a" />
-        <text x="622" y="169" textAnchor="middle" fill="#e2e8f0" fontSize="10">Codex / CLI</text>
+        <rect x="570" y="25" width="105" height="36" rx="8" fill="#f4f6f7" stroke="#d8dee1" />
+        <text x="622" y="47" textAnchor="middle" fill="#111413" fontSize="10">Claude Code</text>
+        <rect x="570" y="86" width="105" height="36" rx="8" fill="#f4f6f7" stroke="#d8dee1" />
+        <text x="622" y="108" textAnchor="middle" fill="#111413" fontSize="10">Hermes</text>
+        <rect x="570" y="147" width="105" height="36" rx="8" fill="#f4f6f7" stroke="#d8dee1" />
+        <text x="622" y="169" textAnchor="middle" fill="#111413" fontSize="10">Codex / CLI</text>
 
-        <line x1="150" y1="92" x2="203" y2="60" stroke="#34d399" strokeWidth="1.4" markerEnd="url(#ragArrowGreen)" />
-        <line x1="150" y1="118" x2="203" y2="135" stroke="#34d399" strokeWidth="1.4" markerEnd="url(#ragArrowGreen)" />
-        <line x1="335" y1="58" x2="388" y2="92" stroke="#7c6ff7" strokeWidth="1.4" markerEnd="url(#ragArrow)" />
-        <line x1="335" y1="135" x2="388" y2="118" stroke="#7c6ff7" strokeWidth="1.4" markerEnd="url(#ragArrow)" />
-        <line x1="520" y1="92" x2="568" y2="43" stroke="#7c6ff7" strokeWidth="1.2" markerEnd="url(#ragArrow)" />
-        <line x1="520" y1="105" x2="568" y2="105" stroke="#7c6ff7" strokeWidth="1.2" markerEnd="url(#ragArrow)" />
-        <line x1="520" y1="118" x2="568" y2="165" stroke="#7c6ff7" strokeWidth="1.2" markerEnd="url(#ragArrow)" />
+        <line x1="150" y1="92" x2="203" y2="60" stroke="#2457d6" strokeWidth="1.4" markerEnd="url(#ragArrowGreen)" />
+        <line x1="150" y1="118" x2="203" y2="135" stroke="#2457d6" strokeWidth="1.4" markerEnd="url(#ragArrowGreen)" />
+        <line x1="335" y1="58" x2="388" y2="92" stroke="#2457d6" strokeWidth="1.4" markerEnd="url(#ragArrow)" />
+        <line x1="335" y1="135" x2="388" y2="118" stroke="#2457d6" strokeWidth="1.4" markerEnd="url(#ragArrow)" />
+        <line x1="520" y1="92" x2="568" y2="43" stroke="#2457d6" strokeWidth="1.2" markerEnd="url(#ragArrow)" />
+        <line x1="520" y1="105" x2="568" y2="105" stroke="#2457d6" strokeWidth="1.2" markerEnd="url(#ragArrow)" />
+        <line x1="520" y1="118" x2="568" y2="165" stroke="#2457d6" strokeWidth="1.2" markerEnd="url(#ragArrow)" />
 
-        <text x="350" y="196" textAnchor="middle" fill="#64748b" fontSize="9">
+        <text x="350" y="196" textAnchor="middle" fill="#5b6367" fontSize="9">
           한 번 인덱싱한 Obsidian 문맥을 여러 에이전트가 같은 방식으로 검색
         </text>
       </svg>

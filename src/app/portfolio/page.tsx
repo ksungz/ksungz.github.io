@@ -82,7 +82,7 @@ export default function PortfolioPage() {
         <h2 className="pf-section-title">공개 UI 구현 사례</h2>
         <p className="pf-section-lead">
           상품상세 UI를 운영하며 다뤄온 옵션, 재고, 모바일 화면 전환을 공개 가능한 데이터로 다시 구현했습니다.
-          실제 서비스 코드와 자산은 사용하지 않았고, 상태를 나누는 기준과 확인 결과를 Storybook에 함께 남겼습니다.
+          업무 코드와 사내 자산은 사용하지 않았고, 상태를 나누는 기준과 확인 결과를 Storybook에 함께 남겼습니다.
         </p>
 
         <div className="pf-project">

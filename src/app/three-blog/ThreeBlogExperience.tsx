@@ -4,7 +4,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useReducedMotion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, Gauge, Play, X } from "lucide-react";
+import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, Gauge, Play, Square, X } from "lucide-react";
 import type { MoveControls } from "./ThreeBlogScene";
 import { landmarks, type LandmarkId } from "./content";
 
@@ -63,7 +63,9 @@ export default function ThreeBlogExperience() {
   const [selectedId, setSelectedId] = useState<LandmarkId | null>(null);
   const [introCompact, setIntroCompact] = useState(false);
   const [lowPowerMode, setLowPowerMode] = useState(false);
+  const [mobileControl, setMobileControl] = useState<keyof MoveControls | null>(null);
   const nearbyIdRef = useRef<LandmarkId | null>(null);
+  const mobileControlRef = useRef<keyof MoveControls | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const mapPlayerRef = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -85,10 +87,19 @@ export default function ThreeBlogExperience() {
     setNearbyId(id);
   }, []);
 
+  const stopMovement = useCallback(() => {
+    Object.keys(controls.current).forEach((key) => {
+      controls.current[key as keyof MoveControls] = false;
+    });
+    mobileControlRef.current = null;
+    setMobileControl(null);
+  }, []);
+
   const handleSelect = useCallback((id: LandmarkId) => {
+    stopMovement();
     setIntroCompact(true);
     setSelectedId(id);
-  }, []);
+  }, [stopMovement]);
 
   const handlePositionChange = useCallback((position: { x: number; z: number }) => {
     if (!mapPlayerRef.current) return;
@@ -101,12 +112,15 @@ export default function ThreeBlogExperience() {
       const control = keyToControl[event.code];
       if (control) {
         event.preventDefault();
+        if (mobileControlRef.current) {
+          stopMovement();
+        }
         controls.current[control] = true;
         setIntroCompact(true);
       }
 
       if (event.key === "Enter" && nearbyIdRef.current) {
-        setSelectedId(nearbyIdRef.current);
+        handleSelect(nearbyIdRef.current);
       }
       if (event.key === "Escape") {
         setSelectedId(null);
@@ -118,46 +132,33 @@ export default function ThreeBlogExperience() {
       if (control) controls.current[control] = false;
     };
 
-    const resetControls = () => {
-      Object.keys(controls.current).forEach((key) => {
-        controls.current[key as keyof MoveControls] = false;
-      });
-    };
-
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
-    window.addEventListener("blur", resetControls);
+    window.addEventListener("blur", stopMovement);
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
-      window.removeEventListener("blur", resetControls);
+      window.removeEventListener("blur", stopMovement);
     };
-  }, []);
+  }, [handleSelect, stopMovement]);
 
   useEffect(() => {
     if (!selected) return;
     closeButtonRef.current?.focus();
   }, [selected]);
 
-  const setControl = (control: keyof MoveControls, active: boolean) => {
-    controls.current[control] = active;
-    if (active) setIntroCompact(true);
-  };
+  const toggleMobileControl = (control: keyof MoveControls) => {
+    const nextControl = mobileControlRef.current === control ? null : control;
+    stopMovement();
 
-  const controlButtonProps = (control: keyof MoveControls) => ({
-    onPointerDown: (event: React.PointerEvent<HTMLButtonElement>) => {
-      event.currentTarget.setPointerCapture(event.pointerId);
-      setControl(control, true);
-    },
-    onPointerUp: (event: React.PointerEvent<HTMLButtonElement>) => {
-      if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-        event.currentTarget.releasePointerCapture(event.pointerId);
-      }
-      setControl(control, false);
-    },
-    onPointerCancel: () => setControl(control, false),
-  });
+    if (nextControl) {
+      controls.current[nextControl] = true;
+      mobileControlRef.current = nextControl;
+      setMobileControl(nextControl);
+      setIntroCompact(true);
+    }
+  };
 
   return (
     <div className="three-blog-page">
@@ -266,18 +267,50 @@ export default function ThreeBlogExperience() {
       </nav>
 
       <div className="tb-mobile-controls" aria-label="캐릭터 이동 컨트롤">
-        <button type="button" aria-label="앞으로 이동" {...controlButtonProps("forward")}>
-          <ChevronUp aria-hidden="true" />
-        </button>
-        <button type="button" aria-label="왼쪽으로 이동" {...controlButtonProps("left")}>
-          <ChevronLeft aria-hidden="true" />
-        </button>
-        <button type="button" aria-label="뒤로 이동" {...controlButtonProps("backward")}>
-          <ChevronDown aria-hidden="true" />
-        </button>
-        <button type="button" aria-label="오른쪽으로 이동" {...controlButtonProps("right")}>
-          <ChevronRight aria-hidden="true" />
-        </button>
+        <p className="tb-mobile-hint" aria-live="polite">
+          {mobileControl ? "이동 중 · 가운데를 눌러 정지" : "한 번 눌러 이동"}
+        </p>
+        <div className="tb-mobile-dpad">
+          <button
+            className={`tb-move-forward${mobileControl === "forward" ? " is-active" : ""}`}
+            type="button"
+            aria-label="앞으로 계속 이동"
+            aria-pressed={mobileControl === "forward"}
+            onClick={() => toggleMobileControl("forward")}
+          >
+            <ChevronUp aria-hidden="true" />
+          </button>
+          <button
+            className={`tb-move-left${mobileControl === "left" ? " is-active" : ""}`}
+            type="button"
+            aria-label="왼쪽으로 계속 이동"
+            aria-pressed={mobileControl === "left"}
+            onClick={() => toggleMobileControl("left")}
+          >
+            <ChevronLeft aria-hidden="true" />
+          </button>
+          <button className="tb-mobile-stop" type="button" aria-label="이동 정지" onClick={stopMovement}>
+            <Square size={13} fill="currentColor" aria-hidden="true" />
+          </button>
+          <button
+            className={`tb-move-right${mobileControl === "right" ? " is-active" : ""}`}
+            type="button"
+            aria-label="오른쪽으로 계속 이동"
+            aria-pressed={mobileControl === "right"}
+            onClick={() => toggleMobileControl("right")}
+          >
+            <ChevronRight aria-hidden="true" />
+          </button>
+          <button
+            className={`tb-move-backward${mobileControl === "backward" ? " is-active" : ""}`}
+            type="button"
+            aria-label="뒤로 계속 이동"
+            aria-pressed={mobileControl === "backward"}
+            onClick={() => toggleMobileControl("backward")}
+          >
+            <ChevronDown aria-hidden="true" />
+          </button>
+        </div>
       </div>
 
       {selected && (

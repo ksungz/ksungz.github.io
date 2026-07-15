@@ -17,10 +17,31 @@ export type MoveControls = {
 type ThreeBlogSceneProps = {
   controls: MutableRefObject<MoveControls>;
   reducedMotion: boolean;
+  lowPowerMode: boolean;
   onNearbyChange: (id: LandmarkId | null) => void;
+  onPositionChange: (position: { x: number; z: number }) => void;
   onSelect: (id: LandmarkId) => void;
   fallback: React.ReactNode;
 };
+
+const ISLAND_RADIUS_X = 16.8;
+const ISLAND_RADIUS_Z = 12.8;
+const LANDMARK_COLLISION_RADIUS = 3.15;
+
+function isWalkable(x: number, z: number) {
+  const insideIsland =
+    (x * x) / (ISLAND_RADIUS_X * ISLAND_RADIUS_X) +
+      (z * z) / (ISLAND_RADIUS_Z * ISLAND_RADIUS_Z) <=
+    1;
+
+  if (!insideIsland) return false;
+
+  return landmarks.every((landmark) => {
+    const dx = x - landmark.position[0];
+    const dz = z - landmark.position[2];
+    return Math.hypot(dx, dz) >= LANDMARK_COLLISION_RADIUS;
+  });
+}
 
 const TREE_POSITIONS: Array<[number, number, number, number]> = [
   [-15, 0, -7, 0.9],
@@ -166,6 +187,14 @@ function LandmarkBuilding({
   reducedMotion: boolean;
   onSelect: (id: LandmarkId) => void;
 }) {
+  const beacon = useRef<THREE.Mesh>(null);
+
+  useFrame(({ clock }) => {
+    if (!beacon.current || reducedMotion) return;
+    const pulse = 1 + Math.sin(clock.elapsedTime * 1.8 + landmark.position[0]) * 0.035;
+    beacon.current.scale.setScalar(pulse);
+  });
+
   return (
     <group
       position={landmark.position}
@@ -177,6 +206,10 @@ function LandmarkBuilding({
       <mesh position={[0, 0.08, 0]}>
         <cylinderGeometry args={[3.6, 3.9, 0.35, 12]} />
         <meshStandardMaterial color="#f5f1d8" roughness={1} />
+      </mesh>
+      <mesh ref={beacon} position={[0, 0.31, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[3.25, 0.055, 5, 32]} />
+        <meshBasicMaterial color={landmark.color} transparent opacity={0.72} />
       </mesh>
       <Float
         speed={reducedMotion ? 0 : 1.4}
@@ -198,9 +231,11 @@ function LandmarkBuilding({
 function Player({
   controls,
   onNearbyChange,
+  onPositionChange,
 }: {
   controls: MutableRefObject<MoveControls>;
   onNearbyChange: (id: LandmarkId | null) => void;
+  onPositionChange: (position: { x: number; z: number }) => void;
 }) {
   const player = useRef<THREE.Group>(null);
   const leftArm = useRef<THREE.Mesh>(null);
@@ -208,6 +243,7 @@ function Player({
   const leftLeg = useRef<THREE.Mesh>(null);
   const rightLeg = useRef<THREE.Mesh>(null);
   const lastNearby = useRef<LandmarkId | null>(null);
+  const lastPositionUpdate = useRef(0);
   const direction = useMemo(() => new THREE.Vector3(), []);
   const cameraTarget = useMemo(() => new THREE.Vector3(), []);
   const cameraPosition = useMemo(() => new THREE.Vector3(), []);
@@ -227,9 +263,16 @@ function Player({
     const moving = direction.lengthSq() > 0;
     if (moving) {
       direction.normalize();
-      player.current.position.addScaledVector(direction, Math.min(delta, 0.05) * 7.2);
-      player.current.position.x = THREE.MathUtils.clamp(player.current.position.x, -16, 16);
-      player.current.position.z = THREE.MathUtils.clamp(player.current.position.z, -12.5, 13);
+      const step = Math.min(delta, 0.05) * 7.2;
+      const nextX = player.current.position.x + direction.x * step;
+      const nextZ = player.current.position.z + direction.z * step;
+
+      if (isWalkable(nextX, player.current.position.z)) {
+        player.current.position.x = nextX;
+      }
+      if (isWalkable(player.current.position.x, nextZ)) {
+        player.current.position.z = nextZ;
+      }
       player.current.rotation.y = THREE.MathUtils.damp(
         player.current.rotation.y,
         Math.atan2(direction.x, direction.z),
@@ -248,6 +291,14 @@ function Player({
     camera.position.lerp(cameraPosition, 1 - Math.exp(-delta * 3.5));
     cameraTarget.copy(player.current.position).add(targetOffset);
     camera.lookAt(cameraTarget);
+
+    if (clock.elapsedTime - lastPositionUpdate.current > 0.12) {
+      lastPositionUpdate.current = clock.elapsedTime;
+      onPositionChange({
+        x: player.current.position.x,
+        z: player.current.position.z,
+      });
+    }
 
     let nearby: LandmarkId | null = null;
     let nearestDistance = Number.POSITIVE_INFINITY;
@@ -311,6 +362,7 @@ function World({
   controls,
   reducedMotion,
   onNearbyChange,
+  onPositionChange,
   onSelect,
 }: Omit<ThreeBlogSceneProps, "fallback">) {
   return (
@@ -368,7 +420,11 @@ function World({
         </>
       )}
 
-      <Player controls={controls} onNearbyChange={onNearbyChange} />
+      <Player
+        controls={controls}
+        onNearbyChange={onNearbyChange}
+        onPositionChange={onPositionChange}
+      />
     </>
   );
 }
@@ -376,23 +432,28 @@ function World({
 export default function ThreeBlogScene({
   controls,
   reducedMotion,
+  lowPowerMode,
   onNearbyChange,
+  onPositionChange,
   onSelect,
   fallback,
 }: ThreeBlogSceneProps) {
   return (
     <Canvas
+      key={lowPowerMode ? "low-power" : "full-effects"}
       aria-label="김성재의 작업 세계를 탐색하는 3D 장면"
       camera={{ position: [8.5, 10.5, 21.5], fov: 42, near: 0.1, far: 120 }}
-      dpr={[1, 1.5]}
+      dpr={lowPowerMode ? 1 : [1, 1.5]}
       fallback={fallback}
-      gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
+      gl={{ antialias: !lowPowerMode, alpha: false, powerPreference: "high-performance" }}
       performance={{ min: 0.6 }}
     >
       <World
         controls={controls}
         reducedMotion={reducedMotion}
+        lowPowerMode={lowPowerMode}
         onNearbyChange={onNearbyChange}
+        onPositionChange={onPositionChange}
         onSelect={onSelect}
       />
     </Canvas>

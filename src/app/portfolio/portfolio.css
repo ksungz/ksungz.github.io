@@ -1227,6 +1227,55 @@ body:has(.portfolio-root) > main {
   }
 }
 
+/* Interactive 3D portfolio entry */
+.pf-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 22px;
+  margin-top: 34px;
+}
+
+.pf-hero-actions .pf-scroll-link {
+  margin-top: 0;
+}
+
+.pf-3d-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid var(--blue);
+  border-radius: 4px;
+  padding: 10px 13px;
+  color: #fff;
+  background: var(--blue);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.pf-3d-link:hover,
+.pf-3d-link:focus-visible {
+  color: var(--blue);
+  background: transparent;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 520px) {
+  .pf-hero-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-3d-link {
+    transition: none;
+  }
+}
+
 @media (max-width: 520px) {
   .pf-cli-status {
     width: 7px;

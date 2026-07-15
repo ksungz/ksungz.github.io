@@ -12,6 +12,7 @@ export default function PortfolioPage() {
           <a href="#case-study">Case Study</a>
           <a href="#services">Services</a>
           <a href="#writing">Writing</a>
+          <a href="/three-blog">3D Mode</a>
           <a href="/career">Career</a>
           <a href="mailto:k.suzkim@gmail.com">Contact</a>
         </nav>
@@ -32,7 +33,10 @@ export default function PortfolioPage() {
           서비스 UI를 만들고 운영하며,<br className="pf-break-desktop" />{" "}
           복잡한 구조를 꾸준히 개선해왔습니다.
         </p>
-        <a className="pf-scroll-link" href="#work"><span aria-hidden="true">$</span> open ./work <span aria-hidden="true">↓</span></a>
+        <div className="pf-hero-actions">
+          <a className="pf-scroll-link" href="#work"><span aria-hidden="true">$</span> open ./work <span aria-hidden="true">↓</span></a>
+          <a className="pf-3d-link" href="/three-blog"><span aria-hidden="true">◆</span> launch ./three-blog</a>
+        </div>
       </header>
 
       <section className="pf-readme-output" aria-label="포트폴리오 소개">

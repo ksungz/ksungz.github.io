@@ -15,17 +15,13 @@ const ThreeBlogScene = dynamic(() => import("./ThreeBlogScene"), {
 
 const keyToControl: Record<string, keyof MoveControls> = {
   ArrowUp: "forward",
-  w: "forward",
-  W: "forward",
+  KeyW: "forward",
   ArrowDown: "backward",
-  s: "backward",
-  S: "backward",
+  KeyS: "backward",
   ArrowLeft: "left",
-  a: "left",
-  A: "left",
+  KeyA: "left",
   ArrowRight: "right",
-  d: "right",
-  D: "right",
+  KeyD: "right",
 };
 
 function NavigationFallback({ onSelect }: { onSelect: (id: LandmarkId) => void }) {
@@ -102,7 +98,7 @@ export default function ThreeBlogExperience() {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      const control = keyToControl[event.key];
+      const control = keyToControl[event.code];
       if (control) {
         event.preventDefault();
         controls.current[control] = true;
@@ -118,7 +114,7 @@ export default function ThreeBlogExperience() {
     };
 
     const handleKeyUp = (event: KeyboardEvent) => {
-      const control = keyToControl[event.key];
+      const control = keyToControl[event.code];
       if (control) controls.current[control] = false;
     };
 

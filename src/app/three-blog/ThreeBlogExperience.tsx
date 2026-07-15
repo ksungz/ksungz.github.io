@@ -26,7 +26,7 @@ const keyToControl: Record<string, keyof MoveControls> = {
 
 function NavigationFallback({ onSelect }: { onSelect: (id: LandmarkId) => void }) {
   return (
-    <div className="tb-fallback" role="status">
+    <div className="tb-fallback" role="region" aria-label="2D 탐색 화면">
       <p className="tb-fallback-kicker">2D navigation mode</p>
       <h2>이 브라우저에서는 가벼운 탐색 화면을 보여드려요.</h2>
       <p>아래 장소를 선택하면 같은 콘텐츠로 이동할 수 있습니다.</p>
@@ -67,6 +67,7 @@ export default function ThreeBlogExperience() {
   const nearbyIdRef = useRef<LandmarkId | null>(null);
   const mobileControlRef = useRef<keyof MoveControls | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const dockButtonRefs = useRef<Partial<Record<LandmarkId, HTMLButtonElement | null>>>({});
   const mapPlayerRef = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
 
@@ -101,6 +102,15 @@ export default function ThreeBlogExperience() {
     setSelectedId(id);
   }, [stopMovement]);
 
+  const closePanel = useCallback(() => {
+    const returnTarget = selectedId;
+    setSelectedId(null);
+
+    window.requestAnimationFrame(() => {
+      if (returnTarget) dockButtonRefs.current[returnTarget]?.focus();
+    });
+  }, [selectedId]);
+
   const handlePositionChange = useCallback((position: { x: number; z: number }) => {
     if (!mapPlayerRef.current) return;
     mapPlayerRef.current.style.left = `${((position.x + 17) / 34) * 100}%`;
@@ -122,8 +132,8 @@ export default function ThreeBlogExperience() {
       if (event.key === "Enter" && nearbyIdRef.current) {
         handleSelect(nearbyIdRef.current);
       }
-      if (event.key === "Escape") {
-        setSelectedId(null);
+      if (event.key === "Escape" && selectedId) {
+        closePanel();
       }
     };
 
@@ -141,7 +151,7 @@ export default function ThreeBlogExperience() {
       window.removeEventListener("keyup", handleKeyUp);
       window.removeEventListener("blur", stopMovement);
     };
-  }, [handleSelect, stopMovement]);
+  }, [closePanel, handleSelect, selectedId, stopMovement]);
 
   useEffect(() => {
     if (!selected) return;
@@ -195,19 +205,21 @@ export default function ThreeBlogExperience() {
           </button>
           <div className="tb-status">
             <span />
-            3D portfolio lab
+            3D navigation experiment
           </div>
         </div>
       </header>
 
       <section className={`tb-intro${introCompact ? " is-compact" : ""}`} aria-labelledby="three-blog-title">
-        <p>Service UI · Frontend · Systems</p>
+        <p>Portfolio navigation experiment</p>
         <h1 id="three-blog-title">
-          Explore my
+          작업을 담은
           <br />
-          frontend world.
+          3D 공간.
         </h1>
-        <span>캐릭터를 움직여 네 개의 작업 공간을 둘러보세요.</span>
+        <span>
+          AI 도구를 활용해 만든 탐색 화면입니다. 캐릭터를 움직이거나 바로가기로 내용을 둘러볼 수 있습니다.
+        </span>
         <button type="button" onClick={() => setIntroCompact(true)}>
           <Play size={13} fill="currentColor" aria-hidden="true" />
           탐색 시작
@@ -255,8 +267,12 @@ export default function ThreeBlogExperience() {
         {landmarks.map((landmark) => (
           <button
             key={landmark.id}
+            ref={(node) => {
+              dockButtonRefs.current[landmark.id] = node;
+            }}
             type="button"
             className={selectedId === landmark.id ? "is-active" : ""}
+            aria-label={`${landmark.label}: ${landmark.title}`}
             aria-pressed={selectedId === landmark.id}
             onClick={() => handleSelect(landmark.id)}
           >
@@ -325,7 +341,7 @@ export default function ThreeBlogExperience() {
             ref={closeButtonRef}
             className="tb-panel-close"
             type="button"
-            onClick={() => setSelectedId(null)}
+            onClick={closePanel}
             aria-label="정보 패널 닫기"
           >
             <X size={18} aria-hidden="true" />
@@ -349,7 +365,7 @@ export default function ThreeBlogExperience() {
         </aside>
       )}
 
-      <p className="tb-corner-note">A small playable index of my work · 2026</p>
+      <p className="tb-corner-note">AI 도구를 활용해 만든 포트폴리오 탐색 실험 · 2026</p>
     </div>
   );
 }

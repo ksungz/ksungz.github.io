@@ -12,7 +12,7 @@ export default function PortfolioPage() {
           <a href="#case-study">Case Study</a>
           <a href="#services">Services</a>
           <a href="#writing">Writing</a>
-          <a href="/three-blog">3D Mode</a>
+          <a href="/three-blog">3D View</a>
           <a href="/career">Career</a>
           <a href="mailto:k.suzkim@gmail.com">Contact</a>
         </nav>
@@ -35,7 +35,13 @@ export default function PortfolioPage() {
         </p>
         <div className="pf-hero-actions">
           <a className="pf-scroll-link" href="#work"><span aria-hidden="true">$</span> open ./work <span aria-hidden="true">↓</span></a>
-          <a className="pf-3d-link" href="/three-blog"><span aria-hidden="true">◆</span> launch ./three-blog</a>
+          <a
+            className="pf-3d-link"
+            href="/three-blog"
+            aria-label="AI 도구를 활용해 만든 3D 포트폴리오 탐색 화면 열기"
+          >
+            <span aria-hidden="true">◆</span> open ./3d-view
+          </a>
         </div>
       </header>
 

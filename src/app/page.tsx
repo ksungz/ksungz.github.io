@@ -41,16 +41,17 @@ export default function Home() {
 
       {/* Hero */}
       <section className="mb-20">
-        <p className="font-mono text-xs text-[var(--color-muted)] mb-3">AX Engineer / AI Product Engineer</p>
+        <p className="font-mono text-xs text-[var(--color-muted)] mb-3">AX Engineer</p>
         <h1 className="text-4xl font-bold tracking-tight mb-6">
-          AI Agent와 자동화로
+          13년의 제품 UI 운영 경험을
           <br />
-          <span className="text-[var(--color-muted)]">업무와 제품 개발 방식을 전환합니다.</span>
+          <span className="text-[var(--color-muted)]">AI Agent와 자동화로 전환합니다.</span>
         </h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
-          13년간 커머스·게임·플랫폼 서비스의 UI를 개발하고 운영했습니다.
-          현장에서 경험한 반복 업무, 맥락 단절, 검증 비용과 레거시 문제를 해결하기 위해
-          Agent, RAG, MCP와 자동화 워크플로우를 직접 설계하고 운영하고 있습니다.
+          커머스·게임·플랫폼 서비스에서 UI를 개발하고 운영하며
+          현장의 반복 업무, 맥락 단절, 검증 비용 문제를 경험했습니다.
+          그 경험을 바탕으로 Agent, RAG, MCP와 자동화 워크플로우를
+          직접 설계하고 운영하고 있습니다.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link

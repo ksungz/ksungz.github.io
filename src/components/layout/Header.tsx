@@ -5,11 +5,11 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 const nav = [
+  { href: "/about", label: "About" },
   { href: "/products", label: "Products" },
   { href: "/case-studies", label: "Case Studies" },
   { href: "/engineering", label: "Engineering" },
   { href: "/career", label: "Career" },
-  { href: "/about", label: "About" },
 ];
 
 export default function Header() {

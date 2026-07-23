@@ -200,7 +200,7 @@ export default function PortfolioPage() {
         <div className="pf-project">
           <div className="pf-project-header">
             <h3>AI PR Review Agent 적용</h3>
-            <a className="pf-project-link" href="/tech/pr-review-agent" target="_blank" rel="noopener noreferrer">관련 글 ↗</a>
+            <a className="pf-project-link" href="/engineering/pr-review-agent" target="_blank" rel="noopener noreferrer">관련 글 ↗</a>
           </div>
           <p className="pf-project-desc">
             UI 개발 리뷰에서는 BEM 네이밍, SCSS 구조, 접근성 속성, 중복 스타일처럼 반복해서 보는 항목이 많습니다.
@@ -251,7 +251,7 @@ export default function PortfolioPage() {
         <div className="pf-project">
           <div className="pf-project-header">
             <h3>AX Doctor</h3>
-            <a className="pf-project-link" href="/tech/ax-doctor-preflight" target="_blank" rel="noopener noreferrer">만든 과정 ↗</a>
+            <a className="pf-project-link" href="/engineering/ax-doctor-preflight" target="_blank" rel="noopener noreferrer">만든 과정 ↗</a>
             <a className="pf-project-link" href="https://github.com/ksungz/ax-doctor" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
             <span className="pf-badge pf-badge-live">오픈소스</span>
           </div>
@@ -349,7 +349,7 @@ export default function PortfolioPage() {
             <div>
               <div className="pf-project-header">
                 <h3>텔레그램 뉴스 봇</h3>
-                <a className="pf-project-link" href="/tech/ai-news-agent" target="_blank" rel="noopener noreferrer">관련 글 ↗</a>
+                <a className="pf-project-link" href="/engineering/ai-news-agent" target="_blank" rel="noopener noreferrer">관련 글 ↗</a>
                 <span className="pf-badge pf-badge-running">상시 실행</span>
               </div>
               <p>
@@ -380,9 +380,9 @@ export default function PortfolioPage() {
         <div className="pf-project">
           <div className="pf-project-header">
             <h3>Hermes와 Obsidian RAG를 연결한 작업 환경</h3>
-            <a className="pf-project-link" href="/tech/ai-workspace" target="_blank" rel="noopener noreferrer">초기 구조 ↗</a>
-            <a className="pf-project-link" href="/tech/hermes-agent-runtime" target="_blank" rel="noopener noreferrer">전환 과정 ↗</a>
-            <a className="pf-project-link" href="/tech/obsidian-rag" target="_blank" rel="noopener noreferrer">RAG 글 ↗</a>
+            <a className="pf-project-link" href="/engineering/ai-workspace" target="_blank" rel="noopener noreferrer">초기 구조 ↗</a>
+            <a className="pf-project-link" href="/engineering/hermes-agent-runtime" target="_blank" rel="noopener noreferrer">전환 과정 ↗</a>
+            <a className="pf-project-link" href="/engineering/obsidian-rag" target="_blank" rel="noopener noreferrer">RAG 글 ↗</a>
           </div>
           <p className="pf-project-desc">
             OpenClaw로 시작한 개인 에이전트 환경을 Hermes 중심으로 정리하고, Obsidian 문서를 로컬 RAG로 인덱싱했습니다.
@@ -417,27 +417,27 @@ export default function PortfolioPage() {
         <h2 className="pf-section-title"><span>$ find writing/</span>기술 기록</h2>
 
         <div className="pf-blog-list">
-          <a className="pf-blog-item" href="/tech/ax-doctor-preflight" target="_blank" rel="noopener noreferrer">
+          <a className="pf-blog-item" href="/engineering/ax-doctor-preflight" target="_blank" rel="noopener noreferrer">
             <div className="pf-blog-title">새 AI 도구를 설치하기 전에 먼저 확인하고 싶었다 ↗</div>
             <div className="pf-blog-desc">기존 AI 개발 환경과 새 도입 대상의 충돌을 읽기 전용으로 점검하는 CLI를 만든 기록</div>
           </a>
-          <a className="pf-blog-item" href="/tech/pdp-ui" target="_blank" rel="noopener noreferrer">
+          <a className="pf-blog-item" href="/engineering/pdp-ui" target="_blank" rel="noopener noreferrer">
             <div className="pf-blog-title">모바일웹 상품상세(PDP) 전체 UI 개발 ↗</div>
             <div className="pf-blog-desc">상품상세 화면 운영, 도메인 영향 범위, 모바일 UI 구조를 정리한 기록</div>
           </a>
-          <a className="pf-blog-item" href="/tech/react-pdp" target="_blank" rel="noopener noreferrer">
+          <a className="pf-blog-item" href="/engineering/react-pdp" target="_blank" rel="noopener noreferrer">
             <div className="pf-blog-title">React 기반 PDP 컴포넌트 개발 ↗</div>
             <div className="pf-blog-desc">HTML/SCSS 기반 산출물을 React 컴포넌트와 CSS Modules 환경으로 옮긴 작업</div>
           </a>
-          <a className="pf-blog-item" href="/tech/dart-sass" target="_blank" rel="noopener noreferrer">
+          <a className="pf-blog-item" href="/engineering/dart-sass" target="_blank" rel="noopener noreferrer">
             <div className="pf-blog-title">Dart Sass 마이그레이션 ↗</div>
             <div className="pf-blog-desc">대규모 SCSS 전환에서 산출물 차이와 운영 화면 영향을 줄인 방식</div>
           </a>
-          <a className="pf-blog-item" href="/tech/cdn-css-series" target="_blank" rel="noopener noreferrer">
+          <a className="pf-blog-item" href="/engineering/cdn-css-series" target="_blank" rel="noopener noreferrer">
             <div className="pf-blog-title">CDN CSS 점진적 내재화 시리즈 ↗</div>
             <div className="pf-blog-desc">외부 CSS 의존성을 React 번들 안으로 단계적으로 옮긴 기록</div>
           </a>
-          <a className="pf-blog-item" href="/tech/ai-tools" target="_blank" rel="noopener noreferrer">
+          <a className="pf-blog-item" href="/engineering/ai-tools" target="_blank" rel="noopener noreferrer">
             <div className="pf-blog-title">AI 기반 개발 환경 구축 ↗</div>
             <div className="pf-blog-desc">팀에서 쓰는 AI 규칙, 스킬, MCP 연동, PR 리뷰 흐름을 정리한 기록</div>
           </a>

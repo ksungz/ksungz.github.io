@@ -32,7 +32,7 @@ export default async function TechPostPage({ params }: Props) {
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
       <Link
-        href={isDigest ? "/tech/digest" : "/tech"}
+        href={isDigest ? "/engineering?category=digest" : "/engineering"}
         className="mb-8 inline-flex items-center gap-1 text-xs text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors"
       >
         ← {isDigest ? "Digest" : "Tech"}

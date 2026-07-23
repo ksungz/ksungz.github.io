@@ -786,7 +786,7 @@ export default function ThreeBlogExperience() {
               프로젝트 보기
               <ArrowRight size={16} aria-hidden="true" />
             </Link>
-            <Link href="/tech">기술 글 보기</Link>
+            <Link href="/engineering">기술 글 보기</Link>
           </div>
         </aside>
       )}

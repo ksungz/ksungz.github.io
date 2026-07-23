@@ -29,7 +29,7 @@ export default function TechPage() {
           {posts.map((post) => (
             <Card
               key={post.slug}
-              href={`/tech/${post.slug}`}
+              href={`/engineering/${post.slug}`}
               title={post.title}
               description={post.description}
               meta={post.date}

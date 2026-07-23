@@ -23,6 +23,13 @@ const featuredProducts = [
     tags: ["AI Content", "Automation", "Supabase"],
   },
   {
+    name: "Commerce AI",
+    tagline: "커머스 서비스에 AI 도입",
+    description: "2,384개 SCSS 파일 Dart Sass 전환, PR Review Agent 8개 저장소 적용, 반복 작업 자동화.",
+    href: "/products#commerce-ai",
+    tags: ["Sass Migration", "PR Review Agent", "Cursor"],
+  },
+  {
     name: "OpenClaw Lab",
     tagline: "다중 AI 에이전트 연결 CLI",
     description: "Claude Code, Codex, Gemini CLI의 작업 맥락과 실행 기록을 공통 관리하는 오픈소스.",
@@ -108,12 +115,23 @@ export default function Home() {
         <h2 className="mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
           What I Do
         </h2>
-        <div className="space-y-4">
+        <div className="grid gap-4 sm:grid-cols-3">
           <div className="rounded-lg border border-[var(--color-border)] p-4">
-            <h3 className="text-sm font-semibold">문제 정의 → AI 활용 → 제품 출시</h3>
+            <h3 className="text-sm font-semibold">문제 정의</h3>
             <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-              기술보다 Problem Solving, Decision Making, Iteration, Impact를 더 강조합니다.
-              왜 만들었는가, 어떤 문제를 해결했는가, 어떤 선택을 했는가, 무엇을 배웠는가.
+              왜 만들었는가부터 시작합니다. 기술 선택보다 문제가 먼저입니다.
+            </p>
+          </div>
+          <div className="rounded-lg border border-[var(--color-border)] p-4">
+            <h3 className="text-sm font-semibold">AI 활용 구현</h3>
+            <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
+              AI Agent로 반복 작업을 줄이고, 사람은 결정과 검증에 집중합니다.
+            </p>
+          </div>
+          <div className="rounded-lg border border-[var(--color-border)] p-4">
+            <h3 className="text-sm font-semibold">운영과 개선</h3>
+            <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
+              배포로 끝내지 않습니다. 운영 데이터와 피드백으로 다음 반복을 설계합니다.
             </p>
           </div>
         </div>

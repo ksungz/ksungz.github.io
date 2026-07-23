@@ -8,13 +8,27 @@ export const metadata: Metadata = {
 };
 
 const categories = [
-  { label: "Engineering", keywords: ["React", "CSS", "Storybook", "Lighthouse", "Performance", "Sass", "마크업", "접근성"] },
-  { label: "AI Engineering", keywords: ["AI", "Prompt", "Context", "Memory", "Tool Calling", "Agent", "RAG", "Ollama", "Hermes"] },
-  { label: "Automation", keywords: ["Automation", "OpenClaw", "Cursor", "Codex", "Claude", "Telegram", "파이프라인"] },
+  { label: "Engineering", keywords: ["React", "CSS", "Storybook", "Lighthouse", "Performance", "Sass", "마크업", "접근성", "반응형", "CDN", "CLS", "PDP"] },
+  { label: "AI Engineering", keywords: ["AI", "Prompt", "Context", "Memory", "Tool Calling", "Agent", "RAG", "Ollama", "Hermes", "OpenClaw", "하네스", "에이전트"] },
+  { label: "Automation", keywords: ["Automation", "Cursor", "Codex", "Claude", "Telegram", "파이프라인", "자동화", "PR Review", "GeekNews", "Digest"] },
 ];
 
 export default function Engineering() {
   const allPosts = getAllPosts().sort((a, b) => (a.date < b.date ? 1 : -1));
+
+  // 카테고리에 속한 slug 수집
+  const categorizedSlugs = new Set<string>();
+  categories.forEach(({ label, keywords }) => {
+    allPosts.forEach((p) => {
+      const tagMatch = p.tags?.some((t) => keywords.some((k) => t.toLowerCase().includes(k.toLowerCase())));
+      const titleMatch = keywords.some((k) => p.title.toLowerCase().includes(k.toLowerCase()));
+      const descMatch = p.description?.toLowerCase().includes(label.toLowerCase());
+      if (tagMatch || titleMatch || descMatch) categorizedSlugs.add(p.slug);
+    });
+  });
+
+  // 미분류 글
+  const uncategorized = allPosts.filter((p) => !categorizedSlugs.has(p.slug));
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
@@ -57,26 +71,26 @@ export default function Engineering() {
         );
       })}
 
-      {/* 전체 글 */}
-      <section>
-        <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
-            All Posts
+      {/* 미분류 글 */}
+      {uncategorized.length > 0 && (
+        <section className="mb-16">
+          <h2 className="mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
+            Other
           </h2>
-        </div>
-        <div className="grid gap-3">
-          {allPosts.map((post) => (
-            <Card
-              key={post.slug}
-              href={`/engineering/${post.slug}`}
-              title={post.title}
-              description={post.description}
-              meta={post.date}
-              tags={post.tags}
-            />
-          ))}
-        </div>
-      </section>
+          <div className="grid gap-3">
+            {uncategorized.map((post) => (
+              <Card
+                key={post.slug}
+                href={`/engineering/${post.slug}`}
+                title={post.title}
+                description={post.description}
+                meta={post.date}
+                tags={post.tags}
+              />
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

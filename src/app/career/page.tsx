@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Career",
@@ -91,43 +90,6 @@ const careers = [
   },
 ];
 
-const sideProjects = [
-  {
-    title: "AX Doctor",
-    stack: "Go · CLI · JSON Schema",
-    description: "AI 개발 환경 도입 전 기존 설정과 충돌, 권한, 미확인 범위를 읽기 전용으로 점검하는 CLI.",
-    links: [
-      { label: "GitHub", href: "https://github.com/ksungz/ax-doctor" },
-      { label: "Case Study", href: "/case-studies/ax-doctor" },
-    ],
-  },
-  {
-    title: "News Automation",
-    stack: "Telegram Bot · AI Agent · GitHub API",
-    description: "뉴스 선택부터 AI 분석, 블로그 초안 PR 생성까지 자동화 파이프라인.",
-    links: [
-      { label: "Case Study", href: "/case-studies/news-automation" },
-    ],
-  },
-  {
-    title: "BabyPick AI",
-    stack: "GAS · Gemini · Ollama · Supabase",
-    description: "AI 콘텐츠 자동 발행으로 220개+ 육아 가이드 운영. 블로그·인스타 자동화 포함.",
-    links: [
-      { label: "사이트", href: "https://babypick.co.kr/guide" },
-      { label: "Case Study", href: "/case-studies/babypick-ai" },
-    ],
-  },
-  {
-    title: "OpenClaw Lab",
-    stack: "Node.js · CLI · MIT",
-    description: "다중 AI 에이전트 연결 CLI. Claude Code, Codex, Gemini CLI의 작업 맥락을 공통 관리.",
-    links: [
-      { label: "GitHub", href: "https://github.com/ksungz/agent-bridge" },
-    ],
-  },
-];
-
 export default function CareerPage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
@@ -197,7 +159,7 @@ export default function CareerPage() {
         </div>
       </section>
 
-      {/* Side Projects → Products 링크 */}
+      {/* Products 링크 */}
       <section>
         <div className="mb-6 flex items-center justify-between">
           <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">
@@ -207,31 +169,17 @@ export default function CareerPage() {
             전체 보기 →
           </Link>
         </div>
-        <div className="space-y-3">
-          {sideProjects.map((proj) => (
-            <div key={proj.title} className="rounded-lg border border-[var(--color-border)] p-4">
-              <h3 className="text-sm font-semibold">{proj.title}</h3>
-              <p className="font-mono text-xs text-[var(--color-muted)] mt-0.5">{proj.stack}</p>
-              <p className="text-sm text-[var(--color-muted)] mt-1">{proj.description}</p>
-              {"links" in proj && proj.links && (
-                <div className="mt-3 flex flex-wrap gap-3">
-                  {proj.links.map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      target={link.href.startsWith("http") ? "_blank" : undefined}
-                      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className="inline-flex items-center gap-1 text-xs font-medium text-[var(--color-foreground)] underline underline-offset-4 decoration-[var(--color-border)] hover:decoration-[var(--color-foreground)]"
-                    >
-                      {link.label}
-                      <ArrowRight className="h-3 w-3" aria-hidden="true" />
-                    </a>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+        <Link
+          href="/products"
+          className="group block rounded-lg border border-[var(--color-border)] p-5 transition-colors hover:border-[var(--color-foreground)]"
+        >
+          <h3 className="text-sm font-semibold group-hover:text-[var(--color-foreground)]">
+            AX Doctor, News Automation, BabyPick AI, Commerce AI, OpenClaw Lab
+          </h3>
+          <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
+            문제 정의부터 AI 활용, 구현, 배포, 운영까지 직접 만든 제품들을 확인하세요.
+          </p>
+        </Link>
       </section>
 
     </div>

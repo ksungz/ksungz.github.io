@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "김성재 — AI Product Engineer. 13년 UI 개발에서 제품 엔지니어링으로.",
+  description: "김성재 — AX Engineer. 13년 제품 UI 운영 경험을 기반으로 AI Agent, RAG, MCP와 자동화를 설계하고 운영합니다.",
 };
 
 export default function About() {
@@ -14,18 +14,23 @@ export default function About() {
         <h1 className="text-3xl font-bold tracking-tight mb-6">김성재</h1>
         <div className="space-y-4 text-sm leading-relaxed text-[var(--color-muted)] max-w-xl">
           <p>
-            13년 동안 UI를 만들어왔습니다.
-            하지만 지금은 좋은 제품을 빠르게 만드는 것에 더 관심이 있습니다.
+            13년간 커머스·게임·플랫폼 서비스의 UI를 개발하고 운영했습니다.
+            오래 운영되는 서비스에서 사람이 같은 맥락을 반복해서 찾고,
+            리뷰와 산출물을 매번 처음부터 만들며, 작은 변경도 여러 영역을 다시 확인해야 하는 문제를 경험했습니다.
           </p>
           <p>
-            AI Agent를 이용해 기획, 개발, 배포, 운영, 자동화를 구축하고 있습니다.
-            커머스 서비스에서 쌓은 UI 개발과 운영 경험을 바탕으로,
-            문제 정의부터 구현, 검증, 운영까지 직접 다루는 Product Engineer로 일하고 있습니다.
+            이 문제를 줄이기 위해 AI Agent, RAG, MCP와 자동화 워크플로우를
+            실제 개발 과정에 적용하고 있습니다. AI가 판단을 대신하게 하기보다
+            필요한 맥락과 초안, 확인 항목을 준비하게 하고
+            제품과 사용자에게 영향을 주는 결정은 사람이 담당하는 방식을 선호합니다.
           </p>
           <p>
-            기술보다 Problem Solving, Decision Making, Iteration, Impact를 더 중요하게 생각합니다.
-            AI가 판단을 대신하기보다 필요한 맥락을 찾아 초안과 확인 항목을 준비하고,
-            사람은 제품과 사용자에게 영향을 주는 결정에 집중하는 개발 환경을 만들고 있습니다.
+            개인적으로는 AX Doctor, Obsidian RAG, Hermes Agent, News Automation, BabyPick AI를
+            직접 설계하고 운영하고 있습니다.
+          </p>
+          <p>
+            하이브랩에서는 약 3년간 팀장으로 업무 분배, 공수 산정, 품질 관리와
+            클라이언트 커뮤니케이션을 담당했습니다.
           </p>
         </div>
       </section>
@@ -36,11 +41,11 @@ export default function About() {
         </h2>
         <div className="space-y-3">
           {[
-            { q: "왜 만들었는가", a: "문제 정의가 기술 선택보다 먼저입니다." },
-            { q: "어떤 문제를 해결했는가", a: "반복되는 작업과 맥락 단절을 줄입니다." },
-            { q: "어떤 선택을 했는가", a: "도구 중심이 아니라 역량 중심으로 판단합니다." },
-            { q: "무엇을 배웠는가", a: "AI 결과는 초안이고, 최종 판단은 사람이 합니다." },
-            { q: "다음에는 어떻게 개선할 것인가", a: "운영 데이터와 피드백으로 다음 반복을 설계합니다." },
+            { q: "현업 문제 이해", a: "13년 제품 운영 경험을 기반으로 반복 업무와 맥락 단절을 찾습니다." },
+            { q: "AX 시스템 설계", a: "Agent, RAG, MCP와 자동화 워크플로우를 직접 구현하고 운영합니다." },
+            { q: "Human-in-the-loop", a: "AI는 초안과 확인 항목을 준비하고, 최종 판단은 사람이 합니다." },
+            { q: "AI 제품 구현", a: "아이디어를 실제 사용할 수 있는 제품으로 만들고 배포·운영합니다." },
+            { q: "운영과 개선", a: "배포 후 운영 데이터와 피드백으로 다음 반복을 설계합니다." },
           ].map(({ q, a }) => (
             <div key={q} className="rounded-lg border border-[var(--color-border)] p-4">
               <p className="text-sm font-semibold">{q}</p>

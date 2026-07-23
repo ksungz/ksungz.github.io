@@ -16,7 +16,7 @@ export default function PortfolioPage() {
           <a href="/career">Career</a>
           <a href="mailto:k.suzkim@gmail.com">Contact</a>
         </nav>
-        <p className="pf-cli-status"><i aria-hidden="true" /> AI Product Engineer</p>
+        <p className="pf-cli-status"><i aria-hidden="true" /> AX Engineer</p>
       </header>
 
       <main className="pf-main">
@@ -450,7 +450,7 @@ export default function PortfolioPage() {
       <div className="pf-footer">
         <p className="pf-footer-name">김성재</p>
         <p className="pf-footer-copy">
-          제품을 기획하고 AI를 활용해 만들고 운영하는 Product Engineer입니다.
+          제품을 기획하고 AI Agent, RAG, MCP와 자동화로 만들고 운영하는 AX Engineer입니다.
         </p>
         <nav className="pf-footer-actions" aria-label="포트폴리오 다음 이동">
           <a href="/career">전체 경력 보기 →</a>
@@ -461,7 +461,7 @@ export default function PortfolioPage() {
 
       <div className="pf-statusbar" role="status" aria-label="포트폴리오 상태">
         <span><i aria-hidden="true" /> ready</span>
-        <span>AI Product Engineer</span>
+        <span>AX Engineer</span>
         <span>UTF-8</span>
         <span>320 · 390 · 1440</span>
       </div>

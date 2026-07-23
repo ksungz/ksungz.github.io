@@ -7,34 +7,39 @@ const featuredProducts = [
     description: "기존 설정과 충돌, 권한, 미확인 범위를 읽기 전용으로 진단하는 Go 기반 preflight 도구.",
     href: "/products#ax-doctor",
     tags: ["Go", "CLI", "Preflight"],
+    group: "AX Systems",
   },
   {
-    name: "News Automation",
-    tagline: "뉴스 선택부터 블로그 PR까지 자동화",
-    description: "GeekNews 큐레이션 → AI 분석 → MDX 초안 → GitHub PR 자동 생성 파이프라인.",
-    href: "/products#news-automation",
-    tags: ["AI Agent", "Automation", "Telegram Bot"],
+    name: "Obsidian RAG",
+    tagline: "여러 AI 에이전트가 같은 문서를 검색하는 로컬 RAG",
+    description: "Obsidian 문서를 Ollama 임베딩으로 인덱싱하고 MCP·HTTP·CLI로 검색하는 환경.",
+    href: "/products#obsidian-rag",
+    tags: ["RAG", "Ollama", "ChromaDB", "MCP"],
+    group: "AX Systems",
+  },
+  {
+    name: "Hermes Agent",
+    tagline: "OpenClaw에서 발전한 개인 AI 에이전트 하네스",
+    description: "Discord 연동, Obsidian RAG, cron 자동화, 다중 모델 지원으로 운영 중인 에이전트 환경.",
+    href: "/products#hermes-agent",
+    tags: ["Agent Runtime", "Discord", "Cron", "Multi-Model"],
+    group: "AX Systems",
   },
   {
     name: "BabyPick AI",
-    tagline: "AI 콘텐츠 자동 발행으로 220개+ 가이드 운영",
-    description: "키워드 선택 → AI 생성 → 검증 → 발행 → 블로그·인스타 자동화까지 구축·운영 중.",
+    tagline: "육아용품 탐색 서비스 + AI 콘텐츠 자동 발행",
+    description: "Next.js 서비스 구축, 키워드 관리→AI 생성→검증→발행→블로그·인스타 자동화까지 운영.",
     href: "/products#babypick-ai",
-    tags: ["AI Content", "Automation", "Supabase"],
+    tags: ["Next.js", "Supabase", "AI Content", "Automation"],
+    group: "AI Products",
   },
   {
-    name: "Commerce AI",
-    tagline: "커머스 서비스에 AI 도입",
-    description: "2,384개 SCSS 파일 Dart Sass 전환, PR Review Agent 8개 저장소 적용, 반복 작업 자동화.",
-    href: "/products#commerce-ai",
-    tags: ["Sass Migration", "PR Review Agent", "Cursor"],
-  },
-  {
-    name: "OpenClaw Lab",
-    tagline: "다중 AI 에이전트 연결 CLI",
-    description: "Claude Code, Codex, Gemini CLI의 작업 맥락과 실행 기록을 공통 관리하는 오픈소스.",
-    href: "/products#openclaw-lab",
-    tags: ["Open Source", "Multi-Agent", "MIT"],
+    name: "News Automation",
+    tagline: "뉴스 선택부터 블로그 PR까지 Human-in-the-loop 파이프라인",
+    description: "GeekNews 큐레이션 → 텔레그램 선택 → AI 분석 → MDX 초안 → GitHub PR 자동 생성.",
+    href: "/products#news-automation",
+    tags: ["AI Agent", "Telegram Bot", "Automation"],
+    group: "AI Products",
   },
 ];
 
@@ -44,15 +49,16 @@ export default function Home() {
 
       {/* Hero */}
       <section className="mb-20">
-        <p className="font-mono text-xs text-[var(--color-muted)] mb-3">AI Product Engineer</p>
+        <p className="font-mono text-xs text-[var(--color-muted)] mb-3">AX Engineer / AI Product Engineer</p>
         <h1 className="text-4xl font-bold tracking-tight mb-6">
-          I build AI-powered products
+          AI Agent와 자동화로
           <br />
-          <span className="text-[var(--color-muted)]">from idea to production.</span>
+          <span className="text-[var(--color-muted)]">업무와 제품 개발 방식을 전환합니다.</span>
         </h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
-          13년 동안 커머스 서비스를 만들었고,
-          현재는 AI Agent를 활용해 제품을 기획하고 개발하고 배포하고 운영하고 있습니다.
+          13년간 커머스·게임·플랫폼 서비스의 UI를 개발하고 운영했습니다.
+          현장에서 경험한 반복 업무, 맥락 단절, 검증 비용과 레거시 문제를 해결하기 위해
+          Agent, RAG, MCP와 자동화 워크플로우를 직접 설계하고 운영하고 있습니다.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
@@ -119,19 +125,19 @@ export default function Home() {
           <div className="rounded-lg border border-[var(--color-border)] p-4">
             <h3 className="text-sm font-semibold">문제 정의</h3>
             <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-              왜 만들었는가부터 시작합니다. 기술 선택보다 문제가 먼저입니다.
+              현업에서 반복되는 업무와 맥락 단절을 찾고, AI가 해결할 범위를 정의합니다.
             </p>
           </div>
           <div className="rounded-lg border border-[var(--color-border)] p-4">
-            <h3 className="text-sm font-semibold">AI 활용 구현</h3>
+            <h3 className="text-sm font-semibold">AX 시스템 구현</h3>
             <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-              AI Agent로 반복 작업을 줄이고, 사람은 결정과 검증에 집중합니다.
+              Agent, RAG, MCP와 자동화 워크플로우를 설계하고 구현합니다. 사람은 결정과 검증에 집중합니다.
             </p>
           </div>
           <div className="rounded-lg border border-[var(--color-border)] p-4">
-            <h3 className="text-sm font-semibold">운영과 개선</h3>
+            <h3 className="text-sm font-semibold">제품 운영과 개선</h3>
             <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-              배포로 끝내지 않습니다. 운영 데이터와 피드백으로 다음 반복을 설계합니다.
+              아이디어를 실제 사용할 수 있는 제품으로 만들고, 배포 후 운영 데이터로 반복 개선합니다.
             </p>
           </div>
         </div>

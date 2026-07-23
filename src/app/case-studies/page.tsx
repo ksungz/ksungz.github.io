@@ -15,9 +15,16 @@ const caseStudies = [
     tags: ["Go", "CLI", "Preflight", "Privacy-by-design"],
   },
   {
+    id: "obsidian-rag",
+    title: "Obsidian RAG — 여러 AI 에이전트가 같은 문서를 검색하는 환경",
+    excerpt: "Obsidian 문서를 로컬 임베딩으로 인덱싱하고 MCP·HTTP·CLI로 검색해 에이전트 간 맥락 단절을 해결한 사례.",
+    href: "/case-studies/obsidian-rag",
+    tags: ["RAG", "Ollama", "ChromaDB", "MCP"],
+  },
+  {
     id: "news-automation",
     title: "News Automation — 뉴스 선택부터 블로그 PR까지",
-    excerpt: "매일 기술 뉴스를 읽고 정리하는 반복 작업을 AI Agent 기반 파이프라인으로 자동화했습니다.",
+    excerpt: "매일 기술 뉴스를 읽고 정리하는 반복 작업을 AI Agent 기반 Human-in-the-loop 파이프라인으로 자동화했습니다.",
     href: "/case-studies/news-automation",
     tags: ["AI Agent", "Telegram Bot", "Automation"],
   },
@@ -27,13 +34,6 @@ const caseStudies = [
     excerpt: "키워드 선택부터 AI 생성, 검증, 발행, 블로그·인스타 자동화까지 혼자 운영하는 콘텐츠 파이프라인입니다.",
     href: "/case-studies/babypick-ai",
     tags: ["AI Content", "Automation", "Supabase"],
-  },
-  {
-    id: "commerce-ai",
-    title: "Commerce AI — 2,384개 SCSS 파일 Dart Sass 전환",
-    excerpt: "AI 도구를 활용해 대규모 SCSS 마이그레이션을 3주 안에 완료하고, PR Review Agent로 반복 리뷰를 자동화했습니다.",
-    href: "/case-studies/commerce-ai",
-    tags: ["Sass Migration", "PR Review Agent", "Cursor"],
   },
 ];
 

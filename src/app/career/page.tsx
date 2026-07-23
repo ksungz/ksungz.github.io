@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Career",
-  description: "김성재의 경력 — 13년 커머스·게임·플랫폼 UI 개발에서 AI Product Engineer로",
+  description: "김성재의 경력 — 13년 커머스·게임·플랫폼 UI 개발에서 AX Engineer로 전환",
 };
 
 const careers = [
@@ -11,7 +11,7 @@ const careers = [
     company: "11번가",
     team: "UI개발팀",
     period: "2020.12 ~ 현재",
-    role: "UI 개발자 → AI Product Engineer",
+    role: "UI Developer → AX Engineer",
     summary: "모바일웹 상품상세(PDP)를 포함한 핵심 서비스 UI 운영. 기존 HTML/SCSS 구조를 React 환경으로 전환하고, AI 도구를 도입해 반복 작업을 자동화.",
     achievements: [
       {
@@ -99,7 +99,7 @@ export default function CareerPage() {
         <p className="font-mono text-xs text-[var(--color-muted)] mb-2">Career</p>
         <h1 className="text-2xl font-bold tracking-tight">김성재</h1>
         <p className="mt-2 text-sm text-[var(--color-muted)]">
-          AI Product Engineer · 13년 커머스·게임·플랫폼 UI 개발
+          AX Engineer · 13년 커머스·게임·플랫폼 제품 UI 운영
         </p>
       </div>
 

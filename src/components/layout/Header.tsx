@@ -5,10 +5,11 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 const nav = [
+  { href: "/products", label: "Products" },
+  { href: "/case-studies", label: "Case Studies" },
+  { href: "/engineering", label: "Engineering" },
   { href: "/career", label: "Career" },
-  { href: "/tech", label: "Tech" },
-  { href: "/tech/digest", label: "Digest" },
-  { href: "/life", label: "Life" },
+  { href: "/about", label: "About" },
 ];
 
 export default function Header() {
@@ -28,7 +29,7 @@ export default function Header() {
               className={cn(
                 "text-sm transition-colors hover:text-[var(--color-foreground)]",
                 pathname === href ||
-                (pathname.startsWith(href + "/") && !(href === "/tech" && pathname.startsWith("/tech/digest")))
+                (pathname.startsWith(href + "/") && href !== "/")
                   ? "font-medium text-[var(--color-foreground)]"
                   : "text-[var(--color-muted)]"
               )}

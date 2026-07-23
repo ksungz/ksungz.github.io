@@ -15,6 +15,22 @@ export type Landmark = {
   position: [number, number, number];
 };
 
+export const worldBounds = {
+  minX: -22,
+  maxX: 22,
+  minZ: -16.5,
+  maxZ: 16.5,
+} as const;
+
+export const playerStart: [number, number, number] = [0, 0.45, 12];
+
+export function worldToMap(position: { x: number; z: number }) {
+  return {
+    left: ((position.x - worldBounds.minX) / (worldBounds.maxX - worldBounds.minX)) * 100,
+    top: ((position.z - worldBounds.minZ) / (worldBounds.maxZ - worldBounds.minZ)) * 100,
+  };
+}
+
 export const landmarks: Landmark[] = [
   {
     id: "career",
@@ -33,7 +49,7 @@ export const landmarks: Landmark[] = [
     action: "경력 살펴보기",
     color: "#ff785a",
     accent: "#ffd0aa",
-    position: [-10, 0, -6],
+    position: [-13, 0, -8],
   },
   {
     id: "tech",
@@ -52,7 +68,7 @@ export const landmarks: Landmark[] = [
     action: "기술 글 읽기",
     color: "#4169e1",
     accent: "#b9ccff",
-    position: [9, 0, -7],
+    position: [12.5, 0, -9],
   },
   {
     id: "portfolio",
@@ -71,7 +87,7 @@ export const landmarks: Landmark[] = [
     action: "프로젝트 보기",
     color: "#ffb84d",
     accent: "#fff0a8",
-    position: [10, 0, 8],
+    position: [13, 0, 9],
   },
   {
     id: "home",
@@ -90,6 +106,6 @@ export const landmarks: Landmark[] = [
     action: "기본 홈페이지로",
     color: "#7a65d1",
     accent: "#d9cbff",
-    position: [-9, 0, 8],
+    position: [-12.5, 0, 9.5],
   },
 ];

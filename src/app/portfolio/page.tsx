@@ -10,9 +10,9 @@ export default function PortfolioPage() {
         <nav className="pf-cli-nav" aria-label="포트폴리오 탐색">
           <a href="#work">Work</a>
           <a href="#case-study">Case Study</a>
+          <a href="#ax-doctor">AX Doctor</a>
           <a href="#services">Services</a>
           <a href="#writing">Writing</a>
-          <a href="/three-blog">3D View</a>
           <a href="/career">Career</a>
           <a href="mailto:k.suzkim@gmail.com">Contact</a>
         </nav>
@@ -237,6 +237,61 @@ export default function PortfolioPage() {
 
       </section>
 
+      <hr className="pf-divider" />
+
+      {/* AI 개발 환경 도입 전 점검 도구 */}
+      <section className="pf-section pf-section-dark" id="ax-doctor">
+        <h2 className="pf-section-title"><span>$ inspect ax-doctor/</span>AI 개발 환경 도입 전 점검 도구</h2>
+        <p className="pf-section-lead">
+          개인 AI 작업 환경을 정리하면서 새 설정을 설치하기 전에 기존 도구와 충돌하지 않는지,
+          확인하지 못한 영역은 없는지 먼저 점검할 필요가 있었습니다.
+          설치기와 분리된 읽기 전용 CLI로 문제를 다시 정의해 구현했습니다.
+        </p>
+
+        <div className="pf-project">
+          <div className="pf-project-header">
+            <h3>AX Doctor</h3>
+            <a className="pf-project-link" href="/tech/ax-doctor-preflight" target="_blank" rel="noopener noreferrer">만든 과정 ↗</a>
+            <a className="pf-project-link" href="https://github.com/ksungz/ax-doctor" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <span className="pf-badge pf-badge-live">오픈소스</span>
+          </div>
+          <p className="pf-project-desc">
+            현재 환경에 이미 있는 AI 클라이언트와 공용 자산, 개인·조직 정책, 새로 도입할 대상을 나눠 입력받고
+            충돌과 정책 차이, 미확인 범위를 근거와 함께 보고서로 남기는 도구입니다.
+            자동 설치나 수정은 하지 않고 도입 진행 여부를 판단하는 데 필요한 정보만 제공합니다.
+          </p>
+          <div className="pf-detail">
+            <h4>문제를 나눈 방식</h4>
+            <ul>
+              <li><strong>Profile</strong> — 허용할 클라이언트와 파일 접근, 네트워크, 비밀정보 보관 기준을 선언</li>
+              <li><strong>Target manifest</strong> — 새 패키지가 만들거나 바꾸려는 파일과 설정을 실행 없이 기술</li>
+              <li><strong>Read-only preflight</strong> — 승인된 범위만 조사하고 현재 상태와 도입 이후 상태를 비교</li>
+              <li><strong>Evidence report</strong> — 판정뿐 아니라 근거, 검사 범위와 확인하지 못한 항목을 함께 기록</li>
+            </ul>
+          </div>
+          <div className="pf-detail">
+            <h4>현재 검증한 범위</h4>
+            <ul>
+              <li>Codex, Claude와 공용 자산을 가정한 합성 환경에서 <strong>scope → scan → report</strong> 흐름 재현</li>
+              <li><strong>safe</strong>는 READY_WITH_CONDITIONS, <strong>risky</strong>는 NOT_READY로 판정하는 CLI 데모 구현</li>
+              <li>각 실행 결과는 JSON, Markdown, 검사 범위 기록 세 파일로 생성</li>
+              <li>미지원 입력은 무시하지 않고 중단하며, 확인하지 못한 항목은 통과로 추정하지 않도록 처리</li>
+              <li>실제 사용자 환경을 읽는 기능이 연결되기 전까지 일반 실행 명령은 의도적으로 비활성화</li>
+            </ul>
+          </div>
+          <div className="pf-chips">
+            <span className="pf-chip">Go</span>
+            <span className="pf-chip">CLI</span>
+            <span className="pf-chip">JSON Schema</span>
+            <span className="pf-chip">Threat Modeling</span>
+            <span className="pf-chip">Synthetic Test</span>
+            <span className="pf-chip">AI Agent</span>
+          </div>
+        </div>
+      </section>
+
+      <hr className="pf-divider" />
+
       {/* 개인 서비스와 자동화 */}
       <section className="pf-section" id="services">
         <h2 className="pf-section-title"><span>$ ls side-projects/</span>직접 만든 서비스와 자동화</h2>
@@ -362,6 +417,10 @@ export default function PortfolioPage() {
         <h2 className="pf-section-title"><span>$ find writing/</span>기술 기록</h2>
 
         <div className="pf-blog-list">
+          <a className="pf-blog-item" href="/tech/ax-doctor-preflight" target="_blank" rel="noopener noreferrer">
+            <div className="pf-blog-title">새 AI 도구를 설치하기 전에 먼저 확인하고 싶었다 ↗</div>
+            <div className="pf-blog-desc">기존 AI 개발 환경과 새 도입 대상의 충돌을 읽기 전용으로 점검하는 CLI를 만든 기록</div>
+          </a>
           <a className="pf-blog-item" href="/tech/pdp-ui" target="_blank" rel="noopener noreferrer">
             <div className="pf-blog-title">모바일웹 상품상세(PDP) 전체 UI 개발 ↗</div>
             <div className="pf-blog-desc">상품상세 화면 운영, 도메인 영향 범위, 모바일 UI 구조를 정리한 기록</div>

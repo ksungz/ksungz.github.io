@@ -1,0 +1,76 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Case Studies",
+  description: "Problem → Hypothesis → Architecture → Implementation → Challenges → Result → Next Step",
+};
+
+const caseStudies = [
+  {
+    id: "ax-doctor",
+    title: "AX Doctor — AI 도입 전 점검 도구",
+    excerpt: "AI 개발 환경을 설치하기 전에 기존 설정과 충돌, 권한, 미확인 범위를 읽기 전용으로 진단하는 CLI를 설계하고 구현했습니다.",
+    href: "/case-studies/ax-doctor",
+    tags: ["Go", "CLI", "Preflight", "Privacy-by-design"],
+  },
+  {
+    id: "news-automation",
+    title: "News Automation — 뉴스 선택부터 블로그 PR까지",
+    excerpt: "매일 기술 뉴스를 읽고 정리하는 반복 작업을 AI Agent 기반 파이프라인으로 자동화했습니다.",
+    href: "/case-studies/news-automation",
+    tags: ["AI Agent", "Telegram Bot", "Automation"],
+  },
+  {
+    id: "babypick-ai",
+    title: "BabyPick AI — 220개+ 육아 가이드 자동 발행",
+    excerpt: "키워드 선택부터 AI 생성, 검증, 발행, 블로그·인스타 자동화까지 혼자 운영하는 콘텐츠 파이프라인입니다.",
+    href: "/case-studies/babypick-ai",
+    tags: ["AI Content", "Automation", "Supabase"],
+  },
+  {
+    id: "commerce-ai",
+    title: "Commerce AI — 2,384개 SCSS 파일 Dart Sass 전환",
+    excerpt: "AI 도구를 활용해 대규모 SCSS 마이그레이션을 3주 안에 완료하고, PR Review Agent로 반복 리뷰를 자동화했습니다.",
+    href: "/case-studies/commerce-ai",
+    tags: ["Sass Migration", "PR Review Agent", "Cursor"],
+  },
+];
+
+export default function CaseStudies() {
+  return (
+    <div className="mx-auto max-w-3xl px-6 py-16">
+      <section className="mb-16">
+        <p className="font-mono text-xs text-[var(--color-muted)] mb-3">Case Studies</p>
+        <h1 className="text-3xl font-bold tracking-tight mb-4">문제 해결 과정</h1>
+        <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
+          기술보다 문제 해결 과정을 보여줍니다.
+          Problem → Hypothesis → Architecture → Implementation → Challenges → Result → Next Step.
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        {caseStudies.map(({ id, title, excerpt, href, tags }) => (
+          <Link
+            key={id}
+            href={href}
+            className="group block rounded-lg border border-[var(--color-border)] p-5 transition-colors hover:border-[var(--color-foreground)]"
+          >
+            <h2 className="text-base font-semibold group-hover:text-[var(--color-foreground)]">{title}</h2>
+            <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">{excerpt}</p>
+            <div className="mt-4 flex flex-wrap gap-1.5">
+              {tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-[var(--color-border)] px-2 py-0.5 text-[10px] text-[var(--color-muted)]"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </Link>
+        ))}
+      </section>
+    </div>
+  );
+}

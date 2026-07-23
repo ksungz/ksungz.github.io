@@ -1,166 +1,123 @@
 import Link from "next/link";
-import Timeline from "@/components/ui/Timeline";
-import Card from "@/components/ui/Card";
-import { getAllPosts } from "@/lib/mdx";
 
-const careerSummary = [
+const featuredProducts = [
   {
-    period: "2020.12 ~ 현재",
-    company: "11번가",
-    role: "UI/Frontend 개발자 · UI개발팀",
-    description: "모바일웹 PDP 및 핵심 서비스 UI 운영, Dart Sass 전환, CSS 내재화, React 환경 개선",
+    name: "AX Doctor",
+    tagline: "AI 개발 환경 도입 전 점검 CLI",
+    description: "기존 설정과 충돌, 권한, 미확인 범위를 읽기 전용으로 진단하는 Go 기반 preflight 도구.",
+    href: "/products#ax-doctor",
+    tags: ["Go", "CLI", "Preflight"],
   },
   {
-    period: "2019.10 ~ 2020.12",
-    company: "스마일게이트 알피지",
-    role: "UI 개발자 · 웹팀",
-    description: "로스트아크 이벤트 페이지 구축·운영, 공식사이트 콘텐츠 업데이트, 매주 정기배포",
+    name: "News Automation",
+    tagline: "뉴스 선택부터 블로그 PR까지 자동화",
+    description: "GeekNews 큐레이션 → AI 분석 → MDX 초안 → GitHub PR 자동 생성 파이프라인.",
+    href: "/products#news-automation",
+    tags: ["AI Agent", "Automation", "Telegram Bot"],
   },
   {
-    period: "2012.07 ~ 2019.06",
-    company: "하이브랩",
-    role: "UI 개발자 → 팀장 · FE개발팀",
-    description: "네이버·블리자드·PUBG 등 대형 클라이언트 UI 프로젝트. i-award 3개 부문 수상. 팀장 약 3년.",
-  },
-];
-
-const highlights = [
-  {
-    title: "제품 화면 운영",
-    description: "모바일웹 핵심 화면을 운영하며 가격, 옵션, 리뷰, 배송처럼 여러 도메인의 영향 범위와 검증 기준을 맞춰 개발합니다.",
+    name: "BabyPick AI",
+    tagline: "AI 콘텐츠 자동 발행으로 220개+ 가이드 운영",
+    description: "키워드 선택 → AI 생성 → 검증 → 발행 → 블로그·인스타 자동화까지 구축·운영 중.",
+    href: "/products#babypick-ai",
+    tags: ["AI Content", "Automation", "Supabase"],
   },
   {
-    title: "기존 UI 구조 개선",
-    description: "Dart Sass 전환, CSS 내재화, React 환경 개선으로 화면 구조와 스타일 관리 흐름을 단계적으로 정리했습니다.",
-  },
-  {
-    title: "UI 품질과 협업 기준",
-    description: "Storybook, 기술 문서, 접근성·스타일 리뷰 기준을 정리해 컴포넌트 단위 확인과 협업 비용을 줄입니다.",
+    name: "OpenClaw Lab",
+    tagline: "다중 AI 에이전트 연결 CLI",
+    description: "Claude Code, Codex, Gemini CLI의 작업 맥락과 실행 기록을 공통 관리하는 오픈소스.",
+    href: "/products#openclaw-lab",
+    tags: ["Open Source", "Multi-Agent", "MIT"],
   },
 ];
 
-const PRIMARY_SKILLS = new Set(["React", "TypeScript", "SCSS/Sass", "Storybook", "웹 접근성", "반응형 UI"]);
-
-const skills = [
-  { label: "UI/Frontend", items: ["React", "TypeScript", "JavaScript", "HTML", "CSS", "SCSS/Sass", "CSS Modules", "Storybook"] },
-  { label: "UI 품질/운영", items: ["웹 표준", "웹 접근성", "반응형 UI", "모바일웹", "BEM", "Lottie"] },
-  { label: "협업/운영 도구", items: ["Git", "Bitbucket", "Jira", "Confluence", "Figma", "Bitbucket Pipelines", "Vercel"] },
-  { label: "AI 보조 흐름", items: ["Cursor", "Claude", "Codex", "PR Review Agent"] },
-];
-
-export default async function Home() {
-  const featuredSlugs = ["pdp-ui", "react-pdp", "dart-sass"];
-  const posts = getAllPosts()
-    .filter((post) => featuredSlugs.includes(post.slug))
-    .sort((a, b) => featuredSlugs.indexOf(a.slug) - featuredSlugs.indexOf(b.slug));
-
+export default function Home() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
 
       {/* Hero */}
-      <section className="mb-16">
-        <p className="font-mono text-xs text-[var(--color-muted)] mb-3">서비스 UI 개발 · 운영 개선 · UI 품질 관리</p>
-        <h1 className="text-3xl font-bold tracking-tight mb-4">김성재</h1>
+      <section className="mb-20">
+        <p className="font-mono text-xs text-[var(--color-muted)] mb-3">AI Product Engineer</p>
+        <h1 className="text-4xl font-bold tracking-tight mb-6">
+          I build AI-powered products
+          <br />
+          <span className="text-[var(--color-muted)]">from idea to production.</span>
+        </h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
-          커머스, 게임, 플랫폼 서비스에서 UI 개발과 운영을 해왔습니다.
-          웹 표준, 접근성, 마크업 구조화, SCSS 설계, 반응형 UI 구현을 바탕으로 운영 중인 서비스 화면의 구조와 유지보수성을 개선해왔습니다.
-          최근에는 HTML/SCSS 중심 산출물을 React 기반 환경으로 옮기고, Storybook·문서화·리뷰 기준을 통해 컴포넌트 단위 검증과 협업 흐름을 정리하고 있습니다.
+          13년 동안 커머스 서비스를 만들었고,
+          현재는 AI Agent를 활용해 제품을 기획하고 개발하고 배포하고 운영하고 있습니다.
         </p>
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="mt-8 flex flex-wrap gap-3">
           <Link
-            href="/career"
+            href="/products"
             className="inline-flex items-center rounded-lg border border-[var(--color-foreground)] bg-[var(--color-foreground)] px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-[var(--color-muted)]"
           >
-            경력 보기
+            View Products
           </Link>
           <Link
-            href="/portfolio"
+            href="https://github.com/ksungz"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center rounded-lg border border-[var(--color-border)] px-4 py-2 text-xs font-medium transition-colors hover:border-[var(--color-foreground)]"
           >
-            포트폴리오
+            View GitHub
           </Link>
           <Link
-            href="/tech"
+            href="/case-studies"
             className="inline-flex items-center rounded-lg border border-[var(--color-border)] px-4 py-2 text-xs font-medium transition-colors hover:border-[var(--color-foreground)]"
           >
-            Tech 블로그
+            Read Case Studies
           </Link>
         </div>
       </section>
 
-      {/* Highlights */}
-      <section className="mb-16">
-        <h2 className="mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">Focus</h2>
-        <div className="grid gap-3 sm:grid-cols-3">
-          {highlights.map(({ title, description }) => (
-            <div key={title} className="rounded-lg border border-[var(--color-border)] p-4">
-              <h3 className="text-sm font-semibold">{title}</h3>
-              <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">{description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Skills */}
-      <section className="mb-16">
-        <h2 className="mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">Skills</h2>
-        <div className="grid gap-3">
-          {skills.map(({ label, items }) => (
-            <div key={label} className="flex flex-col gap-2 sm:flex-row sm:items-start">
-              <span className="w-32 shrink-0 text-xs font-medium text-[var(--color-foreground)]">{label}</span>
-              <div className="flex flex-wrap gap-1.5">
-                {items.map((item) => (
+      {/* Featured Products */}
+      <section className="mb-20">
+        <h2 className="mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
+          Featured Products
+        </h2>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {featuredProducts.map(({ name, tagline, description, href, tags }) => (
+            <Link
+              key={name}
+              href={href}
+              className="group rounded-lg border border-[var(--color-border)] p-5 transition-colors hover:border-[var(--color-foreground)]"
+            >
+              <h3 className="text-base font-semibold group-hover:text-[var(--color-foreground)]">
+                {name}
+              </h3>
+              <p className="mt-1 text-xs font-medium text-[var(--color-muted)]">{tagline}</p>
+              <p className="mt-3 text-xs leading-relaxed text-[var(--color-muted)]">{description}</p>
+              <div className="mt-4 flex flex-wrap gap-1.5">
+                {tags.map((tag) => (
                   <span
-                    key={item}
-                    className={
-                      PRIMARY_SKILLS.has(item)
-                        ? "rounded-full border border-[#2563eb] bg-[#eff6ff] px-2.5 py-0.5 text-xs text-[#2563eb] font-medium"
-                        : "rounded-full border border-[var(--color-border)] px-2.5 py-0.5 text-xs text-[var(--color-muted)]"
-                    }
+                    key={tag}
+                    className="rounded-full border border-[var(--color-border)] px-2 py-0.5 text-[10px] text-[var(--color-muted)]"
                   >
-                    {item}
+                    {tag}
                   </span>
                 ))}
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
 
-      {/* Career Timeline */}
-      <section className="mb-16">
-        <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">Career</h2>
-          <Link href="/career" className="text-xs text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">
-            전체 보기 →
-          </Link>
+      {/* What I Do */}
+      <section className="mb-20">
+        <h2 className="mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
+          What I Do
+        </h2>
+        <div className="space-y-4">
+          <div className="rounded-lg border border-[var(--color-border)] p-4">
+            <h3 className="text-sm font-semibold">문제 정의 → AI 활용 → 제품 출시</h3>
+            <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
+              기술보다 Problem Solving, Decision Making, Iteration, Impact를 더 강조합니다.
+              왜 만들었는가, 어떤 문제를 해결했는가, 어떤 선택을 했는가, 무엇을 배웠는가.
+            </p>
+          </div>
         </div>
-        <Timeline items={careerSummary} />
       </section>
-
-      {/* Featured Work */}
-      {posts.length > 0 && (
-        <section>
-          <div className="mb-6 flex items-center justify-between">
-            <h2 className="text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">Featured Work</h2>
-            <Link href="/tech" className="text-xs text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">
-              전체 보기 →
-            </Link>
-          </div>
-          <div className="grid gap-3">
-            {posts.map((post) => (
-              <Card
-                key={post.slug}
-                href={`/tech/${post.slug}`}
-                title={post.title}
-                description={post.description}
-                meta={post.date}
-                tags={post.tags}
-              />
-            ))}
-          </div>
-        </section>
-      )}
 
     </div>
   );

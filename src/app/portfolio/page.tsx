@@ -16,7 +16,7 @@ export default function PortfolioPage() {
           <a href="/career">Career</a>
           <a href="mailto:k.suzkim@gmail.com">Contact</a>
         </nav>
-        <p className="pf-cli-status"><i aria-hidden="true" /> UI / Frontend</p>
+        <p className="pf-cli-status"><i aria-hidden="true" /> AI Product Engineer</p>
       </header>
 
       <main className="pf-main">
@@ -30,8 +30,8 @@ export default function PortfolioPage() {
         <p className="pf-hero-command"><span aria-hidden="true">$</span> whoami</p>
         <h1>김성재</h1>
         <p className="pf-hero-statement">
-          서비스 UI를 만들고 운영하며,<br className="pf-break-desktop" />{" "}
-          복잡한 구조를 꾸준히 개선해왔습니다.
+          제품을 기획하고 AI를 활용해<br className="pf-break-desktop" />{" "}
+          구현하고 배포하고 운영합니다.
         </p>
         <div className="pf-hero-actions">
           <a className="pf-scroll-link" href="#work"><span aria-hidden="true">$</span> open ./work <span aria-hidden="true">↓</span></a>
@@ -450,7 +450,7 @@ export default function PortfolioPage() {
       <div className="pf-footer">
         <p className="pf-footer-name">김성재</p>
         <p className="pf-footer-copy">
-          서비스 UI를 운영하며 쌓은 경험으로 화면 변경과 검증 흐름을 개선합니다.
+          제품을 기획하고 AI를 활용해 만들고 운영하는 Product Engineer입니다.
         </p>
         <nav className="pf-footer-actions" aria-label="포트폴리오 다음 이동">
           <a href="/career">전체 경력 보기 →</a>
@@ -461,7 +461,7 @@ export default function PortfolioPage() {
 
       <div className="pf-statusbar" role="status" aria-label="포트폴리오 상태">
         <span><i aria-hidden="true" /> ready</span>
-        <span>UI / Frontend Developer</span>
+        <span>AI Product Engineer</span>
         <span>UTF-8</span>
         <span>320 · 390 · 1440</span>
       </div>

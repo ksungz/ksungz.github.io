@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "김성재 — 포트폴리오",
-  description: "서비스 UI 개발과 운영 개선, React 환경 전환, UI 품질 관리 경험을 정리한 포트폴리오",
+  description: "AI Product Engineer 김성재의 포트폴리오 — 제품 기획, AI 활용, 구현, 배포, 운영",
 };
 
 export default function PortfolioLayout({

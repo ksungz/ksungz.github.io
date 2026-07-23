@@ -3,8 +3,8 @@ import Card from "@/components/ui/Card";
 import { getAllPosts } from "@/lib/mdx";
 
 export const metadata: Metadata = {
-  title: "Tech",
-  description: "UI 개발, AI 활용, 프론트엔드 관련 기술 블로그",
+  title: "Engineering",
+  description: "엔지니어링 노트 — Engineering, AI Engineering, Automation",
 };
 
 export default function TechPage() {

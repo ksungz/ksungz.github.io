@@ -43,7 +43,7 @@ export default function Home() {
       <section className="mb-20">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">AX Engineer</p>
         <h1 className="text-4xl font-bold tracking-tight mb-6">
-          13년의 제품 UI 운영 경험을
+          다년간의 제품 UI 운영 경험을
           <br />
           <span className="text-[var(--color-muted)]">AI Agent와 자동화로 전환합니다.</span>
         </h1>

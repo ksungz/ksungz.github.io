@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "김성재 — AX Engineer. 13년 제품 UI 운영 경험을 기반으로 AI Agent, RAG, MCP와 자동화를 설계하고 운영합니다.",
+  description: "김성재 — AX Engineer. 다년간 제품 UI 운영 경험을 기반으로 AI Agent, RAG, MCP와 자동화를 설계하고 운영합니다.",
 };
 
 export default function About() {
@@ -14,7 +14,7 @@ export default function About() {
         <h1 className="text-3xl font-bold tracking-tight mb-6">김성재</h1>
         <div className="space-y-4 text-sm leading-relaxed text-[var(--color-muted)] max-w-xl">
           <p>
-            13년간 커머스·게임·플랫폼 서비스의 UI를 개발하고 운영했습니다.
+            다년간 커머스·게임·플랫폼 서비스의 UI를 개발하고 운영했습니다.
             오래 운영되는 서비스에서 사람이 같은 맥락을 반복해서 찾고,
             리뷰와 산출물을 매번 처음부터 만들며, 작은 변경도 여러 영역을 다시 확인해야 하는 문제를 경험했습니다.
           </p>
@@ -37,7 +37,7 @@ export default function About() {
         </h2>
         <div className="space-y-3">
           {[
-            { q: "현업 문제 이해", a: "13년 제품 운영 경험을 기반으로 반복 업무와 맥락 단절을 찾습니다." },
+            { q: "현업 문제 이해", a: "다년간 제품 운영 경험을 기반으로 반복 업무와 맥락 단절을 찾습니다." },
             { q: "AX 시스템 설계", a: "Agent, RAG, MCP와 자동화 워크플로우를 직접 구현하고 운영합니다." },
             { q: "Human-in-the-loop", a: "AI는 초안과 확인 항목을 준비하고, 최종 판단은 사람이 합니다." },
             { q: "AI 제품 구현", a: "아이디어를 실제 사용할 수 있는 제품으로 만들고 배포·운영합니다." },

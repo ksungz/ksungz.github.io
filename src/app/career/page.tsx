@@ -11,7 +11,7 @@ const careers = [
     company: "11번가",
     team: "UI개발팀",
     period: "2020.12 ~ 현재",
-    role: "UI Developer → AX Engineer",
+    role: "UI Developer",
     summary: "모바일웹 상품상세(PDP)를 포함한 핵심 서비스 UI 운영. 기존 HTML/SCSS 구조를 React 환경으로 전환하고, AI 도구를 도입해 반복 작업을 자동화.",
     achievements: [
       {

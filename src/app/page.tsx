@@ -18,14 +18,6 @@ const featuredProducts = [
     group: "AX Systems",
   },
   {
-    name: "Hermes Agent",
-    tagline: "OpenClaw에서 발전한 개인 AI 에이전트 하네스",
-    description: "Discord 연동, Obsidian RAG, cron 자동화, 다중 모델 지원으로 운영 중인 에이전트 환경.",
-    href: "/products#hermes-agent",
-    tags: ["Agent Runtime", "Discord", "Cron", "Multi-Model"],
-    group: "AX Systems",
-  },
-  {
     name: "BabyPick AI",
     tagline: "육아용품 탐색 서비스 + AI 콘텐츠 자동 발행",
     description: "Next.js 서비스 구축, 키워드 관리→AI 생성→검증→발행→블로그·인스타 자동화까지 운영.",

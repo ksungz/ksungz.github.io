@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/mdx";
-import Card from "@/components/ui/Card";
+import EngineeringClient from "./EngineeringClient";
 
 export const metadata: Metadata = {
   title: "Engineering",
@@ -13,84 +13,34 @@ const categories = [
   { label: "Automation", keywords: ["Automation", "Cursor", "Codex", "Claude", "Telegram", "파이프라인", "자동화", "PR Review", "GeekNews", "Digest"] },
 ];
 
+function getPostsForKeywords(keywords: string[], allPosts: ReturnType<typeof getAllPosts>, label: string) {
+  return allPosts.filter((p) => {
+    const tagMatch = p.tags?.some((t) => keywords.some((k) => t.toLowerCase().includes(k.toLowerCase())));
+    const titleMatch = keywords.some((k) => p.title.toLowerCase().includes(k.toLowerCase()));
+    const descMatch = p.description?.toLowerCase().includes(label.toLowerCase());
+    return tagMatch || titleMatch || descMatch;
+  });
+}
+
 export default function Engineering() {
   const allPosts = getAllPosts().sort((a, b) => (a.date < b.date ? 1 : -1));
 
-  // 카테고리에 속한 slug 수집
   const categorizedSlugs = new Set<string>();
   categories.forEach(({ label, keywords }) => {
-    allPosts.forEach((p) => {
-      const tagMatch = p.tags?.some((t) => keywords.some((k) => t.toLowerCase().includes(k.toLowerCase())));
-      const titleMatch = keywords.some((k) => p.title.toLowerCase().includes(k.toLowerCase()));
-      const descMatch = p.description?.toLowerCase().includes(label.toLowerCase());
-      if (tagMatch || titleMatch || descMatch) categorizedSlugs.add(p.slug);
-    });
+    getPostsForKeywords(keywords, allPosts, label).forEach((p) => categorizedSlugs.add(p.slug));
   });
-
-  // 미분류 글
   const uncategorized = allPosts.filter((p) => !categorizedSlugs.has(p.slug));
 
+  const postsByCategory = categories.map(({ label, keywords }) => ({
+    label,
+    posts: getPostsForKeywords(keywords, allPosts, label),
+  }));
+
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
-      <section className="mb-16">
-        <p className="font-mono text-xs text-[var(--color-muted)] mb-3">Engineering</p>
-        <h1 className="text-3xl font-bold tracking-tight mb-4">엔지니어링 노트</h1>
-        <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
-          기술 구현, AI 도입, 자동화 과정에서 배운 것을 기록합니다.
-        </p>
-      </section>
-
-      {categories.map(({ label, keywords }) => {
-        const posts = allPosts.filter((p) => {
-          const tagMatch = p.tags?.some((t) => keywords.some((k) => t.toLowerCase().includes(k.toLowerCase())));
-          const titleMatch = keywords.some((k) => p.title.toLowerCase().includes(k.toLowerCase()));
-          const descMatch = p.description?.toLowerCase().includes(label.toLowerCase());
-          return tagMatch || titleMatch || descMatch;
-        });
-
-        if (posts.length === 0) return null;
-
-        return (
-          <section key={label} className="mb-16">
-            <h2 className="mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
-              {label}
-            </h2>
-            <div className="grid gap-3">
-              {posts.map((post) => (
-                <Card
-                  key={post.slug}
-                  href={`/engineering/${post.slug}`}
-                  title={post.title}
-                  description={post.description}
-                  meta={post.date}
-                  tags={post.tags}
-                />
-              ))}
-            </div>
-          </section>
-        );
-      })}
-
-      {/* 미분류 글 */}
-      {uncategorized.length > 0 && (
-        <section className="mb-16">
-          <h2 className="mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
-            Other
-          </h2>
-          <div className="grid gap-3">
-            {uncategorized.map((post) => (
-              <Card
-                key={post.slug}
-                href={`/engineering/${post.slug}`}
-                title={post.title}
-                description={post.description}
-                meta={post.date}
-                tags={post.tags}
-              />
-            ))}
-          </div>
-        </section>
-      )}
-    </div>
+    <EngineeringClient
+      allPosts={allPosts}
+      postsByCategory={postsByCategory}
+      uncategorized={uncategorized}
+    />
   );
 }

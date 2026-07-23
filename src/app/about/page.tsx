@@ -25,10 +25,6 @@ export default function About() {
             제품과 사용자에게 영향을 주는 결정은 사람이 담당하는 방식을 선호합니다.
           </p>
           <p>
-            개인적으로는 AX Doctor, Obsidian RAG, Hermes Agent, News Automation, BabyPick AI를
-            직접 설계하고 운영하고 있습니다.
-          </p>
-          <p>
             하이브랩에서는 약 3년간 팀장으로 업무 분배, 공수 산정, 품질 관리와
             클라이언트 커뮤니케이션을 담당했습니다.
           </p>

@@ -5,7 +5,6 @@ const nextConfig = {
       { source: '/tech', destination: '/engineering', permanent: true },
       { source: '/tech/:slug', destination: '/engineering/:slug', permanent: true },
       { source: '/tech/digest', destination: '/engineering?category=digest', permanent: true },
-      { source: '/portfolio', destination: '/products', permanent: true },
       { source: '/life', destination: '/about', permanent: true },
     ];
   },

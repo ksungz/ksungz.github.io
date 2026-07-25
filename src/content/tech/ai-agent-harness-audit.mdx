@@ -5,8 +5,8 @@ category: "AI 에이전트"
 badge: retro
 description: "개인 AI 에이전트 환경에 쌓인 스킬, cron, MCP, RAG를 직접 점검하고 무엇을 덜어낼지 정리한 기록"
 tags: [AI Agent, Harness Engineering, Hermes, MCP, RAG, Automation]
-backHref: /tech
-backLabel: Tech
+backHref: /engineering
+backLabel: Engineering
 ---
 
 AI 에이전트 환경을 오래 사용하다 보니 문제가 생길 때마다 무언가를 하나씩 추가하게 됐다.
@@ -53,7 +53,7 @@ AI 에이전트 환경을 오래 사용하다 보니 문제가 생길 때마다 
 | 모델 사용량 집계 | 7회 | 약 211만 | 74회 |
 | 모델 목록 확인 | 1회 | 약 47만 | 15회 |
 
-![최근 7일 cron 작업별 누적 입력 토큰과 API 호출 비교](/tech/harness-audit-cron.svg)
+![최근 7일 cron 작업별 누적 입력 토큰과 API 호출 비교](/engineering/harness-audit-cron.svg)
 
 여기서 입력 토큰은 각 API 호출에 반복해서 들어간 문맥까지 합산된 값이다. 고유하게 읽은 문서의 양이나 실제 결제 금액과 같지는 않다. 그래도 어떤 작업이 얼마나 많은 문맥과 호출을 반복하는지 비교하는 기준으로는 충분했다.
 
@@ -95,7 +95,7 @@ Obsidian Vault를 인덱싱한 RAG에는 3,138개 청크가 들어 있었다.
 | 아카이브 | 288 |
 | 과거 OpenClaw 문서 | 143 |
 
-![Obsidian RAG 인덱스의 문서 출처 구성](/tech/harness-audit-rag.svg)
+![Obsidian RAG 인덱스의 문서 출처 구성](/engineering/harness-audit-rag.svg)
 
 현재 인덱서는 숨김 폴더를 제외한 모든 Markdown 문서를 재귀적으로 읽는다. 완료된 작업 지시서, 매일 생성된 브리핑, 오래된 메모리, 이전 런타임 문서도 같은 컬렉션에 들어간다.
 

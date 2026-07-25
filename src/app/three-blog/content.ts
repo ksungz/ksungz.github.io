@@ -53,7 +53,7 @@ export const landmarks: Landmark[] = [
   },
   {
     id: "tech",
-    label: "Tech Archive",
+    label: "Engineering Archive",
     title: "적용 과정과 시행착오를 기록합니다",
     eyebrow: "Articles · Notes · Experiments",
     description:
@@ -64,7 +64,7 @@ export const landmarks: Landmark[] = [
       "UI 개발과 AI 도구 활용 경험 연결",
     ],
     tags: ["Writing", "Frontend", "AI Tools"],
-    href: "/tech",
+    href: "/engineering",
     action: "기술 글 읽기",
     color: "#4169e1",
     accent: "#b9ccff",
@@ -72,7 +72,7 @@ export const landmarks: Landmark[] = [
   },
   {
     id: "portfolio",
-    label: "Project Gallery",
+    label: "Case Studies",
     title: "UI 구현 사례와 개인 프로젝트를 정리했습니다",
     eyebrow: "Selected Work · Case Studies",
     description:
@@ -83,7 +83,7 @@ export const landmarks: Landmark[] = [
       "개인 서비스의 화면부터 배포까지 운영",
     ],
     tags: ["Case Study", "UI Systems", "Product"],
-    href: "/portfolio",
+    href: "/case-studies",
     action: "프로젝트 보기",
     color: "#ffb84d",
     accent: "#fff0a8",

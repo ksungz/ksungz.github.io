@@ -4,7 +4,7 @@ import { getAllPosts } from "@/lib/mdx";
 
 export const metadata: Metadata = {
   title: "Engineering",
-  description: "엔지니어링 노트 — Engineering, AI Engineering, Automation",
+  description: "Engineering 블로그 — React, CSS, AI Engineering, Automation, Context Engineering",
 };
 
 export default function TechPage() {
@@ -13,8 +13,8 @@ export default function TechPage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
       <div className="mb-10">
-        <p className="font-mono text-xs text-[var(--color-muted)] mb-2">블로그</p>
-        <h1 className="text-2xl font-bold tracking-tight">Tech</h1>
+        <p className="font-mono text-xs text-[var(--color-muted)] mb-2">Engineering</p>
+        <h1 className="text-2xl font-bold tracking-tight">Engineering</h1>
         <p className="mt-2 text-sm text-[var(--color-muted)]">
           UI 개발, AI 활용, 프론트엔드 이슈 해결 등을 기록합니다.
         </p>

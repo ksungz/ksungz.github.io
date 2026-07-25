@@ -1,5 +1,7 @@
 import "./portfolio.css";
 
+/* eslint-disable @next/next/no-img-element */
+
 export default function PortfolioPage() {
   return (
     <div className="pf-workspace">
@@ -10,9 +12,10 @@ export default function PortfolioPage() {
         <nav className="pf-cli-nav" aria-label="포트폴리오 탐색">
           <a href="#work">Work</a>
           <a href="#case-study">Case Study</a>
+          <a href="#workflow">Workflow</a>
           <a href="#ax-doctor">AX Doctor</a>
-          <a href="#services">Services</a>
-          <a href="#writing">Writing</a>
+          <a href="#ai-products">AI Products</a>
+          <a href="#agents">Agent Systems</a>
           <a href="/career">Career</a>
           <a href="mailto:k.suzkim@gmail.com">Contact</a>
         </nav>
@@ -30,17 +33,23 @@ export default function PortfolioPage() {
         <p className="pf-hero-command"><span aria-hidden="true">$</span> whoami</p>
         <h1>김성재</h1>
         <p className="pf-hero-statement">
-          제품을 기획하고 AI를 활용해<br className="pf-break-desktop" />{" "}
-          구현하고 배포하고 운영합니다.
+          제품을 기획하고 AI Agent, RAG, MCP와 자동화로
+          <br className="pf-break-desktop" />{" "}
+          만들고 운영하는
+          <br className="pf-break-desktop" />{" "}
+          AX Engineer입니다.
         </p>
         <div className="pf-hero-actions">
-          <a className="pf-scroll-link" href="#work"><span aria-hidden="true">$</span> open ./work <span aria-hidden="true">↓</span></a>
+          <a className="pf-scroll-link" href="#work"><span aria-hidden="true">$</span> open ./portfolio <span aria-hidden="true">↓</span></a>
           <a
             className="pf-3d-link"
             href="/three-blog"
-            aria-label="AI 도구를 활용해 만든 3D 포트폴리오 탐색 화면 열기"
+            aria-label="Three.js 기반 인터랙티브 데모 열기"
           >
-            <span aria-hidden="true">◆</span> open ./3d-view
+            <span aria-hidden="true">◆</span> open ./three-blog
+          </a>
+          <a className="pf-scroll-link" href="/writing">
+            <span aria-hidden="true">$</span> open ./writing
           </a>
         </div>
       </header>
@@ -72,7 +81,7 @@ export default function PortfolioPage() {
 
       {/* 서비스 UI 운영과 개선 */}
       <section className="pf-section pf-section-dark" id="work">
-        <h2 className="pf-section-title"><span>$ cat work.md</span>서비스 UI 운영과 개선</h2>
+        <h2 className="pf-section-title">서비스 UI 운영과 개선</h2>
         <p className="pf-section-lead">
           운영 중인 화면을 바꿀 때는 구현뿐 아니라 영향 범위, 협업 대상, 검증 기준과 반영 이후의 결과까지 함께 확인합니다.
           여러 도메인이 맞물리는 화면을 맡으며 변경 단위를 나누고 안정적으로 반영하는 경험을 쌓았습니다.
@@ -97,7 +106,7 @@ export default function PortfolioPage() {
 
       {/* 실무 경험을 바탕으로 만든 UI */}
       <section className="pf-section pf-section-feature" id="case-study">
-        <h2 className="pf-section-title"><span>$ open ui-case.tsx</span>업무 경험을 바탕으로 새로 만든 UI</h2>
+        <h2 className="pf-section-title">업무 경험을 바탕으로 새로 만든 UI</h2>
         <p className="pf-section-lead">
           상품상세 UI를 운영하며 자주 마주친 상태와 예외 케이스를 바탕으로 옵션 선택 흐름을 새로 설계했습니다.
           색상·사이즈 조합, 재고, 추가 금액, 모바일 화면 전환을 공개 컴포넌트로 구현하고 확인 결과를 Storybook에 남겼습니다.
@@ -156,7 +165,7 @@ export default function PortfolioPage() {
 
       {/* 회사 안에서 적용한 AI 보조 흐름 */}
       <section className="pf-section pf-section-tinted" id="workflow">
-        <h2 className="pf-section-title"><span>$ tail ai-workflow.log</span>개발 업무에 적용한 AI 도구와 규칙</h2>
+        <h2 className="pf-section-title">개발 업무에 적용한 AI 도구와 규칙</h2>
 
         <div className="pf-project">
           <div className="pf-project-header">
@@ -241,7 +250,7 @@ export default function PortfolioPage() {
 
       {/* AI 개발 환경 도입 전 점검 도구 */}
       <section className="pf-section pf-section-dark" id="ax-doctor">
-        <h2 className="pf-section-title"><span>$ inspect ax-doctor/</span>AI 개발 환경 도입 전 점검 도구</h2>
+        <h2 className="pf-section-title">AI 개발 환경 도입 전 점검 도구</h2>
         <p className="pf-section-lead">
           개인 AI 작업 환경을 정리하면서 새 설정을 설치하기 전에 기존 도구와 충돌하지 않는지,
           확인하지 못한 영역은 없는지 먼저 점검할 필요가 있었습니다.
@@ -293,8 +302,8 @@ export default function PortfolioPage() {
       <hr className="pf-divider" />
 
       {/* 개인 서비스와 자동화 */}
-      <section className="pf-section" id="services">
-        <h2 className="pf-section-title"><span>$ ls side-projects/</span>직접 만든 서비스와 자동화</h2>
+      <section className="pf-section" id="ai-products">
+        <h2 className="pf-section-title">직접 만든 제품과 자동화</h2>
         <p className="pf-section-lead">
           개인 프로젝트에서는 화면 구현부터 API, DB, 배치 작업과 배포까지 직접 다룹니다.
           서비스와 자동화를 직접 운영하면서 사용 흐름을 확인하고 필요한 기능을 보완하고 있습니다.
@@ -371,7 +380,7 @@ export default function PortfolioPage() {
 
       {/* 에이전트 운영 환경 */}
       <section className="pf-section pf-section-dark" id="agents">
-        <h2 className="pf-section-title"><span>$ cat agent-workspace.md</span>AI 에이전트 작업 환경</h2>
+        <h2 className="pf-section-title">AI 에이전트 작업 환경</h2>
         <p className="pf-section-lead">
           OpenClaw, Hermes, Obsidian RAG를 조합해 개인 작업 환경을 구성했습니다.
           문서 출처와 접근 범위, 작업 로그를 남겨 결과와 실행 과정을 다시 확인할 수 있게 했습니다.
@@ -410,39 +419,6 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <hr className="pf-divider" />
-
-      {/* 블로그 */}
-      <section className="pf-section" id="writing">
-        <h2 className="pf-section-title"><span>$ find writing/</span>기술 기록</h2>
-
-        <div className="pf-blog-list">
-          <a className="pf-blog-item" href="/engineering/ax-doctor-preflight" target="_blank" rel="noopener noreferrer">
-            <div className="pf-blog-title">새 AI 도구를 설치하기 전에 먼저 확인하고 싶었다 ↗</div>
-            <div className="pf-blog-desc">기존 AI 개발 환경과 새 도입 대상의 충돌을 읽기 전용으로 점검하는 CLI를 만든 기록</div>
-          </a>
-          <a className="pf-blog-item" href="/engineering/pdp-ui" target="_blank" rel="noopener noreferrer">
-            <div className="pf-blog-title">모바일웹 상품상세(PDP) 전체 UI 개발 ↗</div>
-            <div className="pf-blog-desc">상품상세 화면 운영, 도메인 영향 범위, 모바일 UI 구조를 정리한 기록</div>
-          </a>
-          <a className="pf-blog-item" href="/engineering/react-pdp" target="_blank" rel="noopener noreferrer">
-            <div className="pf-blog-title">React 기반 PDP 컴포넌트 개발 ↗</div>
-            <div className="pf-blog-desc">HTML/SCSS 기반 산출물을 React 컴포넌트와 CSS Modules 환경으로 옮긴 작업</div>
-          </a>
-          <a className="pf-blog-item" href="/engineering/dart-sass" target="_blank" rel="noopener noreferrer">
-            <div className="pf-blog-title">Dart Sass 마이그레이션 ↗</div>
-            <div className="pf-blog-desc">대규모 SCSS 전환에서 산출물 차이와 운영 화면 영향을 줄인 방식</div>
-          </a>
-          <a className="pf-blog-item" href="/engineering/cdn-css-series" target="_blank" rel="noopener noreferrer">
-            <div className="pf-blog-title">CDN CSS 점진적 내재화 시리즈 ↗</div>
-            <div className="pf-blog-desc">외부 CSS 의존성을 React 번들 안으로 단계적으로 옮긴 기록</div>
-          </a>
-          <a className="pf-blog-item" href="/engineering/ai-tools" target="_blank" rel="noopener noreferrer">
-            <div className="pf-blog-title">AI 기반 개발 환경 구축 ↗</div>
-            <div className="pf-blog-desc">팀에서 쓰는 AI 규칙, 스킬, MCP 연동, PR 리뷰 흐름을 정리한 기록</div>
-          </a>
-        </div>
-      </section>
 
       <hr className="pf-divider" />
 
@@ -452,14 +428,14 @@ export default function PortfolioPage() {
         <p className="pf-footer-copy">
           제품을 기획하고 AI Agent, RAG, MCP와 자동화로 만들고 운영하는 AX Engineer입니다.
         </p>
-        <nav className="pf-footer-actions" aria-label="포트폴리오 다음 이동">
+        <nav className="pf-footer-actions" aria-label="Portfolio 다음 이동">
           <a href="/career">전체 경력 보기 →</a>
           <a href="mailto:k.suzkim@gmail.com">이메일 보내기 →</a>
         </nav>
       </div>
       </main>
 
-      <div className="pf-statusbar" role="status" aria-label="포트폴리오 상태">
+      <div className="pf-statusbar" role="status" aria-label="Portfolio 상태">
         <span><i aria-hidden="true" /> ready</span>
         <span>AX Engineer</span>
         <span>UTF-8</span>

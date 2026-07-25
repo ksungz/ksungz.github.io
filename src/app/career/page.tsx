@@ -11,7 +11,7 @@ const careers = [
     company: "11번가",
     team: "UI개발팀",
     period: "2020.12 ~ 현재",
-    role: "UI Developer",
+    role: "UI 개발자",
     summary: "모바일웹 상품상세(PDP)를 포함한 핵심 서비스 UI 운영. 기존 HTML/SCSS 구조를 React 환경으로 전환하고, AI 도구를 도입해 반복 작업을 자동화.",
     achievements: [
       {
@@ -109,7 +109,7 @@ export default function CareerPage() {
         <div className="space-y-3 text-sm text-[var(--color-muted)] leading-relaxed">
           <p>다년간 커머스, 게임, 플랫폼 서비스에서 UI를 개발하고 운영해왔습니다. 웹 표준, 접근성, 마크업 구조화, SCSS 설계, 반응형 UI 구현을 바탕으로 서비스 화면의 구조와 유지보수성을 개선했습니다.</p>
           <p>현재는 모바일웹 상품상세(PDP)를 포함한 핵심 서비스 UI를 담당하면서, AI 도구를 도입해 반복 작업을 줄이고 제품 개발 과정으로 역할을 넓히고 있습니다. SCSS 마이그레이션, PR Review Agent, 커밋·PR·QA 체크리스트 자동화 흐름을 정리했습니다.</p>
-          <p>개인적으로는 AX Doctor, News Automation, BabyPick AI, OpenClaw Lab을 직접 기획·구현·운영하며 Product Engineer로서의 역량을 쌓고 있습니다.</p>
+          <p>개인적으로는 AX Doctor, News Automation, BabyPick AI, Hermes Agent를 직접 기획·구현·운영하며 AX Engineer로서의 역량을 쌓고 있습니다.</p>
         </div>
       </section>
 
@@ -174,7 +174,7 @@ export default function CareerPage() {
           className="group block rounded-lg border border-[var(--color-border)] p-5 transition-colors hover:border-[var(--color-foreground)]"
         >
           <h3 className="text-sm font-semibold group-hover:text-[var(--color-foreground)]">
-            AX Doctor, News Automation, BabyPick AI, Commerce AI, OpenClaw Lab
+            AX Doctor, News Automation, BabyPick AI, Hermes Agent
           </h3>
           <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
             문제 정의부터 AI 활용, 구현, 배포, 운영까지 직접 만든 제품들을 확인하세요.

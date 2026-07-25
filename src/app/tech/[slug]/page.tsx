@@ -35,7 +35,7 @@ export default async function TechPostPage({ params }: Props) {
         href={isDigest ? "/engineering?category=digest" : "/engineering"}
         className="mb-8 inline-flex items-center gap-1 text-xs text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors"
       >
-        ← {isDigest ? "Digest" : "Tech"}
+        ← {isDigest ? "Digest" : "Engineering"}
       </Link>
 
       <header className="mb-10">

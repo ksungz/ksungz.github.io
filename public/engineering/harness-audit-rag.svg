@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Obsidian RAG 인덱스의 문서 출처 구성</title>
+  <desc id="desc">전체 3,138개 청크 중 아카이브와 과거 OpenClaw 문서 431개도 최신 문서와 함께 검색되고 있었다.</desc>
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", sans-serif; letter-spacing: 0; }
+    .title { font-size: 30px; font-weight: 700; fill: #191b1a; }
+    .subtitle { font-size: 16px; fill: #6a6f6c; }
+    .total { font-size: 17px; font-weight: 700; fill: #252826; }
+    .label { font-size: 17px; font-weight: 600; fill: #252826; }
+    .value { font-size: 16px; font-weight: 700; fill: #505552; }
+    .percent { font-size: 14px; fill: #858a87; }
+    .callout-title { font-size: 18px; font-weight: 700; fill: #7d312b; }
+    .callout-body { font-size: 15px; fill: #6b514e; }
+  </style>
+  <rect width="1200" height="720" fill="#f1f3f0"/>
+  <rect x="24" y="24" width="1152" height="672" rx="8" fill="#ffffff" stroke="#dfe3df"/>
+
+  <text x="60" y="78" class="title">RAG는 어떤 문서를 검색하고 있었나</text>
+  <text x="60" y="112" class="subtitle">필터 없이 Obsidian Vault의 Markdown을 같은 컬렉션에 저장한 결과</text>
+  <rect x="964" y="57" width="176" height="46" rx="6" fill="#eef1ee"/>
+  <text x="1052" y="86" text-anchor="middle" class="total">전체 3,138청크</text>
+
+  <rect x="60" y="156" width="280" height="58" fill="#477a68"/>
+  <rect x="340" y="156" width="250" height="58" fill="#6d9083"/>
+  <rect x="590" y="156" width="125" height="58" fill="#9aafa6"/>
+  <rect x="715" y="156" width="114" height="58" fill="#b8c5bf"/>
+  <rect x="829" y="156" width="99" height="58" fill="#c65348"/>
+  <rect x="928" y="156" width="49" height="58" fill="#d98b55"/>
+  <rect x="977" y="156" width="163" height="58" fill="#d9dedb"/>
+
+  <rect x="60" y="266" width="16" height="16" rx="2" fill="#477a68"/>
+  <text x="90" y="280" class="label">아이디어 문서</text>
+  <text x="90" y="309" class="value">814청크</text>
+  <text x="176" y="309" class="percent">25.9%</text>
+
+  <rect x="430" y="266" width="16" height="16" rx="2" fill="#6d9083"/>
+  <text x="460" y="280" class="label">작업 지시서</text>
+  <text x="460" y="309" class="value">725청크</text>
+  <text x="546" y="309" class="percent">23.1%</text>
+
+  <rect x="800" y="266" width="16" height="16" rx="2" fill="#9aafa6"/>
+  <text x="830" y="280" class="label">일일 메모리</text>
+  <text x="830" y="309" class="value">363청크</text>
+  <text x="916" y="309" class="percent">11.6%</text>
+
+  <rect x="60" y="366" width="16" height="16" rx="2" fill="#b8c5bf"/>
+  <text x="90" y="380" class="label">프로젝트 문서</text>
+  <text x="90" y="409" class="value">331청크</text>
+  <text x="176" y="409" class="percent">10.5%</text>
+
+  <rect x="430" y="366" width="16" height="16" rx="2" fill="#c65348"/>
+  <text x="460" y="380" class="label">아카이브</text>
+  <text x="460" y="409" class="value">288청크</text>
+  <text x="546" y="409" class="percent">9.2%</text>
+
+  <rect x="800" y="366" width="16" height="16" rx="2" fill="#d98b55"/>
+  <text x="830" y="380" class="label">과거 OpenClaw 문서</text>
+  <text x="830" y="409" class="value">143청크</text>
+  <text x="916" y="409" class="percent">4.6%</text>
+
+  <rect x="60" y="466" width="16" height="16" rx="2" fill="#d9dedb"/>
+  <text x="90" y="480" class="label">그 외 문서</text>
+  <text x="90" y="509" class="value">474청크</text>
+  <text x="176" y="509" class="percent">15.1%</text>
+
+  <rect x="60" y="570" width="1080" height="82" rx="6" fill="#fbefed" stroke="#edc9c4"/>
+  <text x="88" y="603" class="callout-title">과거 문서 431청크도 최신 정본과 함께 검색됐다</text>
+  <text x="88" y="631" class="callout-body">아카이브와 이전 런타임 문서를 구분하지 않아, 현재 환경을 묻는 검색에서도 오래된 자료가 먼저 나왔다.</text>
+</svg>

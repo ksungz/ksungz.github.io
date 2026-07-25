@@ -5,8 +5,8 @@ category: AI 활용
 badge: side-project
 description: GeekNews 크롤링 → AI 분석 → 블로그 PR 자동 생성까지, 뉴스 소비를 콘텐츠 생산으로 바꾸는 파이프라인
 tags: [텔레그램 봇, Claude CLI, 자동화, GeekNews, 블로그]
-backHref: /tech
-backLabel: Tech
+backHref: /engineering
+backLabel: Engineering
 ---
 
 ## 뉴스를 읽는 건 좋은데
@@ -84,7 +84,7 @@ GeekNews 최신 글 15개를 크롤링해서, 제목과 링크를 번호로 정�
 
 ## pm2로 상시 실행
 
-봇은 Mac에서 pm2로 돌아간다. 의존성이 `telegraf`, `node-cron`, `dotenv` 세 개 뿐이라 가볍다.
+봇은 Mac에서 pm2로 돌아간다. 의존성이 `telegraf`, `node-cron`, `dotenv` 세 개뿐이라 가볍다.
 
 매일 08:00 KST에 cron이 크롤링을 돌리고, 나머지 시간에는 텔레그램 메시지를 기다리고 있다. 실제로 이 봇이 내려간 적은 한 번도 없다 — 서버가 아니라 내 맥이니까, 맥이 켜져 있는 한 돌아간다.
 

@@ -60,7 +60,7 @@ function NavigationFallback({ onSelect }: { onSelect: (id: LandmarkId) => void }
   return (
     <div className="tb-fallback" role="region" aria-label="2D 탐색 화면">
       <p className="tb-fallback-kicker">2D navigation mode</p>
-      <h2>이 브라우저에서는 가벼운 탐색 화면을 보여드려요.</h2>
+      <h2>이 브라우저에서는 가벼운 탐색 화면을 보여드립니다.</h2>
       <p>아래 장소를 선택하면 같은 콘텐츠로 이동할 수 있습니다.</p>
       <div className="tb-fallback-grid">
         {landmarks.map((landmark) => (
@@ -554,7 +554,7 @@ export default function ThreeBlogExperience() {
           3D 공간.
         </h1>
         <span>
-          AI 도구를 활용해 만든 탐색 화면입니다. 네 공간을 둘러보면 중앙의 탐험 기록이 완성됩니다.
+          AI 도구로 구현한 탐색 화면입니다. 네 공간을 둘러보면 중앙의 탐험 기록이 완성됩니다.
         </span>
         <button type="button" onClick={beginExploration}>
           <Play size={13} fill="currentColor" aria-hidden="true" />
@@ -782,7 +782,7 @@ export default function ThreeBlogExperience() {
             </li>
           </ol>
           <div className="tb-completion-actions">
-            <Link href="/portfolio">
+            <Link href="/case-studies">
               프로젝트 보기
               <ArrowRight size={16} aria-hidden="true" />
             </Link>
@@ -791,7 +791,7 @@ export default function ThreeBlogExperience() {
         </aside>
       )}
 
-      <p className="tb-corner-note">AI 도구를 활용해 만든 포트폴리오 탐색 실험 · 2026</p>
+      <p className="tb-corner-note">AI 도구로 구현한 포트폴리오 탐색 실험 · 2026</p>
     </div>
   );
 }

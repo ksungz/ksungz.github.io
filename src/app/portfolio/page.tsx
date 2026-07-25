@@ -34,7 +34,7 @@ export default function PortfolioPage() {
         <p className="pf-hero-command"><span aria-hidden="true">$</span> whoami</p>
         <h1>김성재</h1>
         <p className="pf-hero-statement">
-          제품을 기획하고 AI Agent, RAG, MCP와 자동화로 만들고 운영하는 AX Engineer입니다.
+          UI/FE와 서비스 운영 경험을 기반으로 Agent, RAG, MCP와 자동화 워크플로를 직접 구현하고 있습니다.
         </p>
         <div className="pf-hero-actions">
           <a className="pf-scroll-link" href="#work"><span aria-hidden="true">$</span> open ./portfolio <span aria-hidden="true">↓</span></a>
@@ -423,7 +423,7 @@ export default function PortfolioPage() {
       <div className="pf-footer">
         <p className="pf-footer-name">김성재</p>
         <p className="pf-footer-copy">
-          제품을 기획하고 AI Agent, RAG, MCP와 자동화로 만들고 운영하는 AX Engineer입니다.
+          UI/FE와 서비스 운영 경험을 기반으로 Agent, RAG, MCP와 자동화 워크플로를 직접 구현하고 있습니다.
         </p>
         <nav className="pf-footer-actions" aria-label="Portfolio 다음 이동">
           <a href="/career">전체 경력 보기 →</a>

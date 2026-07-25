@@ -26,6 +26,21 @@ interface ProductData {
 
 const axSystems: ProductData[] = [
   {
+    id: "agent-bridge",
+    name: "Agent Bridge",
+    tagline: "여러 AI 코딩 에이전트를 연결하는 오픈소스 CLI",
+    problem: "Claude Code, Codex, Gemini CLI를 바꿔 사용할 때마다 작업 맥락과 실행 기록이 흩어지고, 같은 작업을 요청해도 전달한 맥락이 조금씩 달라 결과 비교가 어려웠습니다.",
+    solution: "설치된 CLI를 실행하고 작업 기록을 파일로 남기는 로컬 도구를 만들었습니다. 작업별로 목표, 공통 맥락, 결정 사항, 실행 결과, 리뷰와 인계 문서를 같은 폴더에 저장하고, 연결 정보를 JSON 어댑터로 분리해 명령어로 실행할 수 있는 도구라면 추가할 수 있게 했습니다.",
+    stack: ["Node.js", "CLI", "MIT", "CI"],
+    status: "오픈소스 · GitHub 공개, 자동 테스트 포함",
+    links: [
+      { label: "GitHub", href: "https://github.com/ksungz/agent-bridge" },
+    ],
+    relatedLinks: [
+      { label: "기술 글", href: "/engineering/ai-agent-harness-audit" },
+    ],
+  },
+  {
     id: "ax-doctor",
     name: "AX Doctor",
     tagline: "AI 개발 환경 도입 전 점검 CLI",

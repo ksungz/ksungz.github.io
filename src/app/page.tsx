@@ -2,6 +2,14 @@ import Link from "next/link";
 
 const featuredProducts = [
   {
+    name: "Agent Bridge",
+    tagline: "여러 AI 코딩 에이전트를 연결하는 오픈소스 CLI",
+    description: "Claude Code, Codex, Gemini CLI의 작업 맥락과 실행 기록을 공통 폴더에서 관리하고 인계 문서를 생성하는 로컬 도구.",
+    href: "/products#agent-bridge",
+    tags: ["CLI", "Open Source", "MIT"],
+    group: "AX Systems",
+  },
+  {
     name: "AX Doctor",
     tagline: "AI 개발 환경 도입 전 점검 CLI",
     description: "기존 설정과 충돌, 권한, 미확인 범위를 읽기 전용으로 진단하는 Go 기반 preflight 도구.",
@@ -43,9 +51,9 @@ export default function Home() {
       <section className="mb-20">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">AX Engineer</p>
         <h1 className="text-4xl font-bold tracking-tight mb-6">
-          다년간의 제품 UI 운영 경험을
+          13년간 제품 UI를 운영하며 발견한
           <br />
-          <span className="text-[var(--color-muted)]">AI Agent와 자동화로 전환합니다.</span>
+          <span className="text-[var(--color-muted)]">반복 업무와 맥락 단절을 AI Agent와 자동화로 개선합니다.</span>
         </h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
           커머스·게임·플랫폼 서비스에서 UI를 개발하고 운영하며

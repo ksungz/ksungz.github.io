@@ -119,8 +119,8 @@ const aiProducts: ProductData[] = [
 
 function ProductCard({ id, name, tagline, problem, solution, stack, status, links, relatedLinks }: ProductData) {
   return (
-    <div id={id} className="rounded-lg border border-[var(--color-border)] p-6 scroll-mt-20">
-      <h2 className="text-xl font-bold">{name}</h2>
+    <div id={id} className="rounded-lg border border-[var(--color-border)] p-4 sm:p-6 scroll-mt-20">
+      <h2 className="text-lg sm:text-xl font-bold">{name}</h2>
       <p className="mt-1 text-sm font-medium text-[var(--color-muted)]">{tagline}</p>
 
       <div className="mt-5 space-y-4">
@@ -152,14 +152,14 @@ function ProductCard({ id, name, tagline, problem, solution, stack, status, link
         {links && links.length > 0 && (
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)] mb-2">Links</p>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               {links.map(({ label, href }) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center rounded-lg border border-[var(--color-border)] px-3 py-1.5 text-xs font-medium transition-colors hover:border-[var(--color-foreground)]"
+                  className="inline-flex items-center rounded-lg border border-[var(--color-border)] px-3 py-2 sm:py-1.5 text-xs font-medium transition-colors hover:border-[var(--color-foreground)] min-h-[44px] sm:min-h-0"
                 >
                   {label} ↗
                 </a>
@@ -170,12 +170,12 @@ function ProductCard({ id, name, tagline, problem, solution, stack, status, link
         {relatedLinks && relatedLinks.length > 0 && (
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)] mb-2">자세히 보기</p>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               {relatedLinks.map(({ label, href }) => (
                 <Link
                   key={label}
                   href={href}
-                  className="inline-flex items-center rounded-lg border border-[var(--color-foreground)] bg-[var(--color-foreground)] px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-[var(--color-muted)]"
+                  className="inline-flex items-center rounded-lg border border-[var(--color-foreground)] bg-[var(--color-foreground)] px-3 py-2 sm:py-1.5 text-xs font-medium text-white transition-colors hover:bg-[var(--color-muted)] min-h-[44px] sm:min-h-0"
                 >
                   {label} →
                 </Link>
@@ -190,10 +190,10 @@ function ProductCard({ id, name, tagline, problem, solution, stack, status, link
 
 export default function Products() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
-      <section className="mb-16">
+    <div className="mx-auto max-w-3xl px-4 sm:px-6 py-12 sm:py-16">
+      <section className="mb-12 sm:mb-16">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">Products</p>
-        <h1 className="text-3xl font-bold tracking-tight mb-4">만들어 본 것들</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">만들어 본 것들</h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
           Agent Infrastructure → Workflow AX → AI Product Delivery.
           AX Systems와 AI Products 두 축으로 구성했습니다.
@@ -201,11 +201,11 @@ export default function Products() {
       </section>
 
       {/* AX Systems */}
-      <section className="mb-16">
-        <h2 className="mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
+      <section className="mb-12 sm:mb-16">
+        <h2 className="mb-4 sm:mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
           AX Systems
         </h2>
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           {axSystems.map((p) => (
             <ProductCard key={p.id} {...p} />
           ))}
@@ -214,10 +214,10 @@ export default function Products() {
 
       {/* AI Products */}
       <section>
-        <h2 className="mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
+        <h2 className="mb-4 sm:mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
           AI Products
         </h2>
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           {aiProducts.map((p) => (
             <ProductCard key={p.id} {...p} />
           ))}

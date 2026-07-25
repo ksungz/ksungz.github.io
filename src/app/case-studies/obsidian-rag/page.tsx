@@ -71,18 +71,18 @@ const tags = ["RAG", "Ollama", "ChromaDB", "FastAPI", "MCP"];
 
 export default function ObsidianRagCaseStudy() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
-      <section className="mb-16">
+    <div className="mx-auto max-w-3xl px-4 sm:px-6 py-12 sm:py-16">
+      <section className="mb-12 sm:mb-16">
         <Link
           href="/case-studies"
-          className="font-mono text-xs text-[var(--color-muted)] hover:text-[var(--color-foreground)]"
+          className="font-mono text-xs text-[var(--color-muted)] hover:text-[var(--color-foreground)] inline-block min-h-[44px] flex items-center"
         >
           ← Case Studies
         </Link>
         <p className="font-mono text-xs text-[var(--color-muted)] mt-6 mb-3">
           Obsidian RAG
         </p>
-        <h1 className="text-3xl font-bold tracking-tight mb-4">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">
           여러 AI 에이전트가 같은 문서를 검색하는 환경
         </h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
@@ -101,13 +101,13 @@ export default function ObsidianRagCaseStudy() {
         </div>
       </section>
 
-      <section className="space-y-10">
+      <section className="space-y-8 sm:space-y-10">
         {sections.map((s) => (
           <div key={s.label}>
             <p className="text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)] mb-3">
               {s.label}
             </p>
-            <h2 className="text-lg font-semibold mb-3">{s.title}</h2>
+            <h2 className="text-base sm:text-lg font-semibold mb-3">{s.title}</h2>
             <div className="space-y-3">
               {s.body.map((p, i) => (
                 <p key={i} className="text-sm leading-relaxed">

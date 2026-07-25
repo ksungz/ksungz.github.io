@@ -70,18 +70,18 @@ const tags = ["Go", "CLI", "Preflight", "Privacy-by-design", "Fail-closed"];
 
 export default function AxDoctorCaseStudy() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
-      <section className="mb-16">
+    <div className="mx-auto max-w-3xl px-4 sm:px-6 py-12 sm:py-16">
+      <section className="mb-12 sm:mb-16">
         <Link
           href="/case-studies"
-          className="font-mono text-xs text-[var(--color-muted)] hover:text-[var(--color-foreground)]"
+          className="font-mono text-xs text-[var(--color-muted)] hover:text-[var(--color-foreground)] inline-block min-h-[44px] flex items-center"
         >
           ← Case Studies
         </Link>
         <p className="font-mono text-xs text-[var(--color-muted)] mt-6 mb-3">
           AX Doctor
         </p>
-        <h1 className="text-3xl font-bold tracking-tight mb-4">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">
           AI 도입 전 점검 도구
         </h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
@@ -100,13 +100,13 @@ export default function AxDoctorCaseStudy() {
         </div>
       </section>
 
-      <section className="space-y-10">
+      <section className="space-y-8 sm:space-y-10">
         {sections.map((s) => (
           <div key={s.label}>
             <p className="text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)] mb-3">
               {s.label}
             </p>
-            <h2 className="text-lg font-semibold mb-3">{s.title}</h2>
+            <h2 className="text-base sm:text-lg font-semibold mb-3">{s.title}</h2>
             <div className="space-y-3">
               {s.body.map((p, i) => (
                 <p key={i} className="text-sm leading-relaxed">
@@ -118,12 +118,12 @@ export default function AxDoctorCaseStudy() {
         ))}
       </section>
 
-      <section className="mt-16 pt-8 border-t border-[var(--color-border)]">
+      <section className="mt-12 sm:mt-16 pt-8 border-t border-[var(--color-border)]">
         <a
           href="https://github.com/ksungz/ax-doctor"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center rounded-lg border border-[var(--color-border)] px-3 py-1.5 text-xs font-medium transition-colors hover:border-[var(--color-foreground)]"
+          className="inline-flex items-center rounded-lg border border-[var(--color-border)] px-3 py-2 sm:py-1.5 text-xs font-medium transition-colors hover:border-[var(--color-foreground)] min-h-[44px] sm:min-h-0"
         >
           GitHub ↗
         </a>

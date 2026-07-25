@@ -39,22 +39,22 @@ const caseStudies = [
 
 export default function CaseStudies() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
-      <section className="mb-16">
+    <div className="mx-auto max-w-3xl px-4 sm:px-6 py-12 sm:py-16">
+      <section className="mb-12 sm:mb-16">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">Case Studies</p>
-        <h1 className="text-3xl font-bold tracking-tight mb-4">문제 해결 과정</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">문제 해결 과정</h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
           기술보다 문제 해결 과정을 보여줍니다.
           Problem → Hypothesis → Architecture → Implementation → Challenges → Result → Next Step.
         </p>
       </section>
 
-      <section className="space-y-4">
+      <section className="space-y-3 sm:space-y-4">
         {caseStudies.map(({ id, title, excerpt, href, tags }) => (
           <Link
             key={id}
             href={href}
-            className="group block rounded-lg border border-[var(--color-border)] p-5 transition-colors hover:border-[var(--color-foreground)]"
+            className="group block rounded-lg border border-[var(--color-border)] p-4 sm:p-5 transition-colors hover:border-[var(--color-foreground)]"
           >
             <h2 className="text-base font-semibold group-hover:text-[var(--color-foreground)]">{title}</h2>
             <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">{excerpt}</p>

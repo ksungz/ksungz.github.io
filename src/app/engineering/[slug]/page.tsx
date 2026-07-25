@@ -29,17 +29,17 @@ export default async function EngineeringPostPage({ params }: Props) {
   const isDigest = post.category === "GeekNews 픽";
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
+    <div className="mx-auto max-w-3xl px-4 sm:px-6 py-12 sm:py-16">
       <Link
         href={isDigest ? "/engineering?category=digest" : "/engineering"}
-        className="mb-8 inline-flex items-center gap-1 text-xs text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors"
+        className="mb-6 sm:mb-8 inline-flex items-center gap-1 text-xs text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors min-h-[44px]"
       >
         ← {isDigest ? "Digest" : "Engineering"}
       </Link>
 
-      <header className="mb-10">
+      <header className="mb-8 sm:mb-10">
         <time className="font-mono text-xs text-[var(--color-muted)]">{post.date}</time>
-        <h1 className="mt-2 text-2xl font-bold tracking-tight">{post.title}</h1>
+        <h1 className="mt-2 text-xl sm:text-2xl font-bold tracking-tight">{post.title}</h1>
         {post.description && (
           <p className="mt-2 text-sm text-[var(--color-muted)]">{post.description}</p>
         )}
@@ -58,7 +58,7 @@ export default async function EngineeringPostPage({ params }: Props) {
       </header>
 
       {isDigest && (
-        <div className="mb-8 rounded-lg border border-[var(--color-border)] bg-[var(--color-accent)] px-4 py-3">
+        <div className="mb-6 sm:mb-8 rounded-lg border border-[var(--color-border)] bg-[var(--color-accent)] px-4 py-3">
           <p className="text-xs text-[var(--color-muted)] leading-relaxed">
             매일 GeekNews의 최신 내용을 스크랩하여 개인 프롬프트를 활용해 분석한 포스팅입니다.
             AI가 작성한 초안을 검토 후 게시하며, 원문 링크는 각 포스팅 내에서 확인할 수 있습니다.

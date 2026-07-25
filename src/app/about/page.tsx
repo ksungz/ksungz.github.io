@@ -8,10 +8,10 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
-      <section className="mb-16">
+    <div className="mx-auto max-w-3xl px-4 sm:px-6 py-12 sm:py-16">
+      <section className="mb-12 sm:mb-16">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">About</p>
-        <h1 className="text-3xl font-bold tracking-tight mb-6">김성재</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4 sm:mb-6">김성재</h1>
         <div className="space-y-4 text-sm leading-relaxed text-[var(--color-muted)] max-w-xl">
           <p>
             다년간 커머스·게임·플랫폼 서비스의 UI를 개발하고 운영했습니다.
@@ -31,8 +31,8 @@ export default function About() {
         </div>
       </section>
 
-      <section className="mb-16">
-        <h2 className="mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
+      <section className="mb-12 sm:mb-16">
+        <h2 className="mb-4 sm:mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
           Approach
         </h2>
         <div className="space-y-3">
@@ -52,19 +52,19 @@ export default function About() {
       </section>
 
       <section>
-        <h2 className="mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
+        <h2 className="mb-4 sm:mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
           Links
         </h2>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-2 sm:gap-3">
           <Link
             href="/products"
-            className="inline-flex items-center rounded-lg border border-[var(--color-foreground)] bg-[var(--color-foreground)] px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-[var(--color-muted)]"
+            className="inline-flex items-center rounded-lg border border-[var(--color-foreground)] bg-[var(--color-foreground)] px-4 py-2.5 sm:py-2 text-xs font-medium text-white transition-colors hover:bg-[var(--color-muted)] min-h-[44px]"
           >
             Products
           </Link>
           <Link
             href="/career"
-            className="inline-flex items-center rounded-lg border border-[var(--color-border)] px-4 py-2 text-xs font-medium transition-colors hover:border-[var(--color-foreground)]"
+            className="inline-flex items-center rounded-lg border border-[var(--color-border)] px-4 py-2.5 sm:py-2 text-xs font-medium transition-colors hover:border-[var(--color-foreground)] min-h-[44px]"
           >
             Career
           </Link>
@@ -72,7 +72,7 @@ export default function About() {
             href="https://github.com/ksungz"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center rounded-lg border border-[var(--color-border)] px-4 py-2 text-xs font-medium transition-colors hover:border-[var(--color-foreground)]"
+            className="inline-flex items-center rounded-lg border border-[var(--color-border)] px-4 py-2.5 sm:py-2 text-xs font-medium transition-colors hover:border-[var(--color-foreground)] min-h-[44px]"
           >
             GitHub
           </a>

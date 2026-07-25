@@ -92,19 +92,19 @@ const careers = [
 
 export default function CareerPage() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
+    <div className="mx-auto max-w-3xl px-4 sm:px-6 py-12 sm:py-16">
 
       {/* Heading */}
-      <div className="mb-12">
+      <div className="mb-10 sm:mb-12">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-2">Career</p>
-        <h1 className="text-2xl font-bold tracking-tight">김성재</h1>
+        <h1 className="text-xl sm:text-2xl font-bold tracking-tight">김성재</h1>
         <p className="mt-2 text-sm text-[var(--color-muted)]">
           AX Engineer · 커머스·게임·플랫폼 제품 UI 운영
         </p>
       </div>
 
       {/* 소개 */}
-      <section className="mb-12">
+      <section className="mb-10 sm:mb-12">
         <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">About</h2>
         <div className="space-y-3 text-sm text-[var(--color-muted)] leading-relaxed">
           <p>다년간 커머스, 게임, 플랫폼 서비스에서 UI를 개발하고 운영해왔습니다. 웹 표준, 접근성, 마크업 구조화, SCSS 설계, 반응형 UI 구현을 바탕으로 서비스 화면의 구조와 유지보수성을 개선했습니다.</p>
@@ -114,20 +114,20 @@ export default function CareerPage() {
       </section>
 
       {/* 경력 */}
-      <section className="mb-12">
-        <h2 className="mb-6 text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">Experience</h2>
-        <div className="space-y-10">
+      <section className="mb-10 sm:mb-12">
+        <h2 className="mb-4 sm:mb-6 text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">Experience</h2>
+        <div className="space-y-8 sm:space-y-10">
           {careers.map((career) => (
-            <div key={career.company} className="border-l border-[var(--color-border)] pl-5">
+            <div key={career.company} className="border-l border-[var(--color-border)] pl-4 sm:pl-5">
               <div className="flex flex-col gap-0.5 mb-3">
                 <span className="font-mono text-xs text-[var(--color-muted)]">{career.period}</span>
                 <h3 className="text-sm font-semibold">{career.company} · {career.team}</h3>
                 <span className="text-xs text-[var(--color-muted)]">{career.role}</span>
               </div>
-              <p className="text-sm text-[var(--color-muted)] leading-relaxed mb-5">{career.summary}</p>
+              <p className="text-sm text-[var(--color-muted)] leading-relaxed mb-4 sm:mb-5">{career.summary}</p>
 
               {/* Top 3 Achievements */}
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {career.achievements.map((ach) => (
                   <div key={ach.title} className="rounded-lg border border-[var(--color-border)] p-4">
                     <div className="flex items-start justify-between gap-3">
@@ -135,7 +135,7 @@ export default function CareerPage() {
                       {ach.link && (
                         <Link
                           href={ach.link}
-                          className="shrink-0 text-xs text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors"
+                          className="shrink-0 text-xs text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors min-h-[44px] flex items-center"
                         >
                           자세히 →
                         </Link>
@@ -161,17 +161,17 @@ export default function CareerPage() {
 
       {/* Products 링크 */}
       <section>
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-4 sm:mb-6 flex items-center justify-between">
           <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">
             Products
           </h2>
-          <Link href="/products" className="text-xs text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">
+          <Link href="/products" className="text-xs text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors min-h-[44px] flex items-center">
             전체 보기 →
           </Link>
         </div>
         <Link
           href="/products"
-          className="group block rounded-lg border border-[var(--color-border)] p-5 transition-colors hover:border-[var(--color-foreground)]"
+          className="group block rounded-lg border border-[var(--color-border)] p-4 sm:p-5 transition-colors hover:border-[var(--color-foreground)]"
         >
           <h3 className="text-sm font-semibold group-hover:text-[var(--color-foreground)]">
             AX Doctor, News Automation, BabyPick AI, Hermes Agent

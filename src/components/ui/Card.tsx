@@ -12,7 +12,7 @@ interface CardProps {
 
 export default function Card({ href, title, description, meta, tags, className }: CardProps) {
   const content = (
-    <div className={cn("group rounded-lg border border-[var(--color-border)] p-5 transition-colors hover:border-[var(--color-foreground)]", className)}>
+    <div className={cn("group rounded-lg border border-[var(--color-border)] p-4 sm:p-5 transition-colors hover:border-[var(--color-foreground)]", className)}>
       {meta && <p className="font-mono text-xs text-[var(--color-muted)]">{meta}</p>}
       <h3 className="mt-1 text-sm font-semibold leading-snug">{title}</h3>
       {description && <p className="mt-1.5 text-sm text-[var(--color-muted)] line-clamp-2">{description}</p>}

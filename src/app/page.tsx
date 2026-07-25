@@ -45,12 +45,12 @@ const featuredProducts = [
 
 export default function Home() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
+    <div className="mx-auto max-w-3xl px-4 sm:px-6 py-12 sm:py-16">
 
       {/* Hero */}
-      <section className="mb-20">
+      <section className="mb-16 sm:mb-20">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">AX Engineer</p>
-        <h1 className="text-4xl font-bold tracking-tight mb-6">
+        <h1 className="text-2xl sm:text-4xl font-bold tracking-tight mb-4 sm:mb-6 leading-snug sm:leading-tight">
           13년간 제품 UI를 운영하며 발견한
           <br />
           <span className="text-[var(--color-muted)]">반복 업무와 맥락 단절을 AI Agent와 자동화로 개선합니다.</span>
@@ -61,10 +61,10 @@ export default function Home() {
           그 경험을 바탕으로 Agent, RAG, MCP와 자동화 워크플로우를
           직접 설계하고 운영하고 있습니다.
         </p>
-        <div className="mt-8 flex flex-wrap gap-3">
+        <div className="mt-6 sm:mt-8 flex flex-wrap gap-2 sm:gap-3">
           <Link
             href="/products"
-            className="inline-flex items-center rounded-lg border border-[var(--color-foreground)] bg-[var(--color-foreground)] px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-[var(--color-muted)]"
+            className="inline-flex items-center rounded-lg border border-[var(--color-foreground)] bg-[var(--color-foreground)] px-4 py-2.5 sm:py-2 text-xs font-medium text-white transition-colors hover:bg-[var(--color-muted)] min-h-[44px]"
           >
             View Products
           </Link>
@@ -72,13 +72,13 @@ export default function Home() {
             href="https://github.com/ksungz"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center rounded-lg border border-[var(--color-border)] px-4 py-2 text-xs font-medium transition-colors hover:border-[var(--color-foreground)]"
+            className="inline-flex items-center rounded-lg border border-[var(--color-border)] px-4 py-2.5 sm:py-2 text-xs font-medium transition-colors hover:border-[var(--color-foreground)] min-h-[44px]"
           >
             View GitHub
           </Link>
           <Link
             href="/case-studies"
-            className="inline-flex items-center rounded-lg border border-[var(--color-border)] px-4 py-2 text-xs font-medium transition-colors hover:border-[var(--color-foreground)]"
+            className="inline-flex items-center rounded-lg border border-[var(--color-border)] px-4 py-2.5 sm:py-2 text-xs font-medium transition-colors hover:border-[var(--color-foreground)] min-h-[44px]"
           >
             Read Case Studies
           </Link>
@@ -86,16 +86,16 @@ export default function Home() {
       </section>
 
       {/* Featured Products */}
-      <section className="mb-20">
-        <h2 className="mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
+      <section className="mb-16 sm:mb-20">
+        <h2 className="mb-4 sm:mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
           Featured Products
         </h2>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2">
           {featuredProducts.map(({ name, tagline, description, href, tags }) => (
             <Link
               key={name}
               href={href}
-              className="group rounded-lg border border-[var(--color-border)] p-5 transition-colors hover:border-[var(--color-foreground)]"
+              className="group rounded-lg border border-[var(--color-border)] p-4 sm:p-5 transition-colors hover:border-[var(--color-foreground)]"
             >
               <h3 className="text-base font-semibold group-hover:text-[var(--color-foreground)]">
                 {name}
@@ -118,11 +118,11 @@ export default function Home() {
       </section>
 
       {/* What I Do */}
-      <section className="mb-20">
-        <h2 className="mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
+      <section className="mb-16 sm:mb-20">
+        <h2 className="mb-4 sm:mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
           What I Do
         </h2>
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-3">
           <div className="rounded-lg border border-[var(--color-border)] p-4">
             <h3 className="text-sm font-semibold">문제 정의</h3>
             <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">

@@ -39,24 +39,24 @@ export default function EngineeringClient({ allPosts, postsByCategory, uncategor
   const visiblePosts = getPostsForTab(activeTab);
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
-      <section className="mb-12">
+    <div className="mx-auto max-w-3xl px-4 sm:px-6 py-12 sm:py-16">
+      <section className="mb-10 sm:mb-12">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">Engineering</p>
-        <h1 className="text-3xl font-bold tracking-tight mb-4">엔지니어링 노트</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">엔지니어링 노트</h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
           기술 구현, AI 도입, 자동화 과정에서 배운 것을 기록합니다.
         </p>
       </section>
 
       {/* 탭 */}
-      <div className="mb-10 flex gap-1 border-b border-[var(--color-border)]">
+      <div className="mb-8 sm:mb-10 flex gap-1 border-b border-[var(--color-border)] overflow-x-auto scrollbar-hide">
         {tabs.map((tab) => {
           const count = tab.id === "all" ? allPosts.length : getPostsForTab(tab.id).length;
           return (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-4 py-2 text-xs font-medium transition-colors border-b-2 -mb-px ${
+              className={`px-3 sm:px-4 py-2 sm:py-2.5 text-xs font-medium transition-colors border-b-2 -mb-px whitespace-nowrap min-h-[44px] ${
                 activeTab === tab.id
                   ? "border-[var(--color-foreground)] text-[var(--color-foreground)]"
                   : "border-transparent text-[var(--color-muted)] hover:text-[var(--color-foreground)]"
@@ -83,15 +83,15 @@ export default function EngineeringClient({ allPosts, postsByCategory, uncategor
           ))}
         </div>
       ) : (
-        <div className="rounded-lg border border-dashed border-[var(--color-border)] p-10 text-center">
+        <div className="rounded-lg border border-dashed border-[var(--color-border)] p-6 sm:p-10 text-center">
           <p className="text-sm text-[var(--color-muted)]">해당 카테고리에 글이 없습니다.</p>
         </div>
       )}
 
       {/* 미분류 글 (All 탭에서만) */}
       {activeTab === "all" && uncategorized.length > 0 && (
-        <section className="mt-16">
-          <h2 className="mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
+        <section className="mt-12 sm:mt-16">
+          <h2 className="mb-4 sm:mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
             Other
           </h2>
           <div className="grid gap-3">

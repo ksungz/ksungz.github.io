@@ -178,7 +178,7 @@ export default function Products() {
     <div className="mx-auto max-w-3xl px-6 py-16">
       <section className="mb-16">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">Products</p>
-        <h1 className="text-3xl font-bold tracking-tight mb-4">제품</h1>
+        <h1 className="text-3xl font-bold tracking-tight mb-4">만들어 본 것들</h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
           Agent Infrastructure → Workflow AX → AI Product Delivery.
           AX Systems와 AI Products 두 축으로 구성했습니다.

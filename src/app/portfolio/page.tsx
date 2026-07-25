@@ -1,3 +1,4 @@
+import Link from "next/link";
 import "./portfolio.css";
 
 /* eslint-disable @next/next/no-img-element */
@@ -33,23 +34,19 @@ export default function PortfolioPage() {
         <p className="pf-hero-command"><span aria-hidden="true">$</span> whoami</p>
         <h1>김성재</h1>
         <p className="pf-hero-statement">
-          제품을 기획하고 AI Agent, RAG, MCP와 자동화로
-          <br className="pf-break-desktop" />{" "}
-          만들고 운영하는
-          <br className="pf-break-desktop" />{" "}
-          AX Engineer입니다.
+          제품을 기획하고 AI Agent, RAG, MCP와 자동화로 만들고 운영하는 AX Engineer입니다.
         </p>
         <div className="pf-hero-actions">
           <a className="pf-scroll-link" href="#work"><span aria-hidden="true">$</span> open ./portfolio <span aria-hidden="true">↓</span></a>
+          <Link className="pf-scroll-link" href="/engineering">
+            <span aria-hidden="true">$</span> open ./engineering
+          </Link>
           <a
             className="pf-3d-link"
             href="/three-blog"
             aria-label="Three.js 기반 인터랙티브 데모 열기"
           >
             <span aria-hidden="true">◆</span> open ./three-blog
-          </a>
-          <a className="pf-scroll-link" href="/writing">
-            <span aria-hidden="true">$</span> open ./writing
           </a>
         </div>
       </header>

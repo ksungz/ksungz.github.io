@@ -18,7 +18,6 @@ AI Agent와 자동화를 실제 업무 시스템과 제품으로 연결하는 �
 - [Case Studies](https://ksungz-github-io.vercel.app/case-studies)
 - [Engineering Notes](https://ksungz-github-io.vercel.app/engineering)
 - [Career](https://ksungz-github-io.vercel.app/career)
-- [AX Engineer Portfolio](https://ksungz-github-io.vercel.app/)
 
 ## 대표 내용
 
@@ -40,6 +39,16 @@ AI Agent와 자동화를 실제 업무 시스템과 제품으로 연결하는 �
 - 2,384개 SCSS 파일의 Dart Sass 전환
 - React·TypeScript 컴포넌트 이관과 Storybook 기반 검증 환경
 - 접근성, 반응형 UI, 크로스브라우징과 운영 문서화
+
+## 실험과 학습 공간
+
+메인 포트폴리오 외에도 관심 있는 기술과 아이디어를 직접 시험하고,
+작은 화면이나 도구로 만들어 공개하는 공간을 함께 운영합니다.
+
+- [Info Feed](https://ksungz-github-io.vercel.app/feed): 여러 출처의 기술·비즈니스 소식을 수집하고 분류·검색하는 개인 정보 피드
+- [Learning Space](https://ksungz-github-io.vercel.app/learning): FE·AX·LLM 학습 내용을 트랙과 챕터로 나누어 정리한 학습 공간
+- [3D Portfolio](https://ksungz-github-io.vercel.app/three-blog): 캐릭터를 움직이며 Career, Engineering, Case Studies를 둘러보는 Three.js 기반 탐색 실험
+- [Terminal Portfolio](https://ksungz-github-io.vercel.app/portfolio): 경력과 프로젝트를 터미널 콘셉트의 한 페이지로 정리한 대안형 포트폴리오
 
 ## 기술 구성
 
@@ -70,11 +79,3 @@ npx next build --webpack
 ```
 
 `public/learning` 아래 파일은 별도 학습 콘텐츠의 빌드 결과물이므로 ESLint 검사 대상에서 제외합니다.
-
-## 콘텐츠 원칙
-
-- 회사 내부 저장소명, 팀 코드명, 비공개 인프라 정보는 공개하지 않습니다.
-- 회사 제공 도구와 직접 개발한 도구를 구분합니다.
-- 확인하지 못한 효과나 사용자 성과를 추측하지 않습니다.
-- AI 결과는 초안과 확인 항목으로 다루고 최종 판단은 사람이 담당합니다.
-- 실제 구현 범위와 현재 한계를 함께 기록합니다.

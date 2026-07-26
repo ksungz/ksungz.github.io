@@ -1227,6 +1227,32 @@ body:has(.portfolio-root) > main {
   }
 }
 
+.pf-demo-figure {
+  overflow: hidden;
+  margin: 32px 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #0d1117;
+}
+
+.pf-demo-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 30 / 19;
+  object-fit: contain;
+}
+
+.pf-demo-figure figcaption {
+  margin: 0;
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
 /* Interactive 3D portfolio entry */
 .pf-hero-actions {
   display: flex;

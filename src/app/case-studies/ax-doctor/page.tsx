@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -114,6 +115,19 @@ export default function AxDoctorCaseStudy() {
             </span>
           ))}
         </div>
+        <figure className="mt-8 overflow-hidden rounded-md border border-[var(--color-border)] bg-[#0d1117]">
+          <Image
+            src="/portfolio/ax-doctor-live-demo.png"
+            alt="AX Doctor 합성 safe 시나리오가 READY_WITH_CONDITIONS, risky 시나리오가 NOT_READY로 판정된 실제 CLI 실행 화면"
+            width={1200}
+            height={760}
+            priority
+            className="h-auto w-full"
+          />
+          <figcaption className="border-t border-[var(--color-border)] bg-[var(--color-background)] px-3 py-2.5 text-xs leading-relaxed text-[var(--color-muted)]">
+            2026년 7월 26일 실제 명령 실행 결과입니다. 합성 데이터만 사용하며 실제 사용자 환경은 읽지 않습니다.
+          </figcaption>
+        </figure>
       </section>
 
       <section className="space-y-8 sm:space-y-10">

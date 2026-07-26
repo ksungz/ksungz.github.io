@@ -274,6 +274,16 @@ export default function PortfolioPage() {
             충돌과 정책 차이, 미확인 범위를 근거와 함께 보고서로 남기는 도구입니다.
             자동 설치나 수정은 하지 않고 도입 진행 여부를 판단하는 데 필요한 정보만 제공합니다.
           </p>
+          <figure className="pf-demo-figure">
+            <img
+              src="/portfolio/ax-doctor-live-demo.png"
+              alt="AX Doctor 합성 safe 시나리오가 READY_WITH_CONDITIONS, risky 시나리오가 NOT_READY로 판정된 실제 CLI 실행 화면"
+            />
+            <figcaption>
+              2026년 7월 26일 실제 명령 실행 결과입니다. 두 시나리오 모두 합성 데이터만 사용하며,
+              실제 HOME, AI 설정, 인증정보, 프로세스와 네트워크는 읽지 않습니다.
+            </figcaption>
+          </figure>
           <div className="pf-detail">
             <h4>문제를 나눈 방식</h4>
             <ul>
@@ -405,6 +415,16 @@ export default function PortfolioPage() {
             API 키 기반 모델 라우터 없이 하나의 작업에 함께 사용하기 위해 만든 로컬 오케스트레이션 CLI입니다.
             각 도구의 인증과 결제는 그대로 유지하고, 공통 목표와 결정, 실행·리뷰 기록과 인계 문서만 한 작업 폴더에서 관리합니다.
           </p>
+          <figure className="pf-demo-figure">
+            <img
+              src="/portfolio/agent-bridge-live-demo.png"
+              alt="Agent Bridge가 공개 샘플 작업을 만들고 로그인된 Codex CLI의 실행 기록과 handoff 문서를 생성한 실제 화면"
+            />
+            <figcaption>
+              사용자 파일이 없는 공개 샘플 작업에서 로그인된 Codex CLI를 실제 연결했습니다.
+              Agent Bridge는 실행 결과를 작업 폴더에 기록하고 다음 도구가 이어갈 handoff 문서를 생성합니다.
+            </figcaption>
+          </figure>
           <div className="pf-detail">
             <h4>만든 이유</h4>
             <ul>

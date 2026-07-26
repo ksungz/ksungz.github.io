@@ -122,10 +122,10 @@ export default function Home() {
           <span>
             <strong className="font-semibold">AX Evidence Gates</strong>
             <span className="ml-2 text-[var(--color-muted)]">
-              여행·상품·금융 AI 결과를 공개 근거로 점검한 품질 게이트 3종
+              공개 근거 품질 게이트와 LangGraph 사람 검토 흐름
             </span>
           </span>
-          <span className="text-[var(--color-muted)]">33 tests · GitHub 공개 →</span>
+          <span className="text-[var(--color-muted)]">39 tests · GitHub 공개 →</span>
         </Link>
       </section>
 

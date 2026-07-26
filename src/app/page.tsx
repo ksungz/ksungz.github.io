@@ -107,6 +107,18 @@ export default function Home() {
             </Link>
           ))}
         </div>
+        <Link
+          href="/case-studies/ax-evidence-gates"
+          className="mt-4 flex min-h-[44px] flex-col justify-center gap-1 border-t border-[var(--color-border)] py-3 text-xs transition-colors hover:text-[var(--color-foreground)] sm:flex-row sm:items-center sm:justify-between"
+        >
+          <span>
+            <strong className="font-semibold">AX Evidence Gates</strong>
+            <span className="ml-2 text-[var(--color-muted)]">
+              여행·상품·금융 AI 결과를 공개 근거로 점검한 품질 게이트 3종
+            </span>
+          </span>
+          <span className="text-[var(--color-muted)]">33 tests · GitHub 공개 →</span>
+        </Link>
       </section>
 
       {/* What I Do */}

@@ -22,6 +22,13 @@ const caseStudies = [
     tags: ["Go", "CLI", "Preflight", "Privacy-by-design"],
   },
   {
+    id: "ax-evidence-gates",
+    title: "AX Evidence Gates — 공개 근거 기반 AI 품질 게이트 3종",
+    excerpt: "여행 예약 답변, 상품 등록 데이터, 금융 안내 문구에서 근거 부족과 위험한 단정을 찾는 독립 프로토타입을 구현하고 33개 테스트로 검증했습니다.",
+    href: "/case-studies/ax-evidence-gates",
+    tags: ["Evidence-based QA", "Codex Plugin", "Human-in-the-loop", "33 Tests"],
+  },
+  {
     id: "agent-bridge",
     title: "Agent Bridge — 로그인된 여러 AI CLI를 한 작업에서 연결",
     excerpt: "각 도구의 기존 로그인과 구독 환경을 유지하면서 목표, 결정, 실행·리뷰 기록과 인계 문서를 한 작업 폴더에서 관리하는 오픈소스 CLI입니다.",

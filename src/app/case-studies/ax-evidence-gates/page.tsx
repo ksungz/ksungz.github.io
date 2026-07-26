@@ -1,0 +1,158 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "AX Evidence Gates — 공개 근거 기반 AI 품질 게이트 3종 | Case Studies",
+  description:
+    "여행 예약 답변, 상품 등록 데이터, 금융 안내 문구를 공개 근거와 합성 데이터로 점검하는 품질 게이트 3종을 설계·구현하고 33개 테스트로 검증한 사례.",
+};
+
+const sections = [
+  {
+    label: "Problem",
+    title: "자연스러운 AI 결과가 안전하거나 정확하다는 뜻은 아닙니다",
+    body: [
+      "여행 답변의 예약 가능 여부와 가격, 상품 등록 데이터의 속성과 고시 정보, 금융 안내 문구의 투자 판단 표현은 작은 오류도 사용자의 결정에 직접 영향을 줄 수 있습니다.",
+      "기업 내부 데이터나 비공개 시스템에 접근하지 않는 상황에서도, 공개 근거로 확인할 수 있는 범위를 정하고 AI 결과물을 반복 검수하는 방법을 보여줄 필요가 있었습니다.",
+    ],
+  },
+  {
+    label: "My Role",
+    title: "문제 선택부터 범위 정의, 구현·검증과 공개까지 담당했습니다",
+    body: [
+      "AX 인재전쟁 2026의 기업별 공개 과제를 분석해 여행 예약 답변, 상품 등록 데이터, 금융 안내 문구라는 세 가지 검수 문제를 정의했습니다.",
+      "공개 문서 조사, 입력 계약과 규칙 설계, Python 검사기와 Codex 스킬, 합성 예제, 자동 테스트와 공개 문서를 작성했습니다. AI는 자료 정리와 구현 초안, 반대 관점 검토에 사용했고, 문제 범위와 근거 채택, 최종 판정 기준은 직접 결정했습니다.",
+    ],
+  },
+  {
+    label: "Decision",
+    title: "생성 기능보다 검증 가능한 품질 게이트를 선택했습니다",
+    body: [
+      "내부 API나 실시간 데이터 없이 추천·상담 제품을 구현하면 실제 기능처럼 오해될 수 있다고 판단했습니다. 대신 이미 생성된 답변과 데이터를 입력받아 사람이 확인할 위치를 좁히는 독립 품질 게이트로 범위를 제한했습니다.",
+      "확인하지 못한 내용을 추정해 통과시키지 않고, 입력 위치와 공개 근거를 함께 반환하도록 설계했습니다. 자동 승인보다 Human-in-the-loop 검토를 돕는 것이 공통 원칙입니다.",
+    ],
+  },
+  {
+    label: "Architecture",
+    title: "도메인은 달라도 같은 검증 흐름을 사용합니다",
+    body: [
+      "공개 문서와 합성 샘플을 입력 계약으로 정리하고, 반복 가능한 항목은 결정적 규칙으로 검사합니다. 결과는 finding과 판정, 입력 위치, 공개 근거 URL, 수정 또는 추가 검토 제안을 포함합니다.",
+      "Travel Booking Evidence Gate는 예약 관련 claim과 field evidence를 비교합니다. Commerce Listing Preflight는 상품 속성·태그·사이즈·고시 정보 신호를 확인합니다. Investment Answer Gate는 단정적 투자 표현과 사용자 조건·위험 설명·근거 URL 누락을 점검합니다.",
+    ],
+  },
+  {
+    label: "Implementation",
+    title: "외부 계정이나 API 키 없이 로컬에서 재현할 수 있게 만들었습니다",
+    body: [
+      "세 품질 게이트 모두 Python 표준 라이브러리로 실행할 수 있으며, Markdown 또는 JSON 예제 입력과 기대 결과를 함께 제공합니다.",
+      "각 프로젝트에 Codex 플러그인 메타데이터와 스킬 지침을 포함하고, 세 도구를 한 번에 검증하는 통합 스크립트와 GitHub Actions CI를 구성했습니다.",
+    ],
+  },
+  {
+    label: "Validation",
+    title: "정상·위반·손상 입력을 33개 테스트로 검증했습니다",
+    body: [
+      "여행 게이트 9개, 상품 게이트 17개, 금융 게이트 7개 테스트가 근거 충분·부족, 필드 누락, 잘못된 타입, 깨진 입력과 위험 문구를 확인합니다.",
+      "로컬 통합 테스트와 GitHub Actions CI에서 같은 33개 테스트가 통과합니다. 데모 입력과 리포트를 함께 공개해 결과를 다시 실행하고 비교할 수 있습니다.",
+    ],
+  },
+  {
+    label: "Result",
+    title: "세 산출물을 하나의 공개 AX 검증 포트폴리오로 연결했습니다",
+    body: [
+      "서로 다른 도메인에서도 문제 범위를 좁히고, 공개 근거를 판정 규칙과 연결하며, 사람이 최종 판단할 수 있는 검수 흐름을 구현했습니다.",
+      "코드, 합성 샘플, 설계 문서, 케이스 스터디와 CI를 AX Evidence Gates 저장소에 공개했습니다.",
+    ],
+  },
+  {
+    label: "Limitations",
+    title: "공식 제품이나 실서비스 검증 시스템이 아닙니다",
+    body: [
+      "마이리얼트립, 무신사, 카카오페이증권 및 행사 주최사가 개발·승인·운영하는 도구가 아닙니다. 공개 문서와 합성 데이터만 사용한 독립 프로토타입입니다.",
+      "실제 예약, 상품 등록, 투자 판단이나 준법 판정을 수행하지 않습니다. 현재 finding은 검토 신호이며, 실서비스 적용 전에는 실제 입력 분포와 오탐·미탐 평가가 추가로 필요합니다.",
+    ],
+  },
+  {
+    label: "Next Step",
+    title: "실제 사용 시나리오에서 평가 기준을 확장합니다",
+    body: [
+      "도메인별 기준 질문과 실패 사례를 더 모아 회귀 테스트 세트를 확장하고, 규칙별 오탐·미탐과 검토 시간을 측정할 계획입니다.",
+      "실사용자가 finding의 근거와 수정 제안을 얼마나 빠르게 이해하는지 확인해 리포트 형식과 우선순위를 개선하려고 합니다.",
+    ],
+  },
+];
+
+const tags = [
+  "Python",
+  "Codex Plugin",
+  "Evidence-based QA",
+  "Human-in-the-loop",
+  "33 Tests",
+  "CI",
+];
+
+export default function AxEvidenceGatesCaseStudy() {
+  return (
+    <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
+      <section className="mb-12 sm:mb-16">
+        <Link
+          href="/case-studies"
+          className="inline-flex min-h-[44px] items-center font-mono text-xs text-[var(--color-muted)] hover:text-[var(--color-foreground)]"
+        >
+          ← Case Studies
+        </Link>
+        <p className="mt-6 mb-3 font-mono text-xs text-[var(--color-muted)]">
+          AX Evidence Gates
+        </p>
+        <h1 className="mb-4 text-2xl font-bold tracking-tight sm:text-3xl">
+          공개 근거 기반 AI 품질 게이트 3종
+        </h1>
+        <p className="max-w-xl text-sm leading-relaxed text-[var(--color-muted)]">
+          여행 예약 답변, 상품 등록 데이터, 금융 안내 문구의 근거 부족과
+          위험한 단정을 공개 문서와 합성 입력으로 점검한 사례입니다.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full border border-[var(--color-border)] px-2.5 py-0.5 text-xs text-[var(--color-muted)]"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      <section className="space-y-8 sm:space-y-10">
+        {sections.map((section) => (
+          <div key={section.label}>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">
+              {section.label}
+            </p>
+            <h2 className="mb-3 text-base font-semibold sm:text-lg">
+              {section.title}
+            </h2>
+            <div className="space-y-3">
+              {section.body.map((paragraph) => (
+                <p key={paragraph} className="text-sm leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </div>
+        ))}
+      </section>
+
+      <section className="mt-12 border-t border-[var(--color-border)] pt-8 sm:mt-16">
+        <a
+          href="https://github.com/ksungz/ax-evidence-gates"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex min-h-[44px] items-center rounded-lg border border-[var(--color-border)] px-3 py-2 text-xs font-medium transition-colors hover:border-[var(--color-foreground)] sm:min-h-0 sm:py-1.5"
+        >
+          GitHub ↗
+        </a>
+      </section>
+    </div>
+  );
+}

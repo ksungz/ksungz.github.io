@@ -57,6 +57,21 @@ const axSystems: ProductData[] = [
     ],
   },
   {
+    id: "ax-evidence-gates",
+    name: "AX Evidence Gates",
+    tagline: "여행·상품·금융 AI 결과를 공개 근거로 점검하는 품질 게이트 3종",
+    problem: "AI가 자연스러운 답변과 데이터를 빠르게 만들더라도, 실제 업무에 사용하려면 근거가 없는 단정과 누락된 조건, 확인하지 못한 범위를 반복해서 검수할 수 있어야 했습니다.",
+    solution: "AX 인재전쟁 2026 과제에서 공개 문서와 합성 입력만 사용해 여행 예약 답변, 상품 등록 데이터, 금융 안내 문구를 점검하는 세 개의 로컬 품질 게이트를 구현했습니다. 각 finding에 입력 위치와 공개 근거를 연결하고, 정상·위반·손상 입력을 33개 자동 테스트와 CI로 검증합니다.",
+    stack: ["Python", "Codex Plugin", "Evidence-based QA", "CI"],
+    status: "독립 공개 프로토타입 · 3개 품질 게이트 · 33 tests",
+    links: [
+      { label: "GitHub", href: "https://github.com/ksungz/ax-evidence-gates" },
+    ],
+    relatedLinks: [
+      { label: "Case Study", href: "/case-studies/ax-evidence-gates" },
+    ],
+  },
+  {
     id: "obsidian-rag",
     name: "Obsidian RAG",
     tagline: "여러 AI 에이전트가 같은 문서를 검색하는 로컬 RAG",

@@ -17,14 +17,14 @@ const caseStudies = [
   {
     id: "ax-doctor",
     title: "AX Doctor — AI 도입 전 점검 도구",
-    excerpt: "AI 개발 환경을 설치하기 전에 기존 설정과 충돌, 권한, 미확인 범위를 읽기 전용으로 진단하는 CLI를 설계하고 구현했습니다.",
+    excerpt: "제품 범위와 판정 기준을 정하고 AI 에이전트를 활용해, AI 도입 전 충돌과 미확인 범위를 읽기 전용으로 점검하는 CLI를 구현·검증했습니다.",
     href: "/case-studies/ax-doctor",
     tags: ["Go", "CLI", "Preflight", "Privacy-by-design"],
   },
   {
     id: "ax-evidence-gates",
     title: "AX Evidence Gates — 공개 근거 기반 AI 품질 게이트 3종",
-    excerpt: "여행 예약 답변, 상품 등록 데이터, 금융 안내 문구에서 근거 부족과 위험한 단정을 찾는 독립 프로토타입을 구현하고 33개 테스트로 검증했습니다.",
+    excerpt: "검수 범위와 공개 근거, 판정 기준을 정하고 AI 에이전트를 활용해 독립 프로토타입을 구현한 뒤 33개 테스트로 검증했습니다.",
     href: "/case-studies/ax-evidence-gates",
     tags: ["Evidence-based QA", "Codex Plugin", "Human-in-the-loop", "33 Tests"],
   },

@@ -57,8 +57,9 @@ export default function Home() {
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
           커머스·게임·플랫폼 서비스에서 UI를 개발하고 운영하며
           현장의 반복 업무, 맥락 단절, 검증 비용 문제를 경험했습니다.
-          그 경험을 바탕으로 Agent, RAG, MCP와 자동화 워크플로우를
-          직접 설계하고 운영하고 있습니다.
+          그 경험을 바탕으로 문제와 적용 범위, 완료 기준을 정하고
+          AI Agent를 활용해 RAG, MCP와 자동화 워크플로우를
+          구현·검증하고 운영하고 있습니다.
         </p>
         <div className="mt-6 sm:mt-8 flex flex-wrap gap-2 sm:gap-3">
           <Link

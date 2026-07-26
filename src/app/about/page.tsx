@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "김성재 — AX Engineer. 13년간의 제품 UI 운영 경험을 기반으로 AI Agent, RAG, MCP와 자동화를 설계하고 운영합니다.",
+  description: "김성재 — AX Engineer. 13년간의 제품 UI 운영 경험을 기반으로 문제와 적용 범위를 정하고 AI Agent, RAG, MCP와 자동화를 구현·검증합니다.",
 };
 
 export default function About() {
@@ -29,8 +29,10 @@ export default function About() {
             클라이언트 커뮤니케이션을 담당했습니다.
           </p>
           <p>
-            AX Doctor와 Agent Bridge는 오픈소스로 공개했고, Obsidian RAG와 BabyPick은
-            직접 구현·운영하고 있습니다. 제품 운영과 팀 리딩 경험을 바탕으로
+            AX Doctor와 Agent Bridge는 제품 범위와 판정·완료 기준을 정한 뒤
+            AI 코딩 에이전트를 활용해 구현하고, 실제 명령과 테스트로 검증해 공개했습니다.
+            Obsidian RAG와 BabyPick도 같은 방식으로 구현·운영하고 있습니다.
+            제품 운영과 팀 리딩 경험을 바탕으로
             현업 문제를 실제 사용할 수 있는 AI 업무 시스템과 제품으로 연결하는 AX Engineer를 지향합니다.
           </p>
         </div>
@@ -43,7 +45,7 @@ export default function About() {
         <div className="space-y-3">
           {[
             { q: "현업 문제 이해", a: "13년간의 제품 운영 경험을 기반으로 반복 업무와 맥락 단절을 찾습니다." },
-            { q: "AX 시스템 설계", a: "Agent, RAG, MCP와 자동화 워크플로우를 직접 구현하고 운영합니다." },
+            { q: "AX 시스템 구현", a: "문제와 적용 범위, 완료 기준을 정하고 AI Agent로 구현한 뒤 실제 실행과 테스트로 검증합니다." },
             { q: "Human-in-the-loop", a: "AI는 초안과 확인 항목을 준비하고, 최종 판단은 사람이 합니다." },
             { q: "AI 제품 구현", a: "아이디어를 실제 사용할 수 있는 제품으로 만들고 배포·운영합니다." },
             { q: "운영과 개선", a: "배포 후 운영 기록과 피드백으로 다음 반복을 설계합니다." },

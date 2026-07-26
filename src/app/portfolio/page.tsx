@@ -69,8 +69,9 @@ export default function PortfolioPage() {
             설계와 영향 범위, 예외는 사람이 최종 검증하도록 운영 기준을 정리했습니다.
           </p>
           <p>
-            AX Doctor와 Agent Bridge는 오픈소스로 공개했고, Obsidian RAG와 BabyPick은
-            직접 구현·운영하며, 확인한 범위와 아직 해결하지 못한 한계까지 기록하고 있습니다.
+            개인 프로젝트는 문제와 범위, 완료 기준을 정한 뒤 AI 에이전트를 활용해 구현하고,
+            실제 실행과 테스트로 검증합니다. AX Doctor와 Agent Bridge는 오픈소스로 공개했고,
+            Obsidian RAG와 BabyPick은 운영하며 확인한 범위와 아직 해결하지 못한 한계까지 기록하고 있습니다.
           </p>
         </div>
       </section>
@@ -259,7 +260,8 @@ export default function PortfolioPage() {
         <p className="pf-section-lead">
           개인 AI 작업 환경을 정리하면서 새 설정을 설치하기 전에 기존 도구와 충돌하지 않는지,
           확인하지 못한 영역은 없는지 먼저 점검할 필요가 있었습니다.
-          설치기와 분리된 읽기 전용 CLI로 문제를 다시 정의해 구현했습니다.
+          설치기와 분리된 읽기 전용 CLI로 문제와 판정 기준을 다시 정의하고,
+          AI 코딩 에이전트를 활용해 구현한 뒤 합성 시나리오와 테스트로 검증했습니다.
         </p>
 
         <div className="pf-project">
@@ -496,7 +498,8 @@ export default function PortfolioPage() {
       <div className="pf-footer">
         <p className="pf-footer-name">김성재</p>
         <p className="pf-footer-copy">
-          UI/FE와 서비스 운영 경험을 기반으로 Agent, RAG, MCP와 자동화 워크플로를 직접 구현하고 있습니다.
+          UI/FE와 서비스 운영 경험을 기반으로 문제와 적용 범위를 정하고,
+          AI Agent를 활용해 RAG, MCP와 자동화 워크플로를 구현·검증하고 있습니다.
         </p>
         <nav className="pf-footer-actions" aria-label="Portfolio 다음 이동">
           <a href="/career">전체 경력 보기 →</a>

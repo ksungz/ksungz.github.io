@@ -109,7 +109,7 @@ export default function CareerPage() {
         <div className="space-y-3 text-sm text-[var(--color-muted)] leading-relaxed">
           <p>13년간 커머스, 게임, 플랫폼 서비스에서 UI를 개발하고 운영해왔습니다. 웹 표준, 접근성, 마크업 구조화, SCSS 설계, 반응형 UI 구현을 바탕으로 서비스 화면의 구조와 유지보수성을 개선했습니다.</p>
           <p>현재는 모바일웹 상품상세(PDP)를 포함한 핵심 서비스 UI를 담당하면서, AI 도구를 도입해 반복 작업을 줄이고 제품 개발 과정으로 역할을 넓히고 있습니다. SCSS 마이그레이션, PR Review Agent, 커밋·PR·QA 체크리스트 자동화 흐름을 정리했습니다.</p>
-          <p>개인적으로는 AX Doctor, Agent Bridge, Obsidian RAG, News Automation과 BabyPick AI를 직접 기획·구현·운영하고, 공개 코드와 운영 기록으로 검증 범위와 한계를 남기고 있습니다.</p>
+          <p>개인 프로젝트에서는 문제와 범위, 최종 판단 기준을 직접 정하고 AI 에이전트를 활용해 AX Doctor, Agent Bridge, Obsidian RAG, News Automation과 BabyPick AI를 구현·검증하고 있습니다. 공개 코드와 운영 기록에는 확인한 범위와 한계를 함께 남깁니다.</p>
         </div>
       </section>
 

@@ -21,7 +21,7 @@ const featuredProducts = [
     name: "Agent Bridge",
     tagline: "로그인된 여러 AI CLI를 한 작업 단위로 연결하는 오픈소스 도구",
     description: "각 CLI의 기존 로그인·구독 환경을 유지하면서 공통 목표, 결정, 실행·리뷰 기록과 인계 문서를 관리합니다.",
-    href: "/products#agent-bridge",
+    href: "/case-studies/agent-bridge",
     tags: ["CLI", "Open Source", "MIT"],
     group: "AX Systems",
   },

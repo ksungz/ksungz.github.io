@@ -37,7 +37,7 @@ const axSystems: ProductData[] = [
       { label: "GitHub", href: "https://github.com/ksungz/agent-bridge" },
     ],
     relatedLinks: [
-      { label: "운영 환경 점검", href: "/engineering/ai-agent-harness-audit" },
+      { label: "Case Study", href: "/case-studies/agent-bridge" },
     ],
   },
   {

@@ -22,6 +22,13 @@ const caseStudies = [
     tags: ["Go", "CLI", "Preflight", "Privacy-by-design"],
   },
   {
+    id: "agent-bridge",
+    title: "Agent Bridge — 로그인된 여러 AI CLI를 한 작업에서 연결",
+    excerpt: "각 도구의 기존 로그인과 구독 환경을 유지하면서 목표, 결정, 실행·리뷰 기록과 인계 문서를 한 작업 폴더에서 관리하는 오픈소스 CLI입니다.",
+    href: "/case-studies/agent-bridge",
+    tags: ["Node.js", "CLI", "Multi-Agent", "Open Source"],
+  },
+  {
     id: "obsidian-rag",
     title: "Obsidian RAG — 여러 AI 에이전트가 같은 문서를 검색하는 환경",
     excerpt: "Obsidian 문서를 로컬 임베딩으로 인덱싱하고 MCP·HTTP·CLI로 검색해 에이전트 간 맥락 단절을 해결한 사례.",

@@ -58,11 +58,19 @@ const sections = [
     ],
   },
   {
+    label: "Validation",
+    title: "합성 판정과 안전하게 중단되는 경로를 함께 재현했습니다",
+    body: [
+      "macOS arm64와 Go 1.26.5 환경에서 safe는 READY_WITH_CONDITIONS와 종료 코드 0, risky는 NOT_READY와 종료 코드 2를 반환하고 각각 JSON·Markdown·검사 범위 기록을 생성하는 흐름을 다시 확인했습니다.",
+      "전체 테스트, race detector, vet, CGO 비활성 경로와 공개 계약 검증을 통과했습니다. macOS의 비정규 임시 경로를 그대로 출력 위치로 전달했을 때는 결과 파일을 만들기 전에 AXD-OUTPUT-UNSAFE로 중단됐고, 물리 경로로 정규화한 뒤에만 완료되는 fail-closed 동작도 확인했습니다.",
+    ],
+  },
+  {
     label: "Result",
     title: "결과",
     body: [
       "합성 환경에서 scope → scan → report 흐름이 정상 동작하는 것을 확인했습니다. 판정과 근거가 보고서로 남아, 도입 결정 시 참고할 수 있는 기준선을 확보했습니다.",
-      "저장소와 합성 데모는 오픈소스로 공개했습니다. 다만 실제 사용자 환경을 읽는 production runner는 아직 연결하지 않았으며, 일반 실행 명령도 의도적으로 비활성화한 상태입니다.",
+      "저장소와 합성 데모, 자체 검증 기록을 오픈소스로 공개하고 v0.1.0-alpha.1 소스 릴리스로 묶었습니다. 실제 사용자 환경을 읽는 production runner는 아직 연결하지 않았으며, 일반 실행 명령도 의도적으로 비활성화한 상태입니다.",
     ],
   },
   {
@@ -70,7 +78,7 @@ const sections = [
     title: "현재는 합성 환경에서 검증한 공개 프로토타입입니다",
     body: [
       "실제 사용자의 HOME, AI 설정, 자격 증명이나 실행 중인 프로세스를 읽지 않습니다. 따라서 실제 환경을 지원하거나 기업 도입이 가능한 완성 제품으로 설명하지 않습니다.",
-      "현재 확인한 결과는 공개 스키마, 합성 safe·risky 시나리오, 판정 근거와 산출물 무결성입니다. 실환경 프로필과 규칙별 오탐·미탐 평가는 production runner 이후에 별도로 필요합니다.",
+      "현재 확인한 결과는 공개 스키마, 합성 safe·risky 시나리오, 판정 근거와 산출물 무결성입니다. 외부 사용자 검증과 실환경 프로필, 규칙별 오탐·미탐 평가는 production runner 이후에 별도로 필요합니다.",
     ],
   },
   {
@@ -149,14 +157,23 @@ export default function AxDoctorCaseStudy() {
       </section>
 
       <section className="mt-12 sm:mt-16 pt-8 border-t border-[var(--color-border)]">
-        <a
-          href="https://github.com/ksungz/ax-doctor"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center rounded-lg border border-[var(--color-border)] px-3 py-2 sm:py-1.5 text-xs font-medium transition-colors hover:border-[var(--color-foreground)] min-h-[44px] sm:min-h-0"
-        >
-          GitHub ↗
-        </a>
+        <div className="flex flex-wrap gap-2">
+          {[
+            { label: "GitHub ↗", href: "https://github.com/ksungz/ax-doctor" },
+            { label: "검증 기록 ↗", href: "https://github.com/ksungz/ax-doctor/blob/main/docs/validation.md" },
+            { label: "Alpha Release ↗", href: "https://github.com/ksungz/ax-doctor/releases/tag/v0.1.0-alpha.1" },
+          ].map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-lg border border-[var(--color-border)] px-3 py-2 sm:py-1.5 text-xs font-medium transition-colors hover:border-[var(--color-foreground)] min-h-[44px] sm:min-h-0"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
       </section>
     </div>
   );

@@ -151,6 +151,10 @@ go run ./cmd/ax-doctor-demo --scenario risky --output "${demo_root}/demo-risky"
 
 데모에 필요한 profile, target과 관찰 데이터는 실행 파일 안에 합성 값으로 포함했다. 실제 HOME, AI 도구 설정, 인증정보와 실행 중인 process는 읽지 않는다.
 
+2026년 7월 27일에는 새 임시 출력 폴더에서 두 시나리오와 전체 품질 게이트를 다시 실행했다. 이때 macOS의 `/var/...` 임시 경로를 물리 경로로 정규화하지 않고 전달하자 결과 파일을 만들기 전에 `AXD-OUTPUT-UNSAFE`로 중단됐다. README처럼 `pwd -P`로 실제 경로를 확인한 뒤에만 완료됐다. 성공 시나리오뿐 아니라 모호한 출력 경로에서 추측하지 않고 멈추는 동작도 함께 확인한 셈이다.
+
+검증 환경과 실행 결과, 아직 확인하지 않은 범위는 [공개 자체 검증 기록](https://github.com/ksungz/ax-doctor/blob/main/docs/validation.md)에 정리하고, 실제 환경 진단판과 구분하기 위해 `v0.1.0-alpha.1` 합성 데모 소스 릴리스로 공개했다.
+
 반대로 아직 하지 않은 일도 분명하다.
 
 - 실제 HOME과 사용자 설정 스캔

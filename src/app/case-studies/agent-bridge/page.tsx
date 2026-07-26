@@ -43,18 +43,18 @@ const sections = [
   },
   {
     label: "Validation",
-    title: "자동 테스트와 실제 CLI 실행을 분리해 검증했습니다",
+    title: "공개 설치부터 실제 CLI 실행과 인계까지 다시 재현했습니다",
     body: [
-      "자동 테스트에서는 가짜 로컬 에이전트를 사용해 유료 API나 실제 AI 도구 없이 작업 생성, 실행 기록, 리뷰와 인계 문서 생성을 재현합니다.",
-      "공개 데모에서는 사용자 파일이 없는 샘플 작업으로 현재 소스를 빌드한 뒤 로그인된 Codex CLI를 실제 실행했습니다. 실행 결과가 작업 폴더에 남고 다음 도구용 인계 문서가 생성되는 것을 확인했습니다.",
+      "자동 테스트에서는 가짜 로컬 에이전트를 사용해 유료 API나 실제 AI 도구 없이 작업 생성, 실행 기록, 리뷰와 인계 문서 생성을 재현합니다. 2026년 7월 27일에는 새 임시 작업 공간에서 GitHub 설치부터 작업 생성, 로그인된 Codex CLI 실행과 handoff 생성까지 다시 확인했습니다.",
+      "이 과정에서 Codex CLI의 표준 오류에 포함된 사용자 홈 디렉터리 경로가 run과 handoff 문서에 남는 문제를 발견했습니다. Issue로 기록하고 v0.1.1에서 저장 전 `$HOME`으로 마스킹했으며, 프롬프트·명령 인자·stdout·stderr를 포함한 자동 테스트를 추가했습니다.",
     ],
   },
   {
     label: "Result",
-    title: "기존 AI CLI 환경을 유지하는 연결 계층을 공개했습니다",
+    title: "검증 중 발견한 문제를 v0.1.1 개선으로 연결했습니다",
     body: [
       "작업 생성, 도구 목록 확인, 단일 실행, 다중 리뷰, 인계 문서와 요약 생성을 CLI 명령으로 제공하며 GitHub에서 바로 설치할 수 있습니다.",
-      "저장소에는 실행 화면과 전체 명령 흐름, 설치·사용 방법, 파일 구조, 지원하지 않는 범위를 한글로 공개했습니다.",
+      "저장소에는 실행 화면과 전체 명령 흐름, 설치·사용 방법, 파일 구조, 자체 검증 기록과 지원하지 않는 범위를 한글로 공개했습니다. 홈 경로 마스킹 개선은 Issue, 테스트와 v0.1.1 Release로 남겼습니다.",
     ],
   },
   {
@@ -62,7 +62,8 @@ const sections = [
     title: "현재는 작업 기록과 인계의 기본 구조에 집중합니다",
     body: [
       "AI 제공자의 로그인이나 결제를 관리하지 않고, API 호출을 중계하거나 구독을 우회하지 않습니다. 연결할 CLI는 사용자의 로컬 환경에 이미 설치되고 로그인되어 있어야 합니다.",
-      "긴 맥락을 자동으로 압축하거나 도구별로 필요한 파일을 선별하는 기능은 아직 구현하지 않았습니다. 현재 버전은 여러 CLI의 실행 결과와 결정, 리뷰와 인계 기록을 같은 위치에 남기는 범위에 집중합니다.",
+      "현재 사용자의 홈 경로 외에 프롬프트와 실행 결과에 포함된 임의의 민감정보를 자동으로 판별하지 않습니다. 기록을 공유하거나 커밋하기 전에는 사용자가 직접 확인해야 합니다.",
+      "외부 사용자의 반복 사용과 같은 시점의 Claude Code·Gemini CLI 재현은 아직 검증하지 않았습니다. 긴 맥락 자동 압축과 도구별 파일 선별도 현재 범위에 포함되지 않습니다.",
     ],
   },
   {
@@ -144,14 +145,23 @@ export default function AgentBridgeCaseStudy() {
       </section>
 
       <section className="mt-12 border-t border-[var(--color-border)] pt-8 sm:mt-16">
-        <a
-          href="https://github.com/ksungz/agent-bridge"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex min-h-[44px] items-center rounded-lg border border-[var(--color-border)] px-3 py-2 text-xs font-medium transition-colors hover:border-[var(--color-foreground)] sm:min-h-0 sm:py-1.5"
-        >
-          GitHub ↗
-        </a>
+        <div className="flex flex-wrap gap-2">
+          {[
+            { label: "GitHub ↗", href: "https://github.com/ksungz/agent-bridge" },
+            { label: "검증 기록 ↗", href: "https://github.com/ksungz/agent-bridge/blob/master/docs/validation.md" },
+            { label: "v0.1.1 Release ↗", href: "https://github.com/ksungz/agent-bridge/releases/tag/v0.1.1" },
+          ].map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-[44px] items-center rounded-lg border border-[var(--color-border)] px-3 py-2 text-xs font-medium transition-colors hover:border-[var(--color-foreground)] sm:min-h-0 sm:py-1.5"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
       </section>
     </div>
   );

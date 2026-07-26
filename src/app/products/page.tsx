@@ -32,9 +32,10 @@ const axSystems: ProductData[] = [
     problem: "Claude Code, Codex, Gemini CLI를 각각 구독·로그인해 사용했지만, 한 작업에서 함께 쓰려면 요청과 결과를 직접 옮기고 다음 에이전트에게 다시 설명해야 했습니다. API 키 기반 모델 라우터가 아니라 기존 CLI 환경을 유지한 채 조합하는 방법이 필요했습니다.",
     solution: "각 CLI를 독립된 로컬 프로세스로 실행하고, 하나의 작업 폴더에 목표, 공통 맥락, 결정 사항, 실행 결과, 리뷰와 인계 문서를 저장하는 얇은 오케스트레이션 계층을 만들었습니다. 인증·결제를 대신 관리하거나 API를 프록시하지 않으며, JSON 어댑터로 다른 CLI도 연결할 수 있습니다.",
     stack: ["Node.js", "CLI", "MIT", "CI"],
-    status: "오픈소스 · GitHub 공개, 자동 테스트 포함",
+    status: "오픈소스 · v0.1.1 · 공개 설치와 Codex CLI 실행 검증",
     links: [
       { label: "GitHub", href: "https://github.com/ksungz/agent-bridge" },
+      { label: "Release", href: "https://github.com/ksungz/agent-bridge/releases/tag/v0.1.1" },
     ],
     relatedLinks: [
       { label: "Case Study", href: "/case-studies/agent-bridge" },
@@ -47,9 +48,10 @@ const axSystems: ProductData[] = [
     problem: "새 AI 도구를 설치하기 전에 기존 설정과 충돌, 권한, 미확인 범위를 확인할 방법이 없었습니다.",
     solution: "기존 환경과 도입 대상을 읽기 전용으로 비교해 판단 근거를 남기는 Go 기반 preflight CLI를 만들었습니다. 제품 범위, 비목표, 입력·출력 계약, 위협 모델과 단계별 완료 기준을 먼저 정의하고 기능과 테스트를 같은 단위로 개발했습니다.",
     stack: ["Go", "JSON Schema", "CLI", "Synthetic Test"],
-    status: "오픈소스 공개 · 합성 데모 검증 완료 · 실제 환경 스캐너 미연결",
+    status: "v0.1.0-alpha.1 · 합성 데모 자체 검증 · 실제 환경 스캐너 미연결",
     links: [
       { label: "GitHub", href: "https://github.com/ksungz/ax-doctor" },
+      { label: "Alpha Release", href: "https://github.com/ksungz/ax-doctor/releases/tag/v0.1.0-alpha.1" },
     ],
     relatedLinks: [
       { label: "Case Study", href: "/case-studies/ax-doctor" },

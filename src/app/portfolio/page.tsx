@@ -300,6 +300,7 @@ export default function PortfolioPage() {
               <li><strong>safe</strong>는 READY_WITH_CONDITIONS, <strong>risky</strong>는 NOT_READY로 판정하는 CLI 데모 구현</li>
               <li>각 실행 결과는 JSON, Markdown, 검사 범위 기록 세 파일로 생성</li>
               <li>미지원 입력은 무시하지 않고 중단하며, 확인하지 못한 항목은 통과로 추정하지 않도록 처리</li>
+              <li>macOS arm64에서 전체 테스트 게이트와 종료 코드를 재검증하고, 비정규 출력 경로는 <strong>AXD-OUTPUT-UNSAFE</strong>로 중단되는 동작 확인</li>
               <li>실제 사용자 환경을 읽는 기능이 연결되기 전까지 일반 실행 명령은 의도적으로 비활성화</li>
             </ul>
           </div>
@@ -441,6 +442,7 @@ export default function PortfolioPage() {
               <li><strong>CLI adapter</strong> — 명령어 기반 AI 도구를 JSON 설정으로 연결</li>
               <li><strong>Review</strong> — 여러 에이전트에 같은 검토 요청을 실행하고 결과 기록</li>
               <li><strong>Handoff</strong> — 다음 에이전트가 이어갈 목표, 결정과 최근 실행을 문서로 생성</li>
+              <li>공개 GitHub 설치부터 Codex CLI 실행과 handoff 생성을 재검증하고, 기록에 포함된 홈 경로를 <strong>v0.1.1</strong>에서 마스킹</li>
               <li>컨텍스트 자동 압축이나 에이전트별 파일 선별은 아직 구현하지 않음</li>
             </ul>
           </div>

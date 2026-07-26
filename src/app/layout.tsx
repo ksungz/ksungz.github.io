@@ -21,8 +21,23 @@ const notoSansKR = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ksungz-github-io.vercel.app"),
   title: { default: "김성재 · AX Engineer", template: "%s · 김성재" },
   description: "13년간의 제품 운영 경험을 바탕으로 AI Agent, RAG, MCP와 자동화로 업무와 제품 개발 방식을 전환하는 AX Engineer 김성재입니다.",
+  openGraph: {
+    type: "website",
+    locale: "ko_KR",
+    siteName: "김성재 · AX Engineer",
+    title: "김성재 · AX Engineer",
+    description:
+      "13년간의 제품 운영 경험을 바탕으로 AI Agent, RAG, MCP와 자동화로 업무와 제품 개발 방식을 전환합니다.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "김성재 · AX Engineer",
+    description:
+      "제품 운영 경험을 바탕으로 AI Agent와 자동화를 실제 업무 시스템과 제품으로 연결합니다.",
+  },
 };
 
 export default function RootLayout({

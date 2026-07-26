@@ -18,7 +18,7 @@ AI Agent와 자동화를 실제 업무 시스템과 제품으로 연결하는 �
 - [Case Studies](https://ksungz-github-io.vercel.app/case-studies)
 - [Engineering Notes](https://ksungz-github-io.vercel.app/engineering)
 - [Career](https://ksungz-github-io.vercel.app/career)
-- [Portfolio](https://ksungz-github-io.vercel.app/portfolio)
+- [AX Engineer Portfolio](https://ksungz-github-io.vercel.app/)
 
 ## 대표 내용
 

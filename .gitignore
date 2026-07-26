@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+/tmp/
 
 # next.js
 /.next/
@@ -32,6 +33,12 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+
+# local review and resume drafts
+/chatgpt-review*.md
+/rebranding-review.md
+/resume*.md
+/*이력서*.md
 
 # vercel
 .vercel

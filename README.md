@@ -43,6 +43,7 @@ AI Agent와 자동화를 실제 업무 시스템과 제품으로 연결하는 �
 
 ## 기술 구성
 
+- Node.js 22
 - Next.js 16
 - React 19
 - TypeScript

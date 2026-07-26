@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Career",
-  description: "김성재의 경력 — 제품 UI 운영 경험과 개발 워크플로우 AX",
+  description: "김성재의 경력 — 서비스 UI 개발·운영 경험과 개발 워크플로우 AX",
 };
 
 const careers = [
@@ -12,7 +12,7 @@ const careers = [
     team: "UI개발팀",
     period: "2020.12 ~ 현재",
     role: "UI 개발자",
-    summary: "모바일웹 상품상세(PDP)를 포함한 핵심 서비스 UI 운영. 기존 HTML/SCSS 구조를 React 환경으로 전환하고, AI 도구를 도입해 반복 작업을 자동화.",
+    summary: "모바일웹 상품상세(PDP)를 포함한 핵심 서비스 UI 개발·운영. 기존 HTML/SCSS 구조를 React 환경으로 전환하고, AI 도구를 도입해 반복 작업을 자동화.",
     achievements: [
       {
         title: "Dart Sass 마이그레이션 — 2,384개 파일, 3주 완료",
@@ -99,7 +99,7 @@ export default function CareerPage() {
         <p className="font-mono text-xs text-[var(--color-muted)] mb-2">Career</p>
         <h1 className="text-xl sm:text-2xl font-bold tracking-tight">김성재</h1>
         <p className="mt-2 text-sm text-[var(--color-muted)]">
-          AX Engineer · 커머스·게임·플랫폼 제품 UI 운영
+          AX Engineer · 커머스·게임·플랫폼 서비스 UI 개발·운영
         </p>
       </div>
 

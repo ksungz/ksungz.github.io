@@ -50,8 +50,8 @@ export default function Home() {
       <section className="mb-16 sm:mb-20">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">AX Engineer</p>
         <h1 className="text-2xl sm:text-4xl font-bold tracking-tight mb-4 sm:mb-6 leading-snug sm:leading-tight">
-          <span className="block">13년간 제품 UI를 운영하며 발견한</span>
-          <span className="block text-[var(--color-muted)]">반복 업무와 맥락 단절을</span>
+          <span className="block">13년간 서비스 UI를 개발·운영하며</span>
+          <span className="block text-[var(--color-muted)]">발견한 반복 업무와 맥락 단절을</span>
           <span className="block text-[var(--color-muted)]">AI Agent와 자동화로 개선합니다.</span>
         </h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">

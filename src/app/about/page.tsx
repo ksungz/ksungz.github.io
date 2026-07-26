@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "김성재 — AX Engineer. 13년간의 제품 UI 운영 경험을 기반으로 문제와 적용 범위를 정하고 AI Agent, RAG, MCP와 자동화를 구현·검증합니다.",
+  description: "김성재 — AX Engineer. 13년간 서비스 UI를 개발·운영한 경험을 기반으로 문제와 적용 범위를 정하고 AI Agent, RAG, MCP와 자동화를 구현·검증합니다.",
 };
 
 export default function About() {

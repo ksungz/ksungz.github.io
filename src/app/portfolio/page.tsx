@@ -78,9 +78,9 @@ export default function PortfolioPage() {
 
       <hr className="pf-divider" />
 
-      {/* 서비스 UI 운영과 개선 */}
+      {/* 서비스 UI 개발과 운영 개선 */}
       <section className="pf-section pf-section-dark" id="work">
-        <h2 className="pf-section-title">서비스 UI 운영과 개선</h2>
+        <h2 className="pf-section-title">서비스 UI 개발과 운영 개선</h2>
         <p className="pf-section-lead">
           운영 중인 화면을 바꿀 때는 구현뿐 아니라 영향 범위, 협업 대상, 검증 기준과 반영 이후의 결과까지 함께 확인합니다.
           여러 도메인이 맞물리는 화면을 맡으며 변경 단위를 나누고 안정적으로 반영하는 경험을 쌓았습니다.

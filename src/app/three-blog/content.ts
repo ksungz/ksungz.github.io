@@ -76,7 +76,7 @@ export const landmarks: Landmark[] = [
     title: "UI 구현 사례와 개인 프로젝트를 정리했습니다",
     eyebrow: "Selected Work · Case Studies",
     description:
-      "제품 UI 운영, 환경 전환, 디자인 시스템과 개인 프로젝트를 문제와 검증 과정 중심으로 소개합니다.",
+      "서비스 UI 개발·운영, 환경 전환, 디자인 시스템과 개인 프로젝트를 문제와 검증 과정 중심으로 소개합니다.",
     highlights: [
       "상품 옵션 선택 UI 공개 구현",
       "컴포넌트 상태와 예외 케이스 검증",

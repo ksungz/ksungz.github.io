@@ -69,8 +69,8 @@ export default function PortfolioPage() {
             설계와 영향 범위, 예외는 사람이 최종 검증하도록 운영 기준을 정리했습니다.
           </p>
           <p>
-            개인적으로는 AX Doctor, Agent Bridge, Obsidian RAG와 BabyPick을
-            직접 구현·공개·운영하며, 확인한 범위와 아직 해결하지 못한 한계까지 기록하고 있습니다.
+            AX Doctor와 Agent Bridge는 오픈소스로 공개했고, Obsidian RAG와 BabyPick은
+            직접 구현·운영하며, 확인한 범위와 아직 해결하지 못한 한계까지 기록하고 있습니다.
           </p>
         </div>
       </section>

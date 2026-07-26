@@ -130,7 +130,7 @@ export default function Home() {
           <div className="rounded-lg border border-[var(--color-border)] p-4">
             <h3 className="text-sm font-semibold">제품 운영과 개선</h3>
             <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-              아이디어를 실제 사용할 수 있는 제품으로 만들고, 배포 후 운영 데이터로 반복 개선합니다.
+              아이디어를 실제 사용할 수 있는 제품으로 만들고, 배포 후 운영 기록과 피드백으로 반복 개선합니다.
             </p>
           </div>
         </div>

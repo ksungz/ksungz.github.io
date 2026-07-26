@@ -11,12 +11,12 @@ export default function PortfolioPage() {
           <span aria-hidden="true">&gt;_</span> k.sungjae@portfolio:~$
         </a>
         <nav className="pf-cli-nav" aria-label="포트폴리오 탐색">
-          <a href="#work">Work</a>
-          <a href="#case-study">Case Study</a>
-          <a href="#workflow">Workflow</a>
+          <a href="#workflow">AX Work</a>
           <a href="#ax-doctor">AX Doctor</a>
-          <a href="#ai-products">AI Products</a>
           <a href="#agents">Agent Systems</a>
+          <a href="#ai-products">AI Products</a>
+          <a href="#work">UI Background</a>
+          <a href="#case-study">UI Case Study</a>
           <a href="/career">Career</a>
           <a href="mailto:k.suzkim@gmail.com">Contact</a>
         </nav>
@@ -34,20 +34,21 @@ export default function PortfolioPage() {
         <p className="pf-hero-command"><span aria-hidden="true">$</span> whoami</p>
         <h1>김성재</h1>
         <p className="pf-hero-statement">
-          UI/FE와 서비스 운영 경험을 기반으로 Agent, RAG, MCP와 자동화 워크플로를 직접 구현하고 있습니다.
+          13년간 제품을 운영하며 발견한 반복 업무와 맥락 단절을
+          Agent, RAG, MCP와 자동화 워크플로로 전환하고 있습니다.
         </p>
         <div className="pf-hero-actions">
-          <a className="pf-scroll-link" href="#work"><span aria-hidden="true">$</span> open ./portfolio <span aria-hidden="true">↓</span></a>
+          <a className="pf-scroll-link" href="#workflow"><span aria-hidden="true">$</span> open ./ax-work <span aria-hidden="true">↓</span></a>
           <Link className="pf-scroll-link" href="/engineering">
             <span aria-hidden="true">$</span> open ./engineering
           </Link>
-          <a
+          <Link
             className="pf-3d-link"
-            href="/three-blog"
-            aria-label="Three.js 기반 인터랙티브 데모 열기"
+            href="/products"
+            aria-label="AX 시스템과 AI 제품 목록 열기"
           >
-            <span aria-hidden="true">◆</span> open ./three-blog
-          </a>
+            <span aria-hidden="true">◆</span> open ./products
+          </Link>
         </div>
       </header>
 
@@ -58,18 +59,18 @@ export default function PortfolioPage() {
         </div>
         <div className="pf-hero-copy">
           <p>
-            커머스, 게임, 플랫폼 서비스에서 UI 개발과 운영을 해왔습니다.
-            웹 표준, 접근성, 마크업 구조화, SCSS 설계, 반응형 UI 구현을 바탕으로
-            서비스 화면의 구조와 유지보수성을 개선해왔습니다.
+            커머스, 게임, 플랫폼 서비스에서 13년간 UI를 개발하고 운영했습니다.
+            복잡한 변경 범위와 검증 기준을 기획, 디자인, 백엔드 담당자와 조율하고
+            운영 중인 서비스에 안정적으로 반영해왔습니다.
           </p>
           <p>
-            현재는 모바일웹 상품상세처럼 여러 도메인이 맞물리는 화면을 운영하며,
-            HTML/SCSS 기반 산출물을 React 환경으로 옮기고 CSS 의존성을 프로젝트 안으로 정리하고 있습니다.
-            Storybook과 문서화, 리뷰 기준으로 컴포넌트 단위 검증 흐름도 만들고 있습니다.
+            회사에서는 승인된 업무 문맥 연결과 회사 제공 PR Review Agent를
+            실제 개발 흐름에 도입·설정했습니다. 반복 항목은 AI가 먼저 확인하고,
+            설계와 영향 범위, 예외는 사람이 최종 검증하도록 운영 기준을 정리했습니다.
           </p>
           <p>
-            반복되는 리뷰 항목과 PR 설명, 문서 초안, QA 체크리스트는 AI로 먼저 정리한 뒤 검토해 활용합니다.
-            이를 팀에서 재사용할 수 있도록 규칙과 작업 흐름도 함께 정리하고 있습니다.
+            개인적으로는 AX Doctor, Agent Bridge, Obsidian RAG와 BabyPick을
+            직접 구현·공개·운영하며, 확인한 범위와 아직 해결하지 못한 한계까지 기록하고 있습니다.
           </p>
         </div>
       </section>
@@ -163,10 +164,16 @@ export default function PortfolioPage() {
       {/* 회사 안에서 적용한 AI 보조 흐름 */}
       <section className="pf-section pf-section-tinted" id="workflow">
         <h2 className="pf-section-title">개발 업무에 적용한 AI 도구와 규칙</h2>
+        <p className="pf-section-lead">
+          회사에서 제공한 도구와 승인된 연동을 실제 개발 흐름에 적용하고,
+          반복 작업의 규칙과 사람이 최종 판단할 범위를 정리했습니다.
+          도구 자체 개발과 제가 담당한 도입·설정·운영 범위는 구분해서 기록합니다.
+        </p>
 
         <div className="pf-project">
           <div className="pf-project-header">
             <h3>팀에서 함께 쓰는 규칙과 작성 흐름</h3>
+            <a className="pf-project-link" href="/case-studies/developer-workflow-ax">Case Study →</a>
             <span className="pf-badge pf-badge-running">실무 적용</span>
           </div>
           <p className="pf-project-desc">
@@ -189,7 +196,7 @@ export default function PortfolioPage() {
             <ul>
               <li>개인마다 달랐던 프롬프트와 작성 형식을 팀 공통 규칙으로 정리</li>
               <li>PR, 커밋, 위키, QA 산출물을 일정한 형식의 초안으로 생성</li>
-              <li>리뷰 단계에서 맥락, 영향 범위, 예외 케이스 확인에 집중할 수 있도록 반복 작성 작업 축소</li>
+              <li>반복 항목은 AI의 1차 확인 대상으로 옮기고, 맥락·영향 범위·예외 케이스는 사람이 최종 검증</li>
               <li>참고할 문맥의 범위와 공개 문서에 남기지 말아야 할 정보를 사용 기준에 포함</li>
             </ul>
           </div>
@@ -210,7 +217,8 @@ export default function PortfolioPage() {
           </div>
           <p className="pf-project-desc">
             UI 개발 리뷰에서는 BEM 네이밍, SCSS 구조, 접근성 속성, 중복 스타일처럼 반복해서 보는 항목이 많습니다.
-            여러 저장소의 파이프라인에 PR diff 기반 AI 리뷰 스텝을 붙여 이 항목들을 먼저 확인하도록 구성했습니다.
+            회사에서 제공한 PR Review Agent를 여러 저장소의 파이프라인에 적용해 이 항목들을 먼저 확인하도록 구성했습니다.
+            Agent 자체를 개발한 것이 아니라 파일 필터, 검토 기준과 실행 방식을 실제 업무에 맞게 설정했습니다.
             설계, 영향 범위, 예외 케이스는 기존 코드 리뷰에서 별도로 확인했습니다.
           </p>
           <div className="pf-detail">
@@ -318,13 +326,15 @@ export default function PortfolioPage() {
               </div>
               <p>
                 육아용품 가이드와 상품 정보를 함께 제공하는 커머스 서비스입니다.
-                Search Console 키워드, GAS, Gemini, API 웹훅을 연결해 매일 콘텐츠를 발행하고 있습니다.
+                Search Console 키워드, GAS, LLM과 API 웹훅을 연결해 공식 가이드를 자동 발행하고 있습니다.
+                네이버 블로그와 인스타그램은 초안·콘텐츠 패키지와 검수 대기열까지만 준비하고 공개는 사람이 결정합니다.
               </p>
               <div className="pf-chips">
                 <span className="pf-chip">Next.js</span>
                 <span className="pf-chip">Supabase</span>
                 <span className="pf-chip">GAS</span>
-                <span className="pf-chip">Gemini API</span>
+                <span className="pf-chip">LLM</span>
+                <span className="pf-chip">Human-in-the-loop</span>
               </div>
             </div>
           </div>
@@ -379,9 +389,50 @@ export default function PortfolioPage() {
       <section className="pf-section pf-section-dark" id="agents">
         <h2 className="pf-section-title">AI 에이전트 작업 환경</h2>
         <p className="pf-section-lead">
-          OpenClaw, Hermes, Obsidian RAG를 조합해 개인 작업 환경을 구성했습니다.
+          기존 로그인·구독 환경을 유지한 여러 AI CLI를 한 작업 단위로 연결하고,
+          Hermes와 Obsidian RAG를 조합해 개인 작업 환경을 구성했습니다.
           문서 출처와 접근 범위, 작업 로그를 남겨 결과와 실행 과정을 다시 확인할 수 있게 했습니다.
         </p>
+
+        <div className="pf-project" id="agent-bridge">
+          <div className="pf-project-header">
+            <h3>Agent Bridge</h3>
+            <a className="pf-project-link" href="https://github.com/ksungz/agent-bridge" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <span className="pf-badge pf-badge-live">오픈소스</span>
+          </div>
+          <p className="pf-project-desc">
+            Claude Code, Codex와 Gemini CLI를 각각 구독·로그인한 상태에서
+            API 키 기반 모델 라우터 없이 하나의 작업에 함께 사용하기 위해 만든 로컬 오케스트레이션 CLI입니다.
+            각 도구의 인증과 결제는 그대로 유지하고, 공통 목표와 결정, 실행·리뷰 기록과 인계 문서만 한 작업 폴더에서 관리합니다.
+          </p>
+          <div className="pf-detail">
+            <h4>만든 이유</h4>
+            <ul>
+              <li>각각 로그인된 로컬 CLI를 한 작업 안에서 선택해 실행</li>
+              <li>다음 에이전트에게 요청과 이전 결정을 다시 설명하는 과정 축소</li>
+              <li>여러 에이전트의 실행 결과와 리뷰를 비교 가능한 기록으로 보존</li>
+              <li>API 프록시나 구독 우회 없이 기존 도구의 실행 환경 유지</li>
+            </ul>
+          </div>
+          <div className="pf-detail">
+            <h4>현재 구현 범위</h4>
+            <ul>
+              <li><strong>Task workspace</strong> — 목표, 공통 맥락, 결정과 실행 기록을 파일로 관리</li>
+              <li><strong>CLI adapter</strong> — 명령어 기반 AI 도구를 JSON 설정으로 연결</li>
+              <li><strong>Review</strong> — 여러 에이전트에 같은 검토 요청을 실행하고 결과 기록</li>
+              <li><strong>Handoff</strong> — 다음 에이전트가 이어갈 목표, 결정과 최근 실행을 문서로 생성</li>
+              <li>컨텍스트 자동 압축이나 에이전트별 파일 선별은 아직 구현하지 않음</li>
+            </ul>
+          </div>
+          <div className="pf-chips">
+            <span className="pf-chip">Node.js</span>
+            <span className="pf-chip">TypeScript</span>
+            <span className="pf-chip">CLI</span>
+            <span className="pf-chip">Multi-Agent</span>
+            <span className="pf-chip">Handoff</span>
+            <span className="pf-chip">MIT</span>
+          </div>
+        </div>
 
         <div className="pf-project">
           <div className="pf-project-header">

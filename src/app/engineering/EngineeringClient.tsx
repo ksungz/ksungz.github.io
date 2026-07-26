@@ -14,24 +14,34 @@ interface PostMeta {
 
 interface Props {
   allPosts: PostMeta[];
+  featuredPosts: PostMeta[];
+  digestPosts: PostMeta[];
   postsByCategory: { label: string; posts: PostMeta[] }[];
-  uncategorized: PostMeta[];
 }
 
 const tabs = [
+  { id: "featured", label: "Start Here" },
   { id: "all", label: "All" },
   { id: "Engineering", label: "Engineering" },
   { id: "AI Engineering", label: "AI Engineering" },
   { id: "Automation", label: "Automation" },
+  { id: "digest", label: "Digest" },
 ] as const;
 
 type TabId = (typeof tabs)[number]["id"];
 
-export default function EngineeringClient({ allPosts, postsByCategory, uncategorized }: Props) {
-  const [activeTab, setActiveTab] = useState<TabId>("all");
+export default function EngineeringClient({
+  allPosts,
+  featuredPosts,
+  digestPosts,
+  postsByCategory,
+}: Props) {
+  const [activeTab, setActiveTab] = useState<TabId>("featured");
 
   function getPostsForTab(tab: TabId): PostMeta[] {
+    if (tab === "featured") return featuredPosts;
     if (tab === "all") return allPosts;
+    if (tab === "digest") return digestPosts;
     const cat = postsByCategory.find((c) => c.label === tab);
     return cat ? cat.posts : [];
   }
@@ -51,7 +61,7 @@ export default function EngineeringClient({ allPosts, postsByCategory, uncategor
       {/* 탭 */}
       <div className="mb-8 sm:mb-10 flex gap-1 border-b border-[var(--color-border)] overflow-x-auto scrollbar-hide">
         {tabs.map((tab) => {
-          const count = tab.id === "all" ? allPosts.length : getPostsForTab(tab.id).length;
+          const count = getPostsForTab(tab.id).length;
           return (
             <button
               key={tab.id}
@@ -88,26 +98,6 @@ export default function EngineeringClient({ allPosts, postsByCategory, uncategor
         </div>
       )}
 
-      {/* 미분류 글 (All 탭에서만) */}
-      {activeTab === "all" && uncategorized.length > 0 && (
-        <section className="mt-12 sm:mt-16">
-          <h2 className="mb-4 sm:mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
-            Other
-          </h2>
-          <div className="grid gap-3">
-            {uncategorized.map((post) => (
-              <Card
-                key={post.slug}
-                href={`/engineering/${post.slug}`}
-                title={post.title}
-                description={post.description}
-                meta={post.date}
-                tags={post.tags}
-              />
-            ))}
-          </div>
-        </section>
-      )}
     </div>
   );
 }

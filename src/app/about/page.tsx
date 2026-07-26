@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "김성재 — AX Engineer. 다년간 제품 UI 운영 경험을 기반으로 AI Agent, RAG, MCP와 자동화를 설계하고 운영합니다.",
+  description: "김성재 — AX Engineer. 13년간의 제품 UI 운영 경험을 기반으로 AI Agent, RAG, MCP와 자동화를 설계하고 운영합니다.",
 };
 
 export default function About() {
@@ -14,7 +14,7 @@ export default function About() {
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4 sm:mb-6">김성재</h1>
         <div className="space-y-4 text-sm leading-relaxed text-[var(--color-muted)] max-w-xl">
           <p>
-            다년간 커머스·게임·플랫폼 서비스의 UI를 개발하고 운영했습니다.
+            13년간 커머스·게임·플랫폼 서비스의 UI를 개발하고 운영했습니다.
             오래 운영되는 서비스에서 사람이 같은 맥락을 반복해서 찾고,
             리뷰와 산출물을 매번 처음부터 만들며, 작은 변경도 여러 영역을 다시 확인해야 하는 문제를 경험했습니다.
           </p>
@@ -28,6 +28,11 @@ export default function About() {
             하이브랩에서는 약 3년간 팀장으로 업무 분배, 공수 산정, 품질 관리와
             클라이언트 커뮤니케이션을 담당했습니다.
           </p>
+          <p>
+            개인적으로는 AX Doctor, Agent Bridge, Obsidian RAG와 BabyPick을
+            직접 구현·공개·운영하고 있습니다. 제품 운영과 팀 리딩 경험을 바탕으로
+            현업 문제를 실제 사용할 수 있는 AI 업무 시스템과 제품으로 연결하는 AX Engineer를 지향합니다.
+          </p>
         </div>
       </section>
 
@@ -37,7 +42,7 @@ export default function About() {
         </h2>
         <div className="space-y-3">
           {[
-            { q: "현업 문제 이해", a: "다년간 제품 운영 경험을 기반으로 반복 업무와 맥락 단절을 찾습니다." },
+            { q: "현업 문제 이해", a: "13년간의 제품 운영 경험을 기반으로 반복 업무와 맥락 단절을 찾습니다." },
             { q: "AX 시스템 설계", a: "Agent, RAG, MCP와 자동화 워크플로우를 직접 구현하고 운영합니다." },
             { q: "Human-in-the-loop", a: "AI는 초안과 확인 항목을 준비하고, 최종 판단은 사람이 합니다." },
             { q: "AI 제품 구현", a: "아이디어를 실제 사용할 수 있는 제품으로 만들고 배포·운영합니다." },
@@ -75,6 +80,12 @@ export default function About() {
             className="inline-flex items-center rounded-lg border border-[var(--color-border)] px-4 py-2.5 sm:py-2 text-xs font-medium transition-colors hover:border-[var(--color-foreground)] min-h-[44px]"
           >
             GitHub
+          </a>
+          <a
+            href="mailto:k.suzkim@gmail.com"
+            className="inline-flex items-center rounded-lg border border-[var(--color-border)] px-4 py-2.5 sm:py-2 text-xs font-medium transition-colors hover:border-[var(--color-foreground)] min-h-[44px]"
+          >
+            Email
           </a>
         </div>
       </section>

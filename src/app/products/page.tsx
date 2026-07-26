@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Products",
-  description: "AX Engineer 김성재의 제품 — AX Systems (AX Doctor, Obsidian RAG, Hermes Agent) · AI Products (BabyPick AI, News Automation)",
+  description: "AX Engineer 김성재가 직접 만든 AX Systems와 AI Products",
 };
 
 interface ProductLink {
@@ -28,16 +28,16 @@ const axSystems: ProductData[] = [
   {
     id: "agent-bridge",
     name: "Agent Bridge",
-    tagline: "여러 AI 코딩 에이전트를 연결하는 오픈소스 CLI",
-    problem: "Claude Code, Codex, Gemini CLI를 바꿔 사용할 때마다 작업 맥락과 실행 기록이 흩어지고, 같은 작업을 요청해도 전달한 맥락이 조금씩 달라 결과 비교가 어려웠습니다.",
-    solution: "설치된 CLI를 실행하고 작업 기록을 파일로 남기는 로컬 도구를 만들었습니다. 작업별로 목표, 공통 맥락, 결정 사항, 실행 결과, 리뷰와 인계 문서를 같은 폴더에 저장하고, 연결 정보를 JSON 어댑터로 분리해 명령어로 실행할 수 있는 도구라면 추가할 수 있게 했습니다.",
+    tagline: "로그인된 여러 AI CLI를 한 작업 단위로 연결하는 오픈소스 도구",
+    problem: "Claude Code, Codex, Gemini CLI를 각각 구독·로그인해 사용했지만, 한 작업에서 함께 쓰려면 요청과 결과를 직접 옮기고 다음 에이전트에게 다시 설명해야 했습니다. API 키 기반 모델 라우터가 아니라 기존 CLI 환경을 유지한 채 조합하는 방법이 필요했습니다.",
+    solution: "각 CLI를 독립된 로컬 프로세스로 실행하고, 하나의 작업 폴더에 목표, 공통 맥락, 결정 사항, 실행 결과, 리뷰와 인계 문서를 저장하는 얇은 오케스트레이션 계층을 만들었습니다. 인증·결제를 대신 관리하거나 API를 프록시하지 않으며, JSON 어댑터로 다른 CLI도 연결할 수 있습니다.",
     stack: ["Node.js", "CLI", "MIT", "CI"],
     status: "오픈소스 · GitHub 공개, 자동 테스트 포함",
     links: [
       { label: "GitHub", href: "https://github.com/ksungz/agent-bridge" },
     ],
     relatedLinks: [
-      { label: "기술 글", href: "/engineering/ai-agent-harness-audit" },
+      { label: "운영 환경 점검", href: "/engineering/ai-agent-harness-audit" },
     ],
   },
   {
@@ -47,8 +47,10 @@ const axSystems: ProductData[] = [
     problem: "새 AI 도구를 설치하기 전에 기존 설정과 충돌, 권한, 미확인 범위를 확인할 방법이 없었습니다.",
     solution: "기존 환경과 도입 대상을 읽기 전용으로 비교해 판단 근거를 남기는 Go 기반 preflight CLI를 만들었습니다. 제품 범위, 비목표, 입력·출력 계약, 위협 모델과 단계별 완료 기준을 먼저 정의하고 기능과 테스트를 같은 단위로 개발했습니다.",
     stack: ["Go", "JSON Schema", "CLI", "Synthetic Test"],
-    status: "합성 데모 완료 · Prototype",
-    links: [],
+    status: "오픈소스 공개 · 합성 데모 검증 완료 · 실제 환경 스캐너 미연결",
+    links: [
+      { label: "GitHub", href: "https://github.com/ksungz/ax-doctor" },
+    ],
     relatedLinks: [
       { label: "Case Study", href: "/case-studies/ax-doctor" },
       { label: "개발 기록", href: "/engineering/ax-doctor-preflight" },
@@ -71,11 +73,11 @@ const axSystems: ProductData[] = [
   {
     id: "hermes-agent",
     name: "Hermes Agent",
-    tagline: "OpenClaw에서 발전한 개인 AI 에이전트 하네스",
-    problem: "여러 AI 에이전트(Claude Code, Codex, Gemini CLI)를 바꿀 때마다 작업 맥락과 실행 기록이 흩어졌습니다.",
-    solution: "Discord 연동, Obsidian RAG, cron 자동화, 다중 모델 지원을 갖춘 에이전트 하네스로 발전시켰습니다. OpenClaw 실험에서 시작해 일일 작업 로그, 트렌드 브리핑, 자동화 cron을 운영하는 환경으로 성장했습니다.",
+    tagline: "정기 작업과 도구 실행을 운영하는 개인 AI 에이전트 런타임",
+    problem: "작업 기록을 연결하는 것과 별개로, Discord 요청과 정기 작업, 검색 도구 실행을 한 환경에서 지속적으로 운영할 런타임이 필요했습니다.",
+    solution: "Discord를 요청 창구로 두고 Obsidian RAG, cron 자동화와 다중 모델 실행을 연결했습니다. Agent Bridge가 작업 인계 형식을 담당한다면, Hermes는 일일 작업 로그와 트렌드 브리핑 같은 실행을 운영하는 개인 런타임으로 역할을 구분했습니다.",
     stack: ["Agent Runtime", "Discord", "Cron", "Multi-Model", "MCP"],
-    status: "운영 중 · 일일 작업 로그, 트렌드 브리핑, 자동화 cron 운영",
+    status: "개인 환경 운영 중 · 일일 작업 로그, 트렌드 브리핑, cron 자동화",
     links: [],
     relatedLinks: [
       { label: "초기 구조", href: "/engineering/ai-workspace" },
@@ -88,12 +90,12 @@ const axSystems: ProductData[] = [
 const aiProducts: ProductData[] = [
   {
     id: "babypick-ai",
-    name: "BabyPick AI",
-    tagline: "육아용품 탐색 서비스 + AI 콘텐츠 자동 발행",
+    name: "BabyPick",
+    tagline: "육아용품 탐색 서비스와 사람 검수형 콘텐츠 운영",
     problem: "혼자 서비스 개발과 콘텐츠 작성을 함께 하기에는 시간이 부족했습니다.",
-    solution: "Next.js 서비스 구축, 키워드 관리 → AI 생성(Gemini/Ollama) → 형식·금지표현 검사 → API 발행 → 블로그·인스타 자동화까지 End-to-End로 구축하고 운영 중입니다. 키워드 선택과 최종 확인은 사람이 담당합니다.",
-    stack: ["Next.js", "Supabase", "Google Apps Script", "Gemini", "Ollama"],
-    status: "운영 중 · 220개+ 가이드, 블로그·인스타 자동화",
+    solution: "Next.js와 Supabase로 서비스를 구축하고, 키워드 관리 → AI 생성 → 중복·금지 표현 검사 → API 발행으로 공식 가이드를 자동화했습니다. 네이버 블로그는 SmartEditor 임시저장, 인스타그램은 콘텐츠 패키지와 검수 대기열까지만 연결하고 공개는 사람이 결정합니다.",
+    stack: ["Next.js", "Supabase", "Google Apps Script", "LLM", "Human-in-the-loop"],
+    status: "운영 중 · 공식 가이드 220개+ · 외부 채널은 사람 검수 후 발행",
     links: [
       { label: "사이트", href: "https://babypick.co.kr/guide" },
     ],
@@ -120,7 +122,7 @@ const aiProducts: ProductData[] = [
 function ProductCard({ id, name, tagline, problem, solution, stack, status, links, relatedLinks }: ProductData) {
   return (
     <div id={id} className="rounded-lg border border-[var(--color-border)] p-4 sm:p-6 scroll-mt-20">
-      <h2 className="text-lg sm:text-xl font-bold">{name}</h2>
+      <h3 className="text-lg sm:text-xl font-bold">{name}</h3>
       <p className="mt-1 text-sm font-medium text-[var(--color-muted)]">{tagline}</p>
 
       <div className="mt-5 space-y-4">
@@ -193,10 +195,10 @@ export default function Products() {
     <div className="mx-auto max-w-3xl px-4 sm:px-6 py-12 sm:py-16">
       <section className="mb-12 sm:mb-16">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">Products</p>
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">만들어 본 것들</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">AX 시스템과 AI 제품</h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
-          Agent Infrastructure → Workflow AX → AI Product Delivery.
-          AX Systems와 AI Products 두 축으로 구성했습니다.
+          Agent Infrastructure → AI Product Delivery.
+          직접 만든 AX Systems와 AI Products 두 축으로 구성했습니다.
         </p>
       </section>
 

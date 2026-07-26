@@ -21,8 +21,8 @@ const notoSansKR = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  title: { default: "ksungz", template: "%s · ksungz" },
-  description: "김성재 — AX Engineer. AI Agent, RAG, MCP와 자동화로 업무와 제품 개발 방식을 전환합니다.",
+  title: { default: "김성재 · AX Engineer", template: "%s · 김성재" },
+  description: "13년간의 제품 운영 경험을 바탕으로 AI Agent, RAG, MCP와 자동화로 업무와 제품 개발 방식을 전환하는 AX Engineer 김성재입니다.",
 };
 
 export default function RootLayout({

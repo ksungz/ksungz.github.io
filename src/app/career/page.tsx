@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Career",
-  description: "김성재의 경력 — 커머스·게임·플랫폼 UI 개발에서 AX Engineer로 전환",
+  description: "김성재의 경력 — 제품 UI 운영 경험과 개발 워크플로우 AX",
 };
 
 const careers = [
@@ -23,8 +23,8 @@ const careers = [
       {
         title: "AI PR Review Agent — 8개 저장소 적용",
         action: "사내 제공 AI Agent를 파이프라인에 연결. SCSS/HTML 중심 파일 필터링, 접근성·BEM·SCSS 컨벤션 리뷰 기준 정리.",
-        impact: "반복 컨벤션 확인 자동화. 리뷰 단계에서 설계·영향 범위 검토에 집중 가능.",
-        link: "/engineering/pr-review-agent",
+        impact: "반복 컨벤션은 Agent의 1차 확인 항목으로 옮기고, 설계·영향 범위와 예외는 개발자가 최종 검증하도록 운영.",
+        link: "/case-studies/developer-workflow-ax",
       },
       {
         title: "React 기반 PDP 컴포넌트 전환 및 CSS 내재화",
@@ -107,9 +107,9 @@ export default function CareerPage() {
       <section className="mb-10 sm:mb-12">
         <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">About</h2>
         <div className="space-y-3 text-sm text-[var(--color-muted)] leading-relaxed">
-          <p>다년간 커머스, 게임, 플랫폼 서비스에서 UI를 개발하고 운영해왔습니다. 웹 표준, 접근성, 마크업 구조화, SCSS 설계, 반응형 UI 구현을 바탕으로 서비스 화면의 구조와 유지보수성을 개선했습니다.</p>
+          <p>13년간 커머스, 게임, 플랫폼 서비스에서 UI를 개발하고 운영해왔습니다. 웹 표준, 접근성, 마크업 구조화, SCSS 설계, 반응형 UI 구현을 바탕으로 서비스 화면의 구조와 유지보수성을 개선했습니다.</p>
           <p>현재는 모바일웹 상품상세(PDP)를 포함한 핵심 서비스 UI를 담당하면서, AI 도구를 도입해 반복 작업을 줄이고 제품 개발 과정으로 역할을 넓히고 있습니다. SCSS 마이그레이션, PR Review Agent, 커밋·PR·QA 체크리스트 자동화 흐름을 정리했습니다.</p>
-          <p>개인적으로는 AX Doctor, News Automation, BabyPick AI, Hermes Agent를 직접 기획·구현·운영하며 AX Engineer로서의 역량을 쌓고 있습니다.</p>
+          <p>개인적으로는 AX Doctor, Agent Bridge, Obsidian RAG, News Automation과 BabyPick AI를 직접 기획·구현·운영하고, 공개 코드와 운영 기록으로 검증 범위와 한계를 남기고 있습니다.</p>
         </div>
       </section>
 
@@ -174,7 +174,7 @@ export default function CareerPage() {
           className="group block rounded-lg border border-[var(--color-border)] p-4 sm:p-5 transition-colors hover:border-[var(--color-foreground)]"
         >
           <h3 className="text-sm font-semibold group-hover:text-[var(--color-foreground)]">
-            AX Doctor, News Automation, BabyPick AI, Hermes Agent
+            AX Doctor, Agent Bridge, Obsidian RAG, BabyPick AI
           </h3>
           <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
             문제 정의부터 AI 활용, 구현, 배포, 운영까지 직접 만든 제품들을 확인하세요.

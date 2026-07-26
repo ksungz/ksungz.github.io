@@ -2,11 +2,11 @@ import Link from "next/link";
 
 const featuredProducts = [
   {
-    name: "Agent Bridge",
-    tagline: "여러 AI 코딩 에이전트를 연결하는 오픈소스 CLI",
-    description: "Claude Code, Codex, Gemini CLI의 작업 맥락과 실행 기록을 공통 폴더에서 관리하고 인계 문서를 생성하는 로컬 도구.",
-    href: "/products#agent-bridge",
-    tags: ["CLI", "Open Source", "MIT"],
+    name: "Developer Workflow AX",
+    tagline: "회사 제공 AI 도구를 실제 개발 흐름에 도입·설정",
+    description: "승인된 업무 문맥 연결, PR Review Agent의 8개 저장소 적용, 공통 작성 규칙과 사람의 검증 범위를 정리한 실무 사례.",
+    href: "/case-studies/developer-workflow-ax",
+    tags: ["Workflow AX", "MCP", "AI Review"],
     group: "AX Systems",
   },
   {
@@ -18,27 +18,19 @@ const featuredProducts = [
     group: "AX Systems",
   },
   {
-    name: "Obsidian RAG",
-    tagline: "여러 AI 에이전트가 같은 문서를 검색하는 로컬 RAG",
-    description: "Obsidian 문서를 Ollama 임베딩으로 인덱싱하고 MCP·HTTP·CLI로 검색하는 환경.",
-    href: "/products#obsidian-rag",
-    tags: ["RAG", "Ollama", "ChromaDB", "MCP"],
+    name: "Agent Bridge",
+    tagline: "로그인된 여러 AI CLI를 한 작업 단위로 연결하는 오픈소스 도구",
+    description: "각 CLI의 기존 로그인·구독 환경을 유지하면서 공통 목표, 결정, 실행·리뷰 기록과 인계 문서를 관리합니다.",
+    href: "/products#agent-bridge",
+    tags: ["CLI", "Open Source", "MIT"],
     group: "AX Systems",
   },
   {
-    name: "BabyPick AI",
-    tagline: "육아용품 탐색 서비스 + AI 콘텐츠 자동 발행",
-    description: "Next.js 서비스 구축, 키워드 관리→AI 생성→검증→발행→블로그·인스타 자동화까지 운영.",
+    name: "BabyPick",
+    tagline: "육아용품 탐색 서비스와 사람 검수형 콘텐츠 운영",
+    description: "공식 가이드는 생성·검증·API 발행을 자동화하고, 네이버·인스타 콘텐츠는 사람이 검수할 수 있는 초안과 패키지까지 준비합니다.",
     href: "/products#babypick-ai",
-    tags: ["Next.js", "Supabase", "AI Content", "Automation"],
-    group: "AI Products",
-  },
-  {
-    name: "News Automation",
-    tagline: "뉴스 선택부터 블로그 PR까지 Human-in-the-loop 파이프라인",
-    description: "GeekNews 큐레이션 → 텔레그램 선택 → AI 분석 → MDX 초안 → GitHub PR 자동 생성.",
-    href: "/products#news-automation",
-    tags: ["AI Agent", "Telegram Bot", "Automation"],
+    tags: ["Next.js", "Supabase", "Automation", "Human-in-the-loop"],
     group: "AI Products",
   },
 ];
@@ -51,9 +43,9 @@ export default function Home() {
       <section className="mb-16 sm:mb-20">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">AX Engineer</p>
         <h1 className="text-2xl sm:text-4xl font-bold tracking-tight mb-4 sm:mb-6 leading-snug sm:leading-tight">
-          13년간 제품 UI를 운영하며 발견한
-          <br />
-          <span className="text-[var(--color-muted)]">반복 업무와 맥락 단절을 AI Agent와 자동화로 개선합니다.</span>
+          <span className="block">13년간 제품 UI를 운영하며 발견한</span>
+          <span className="block text-[var(--color-muted)]">반복 업무와 맥락 단절을</span>
+          <span className="block text-[var(--color-muted)]">AI Agent와 자동화로 개선합니다.</span>
         </h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
           커머스·게임·플랫폼 서비스에서 UI를 개발하고 운영하며
@@ -85,10 +77,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Products */}
+      {/* Featured Work */}
       <section className="mb-16 sm:mb-20">
         <h2 className="mb-4 sm:mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
-          Featured Products
+          Featured Work
         </h2>
         <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2">
           {featuredProducts.map(({ name, tagline, description, href, tags }) => (

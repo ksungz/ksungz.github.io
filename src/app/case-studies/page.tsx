@@ -24,9 +24,9 @@ const caseStudies = [
   {
     id: "ax-evidence-gates",
     title: "AX Evidence Gates — 공개 근거 기반 AI 품질 게이트 3종",
-    excerpt: "해커톤에서 구현한 품질 게이트 3종을 공개한 뒤, 금융 답변 검수를 LangGraph 기반 사람 검토 흐름으로 확장했습니다.",
+    excerpt: "여행 API 연동 코드, 상품 등록 정보와 투자 답변을 점검한 해커톤 제출물 3종을 공개하고, 금융 답변 검수를 LangGraph 기반 사람 검토 흐름으로 확장했습니다.",
     href: "/case-studies/ax-evidence-gates",
-    tags: ["Evidence-based QA", "LangGraph", "Human-in-the-loop", "39 Tests"],
+    tags: ["Evidence-based QA", "LangGraph", "Human-in-the-loop", "49 Tests"],
   },
   {
     id: "agent-bridge",

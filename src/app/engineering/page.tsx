@@ -14,6 +14,7 @@ const categories = [
 ];
 
 const featuredSlugs = [
+  "ax-hackathon-retrospective",
   "ax-doctor-preflight",
   "pr-review-agent",
   "ai-agent-harness-audit",

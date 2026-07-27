@@ -61,16 +61,17 @@ const axSystems: ProductData[] = [
   {
     id: "ax-evidence-gates",
     name: "AX Evidence Gates",
-    tagline: "여행·상품·금융 AI 결과를 공개 근거로 점검하는 품질 게이트 3종",
+    tagline: "API 연동 코드·상품 정보·투자 답변을 공개 근거로 점검하는 검수 도구 3종",
     problem: "AI가 자연스러운 답변과 데이터를 빠르게 만들더라도, 실제 업무에 사용하려면 근거가 없는 단정과 누락된 조건, 확인하지 못한 범위를 반복해서 검수할 수 있어야 했습니다.",
     solution: "AX 인재전쟁 2026 과제에서 문제 범위와 근거·판정 기준을 정하고, AI 에이전트를 활용해 세 개의 로컬 품질 게이트를 구현했습니다. 해커톤 종료 후에는 금융 답변 게이트를 LangGraph에 연결해 자동 검사에서 위험 항목이 발견되면 사람이 승인·수정·반려하고, 수정본을 다시 검사하는 흐름으로 확장했습니다.",
     stack: ["Python", "LangGraph", "Human-in-the-loop", "CI"],
-    status: "독립 공개 프로토타입 · LangGraph 후속 확장 · 39 tests",
+    status: "실제 해커톤 제출물 공개 · LangGraph 후속 확장 · 49 tests",
     links: [
       { label: "GitHub", href: "https://github.com/ksungz/ax-evidence-gates" },
     ],
     relatedLinks: [
       { label: "Case Study", href: "/case-studies/ax-evidence-gates" },
+      { label: "해커톤 후기", href: "/engineering/ax-hackathon-retrospective" },
     ],
   },
   {

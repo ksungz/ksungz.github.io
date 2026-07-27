@@ -2,42 +2,42 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "AX Evidence Gates — AI 결과를 다시 확인하는 세 가지 도구 | Case Studies",
+  title: "AX Evidence Gates — AI와 함께 만든 결과를 다시 확인하는 세 가지 도구 | Case Studies",
   description:
-    "여행 안내, 상품 정보, 투자 관련 답변에서 놓치기 쉬운 조건과 근거를 확인하도록 만든 세 가지 도구와 후속 개선 기록.",
+    "여행 API 연동 코드, 상품 등록 정보, 투자 답변 초안을 공개 문서 기준으로 확인한 세 가지 해커톤 제출물과 후속 개선 기록.",
 };
 
 const sections = [
   {
     label: "문제",
-    title: "AI가 자연스럽게 답해도 내용이 맞는지는 다시 확인해야 합니다",
+    title: "AI가 빠르게 만든 결과도 그대로 제출할 수는 없었습니다",
     body: [
-      "여행 상품을 예약할 수 있는지, 상품 정보가 빠짐없이 적혔는지, 투자 답변이 지나치게 확신하고 있지는 않은지처럼 사용자의 결정에 영향을 주는 내용은 한 번 더 확인해야 합니다.",
-      "회사 내부 시스템이나 실제 고객 데이터는 사용할 수 없었습니다. 그래서 누구나 확인할 수 있는 공식 문서와 제가 직접 만든 테스트용 예시만으로 어디까지 점검할 수 있을지 범위를 정했습니다.",
+      "AX 인재전쟁 기업 과제는 공개 자료를 바탕으로 실제 문제를 좁히고, AI와 함께 만든 결과를 다시 검수할 수 있는 Codex 플러그인을 만드는 일이었습니다.",
+      "기업 내부 시스템이나 실제 고객 데이터는 사용할 수 없었습니다. 그래서 누구나 열어볼 수 있는 공식 문서와 직접 만든 테스트용 예시만으로 확인 가능한 범위를 정했습니다.",
     ],
   },
   {
     label: "내가 맡은 일",
     title: "무엇을 확인할지 정하고 결과를 직접 검토했습니다",
     body: [
-      "AX 인재전쟁 2026에 공개된 기업 과제를 살펴보고 여행 안내, 상품 등록 정보, 투자 관련 답변이라는 세 가지 확인 대상을 골랐습니다.",
-      "AI 에이전트는 공식 문서를 정리하고 검사 코드와 테스트 초안을 만드는 데 활용했습니다. 어떤 문서를 근거로 사용할지, 어떤 경우를 문제로 볼지, 결과를 어떻게 보여줄지는 직접 정하고 다시 실행해 확인했습니다.",
+      "여섯 기업 과제 중 마이리얼트립, 무신사, 카카오페이증권 세 곳을 골라 각각 다른 문제를 풀었습니다.",
+      "AI는 공개 자료 정리, 검사 코드와 테스트 초안에 활용했습니다. 어떤 문제를 풀지, 어떤 문서를 근거로 삼을지, 무엇을 만들지 않을지는 직접 정했습니다. AI가 작성한 인용과 판단도 원문과 실행 결과로 다시 확인했습니다.",
     ],
   },
   {
     label: "선택",
-    title: "새 답변을 만드는 대신 이미 만들어진 결과를 확인했습니다",
+    title: "그럴듯한 데모보다 확인 가능한 작은 도구를 택했습니다",
     body: [
-      "실제 예약 정보나 실시간 가격 없이 추천 서비스를 만들면 겉모습만 그럴듯한 데모가 될 수 있다고 생각했습니다. 대신 AI가 만든 답변이나 상품 정보를 넣으면 사람이 다시 봐야 할 부분을 찾아주는 도구를 만들었습니다.",
-      "확인할 수 없는 내용은 괜찮다고 추측하지 않았습니다. 문제가 발견된 문장과 참고한 공식 문서, 다음에 확인할 내용을 함께 보여주고 마지막 판단은 사람이 맡도록 했습니다.",
+      "공개 자료만으로 기업의 실제 서비스를 흉내 내면 겉모습만 그럴듯해질 수 있다고 생각했습니다. 대신 개발자가 작성한 API 연동 코드, 판매자가 준비한 상품 정보, AI가 만든 투자 답변 초안처럼 입력과 결과를 직접 확인할 수 있는 범위를 골랐습니다.",
+      "확인할 수 없는 내용은 괜찮다고 추측하지 않았습니다. 문제가 발견된 위치와 참고한 공식 문서, 다음에 확인할 내용을 함께 보여주고 마지막 판단은 사람이 맡도록 했습니다.",
     ],
   },
   {
     label: "동작 방식",
-    title: "다루는 내용은 달라도 확인하는 순서는 같습니다",
+    title: "세 도구는 서로 다른 결과물을 살펴봅니다",
     body: [
       "먼저 공식 문서에서 확인할 기준을 정리하고, 테스트용 입력을 준비한 뒤 같은 기준으로 반복 검사합니다. 문제가 있으면 해당 위치와 이유, 참고할 문서, 수정하거나 추가로 확인할 내용을 돌려줍니다.",
-      "여행 도구는 예약 가능 여부와 가격 근거를 확인합니다. 상품 도구는 속성, 태그, 사이즈와 필수 정보 누락을 살펴봅니다. 금융 도구는 매수·매도를 단정하는 표현이나 사용자 상황, 위험 안내와 근거가 빠졌는지 확인합니다.",
+      "마이리얼트립 도구는 페이지 기준, 공항 코드, 인증과 호출 제한처럼 Open API 연동 코드에서 놓치기 쉬운 10개 항목을 확인합니다. 무신사 도구는 상품 속성, 태그, 사이즈와 필수 정보 누락을 살펴봅니다. 카카오페이증권 도구는 매수·매도를 단정하는 표현이나 사용자 상황, 위험 안내와 근거가 빠졌는지 확인합니다.",
     ],
   },
   {
@@ -53,15 +53,15 @@ const sections = [
     label: "확인",
     title: "해커톤 이후에도 테스트를 추가하며 계속 개선했습니다",
     body: [
-      "해커톤 제출 당시에는 여행 9개, 상품 17개, 금융 7개로 총 33개 테스트를 만들었습니다. 이후 금융 답변 입력 검사 1개와 사람 검토 흐름 5개를 더했습니다.",
-      "현재는 총 39개 테스트가 통과합니다. 화면에서도 위험한 답변을 반려하는 과정과 내용을 고친 답변이 자동으로 통과하는 과정을 직접 확인했습니다.",
+      "해커톤 제출 당시에는 마이리얼트립 19개, 무신사 17개, 카카오페이증권 7개로 총 43개 테스트를 만들었습니다. 이후 금융 답변 입력 검사 1개와 사람 검토 흐름 5개를 더했습니다.",
+      "현재 공개 저장소에서는 총 49개 테스트가 통과합니다. 화면에서도 위험한 답변을 반려하는 과정과 내용을 고친 답변이 다시 검사를 통과하는 과정을 확인했습니다.",
     ],
   },
   {
     label: "결과",
     title: "검사 결과를 보여주는 데서 사람의 결정까지 연결했습니다",
     body: [
-      "서로 다른 분야에서도 먼저 확인할 범위를 좁히고, 공식 문서와 검사 기준을 연결한 뒤 사람이 마지막 결정을 내리는 공통 흐름을 만들 수 있었습니다.",
+      "무신사 과제는 본선 후보로 선정됐지만 최종 본선 진출로 이어지지는 않았습니다. 세 과제를 진행하면서 분야가 달라도 확인할 범위를 좁히고, 공식 문서와 검사 기준을 연결한 뒤 사람이 마지막 결정을 내리는 흐름은 공통으로 적용할 수 있다는 점을 확인했습니다.",
       "해커톤 제출물을 공개하는 데서 끝내지 않고, 금융 답변 검사를 실제 업무의 검토 과정에 가까운 화면과 흐름으로 확장했습니다. 코드와 테스트용 예시, 설계 문서는 GitHub에서 확인할 수 있습니다.",
     ],
   },
@@ -88,7 +88,7 @@ const tags = [
   "LangGraph",
   "공식 문서 확인",
   "사람 검토",
-  "39 Tests",
+  "49 Tests",
   "CI",
 ];
 
@@ -106,11 +106,11 @@ export default function AxEvidenceGatesCaseStudy() {
           AX Evidence Gates
         </p>
         <h1 className="mb-4 break-keep text-2xl font-bold tracking-tight sm:text-3xl">
-          AI 결과를 다시 확인하는 세 가지 도구
+          AI와 함께 만든 결과를 다시 확인하는 세 가지 도구
         </h1>
         <p className="max-w-2xl break-keep text-sm leading-relaxed text-[var(--color-muted)]">
-          여행 안내, 상품 정보, 투자 관련 답변에서 놓치기 쉬운 조건과
-          근거를 확인하도록 만든 프로젝트입니다.
+          여행 API 연동 코드, 상품 등록 정보와 투자 답변 초안에서 놓치기
+          쉬운 조건과 근거를 확인하도록 만든 프로젝트입니다.
         </p>
         <div className="mt-4 flex flex-wrap gap-1.5">
           {tags.map((tag) => (
@@ -148,14 +148,22 @@ export default function AxEvidenceGatesCaseStudy() {
       </section>
 
       <section className="mt-12 border-t border-[var(--color-border)] pt-8 sm:mt-16">
-        <a
-          href="https://github.com/ksungz/ax-evidence-gates"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex min-h-[44px] items-center rounded-lg border border-[var(--color-border)] px-3 py-2 text-xs font-medium transition-colors hover:border-[var(--color-foreground)] sm:min-h-0 sm:py-1.5"
-        >
-          GitHub ↗
-        </a>
+        <div className="flex flex-wrap gap-2">
+          <a
+            href="https://github.com/ksungz/ax-evidence-gates"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-[44px] items-center rounded-lg border border-[var(--color-border)] px-3 py-2 text-xs font-medium transition-colors hover:border-[var(--color-foreground)] sm:min-h-0 sm:py-1.5"
+          >
+            GitHub ↗
+          </a>
+          <Link
+            href="/engineering/ax-hackathon-retrospective"
+            className="inline-flex min-h-[44px] items-center rounded-lg border border-[var(--color-border)] px-3 py-2 text-xs font-medium transition-colors hover:border-[var(--color-foreground)] sm:min-h-0 sm:py-1.5"
+          >
+            해커톤 후기 →
+          </Link>
+        </div>
       </section>
     </div>
   );

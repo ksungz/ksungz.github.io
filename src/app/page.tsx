@@ -125,7 +125,7 @@ export default function Home() {
               공개 근거 품질 게이트와 LangGraph 사람 검토 흐름
             </span>
           </span>
-          <span className="text-[var(--color-muted)]">39 tests · GitHub 공개 →</span>
+          <span className="text-[var(--color-muted)]">49 tests · GitHub 공개 →</span>
         </Link>
       </section>
 

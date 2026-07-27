@@ -1,0 +1,1332 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#17202a" />
+    <title>코딩 기본기 연습 워크북</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f5f7f8;
+        color: #17202a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: #f5f7f8;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .topbar {
+        border-bottom: 1px solid #d9dee3;
+        background: #ffffff;
+      }
+
+      .topbar-inner,
+      .toolbar,
+      main {
+        width: min(920px, 100%);
+        margin: 0 auto;
+      }
+
+      .topbar-inner {
+        padding: 18px 20px 16px;
+      }
+
+      .back {
+        display: inline-flex;
+        min-height: 36px;
+        align-items: center;
+        color: #5f6b76;
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      h1 {
+        margin: 12px 0 0;
+        font-size: 28px;
+        line-height: 38px;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        max-width: 680px;
+        margin: 8px 0 0;
+        color: #5f6b76;
+        font-size: 14px;
+        line-height: 22px;
+      }
+
+      .progress-row {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 10px;
+        margin-top: 18px;
+        color: #5f6b76;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .progress-track {
+        height: 7px;
+        overflow: hidden;
+        border-radius: 4px;
+        background: #e8ecef;
+      }
+
+      .progress-fill {
+        width: 0;
+        height: 100%;
+        border-radius: 4px;
+        background: #0f766e;
+        transition: width 180ms ease;
+      }
+
+      .toolbar-wrap {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        border-bottom: 1px solid #d9dee3;
+        background: rgba(245, 247, 248, 0.97);
+        backdrop-filter: blur(8px);
+      }
+
+      .toolbar {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 12px;
+        min-height: 62px;
+        padding: 8px 20px;
+      }
+
+      .nav-tabs,
+      .language-tabs {
+        display: flex;
+        gap: 4px;
+      }
+
+      .nav-tabs {
+        overflow-x: auto;
+      }
+
+      .nav-tabs button,
+      .language-tabs button,
+      .print-button {
+        min-height: 42px;
+        padding: 0 13px;
+        border: 1px solid #d9dee3;
+        border-radius: 6px;
+        background: #ffffff;
+        color: #5f6b76;
+        font-size: 13px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      .nav-tabs button[aria-selected="true"],
+      .language-tabs button[aria-pressed="true"] {
+        border-color: #17202a;
+        background: #17202a;
+        color: #ffffff;
+      }
+
+      main {
+        padding: 26px 20px 80px;
+      }
+
+      .panel[hidden] {
+        display: none;
+      }
+
+      .section-heading {
+        margin-bottom: 18px;
+      }
+
+      .eyebrow {
+        margin: 0 0 5px;
+        color: #0f766e;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: 22px;
+        line-height: 31px;
+        letter-spacing: 0;
+      }
+
+      .section-description {
+        margin: 7px 0 0;
+        color: #5f6b76;
+        font-size: 14px;
+        line-height: 22px;
+      }
+
+      .study-rule,
+      .talk-script,
+      .schedule {
+        margin-bottom: 18px;
+        padding: 16px 18px;
+        border-left: 4px solid #a65308;
+        background: #fff4e5;
+        color: #6f3a06;
+        font-size: 14px;
+        line-height: 22px;
+      }
+
+      .example-list,
+      .cs-list,
+      .syntax-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .example,
+      .cs-card,
+      .syntax-card {
+        overflow: hidden;
+        border: 1px solid #d9dee3;
+        border-radius: 8px;
+        background: #ffffff;
+      }
+
+      .example-head {
+        display: grid;
+        grid-template-columns: 32px minmax(0, 1fr) auto;
+        align-items: start;
+        gap: 12px;
+        padding: 18px;
+      }
+
+      .example-number {
+        display: flex;
+        width: 30px;
+        height: 30px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: #17202a;
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .example h3,
+      .cs-card h3,
+      .syntax-card h3 {
+        margin: 0;
+        font-size: 17px;
+        line-height: 25px;
+        letter-spacing: 0;
+      }
+
+      .syntax-card {
+        padding: 18px;
+      }
+
+      .syntax-head {
+        display: grid;
+        grid-template-columns: 32px minmax(0, 1fr);
+        align-items: start;
+        gap: 12px;
+      }
+
+      .syntax-keyword {
+        display: block;
+        margin-top: 3px;
+        color: #0f766e;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .syntax-meaning,
+      .syntax-remember {
+        margin: 14px 0 0 44px;
+        font-size: 13px;
+        line-height: 21px;
+      }
+
+      .syntax-meaning {
+        color: #34414d;
+      }
+
+      .syntax-remember {
+        padding: 10px 12px;
+        border-left: 3px solid #0f766e;
+        background: #e6f4f1;
+        color: #244d49;
+      }
+
+      .syntax-card pre {
+        margin: 14px 0 0 44px;
+      }
+
+      .problem {
+        margin: 5px 0 0;
+        color: #5f6b76;
+        font-size: 13px;
+        line-height: 21px;
+      }
+
+      .complete-control {
+        display: inline-flex;
+        min-height: 34px;
+        align-items: center;
+        gap: 7px;
+        color: #5f6b76;
+        font-size: 12px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      .complete-control input {
+        width: 18px;
+        height: 18px;
+        margin: 0;
+        accent-color: #0f766e;
+      }
+
+      .sample {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin: 0 18px 16px 62px;
+      }
+
+      .sample div {
+        min-width: 0;
+        padding: 10px 12px;
+        border: 1px solid #d9dee3;
+        border-radius: 6px;
+        background: #f5f7f8;
+      }
+
+      .sample strong {
+        display: block;
+        color: #5f6b76;
+        font-size: 11px;
+      }
+
+      .sample code {
+        display: block;
+        margin-top: 5px;
+        overflow-wrap: anywhere;
+        font-size: 12px;
+        line-height: 19px;
+      }
+
+      .say {
+        margin: 0 18px 16px 62px;
+        padding: 12px 14px;
+        border-left: 3px solid #0f766e;
+        background: #e6f4f1;
+        color: #244d49;
+        font-size: 13px;
+        line-height: 21px;
+      }
+
+      details {
+        border-top: 1px solid #d9dee3;
+      }
+
+      summary {
+        min-height: 48px;
+        padding: 14px 18px;
+        color: #0f766e;
+        font-size: 13px;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      .solution {
+        padding: 0 18px 18px;
+      }
+
+      .steps {
+        margin: 0 0 14px;
+        padding-left: 20px;
+        color: #34414d;
+        font-size: 13px;
+        line-height: 21px;
+      }
+
+      pre {
+        margin: 0;
+        overflow-x: auto;
+        padding: 16px;
+        border-radius: 6px;
+        background: #17202a;
+        color: #f7fafc;
+        font-size: 13px;
+        line-height: 21px;
+        tab-size: 2;
+        white-space: pre;
+      }
+
+      .cs-card {
+        padding: 18px;
+      }
+
+      .cs-card p {
+        margin: 9px 0 0;
+        color: #34414d;
+        font-size: 14px;
+        line-height: 23px;
+      }
+
+      .keyword-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 12px;
+      }
+
+      .keyword-row span {
+        padding: 4px 8px;
+        border-radius: 4px;
+        background: #e6f4f1;
+        color: #0f766e;
+        font-size: 11px;
+        font-weight: 800;
+      }
+
+      .talk-script {
+        border-left-color: #0f766e;
+        background: #e6f4f1;
+        color: #244d49;
+      }
+
+      .talk-script ol,
+      .schedule ol {
+        margin: 8px 0 0;
+        padding-left: 21px;
+      }
+
+      .print-row {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 22px;
+      }
+
+      .print-button {
+        color: #17202a;
+      }
+
+      @media (max-width: 640px) {
+        .topbar-inner {
+          padding: 14px 16px 15px;
+        }
+
+        h1 {
+          font-size: 23px;
+          line-height: 32px;
+        }
+
+        .toolbar {
+          grid-template-columns: 1fr;
+          gap: 6px;
+          padding: 7px 16px;
+        }
+
+        .nav-tabs,
+        .language-tabs {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .language-tabs {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .nav-tabs button,
+        .language-tabs button {
+          min-width: 0;
+          padding: 0 6px;
+          font-size: 12px;
+        }
+
+        main {
+          padding: 22px 16px 64px;
+        }
+
+        .example-head {
+          grid-template-columns: 30px minmax(0, 1fr);
+          padding: 16px;
+        }
+
+        .complete-control {
+          grid-column: 2;
+        }
+
+        .sample {
+          grid-template-columns: 1fr;
+          margin: 0 16px 14px 58px;
+        }
+
+        .syntax-meaning,
+        .syntax-remember,
+        .syntax-card pre {
+          margin-left: 0;
+        }
+
+        .say {
+          margin: 0 16px 14px 58px;
+        }
+
+        summary {
+          padding-right: 16px;
+          padding-left: 16px;
+        }
+
+        .solution {
+          padding: 0 12px 14px;
+        }
+
+        pre {
+          padding: 14px;
+          font-size: 12px;
+          line-height: 20px;
+        }
+      }
+
+      @media print {
+        body,
+        :root {
+          background: #ffffff;
+        }
+
+        .toolbar-wrap,
+        .back,
+        .progress-row,
+        .print-row {
+          display: none;
+        }
+
+        main {
+          width: 100%;
+          padding: 12px 0;
+        }
+
+        .panel[hidden] {
+          display: block;
+        }
+
+        .example,
+        .cs-card,
+        .syntax-card {
+          break-inside: avoid;
+          box-shadow: none;
+        }
+
+        pre {
+          overflow: visible;
+          white-space: pre-wrap;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .progress-fill {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="back" href="/learning/test-exam">← Learning Space로 돌아가기</a>
+        <h1>코딩 기본기 연습 워크북</h1>
+        <p class="lead">
+          문법 기초부터 10개 구현 패턴까지 Python으로 먼저 읽고 JavaScript로 비교합니다.
+          코드를 외우기보다 입력, 반복, 저장, 반환의 순서를 익히는 데 집중합니다.
+        </p>
+        <div class="progress-row">
+          <span>예제 확인</span>
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <strong id="progressText">0 / 10</strong>
+        </div>
+      </div>
+    </header>
+
+    <div class="toolbar-wrap">
+      <div class="toolbar">
+        <div class="nav-tabs" role="tablist" aria-label="워크북 목차">
+          <button type="button" role="tab" aria-selected="true" data-panel="basics">문법 기초</button>
+          <button type="button" role="tab" aria-selected="false" data-panel="examples">예제 10</button>
+          <button type="button" role="tab" aria-selected="false" data-panel="cs">CS 요약</button>
+          <button type="button" role="tab" aria-selected="false" data-panel="process">풀이 순서</button>
+        </div>
+        <div class="language-tabs" aria-label="코드 언어">
+          <button type="button" aria-pressed="true" data-language="python">Python</button>
+          <button type="button" aria-pressed="false" data-language="javascript">JavaScript</button>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <section class="panel" id="basics" role="tabpanel">
+        <div class="section-heading">
+          <p class="eyebrow">START HERE</p>
+          <h2>코드를 읽기 위한 최소 문법</h2>
+          <p class="section-description">
+            처음부터 외우지 않아도 됩니다. 각 단어가 무슨 역할인지 확인하고 코드를 위에서
+            아래로 따라가면 됩니다.
+          </p>
+        </div>
+        <aside class="study-rule">
+          먼저 다섯 단어만 기억합니다. <strong>print</strong>는 확인,
+          <strong>def</strong>는 함수 만들기, <strong>return</strong>은 결과 돌려주기,
+          <strong>if</strong>는 조건, <strong>for</strong>는 반복입니다.
+        </aside>
+        <div class="syntax-list" id="syntaxList"></div>
+      </section>
+
+      <section class="panel" id="examples" role="tabpanel" hidden>
+        <div class="section-heading">
+          <p class="eyebrow">IMPLEMENTATION PATTERNS</p>
+          <h2>기본 구현 예제 10개</h2>
+          <p class="section-description">
+            문제를 읽은 뒤 먼저 입·출력과 풀이 순서를 말하고, 그 다음 코드와 주석을 확인합니다.
+          </p>
+        </div>
+        <aside class="study-rule">
+          한 예제는 세 번 봅니다. ① 코드를 읽습니다. ② 답을 닫고 종이에 순서를 적습니다.
+          ③ 집에서 답을 보지 않고 직접 입력합니다.
+        </aside>
+        <div class="example-list" id="exampleList"></div>
+      </section>
+
+      <section class="panel" id="cs" role="tabpanel" hidden>
+        <div class="section-heading">
+          <p class="eyebrow">CS BASICS</p>
+          <h2>30초 CS 답변</h2>
+          <p class="section-description">
+            긴 정의보다 첫 문장으로 차이를 말하고, 사용 사례나 비용을 한 문장 덧붙입니다.
+          </p>
+        </div>
+        <div class="cs-list" id="csList"></div>
+      </section>
+
+      <section class="panel" id="process" role="tabpanel" hidden>
+        <div class="section-heading">
+          <p class="eyebrow">PROBLEM SOLVING FLOW</p>
+          <h2>코드를 작성하기 전에 정리할 것</h2>
+        </div>
+        <div class="talk-script">
+          <strong>문제를 받은 직후</strong>
+          <ol>
+            <li>“제가 이해한 입력과 출력은 다음과 같습니다.”</li>
+            <li>“빈 입력, 중복 값, 잘못된 값도 고려해야 할까요?”</li>
+            <li>“먼저 가장 단순한 반복문 풀이부터 설명하겠습니다.”</li>
+            <li>“중간 결과는 딕셔너리 또는 Set에 저장하겠습니다.”</li>
+            <li>“작성한 뒤 예시를 직접 넣어 확인하겠습니다.”</li>
+            <li>“한 번 순회하므로 시간복잡도는 O(n)입니다.”</li>
+          </ol>
+        </div>
+        <div class="schedule">
+          <strong>3일 연습 순서</strong>
+          <ol>
+            <li>1일차: 1~5번을 Python으로 읽고 직접 작성합니다.</li>
+            <li>2일차: 6~10번과 CS 답변을 연습합니다.</li>
+            <li>3일차: 30분 타이머로 예제 3개를 소리 내어 풉니다.</li>
+            <li>마지막 확인: 새 문제를 보지 않고 표시한 예제만 다시 확인합니다.</li>
+          </ol>
+        </div>
+        <div class="print-row">
+          <button class="print-button" type="button" id="printButton">인쇄 또는 PDF 저장</button>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const syntaxBasics = [
+        {
+          title: "출력하기",
+          keyword: "print / console.log",
+          meaning: "프로그램이 가진 값을 화면에서 확인합니다. 정답을 제출하는 기능이라기보다 중간 값과 결과를 확인하는 도구입니다.",
+          remember: "괄호 안에 확인하고 싶은 값을 넣습니다.",
+          python: `print("안녕하세요")
+print(2 + 3)  # 5`,
+          javascript: `console.log("안녕하세요");
+console.log(2 + 3); // 5`
+        },
+        {
+          title: "값 저장하기",
+          keyword: "변수와 =",
+          meaning: "이름표를 붙여 값을 기억해 둡니다. =은 같다는 뜻이 아니라 오른쪽 값을 왼쪽 이름에 저장한다는 뜻입니다.",
+          remember: "Python은 이름을 바로 쓰고, JavaScript는 const 또는 let으로 시작합니다.",
+          python: `name = "Kim"
+age = 40
+
+print(name)
+print(age)`,
+          javascript: `const name = "Kim";
+let age = 40;
+
+age = 41; // let은 값을 다시 바꿀 수 있습니다.
+console.log(name);
+console.log(age);`
+        },
+        {
+          title: "값의 종류",
+          keyword: "문자열 · 숫자 · 불리언 · 목록 · 객체",
+          meaning: "문자, 숫자, 참·거짓, 여러 값의 목록, 이름으로 값을 찾는 묶음을 구분합니다.",
+          remember: "문자는 따옴표, 목록은 대괄호 [], 객체는 중괄호 {}로 시작합니다.",
+          python: `name = "Kim"                 # 문자열
+age = 40                     # 숫자
+is_ready = True              # 참·거짓
+names = ["Kim", "Lee"]       # 리스트
+user = {"name": "Kim", "age": 40}  # 딕셔너리`,
+          javascript: `const name = "Kim";                  // 문자열
+const age = 40;                      // 숫자
+const isReady = true;                // 참·거짓
+const names = ["Kim", "Lee"];        // 배열
+const user = { name: "Kim", age: 40 }; // 객체`
+        },
+        {
+          title: "조건에 따라 나누기",
+          keyword: "if / else",
+          meaning: "조건이 참일 때와 거짓일 때 서로 다른 코드를 실행합니다.",
+          remember: "Python은 콜론과 들여쓰기로, JavaScript는 중괄호로 실행 범위를 표시합니다.",
+          python: `age = 20
+
+if age >= 18:
+    print("성인")
+else:
+    print("미성년자")`,
+          javascript: `const age = 20;
+
+if (age >= 18) {
+  console.log("성인");
+} else {
+  console.log("미성년자");
+}`
+        },
+        {
+          title: "목록을 하나씩 반복하기",
+          keyword: "for",
+          meaning: "목록의 값을 처음부터 하나씩 꺼내 같은 작업을 반복합니다.",
+          remember: "names에 값이 두 개 있으면 반복문 안의 코드도 두 번 실행됩니다.",
+          python: `names = ["Kim", "Lee"]
+
+for name in names:
+    print(name)`,
+          javascript: `const names = ["Kim", "Lee"];
+
+for (const name of names) {
+  console.log(name);
+}`
+        },
+        {
+          title: "함수 만들고 결과 돌려주기",
+          keyword: "def / function / return",
+          meaning: "여러 줄의 작업에 이름을 붙여 다시 사용할 수 있게 만듭니다. def는 define의 줄임말이고 return은 계산 결과를 함수를 부른 곳으로 돌려줍니다.",
+          remember: "함수를 만드는 것과 실제로 호출하는 것은 별개입니다. add(2, 3)이 호출입니다.",
+          python: `def add(a, b):
+    result = a + b
+    return result
+
+answer = add(2, 3)
+print(answer)  # 5`,
+          javascript: `function add(a, b) {
+  const result = a + b;
+  return result;
+}
+
+const answer = add(2, 3);
+console.log(answer); // 5`
+        },
+        {
+          title: "목록 사용하기",
+          keyword: "list / array",
+          meaning: "여러 값을 순서대로 저장합니다. 위치는 1이 아니라 0부터 시작합니다.",
+          remember: "첫 번째 값은 [0]입니다. 새 값 추가는 Python의 append, JavaScript의 push입니다.",
+          python: `names = ["Kim", "Lee"]
+
+print(names[0])  # Kim
+names.append("Park")
+print(len(names))  # 3`,
+          javascript: `const names = ["Kim", "Lee"];
+
+console.log(names[0]); // Kim
+names.push("Park");
+console.log(names.length); // 3`
+        },
+        {
+          title: "이름으로 값 찾기",
+          keyword: "dict / object",
+          meaning: "순서 대신 key 이름으로 값을 저장하고 찾습니다. 사용자별 합계나 단어별 개수를 셀 때 자주 사용합니다.",
+          remember: "없는 값을 읽을 수 있으므로 기본값을 함께 사용하는 패턴을 기억합니다.",
+          python: `user = {"name": "Kim"}
+
+print(user["name"])
+user["role"] = "AX"
+age = user.get("age", 0)  # 없으면 0`,
+          javascript: `const user = { name: "Kim" };
+
+console.log(user.name);
+user.role = "AX";
+const age = user.age ?? 0; // 없으면 0`
+        },
+        {
+          title: "저장과 비교 구분하기",
+          keyword: "= / == / === / and / &&",
+          meaning: "=은 값을 저장하고, == 또는 ===는 두 값을 비교합니다. 여러 조건을 함께 확인할 수도 있습니다.",
+          remember: "JavaScript 비교는 값과 자료형을 함께 보는 ===를 사용합니다.",
+          python: `age = 40                    # 저장
+is_same = age == 40          # 비교
+can_apply = age >= 18 and is_same
+
+print(not can_apply)`,
+          javascript: `const age = 40;                       // 저장
+const isSame = age === 40;              // 비교
+const canApply = age >= 18 && isSame;
+
+console.log(!canApply);`
+        },
+        {
+          title: "위에서 아래로 읽기",
+          keyword: "종합 예제",
+          meaning: "변수, 반복문, 조건문, 함수와 return이 실제 문제에서 어떻게 이어지는지 확인합니다.",
+          remember: "입력 받기 → 결과 저장 공간 만들기 → 반복하기 → 조건 확인하기 → 결과 돌려주기 순서입니다.",
+          python: `def count_positive(numbers):
+    count = 0
+
+    for number in numbers:
+        if number > 0:
+            count = count + 1
+
+    return count
+
+print(count_positive([-1, 3, 0, 5]))  # 2`,
+          javascript: `function countPositive(numbers) {
+  let count = 0;
+
+  for (const number of numbers) {
+    if (number > 0) {
+      count = count + 1;
+    }
+  }
+
+  return count;
+}
+
+console.log(countPositive([-1, 3, 0, 5])); // 2`
+        }
+      ];
+
+      const examples = [
+        {
+          id: "reverse-text",
+          title: "문자열 뒤집기",
+          problem: "문자열을 받아 글자 순서를 반대로 반환합니다.",
+          input: '"hello"',
+          output: '"olleh"',
+          say: "문자열을 뒤에서부터 읽어 새로운 문자열로 반환하겠습니다.",
+          steps: ["문자열을 글자 목록으로 봅니다.", "순서를 뒤집습니다.", "글자를 다시 하나의 문자열로 합칩니다."],
+          python: `def reverse_text(text):
+    # [시작:끝:간격]에서 -1은 뒤에서부터 읽는다는 뜻입니다.
+    return text[::-1]
+
+print(reverse_text("hello"))`,
+          javascript: `function reverseText(text) {
+  // 문자열을 배열로 바꾸고, 뒤집은 뒤 다시 합칩니다.
+  return [...text].reverse().join("");
+}
+
+console.log(reverseText("hello"));`
+        },
+        {
+          id: "palindrome",
+          title: "회문 확인",
+          problem: "앞뒤로 읽은 결과가 같은 문자열인지 확인합니다.",
+          input: '"level"',
+          output: "true",
+          say: "원래 문자열과 뒤집은 문자열이 같은지 비교하겠습니다.",
+          steps: ["문자열을 뒤집습니다.", "원래 문자열과 비교합니다.", "같으면 true, 다르면 false를 반환합니다."],
+          python: `def is_palindrome(text):
+    # 원래 값과 뒤집은 값이 같은지 바로 비교합니다.
+    return text == text[::-1]
+
+print(is_palindrome("level"))`,
+          javascript: `function isPalindrome(text) {
+  // reverseText는 1번 예제의 함수를 다시 사용합니다.
+  return text === reverseText(text);
+}
+
+console.log(isPalindrome("level"));`
+        },
+        {
+          id: "count-words",
+          title: "단어 출현 횟수 세기",
+          problem: "단어 목록에서 각 단어가 몇 번 나왔는지 반환합니다.",
+          input: '["apple", "banana", "apple"]',
+          output: "{ apple: 2, banana: 1 }",
+          say: "목록을 한 번 순회하면서 딕셔너리에 단어별 개수를 누적하겠습니다.",
+          steps: ["빈 counts를 만듭니다.", "단어를 하나씩 확인합니다.", "기존 개수에 1을 더합니다."],
+          python: `def count_words(words):
+    counts = {}
+
+    for word in words:
+        # 값이 없으면 0을 사용한 뒤 1을 더합니다.
+        counts[word] = counts.get(word, 0) + 1
+
+    return counts
+
+print(count_words(["apple", "banana", "apple"]))`,
+          javascript: `function countWords(words) {
+  const counts = {};
+
+  for (const word of words) {
+    // 값이 없으면 0을 사용한 뒤 1을 더합니다.
+    counts[word] = (counts[word] ?? 0) + 1;
+  }
+
+  return counts;
+}
+
+console.log(countWords(["apple", "banana", "apple"]));`
+        },
+        {
+          id: "remove-duplicates",
+          title: "순서를 유지하며 중복 제거",
+          problem: "처음 등장한 순서는 유지하고 중복 값만 제거합니다.",
+          input: "[1, 2, 1, 3, 2]",
+          output: "[1, 2, 3]",
+          say: "이미 본 값은 Set에 기록하고, 처음 본 값만 결과에 넣겠습니다.",
+          steps: ["seen과 result를 만듭니다.", "처음 본 값만 두 곳에 저장합니다.", "완성된 result를 반환합니다."],
+          python: `def remove_duplicates(values):
+    seen = set()
+    result = []
+
+    for value in values:
+        if value not in seen:
+            seen.add(value)
+            result.append(value)
+
+    return result
+
+print(remove_duplicates([1, 2, 1, 3, 2]))`,
+          javascript: `function removeDuplicates(values) {
+  const seen = new Set();
+  const result = [];
+
+  for (const value of values) {
+    if (!seen.has(value)) {
+      seen.add(value);
+      result.push(value);
+    }
+  }
+
+  return result;
+}
+
+console.log(removeDuplicates([1, 2, 1, 3, 2]));`
+        },
+        {
+          id: "most-frequent",
+          title: "가장 많이 등장한 값",
+          problem: "목록에서 가장 많이 등장한 값을 반환합니다.",
+          input: '["a", "b", "a"]',
+          output: '"a"',
+          say: "먼저 값별 개수를 센 뒤 가장 큰 개수를 가진 값을 찾겠습니다.",
+          steps: ["빈 목록이면 None 또는 null을 반환합니다.", "값별 개수를 셉니다.", "가장 큰 개수의 값을 찾습니다."],
+          python: `def most_frequent(values):
+    if not values:
+        return None
+
+    counts = {}
+    for value in values:
+        counts[value] = counts.get(value, 0) + 1
+
+    # counts.get을 기준으로 가장 큰 key를 찾습니다.
+    return max(counts, key=counts.get)
+
+print(most_frequent(["a", "b", "a"]))`,
+          javascript: `function mostFrequent(values) {
+  if (values.length === 0) return null;
+
+  const counts = {};
+  let answer = values[0];
+
+  for (const value of values) {
+    counts[value] = (counts[value] ?? 0) + 1;
+    if (counts[value] > (counts[answer] ?? 0)) {
+      answer = value;
+    }
+  }
+
+  return answer;
+}
+
+console.log(mostFrequent(["a", "b", "a"]));`
+        },
+        {
+          id: "two-sum",
+          title: "두 수의 합",
+          problem: "합이 target이 되는 두 값의 위치를 반환합니다.",
+          input: "[2, 7, 11, 15], target = 9",
+          output: "[0, 1]",
+          say: "현재 값과 짝이 되는 숫자가 앞에서 나왔는지 딕셔너리로 확인하겠습니다.",
+          steps: ["needed는 target에서 현재 값을 뺀 값입니다.", "needed가 저장돼 있으면 두 위치를 반환합니다.", "없으면 현재 값과 위치를 저장합니다."],
+          python: `def two_sum(numbers, target):
+    seen = {}
+
+    for index, number in enumerate(numbers):
+        needed = target - number
+
+        if needed in seen:
+            return [seen[needed], index]
+
+        seen[number] = index
+
+    return []
+
+print(two_sum([2, 7, 11, 15], 9))`,
+          javascript: `function twoSum(numbers, target) {
+  const seen = new Map();
+
+  for (let index = 0; index < numbers.length; index++) {
+    const number = numbers[index];
+    const needed = target - number;
+
+    if (seen.has(needed)) {
+      return [seen.get(needed), index];
+    }
+
+    seen.set(number, index);
+  }
+
+  return [];
+}
+
+console.log(twoSum([2, 7, 11, 15], 9));`
+        },
+        {
+          id: "valid-brackets",
+          title: "올바른 괄호",
+          problem: "여는 괄호와 닫는 괄호의 순서가 올바른지 확인합니다.",
+          input: '"([])"',
+          output: "true",
+          say: "여는 괄호는 스택에 넣고, 닫는 괄호는 가장 최근 값과 짝을 확인하겠습니다.",
+          steps: ["여는 괄호를 stack에 넣습니다.", "닫는 괄호가 나오면 마지막 값을 꺼냅니다.", "짝이 다르거나 값이 남으면 false입니다."],
+          python: `def is_valid_brackets(text):
+    pairs = {")": "(", "]": "[", "}": "{"}
+    stack = []
+
+    for char in text:
+        if char in "([{":
+            stack.append(char)
+        elif char in pairs:
+            if not stack or stack.pop() != pairs[char]:
+                return False
+
+    return len(stack) == 0
+
+print(is_valid_brackets("([])"))`,
+          javascript: `function isValidBrackets(text) {
+  const pairs = { ")": "(", "]": "[", "}": "{" };
+  const stack = [];
+
+  for (const char of text) {
+    if ("([{".includes(char)) {
+      stack.push(char);
+    } else if (char in pairs) {
+      if (stack.length === 0 || stack.pop() !== pairs[char]) {
+        return false;
+      }
+    }
+  }
+
+  return stack.length === 0;
+}
+
+console.log(isValidBrackets("([])"));`
+        },
+        {
+          id: "sort-age",
+          title: "객체 목록 정렬",
+          problem: "사용자 목록을 나이가 적은 순서로 정렬합니다.",
+          input: '[{name:"Kim", age:40}, {name:"Lee", age:30}]',
+          output: "Lee, Kim 순서",
+          say: "원본을 보존하기 위해 목록을 복사한 뒤 age를 기준으로 정렬하겠습니다.",
+          steps: ["원본 목록을 복사합니다.", "age 값의 차이를 정렬 기준으로 사용합니다.", "정렬된 새 목록을 반환합니다."],
+          python: `def sort_by_age(users):
+    # sorted는 원본을 바꾸지 않고 새 목록을 만듭니다.
+    return sorted(users, key=lambda user: user["age"])
+
+users = [
+    {"name": "Kim", "age": 40},
+    {"name": "Lee", "age": 30}
+]
+
+print(sort_by_age(users))`,
+          javascript: `function sortByAge(users) {
+  // 복사본을 만들어 원본 배열이 바뀌지 않게 합니다.
+  return [...users].sort((a, b) => a.age - b.age);
+}
+
+const users = [
+  { name: "Kim", age: 40 },
+  { name: "Lee", age: 30 }
+];
+
+console.log(sortByAge(users));`
+        },
+        {
+          id: "group-category",
+          title: "카테고리별로 묶기",
+          problem: "같은 카테고리를 가진 항목을 하나의 목록으로 묶습니다.",
+          input: '[{category:"book"}, {category:"toy"}, {category:"book"}]',
+          output: "{ book: [2개], toy: [1개] }",
+          say: "카테고리를 key로 사용하고, 같은 카테고리의 항목을 배열에 추가하겠습니다.",
+          steps: ["빈 groups를 만듭니다.", "카테고리 목록이 없으면 먼저 만듭니다.", "현재 항목을 해당 목록에 추가합니다."],
+          python: `def group_by_category(items):
+    groups = {}
+
+    for item in items:
+        category = item["category"]
+
+        if category not in groups:
+            groups[category] = []
+
+        groups[category].append(item)
+
+    return groups`,
+          javascript: `function groupByCategory(items) {
+  const groups = {};
+
+  for (const item of items) {
+    const category = item.category;
+
+    if (!groups[category]) {
+      groups[category] = [];
+    }
+
+    groups[category].push(item);
+  }
+
+  return groups;
+}`
+        },
+        {
+          id: "paid-orders",
+          title: "결제 주문 고객별 합계",
+          problem: "paid 상태인 주문만 사용자별로 합산합니다.",
+          input: "kim 1000 paid, lee 500 cancelled, kim 2000 paid",
+          output: "{ kim: 3000 }",
+          say: "결제 완료가 아닌 주문을 제외하고 사용자별 금액을 누적하겠습니다.",
+          steps: ["주문을 하나씩 확인합니다.", "paid가 아니면 건너뜁니다.", "사용자별 기존 합계에 금액을 더합니다."],
+          python: `def sum_paid_orders(orders):
+    totals = {}
+
+    for order in orders:
+        # 결제 완료 주문만 계산합니다.
+        if order["status"] != "paid":
+            continue
+
+        user = order["user"]
+        totals[user] = totals.get(user, 0) + order["amount"]
+
+    return totals`,
+          javascript: `function sumPaidOrders(orders) {
+  const totals = {};
+
+  for (const order of orders) {
+    // paid가 아닌 주문은 건너뜁니다.
+    if (order.status !== "paid") continue;
+
+    totals[order.user] =
+      (totals[order.user] ?? 0) + order.amount;
+  }
+
+  return totals;
+}`
+        }
+      ];
+
+      const csCards = [
+        ["배열과 해시 맵의 차이는 무엇인가요?", "배열은 순서가 있는 값을 다룰 때 적합합니다. 해시 맵은 키로 값을 빠르게 찾거나 키별로 집계할 때 적합하고 평균 조회와 삽입은 O(1)입니다.", ["순서", "키 조회", "평균 O(1)"]],
+        ["스택과 큐의 차이는 무엇인가요?", "스택은 마지막에 넣은 값을 먼저 꺼내는 LIFO 구조이고, 큐는 먼저 넣은 값을 먼저 꺼내는 FIFO 구조입니다. 괄호 검사는 스택, 작업 대기는 큐의 대표 사례입니다.", ["LIFO", "FIFO", "괄호", "작업 대기"]],
+        ["Set은 언제 사용하나요?", "중복을 허용하지 않는 값의 모음이 필요할 때 사용합니다. 이미 본 값인지 확인하거나 중복을 제거할 때 유용합니다.", ["중복 제거", "포함 여부", "평균 O(1)"]],
+        ["O(n)과 O(n log n)의 차이는 무엇인가요?", "O(n)은 입력을 한 번 순회할 때 나타납니다. O(n log n)은 일반적인 비교 정렬에서 나타나며 입력이 커질수록 단순 순회보다 비용이 더 빠르게 증가합니다.", ["한 번 순회", "정렬", "입력 크기"]],
+        ["동기와 비동기의 차이는 무엇인가요?", "동기는 한 작업이 끝날 때까지 다음 작업이 기다립니다. 비동기는 오래 걸리는 작업을 기다리는 동안 다른 일을 진행하고 완료 결과를 나중에 처리합니다.", ["대기", "다른 작업", "완료 처리"]],
+        ["프로세스와 스레드의 차이는 무엇인가요?", "프로세스는 독립된 메모리 공간에서 실행되는 프로그램 단위입니다. 스레드는 한 프로세스 안에서 메모리를 공유하며 실행되는 작업 단위입니다.", ["독립 메모리", "메모리 공유", "실행 단위"]],
+        ["HTTP GET과 POST의 차이는 무엇인가요?", "GET은 주로 데이터를 조회하고 POST는 서버에 새 작업이나 데이터 생성을 요청할 때 사용합니다. GET 요청은 같은 요청을 반복해도 상태가 달라지지 않는 것이 일반적입니다.", ["조회", "생성", "멱등성"]],
+        ["401과 403의 차이는 무엇인가요?", "401은 인증이 필요하거나 인증에 실패한 상태입니다. 403은 사용자가 누구인지는 알지만 해당 작업을 수행할 권한이 없는 상태입니다.", ["401 인증", "403 권한"]],
+        ["REST API와 WebSocket의 차이는 무엇인가요?", "REST API는 요청마다 응답을 받는 방식에 적합합니다. WebSocket은 연결을 유지하면서 서버와 클라이언트가 실시간으로 메시지를 주고받을 때 적합합니다.", ["요청·응답", "연결 유지", "실시간"]],
+        ["데이터베이스 인덱스의 장점과 비용은 무엇인가요?", "특정 컬럼의 조회를 빠르게 하지만 별도 저장 공간이 필요하고, 데이터 삽입이나 수정 때 인덱스도 갱신해야 하므로 쓰기 비용이 증가합니다.", ["조회 속도", "저장 공간", "쓰기 비용"]]
+      ];
+
+      const STORAGE_KEY = "coding-basics-workbook-completed-v1";
+      let activeLanguage = "python";
+
+      const escapeHtml = (value) =>
+        value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;");
+
+      const loadCompleted = () => {
+        try {
+          return new Set(JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"));
+        } catch {
+          return new Set();
+        }
+      };
+
+      const completed = loadCompleted();
+
+      const renderSyntaxBasics = () => {
+        document.querySelector("#syntaxList").innerHTML = syntaxBasics.map((item, index) => `
+          <article class="syntax-card">
+            <div class="syntax-head">
+              <span class="example-number">${index + 1}</span>
+              <div>
+                <h3>${item.title}</h3>
+                <span class="syntax-keyword">${item.keyword}</span>
+              </div>
+            </div>
+            <p class="syntax-meaning">${item.meaning}</p>
+            <p class="syntax-remember"><strong>이것만 기억:</strong> ${item.remember}</p>
+            <pre><code>${escapeHtml(item[activeLanguage])}</code></pre>
+          </article>
+        `).join("");
+      };
+
+      const renderExamples = () => {
+        const list = document.querySelector("#exampleList");
+        list.innerHTML = examples.map((example, index) => {
+          const code = example[activeLanguage];
+          const checked = completed.has(example.id) ? "checked" : "";
+
+          return `
+            <article class="example">
+              <div class="example-head">
+                <span class="example-number">${index + 1}</span>
+                <div>
+                  <h3>${example.title}</h3>
+                  <p class="problem">${example.problem}</p>
+                </div>
+                <label class="complete-control">
+                  <input type="checkbox" data-example-id="${example.id}" ${checked} />
+                  확인 완료
+                </label>
+              </div>
+              <div class="sample">
+                <div><strong>입력</strong><code>${escapeHtml(example.input)}</code></div>
+                <div><strong>출력</strong><code>${escapeHtml(example.output)}</code></div>
+              </div>
+              <blockquote class="say"><strong>먼저 할 말:</strong> ${example.say}</blockquote>
+              <details>
+                <summary>풀이 순서와 주석 코드 보기</summary>
+                <div class="solution">
+                  <ol class="steps">${example.steps.map((step) => `<li>${step}</li>`).join("")}</ol>
+                  <pre><code>${escapeHtml(code)}</code></pre>
+                </div>
+              </details>
+            </article>
+          `;
+        }).join("");
+
+        list.querySelectorAll('input[type="checkbox"]').forEach((input) => {
+          input.addEventListener("change", () => {
+            if (input.checked) {
+              completed.add(input.dataset.exampleId);
+            } else {
+              completed.delete(input.dataset.exampleId);
+            }
+            localStorage.setItem(STORAGE_KEY, JSON.stringify([...completed]));
+            updateProgress();
+          });
+        });
+      };
+
+      const renderCsCards = () => {
+        document.querySelector("#csList").innerHTML = csCards.map(([question, answer, keywords]) => `
+          <article class="cs-card">
+            <h3>${question}</h3>
+            <p>${answer}</p>
+            <div class="keyword-row">${keywords.map((keyword) => `<span>${keyword}</span>`).join("")}</div>
+          </article>
+        `).join("");
+      };
+
+      const updateProgress = () => {
+        const count = completed.size;
+        document.querySelector("#progressText").textContent = `${count} / ${examples.length}`;
+        document.querySelector("#progressFill").style.width = `${(count / examples.length) * 100}%`;
+      };
+
+      document.querySelectorAll("[data-panel]").forEach((button) => {
+        button.addEventListener("click", () => {
+          document.querySelectorAll("[data-panel]").forEach((item) => {
+            item.setAttribute("aria-selected", String(item === button));
+          });
+          document.querySelectorAll(".panel").forEach((panel) => {
+            panel.hidden = panel.id !== button.dataset.panel;
+          });
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      });
+
+      document.querySelectorAll("[data-language]").forEach((button) => {
+        button.addEventListener("click", () => {
+          activeLanguage = button.dataset.language;
+          document.querySelectorAll("[data-language]").forEach((item) => {
+            item.setAttribute("aria-pressed", String(item === button));
+          });
+          renderSyntaxBasics();
+          renderExamples();
+        });
+      });
+
+      document.querySelector("#printButton").addEventListener("click", () => window.print());
+      window.addEventListener("beforeprint", () => {
+        document.querySelectorAll("details").forEach((detail) => {
+          detail.open = true;
+        });
+      });
+
+      renderSyntaxBasics();
+      renderExamples();
+      renderCsCards();
+      updateProgress();
+    </script>
+  </body>
+</html>

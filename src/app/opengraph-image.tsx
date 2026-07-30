@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "김성재 AX Engineer 포트폴리오";
+export const alt = "김성재 AI Workflow & Product Engineering 포트폴리오";
 export const size = {
   width: 1200,
   height: 630,
@@ -31,7 +31,7 @@ export default function OpenGraphImage() {
             fontWeight: 600,
           }}
         >
-          김성재 · AX Engineer
+          김성재 · AI Workflow &amp; Product Engineering
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div
@@ -54,7 +54,7 @@ export default function OpenGraphImage() {
               fontSize: 28,
             }}
           >
-            Agent Systems · RAG · MCP · Workflow Automation
+            Service UI · AI Workflow · Product Engineering
           </div>
         </div>
         <div
@@ -68,7 +68,7 @@ export default function OpenGraphImage() {
             paddingTop: 28,
           }}
         >
-          <span>13 years of product operations</span>
+          <span>13 years of service UI development</span>
           <span>ksungz-github-io.vercel.app</span>
         </div>
       </div>

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Products",
-  description: "AX Engineer 김성재가 직접 만든 AX Systems와 AI Products",
+  description: "서비스 UI 경험을 바탕으로 문제 범위를 정하고 AI 코딩 에이전트와 함께 구현·검증한 AI Workflow와 Product 프로젝트",
 };
 
 interface ProductLink {
@@ -63,9 +63,9 @@ const axSystems: ProductData[] = [
     name: "AX Evidence Gates",
     tagline: "API 연동 코드·상품 정보·투자 답변을 공개 근거로 점검하는 검수 도구 3종",
     problem: "AI가 자연스러운 답변과 데이터를 빠르게 만들더라도, 실제 업무에 사용하려면 근거가 없는 단정과 누락된 조건, 확인하지 못한 범위를 반복해서 검수할 수 있어야 했습니다.",
-    solution: "AX 인재전쟁 2026 과제에서 문제 범위와 근거·판정 기준을 정하고, AI 에이전트를 활용해 세 개의 로컬 품질 게이트를 구현했습니다. 해커톤 종료 후에는 금융 답변 게이트를 LangGraph에 연결해 자동 검사에서 위험 항목이 발견되면 사람이 승인·수정·반려하고, 수정본을 다시 검사하는 흐름으로 확장했습니다.",
+    solution: "AX 인재전쟁 2026 과제에서 문제 범위와 근거·판정 기준을 정하고, AI 에이전트를 활용해 세 개의 로컬 품질 게이트를 구현했습니다. 해커톤 종료 후에는 LangGraph를 학습하기 위한 후속 PoC로 AI 코딩 에이전트와 함께 금융 답변 게이트에 사람 검토 단계를 추가했습니다. 현재는 워크북으로 코드와 실행 경로를 학습하고 있으며, 독립적인 LangGraph 설계 경험으로 표기하지 않습니다.",
     stack: ["Python", "LangGraph", "Human-in-the-loop", "CI"],
-    status: "실제 해커톤 제출물 공개 · LangGraph 후속 확장 · 49 tests",
+    status: "실제 해커톤 제출물 공개 · LangGraph 학습용 후속 PoC · 49 tests",
     links: [
       { label: "GitHub", href: "https://github.com/ksungz/ax-evidence-gates" },
     ],

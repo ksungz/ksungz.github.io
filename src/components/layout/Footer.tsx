@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="mt-auto border-t border-[var(--color-border)] py-6 sm:py-8">
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-3 px-4 text-xs text-[var(--color-muted)] sm:flex-row sm:justify-between sm:px-6">
-        <p>© {new Date().getFullYear()} Sungjae Kim · AX Engineer</p>
+        <p>© {new Date().getFullYear()} Sungjae Kim · AI Workflow &amp; Product Engineering</p>
         <div className="flex items-center gap-4">
           <a
             href="https://github.com/ksungz"

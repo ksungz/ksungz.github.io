@@ -20,7 +20,7 @@ export default function PortfolioPage() {
           <a href="/career">Career</a>
           <a href="mailto:k.suzkim@gmail.com">Contact</a>
         </nav>
-        <p className="pf-cli-status"><i aria-hidden="true" /> AX Engineer</p>
+        <p className="pf-cli-status"><i aria-hidden="true" /> AI Workflow &amp; Product Engineering</p>
       </header>
 
       <main className="pf-main">
@@ -34,8 +34,8 @@ export default function PortfolioPage() {
         <p className="pf-hero-command"><span aria-hidden="true">$</span> whoami</p>
         <h1>김성재</h1>
         <p className="pf-hero-statement">
-          13년간 제품을 운영하며 발견한 반복 업무와 맥락 단절을
-          Agent, RAG, MCP와 자동화 워크플로로 전환하고 있습니다.
+          13년간 서비스 UI를 개발·운영하며 발견한 반복 업무와 맥락 단절을
+          AI Agent와 자동화로 개선하고 있습니다.
         </p>
         <div className="pf-hero-actions">
           <a className="pf-scroll-link" href="#workflow"><span aria-hidden="true">$</span> open ./ax-work <span aria-hidden="true">↓</span></a>
@@ -498,8 +498,8 @@ export default function PortfolioPage() {
       <div className="pf-footer">
         <p className="pf-footer-name">김성재</p>
         <p className="pf-footer-copy">
-          UI/FE와 서비스 운영 경험을 기반으로 문제와 적용 범위를 정하고,
-          AI Agent를 활용해 RAG, MCP와 자동화 워크플로를 구현·검증하고 있습니다.
+          서비스 UI 개발·운영 경험을 기반으로 문제와 적용 범위를 정하고,
+          AI 코딩 에이전트로 구현한 결과를 실제 실행과 테스트로 검증하고 있습니다.
         </p>
         <nav className="pf-footer-actions" aria-label="Portfolio 다음 이동">
           <a href="/career">전체 경력 보기 →</a>
@@ -510,7 +510,7 @@ export default function PortfolioPage() {
 
       <div className="pf-statusbar" role="status" aria-label="Portfolio 상태">
         <span><i aria-hidden="true" /> ready</span>
-        <span>AX Engineer</span>
+        <span>AI Workflow</span>
         <span>UTF-8</span>
         <span>320 · 390 · 1440</span>
       </div>

@@ -22,21 +22,21 @@ const notoSansKR = Noto_Sans_KR({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ksungz-github-io.vercel.app"),
-  title: { default: "김성재 · AX Engineer", template: "%s · 김성재" },
-  description: "13년간의 제품 운영 경험을 바탕으로 AI Agent, RAG, MCP와 자동화로 업무와 제품 개발 방식을 전환하는 AX Engineer 김성재입니다.",
+  title: { default: "김성재 · AI Workflow & Product Engineering", template: "%s · 김성재" },
+  description: "13년간 서비스 UI를 개발·운영한 경험을 바탕으로 문제와 적용 범위를 정하고, AI 코딩 에이전트로 구현한 결과를 실행과 테스트로 검증하며 역할을 확장하고 있습니다.",
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    siteName: "김성재 · AX Engineer",
-    title: "김성재 · AX Engineer",
+    siteName: "김성재 · AI Workflow & Product Engineering",
+    title: "김성재 · AI Workflow & Product Engineering",
     description:
-      "13년간의 제품 운영 경험을 바탕으로 AI Agent, RAG, MCP와 자동화로 업무와 제품 개발 방식을 전환합니다.",
+      "13년간 서비스 UI를 개발·운영한 경험을 바탕으로 AI Agent와 자동화를 업무와 제품 개발에 적용하고 검증합니다.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "김성재 · AX Engineer",
+    title: "김성재 · AI Workflow & Product Engineering",
     description:
-      "제품 운영 경험을 바탕으로 AI Agent와 자동화를 실제 업무 시스템과 제품으로 연결합니다.",
+      "서비스 UI 개발·운영 경험을 바탕으로 AI Agent와 자동화를 업무와 제품 개발에 적용하고 검증합니다.",
   },
 };
 

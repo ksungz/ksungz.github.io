@@ -48,7 +48,9 @@ export default function Home() {
 
       {/* Hero */}
       <section className="mb-16 sm:mb-20">
-        <p className="font-mono text-xs text-[var(--color-muted)] mb-3">AX Engineer</p>
+        <p className="font-mono text-xs text-[var(--color-muted)] mb-3">
+          Service UI · AI Workflow · Automation
+        </p>
         <h1 className="text-2xl sm:text-4xl font-bold tracking-tight mb-4 sm:mb-6 leading-snug sm:leading-tight">
           <span className="block">13년간 서비스 UI를 개발·운영하며</span>
           <span className="block text-[var(--color-muted)]">발견한 반복 업무와 맥락 단절을</span>
@@ -58,8 +60,8 @@ export default function Home() {
           커머스·게임·플랫폼 서비스에서 UI를 개발하고 운영하며
           현장의 반복 업무, 맥락 단절, 검증 비용 문제를 경험했습니다.
           그 경험을 바탕으로 문제와 적용 범위, 완료 기준을 정하고
-          AI Agent를 활용해 RAG, MCP와 자동화 워크플로우를
-          구현·검증하고 운영하고 있습니다.
+          AI 코딩 에이전트로 구현한 결과를 실행과 테스트로 검증하며,
+          AI 워크플로우와 제품 개발로 역할을 확장하고 있습니다.
         </p>
         <div className="mt-6 sm:mt-8 flex flex-wrap gap-2 sm:gap-3">
           <Link
@@ -122,7 +124,7 @@ export default function Home() {
           <span>
             <strong className="font-semibold">AX Evidence Gates</strong>
             <span className="ml-2 text-[var(--color-muted)]">
-              공개 근거 품질 게이트와 LangGraph 사람 검토 흐름
+              공개 근거 품질 게이트와 LangGraph 학습용 후속 PoC
             </span>
           </span>
           <span className="text-[var(--color-muted)]">49 tests · GitHub 공개 →</span>
@@ -142,9 +144,9 @@ export default function Home() {
             </p>
           </div>
           <div className="rounded-lg border border-[var(--color-border)] p-4">
-            <h3 className="text-sm font-semibold">AX 시스템 구현</h3>
+            <h3 className="text-sm font-semibold">AI 워크플로우 적용·검증</h3>
             <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-              Agent, RAG, MCP와 자동화 워크플로우를 설계하고 구현합니다. 사람은 결정과 검증에 집중합니다.
+              문제와 완료 기준을 정하고 AI 코딩 에이전트로 구현한 결과를 실제 명령과 테스트로 확인합니다.
             </p>
           </div>
           <div className="rounded-lg border border-[var(--color-border)] p-4">

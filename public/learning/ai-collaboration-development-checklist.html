@@ -1,0 +1,1184 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#111827" />
+    <meta
+      name="description"
+      content="요구사항 정리부터 구현, 검증, 리뷰와 인계까지 이어지는 AI 협업 개발 체크리스트"
+    />
+    <title>AI 협업 개발 체크리스트</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #eef1f4;
+        color: #17202a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: #eef1f4;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        border-bottom: 1px solid #d1d7de;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(10px);
+      }
+
+      .topbar-inner {
+        display: flex;
+        width: min(1320px, 100%);
+        min-height: 60px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin: 0 auto;
+        padding: 10px 24px;
+      }
+
+      .brand {
+        min-width: 0;
+      }
+
+      .brand strong {
+        display: block;
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      .brand span {
+        display: block;
+        color: #64707c;
+        font-size: 12px;
+        line-height: 18px;
+      }
+
+      .status {
+        display: inline-flex;
+        min-height: 34px;
+        align-items: center;
+        gap: 7px;
+        padding: 0 11px;
+        border: 1px solid #b8d7cf;
+        border-radius: 6px;
+        background: #ecf8f4;
+        color: #116149;
+        font-size: 12px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      .status-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #16866a;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 290px minmax(0, 1fr);
+        gap: 24px;
+        width: min(1320px, 100%);
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 84px;
+        align-self: start;
+      }
+
+      .sidebar-panel {
+        overflow: hidden;
+        border: 1px solid #d1d7de;
+        border-radius: 8px;
+        background: #ffffff;
+      }
+
+      .sidebar-head {
+        padding: 16px;
+        border-bottom: 1px solid #e2e6ea;
+      }
+
+      .sidebar-head h2 {
+        margin: 0;
+        font-size: 15px;
+        line-height: 23px;
+      }
+
+      .sidebar-head p {
+        margin: 5px 0 0;
+        color: #64707c;
+        font-size: 12px;
+        line-height: 18px;
+      }
+
+      .progress {
+        height: 6px;
+        margin-top: 12px;
+        overflow: hidden;
+        border-radius: 3px;
+        background: #e8ecef;
+      }
+
+      .progress-fill {
+        width: 0;
+        height: 100%;
+        background: #16866a;
+        transition: width 160ms ease;
+      }
+
+      .checklist {
+        display: grid;
+        gap: 0;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .checklist label {
+        display: grid;
+        grid-template-columns: 20px minmax(0, 1fr);
+        gap: 10px;
+        align-items: start;
+        padding: 11px 16px;
+        border-bottom: 1px solid #edf0f2;
+        font-size: 13px;
+        line-height: 20px;
+      }
+
+      .checklist li:last-child label {
+        border-bottom: 0;
+      }
+
+      .checklist input {
+        width: 16px;
+        height: 16px;
+        margin: 2px 0 0;
+        accent-color: #16866a;
+      }
+
+      .sidebar-actions {
+        padding: 12px 16px;
+        border-top: 1px solid #e2e6ea;
+        background: #f7f9fa;
+      }
+
+      .reset-button {
+        width: 100%;
+        min-height: 36px;
+        border: 1px solid #cbd2d9;
+        border-radius: 6px;
+        background: #ffffff;
+        color: #4e5a66;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .quick-nav {
+        display: grid;
+        gap: 5px;
+        margin-top: 14px;
+      }
+
+      .quick-nav a {
+        display: flex;
+        min-height: 36px;
+        align-items: center;
+        padding: 0 12px;
+        border-radius: 5px;
+        color: #53606c;
+        font-size: 12px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .quick-nav a:hover,
+      .quick-nav a:focus-visible {
+        background: #dde3e8;
+        color: #17202a;
+        outline: none;
+      }
+
+      main {
+        min-width: 0;
+      }
+
+      .hero {
+        padding: 28px 30px;
+        border: 1px solid #252f3b;
+        border-radius: 8px;
+        background: #17202a;
+        color: #ffffff;
+      }
+
+      .hero .eyebrow {
+        margin: 0 0 7px;
+        color: #7ad8bd;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      h1 {
+        max-width: 760px;
+        margin: 0;
+        font-size: 30px;
+        line-height: 41px;
+        letter-spacing: 0;
+      }
+
+      .hero p {
+        max-width: 760px;
+        margin: 10px 0 0;
+        color: #c6ced6;
+        font-size: 14px;
+        line-height: 23px;
+      }
+
+      .core-rule {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        margin-top: 20px;
+        overflow: hidden;
+        border: 1px solid #394654;
+        border-radius: 6px;
+        background: #394654;
+      }
+
+      .core-rule div {
+        min-height: 66px;
+        padding: 13px 15px;
+        background: #202b36;
+      }
+
+      .core-rule span {
+        display: block;
+        color: #8c98a4;
+        font-size: 11px;
+        font-weight: 800;
+      }
+
+      .core-rule strong {
+        display: block;
+        margin-top: 4px;
+        font-size: 14px;
+        line-height: 21px;
+      }
+
+      section {
+        scroll-margin-top: 82px;
+        margin-top: 24px;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 12px;
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-size: 22px;
+        line-height: 31px;
+      }
+
+      .section-head p {
+        margin: 5px 0 0;
+        color: #64707c;
+        font-size: 13px;
+        line-height: 20px;
+      }
+
+      .label {
+        display: inline-flex;
+        min-height: 27px;
+        align-items: center;
+        padding: 0 9px;
+        border: 1px solid #ccd4da;
+        border-radius: 5px;
+        background: #ffffff;
+        color: #586572;
+        font-size: 11px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      .notice {
+        padding: 15px 17px;
+        border-left: 4px solid #b85c13;
+        background: #fff5e8;
+        color: #6e3a12;
+        font-size: 13px;
+        line-height: 21px;
+      }
+
+      .steps {
+        display: grid;
+        gap: 10px;
+      }
+
+      .step {
+        display: grid;
+        grid-template-columns: 42px minmax(0, 1fr);
+        gap: 14px;
+        padding: 18px;
+        border: 1px solid #d1d7de;
+        border-radius: 8px;
+        background: #ffffff;
+      }
+
+      .step-number {
+        display: flex;
+        width: 38px;
+        height: 38px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        background: #17202a;
+        color: #ffffff;
+        font-size: 13px;
+        font-weight: 900;
+      }
+
+      .step h3 {
+        margin: 0;
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      .step p {
+        margin: 5px 0 0;
+        color: #56626e;
+        font-size: 13px;
+        line-height: 21px;
+      }
+
+      .step ul,
+      .plain-list {
+        margin: 10px 0 0;
+        padding-left: 19px;
+        color: #3d4954;
+        font-size: 13px;
+        line-height: 22px;
+      }
+
+      .timeline {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        overflow: hidden;
+        border: 1px solid #d1d7de;
+        border-radius: 8px;
+        background: #ffffff;
+      }
+
+      .timeline-item {
+        min-height: 112px;
+        padding: 16px;
+        border-right: 1px solid #e1e5e9;
+      }
+
+      .timeline-item:last-child {
+        border-right: 0;
+      }
+
+      .timeline-item span {
+        color: #16866a;
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .timeline-item strong {
+        display: block;
+        margin-top: 5px;
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+      .timeline-item p {
+        margin: 5px 0 0;
+        color: #64707c;
+        font-size: 12px;
+        line-height: 18px;
+      }
+
+      .prompt-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .prompt {
+        overflow: hidden;
+        border: 1px solid #cdd4db;
+        border-radius: 8px;
+        background: #ffffff;
+      }
+
+      .prompt-head {
+        display: flex;
+        min-height: 48px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 8px 12px 8px 16px;
+        border-bottom: 1px solid #e2e6ea;
+      }
+
+      .prompt-head strong {
+        font-size: 13px;
+        line-height: 20px;
+      }
+
+      .copy-button {
+        min-width: 58px;
+        min-height: 32px;
+        padding: 0 10px;
+        border: 1px solid #c7cfd6;
+        border-radius: 5px;
+        background: #f7f9fa;
+        color: #3d4954;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .copy-button[data-copied="true"] {
+        border-color: #78bba7;
+        background: #e9f7f2;
+        color: #116149;
+      }
+
+      pre {
+        margin: 0;
+        padding: 15px 16px 17px;
+        overflow-x: auto;
+        background: #111827;
+        color: #e7ebef;
+        font-family:
+          "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        font-size: 12px;
+        line-height: 20px;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+
+      .verification-grid,
+      .question-grid,
+      .guardrail-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .check-card,
+      .question-card,
+      .guardrail-card {
+        padding: 17px;
+        border: 1px solid #d1d7de;
+        border-radius: 8px;
+        background: #ffffff;
+      }
+
+      .check-card h3,
+      .question-card h3,
+      .guardrail-card h3 {
+        margin: 0;
+        font-size: 15px;
+        line-height: 23px;
+      }
+
+      .check-card p,
+      .question-card p,
+      .guardrail-card p {
+        margin: 6px 0 0;
+        color: #5c6874;
+        font-size: 13px;
+        line-height: 21px;
+      }
+
+      .question-card {
+        border-left: 4px solid #16866a;
+      }
+
+      .danger {
+        border-color: #e4c3c3;
+        background: #fff8f8;
+      }
+
+      .danger h3 {
+        color: #9a2e2e;
+      }
+
+      code {
+        padding: 2px 5px;
+        border-radius: 4px;
+        background: #e8edf1;
+        color: #25313c;
+        font-family:
+          "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        font-size: 0.92em;
+      }
+
+      footer {
+        margin-top: 30px;
+        padding: 18px 0 4px;
+        border-top: 1px solid #d1d7de;
+        color: #6a7580;
+        font-size: 12px;
+        line-height: 19px;
+      }
+
+      @media (max-width: 980px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          position: static;
+        }
+
+        .quick-nav {
+          display: none;
+        }
+
+        .timeline {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .timeline-item {
+          border-bottom: 1px solid #e1e5e9;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .topbar-inner,
+        .layout {
+          padding-right: 16px;
+          padding-left: 16px;
+        }
+
+        .status {
+          display: none;
+        }
+
+        .hero {
+          padding: 22px 20px;
+        }
+
+        h1 {
+          font-size: 25px;
+          line-height: 35px;
+        }
+
+        .core-rule,
+        .verification-grid,
+        .question-grid,
+        .guardrail-grid,
+        .timeline {
+          grid-template-columns: 1fr;
+        }
+
+        .step {
+          grid-template-columns: 36px minmax(0, 1fr);
+          gap: 11px;
+          padding: 15px;
+        }
+
+        .step-number {
+          width: 34px;
+          height: 34px;
+        }
+
+        .section-head {
+          align-items: start;
+          flex-direction: column;
+        }
+
+        .timeline-item {
+          min-height: 0;
+          border-right: 0;
+        }
+      }
+
+      @media print {
+        .topbar,
+        .sidebar,
+        .copy-button {
+          display: none;
+        }
+
+        body {
+          background: #ffffff;
+        }
+
+        .layout {
+          display: block;
+          width: 100%;
+          padding: 0;
+        }
+
+        section,
+        .prompt,
+        .step {
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <strong>AI 협업 개발 체크리스트</strong>
+          <span>요구사항부터 검증과 인계까지 한 흐름으로 확인</span>
+        </div>
+        <div class="status"><span class="status-dot"></span>업무 참고용</div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="sidebar-panel">
+          <div class="sidebar-head">
+            <h2>진행 체크</h2>
+            <p id="progressText">0 / 8 완료</p>
+            <div class="progress" aria-hidden="true">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+          </div>
+          <ul class="checklist" id="taskChecklist">
+            <li><label><input type="checkbox" />목표와 완료 조건 합의</label></li>
+            <li><label><input type="checkbox" />관련 문서와 기존 맥락 확인</label></li>
+            <li><label><input type="checkbox" />기존 테스트·빌드 실행</label></li>
+            <li><label><input type="checkbox" />최소 변경 계획 확인</label></li>
+            <li><label><input type="checkbox" />기능을 단계별로 구현</label></li>
+            <li><label><input type="checkbox" />브라우저·예외 상태 검증</label></li>
+            <li><label><input type="checkbox" />최종 diff·보안·전체 테스트 확인</label></li>
+            <li><label><input type="checkbox" />결정과 한계·인계 내용 정리</label></li>
+          </ul>
+          <div class="sidebar-actions">
+            <button class="reset-button" id="resetProgress" type="button">진행 상태 초기화</button>
+          </div>
+        </div>
+
+        <nav class="quick-nav" aria-label="빠른 이동">
+          <a href="#before">작업 전 정렬</a>
+          <a href="#workflow">실전 진행 순서</a>
+          <a href="#timeline">작업 주기 배분</a>
+          <a href="#prompts">복사할 프롬프트</a>
+          <a href="#verify">검증 항목</a>
+          <a href="#questions">리뷰·인계 준비</a>
+          <a href="#guardrails">팀 사용 원칙</a>
+        </nav>
+      </aside>
+
+      <main>
+        <div class="hero">
+          <p class="eyebrow">가장 중요한 한 문장</p>
+          <h1>작게 요청하고, 직접 검증하고, 결정과 근거를 남긴다.</h1>
+          <p>
+            업무를 AI가 다룰 수 있는 단위로 나누고, 필요한 맥락과 완료 조건을 전달한다.
+            결과는 사람이 실행해 검증하고 중요한 선택과 남은 한계를 팀에 공유한다.
+          </p>
+          <div class="core-rule">
+            <div>
+              <span>01 · 지시</span>
+              <strong>완료 조건까지 작게 나누기</strong>
+            </div>
+            <div>
+              <span>02 · 검증</span>
+              <strong>테스트와 화면으로 직접 확인</strong>
+            </div>
+            <div>
+              <span>03 · 설명</span>
+              <strong>선택 이유와 한계를 기록하기</strong>
+            </div>
+          </div>
+        </div>
+
+        <section id="before">
+          <div class="section-head">
+            <div>
+              <h2>작업 전 정렬</h2>
+              <p>코드를 수정하기 전에 목적, 범위, 확인 기준을 팀과 맞춘다.</p>
+            </div>
+            <span class="label">첫 10분</span>
+          </div>
+          <div class="notice">
+            <strong>하나의 주 에이전트로 시작한다.</strong>
+            여러 AI를 동시에 열기보다 작업 맥락을 한곳에 유지한다. 다른 도구는 교차 검토나
+            명확한 역할이 있을 때만 추가한다.
+          </div>
+          <ul class="plain-list">
+            <li>이슈·기획 문서·운영 요청 중 무엇이 기준 문서인지 확인</li>
+            <li>목표, 비목표, 완료 조건과 담당 범위를 구분</li>
+            <li>사내 정보·개인정보·인증 정보가 입력에 포함되는지 확인</li>
+            <li>실행·테스트·빌드 명령과 배포 영향 범위 확인</li>
+            <li>불명확한 정책은 추측하지 말고 담당자에게 질문</li>
+          </ul>
+        </section>
+
+        <section id="workflow">
+          <div class="section-head">
+            <div>
+              <h2>실전 진행 순서</h2>
+              <p>AI가 완료했다고 말해도 다음 단계로 자동 이동하지 않는다.</p>
+            </div>
+            <span class="label">순서대로 진행</span>
+          </div>
+          <div class="steps">
+            <article class="step">
+              <div class="step-number">01</div>
+              <div>
+                <h3>업무 요청부터 나눈다</h3>
+                <p>바로 코드를 만들지 말고 기능, 제약, 완료 조건, 불명확한 점을 먼저 구분한다.</p>
+                <ul>
+                  <li>이슈·기획 문서와 관련 링크를 에이전트에 전달한다.</li>
+                  <li>추측이 필요한 부분은 요청자 또는 담당자에게 확인한다.</li>
+                  <li>요구하지 않은 기능은 만들지 않는다.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="step">
+              <div class="step-number">02</div>
+              <div>
+                <h3>수정 전 상태를 실행한다</h3>
+                <p>프로젝트 구조와 명령어를 확인하고 기존 테스트·빌드·화면 상태를 기록한다.</p>
+                <ul>
+                  <li><code>package.json</code> 또는 프로젝트 실행 문서를 확인한다.</li>
+                  <li>처음부터 실패하던 항목과 수정 후 실패한 항목을 구분한다.</li>
+                  <li>보이는 오류 메시지를 숨기지 않는다.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="step">
+              <div class="step-number">03</div>
+              <div>
+                <h3>최소 변경 계획을 확인한다</h3>
+                <p>수정 파일, 구현 순서, 검증 방법을 확인한 뒤 첫 단계만 시작한다.</p>
+                <ul>
+                  <li>기존 구조를 유지하는 방식을 우선한다.</li>
+                  <li>새 라이브러리와 대규모 리팩터링은 명확한 이유가 있을 때만 허용한다.</li>
+                  <li>이해하지 못한 설계가 나오면 쉬운 말로 다시 설명하게 한다.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="step">
+              <div class="step-number">04</div>
+              <div>
+                <h3>한 단계씩 구현한다</h3>
+                <p>한 번에 전체를 맡기지 않고 핵심 기능부터 작은 단위로 구현한다.</p>
+                <ul>
+                  <li>변경 파일과 이유를 매번 확인한다.</li>
+                  <li>단계가 끝날 때마다 관련 테스트를 실행한다.</li>
+                  <li>오류가 발생하면 정확한 오류 메시지를 기준으로 수정한다.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="step">
+              <div class="step-number">05</div>
+              <div>
+                <h3>화면과 예외 상황을 직접 본다</h3>
+                <p>테스트 통과만으로 끝내지 않고 실제 브라우저에서 사용자 흐름을 확인한다.</p>
+                <ul>
+                  <li>정상 입력, 빈 입력, 잘못된 입력, 결과 없음</li>
+                  <li>로딩, 오류, 반복 실행, 긴 텍스트</li>
+                  <li>콘솔 오류와 화면 깨짐 여부</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="step">
+              <div class="step-number">06</div>
+              <div>
+                <h3>최종 diff와 전체 검증을 한다</h3>
+                <p>요구사항 누락, 과도한 구현, 불필요한 파일, 비밀값 노출과 인계 내용을 확인한다.</p>
+                <ul>
+                  <li>전체 테스트와 빌드를 다시 실행한다.</li>
+                  <li>AI가 추측해서 만든 API나 기능이 없는지 확인한다.</li>
+                  <li>중요한 결정, 남은 한계, 롤백 방법을 팀에 남긴다.</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="timeline">
+          <div class="section-head">
+            <div>
+              <h2>작업 주기 배분</h2>
+              <p>작업 크기와 관계없이 구현에만 몰리지 않도록 전체 주기를 비율로 나눈다.</p>
+            </div>
+            <span class="label">권장 비율</span>
+          </div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <span>10%</span>
+              <strong>업무 정렬</strong>
+              <p>목표·비목표·완료 조건·질문 정리</p>
+            </div>
+            <div class="timeline-item">
+              <span>15%</span>
+              <strong>기준 상태</strong>
+              <p>구조 확인, 테스트, 빌드, 화면 실행</p>
+            </div>
+            <div class="timeline-item">
+              <span>45%</span>
+              <strong>단계별 구현</strong>
+              <p>핵심부터 작게 구현하고 매번 검증</p>
+            </div>
+            <div class="timeline-item">
+              <span>25%</span>
+              <strong>검증·리뷰</strong>
+              <p>예외 상태, 전체 테스트, 보안과 diff 검토</p>
+            </div>
+            <div class="timeline-item">
+              <span>5%</span>
+              <strong>공유·인계</strong>
+              <p>선택 이유, 검증 결과, 한계와 롤백 정리</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="prompts">
+          <div class="section-head">
+            <div>
+              <h2>복사해서 사용할 프롬프트</h2>
+              <p>업무 요청, 관련 문서와 현재 오류를 추가해서 사용한다.</p>
+            </div>
+            <span class="label">Codex CLI</span>
+          </div>
+          <div class="prompt-list">
+            <article class="prompt">
+              <div class="prompt-head">
+                <strong>1. 요구사항 분석</strong>
+                <button class="copy-button" type="button" data-copy-target="promptAnalyze">복사</button>
+              </div>
+              <pre id="promptAnalyze">아직 코드를 수정하지 마세요.
+
+아래 업무 요청을 기준으로 다음을 정리해주세요.
+
+1. 반드시 구현해야 하는 기능
+2. 지켜야 하는 제약
+3. 완료 여부를 확인할 기준
+4. 불명확해서 확인이 필요한 내용
+5. 예상 수정 파일
+6. 구현 후 실행할 테스트
+
+요구사항에 없는 기능은 추측해서 추가하지 마세요.</pre>
+            </article>
+
+            <article class="prompt">
+              <div class="prompt-head">
+                <strong>2. 현재 상태 확인</strong>
+                <button class="copy-button" type="button" data-copy-target="promptBaseline">복사</button>
+              </div>
+              <pre id="promptBaseline">현재 프로젝트 구조와 실행 방법을 확인해주세요.
+
+아직 기능 코드는 수정하지 마세요.
+
+1. 실행·테스트·빌드 명령 확인
+2. 기존 테스트와 빌드 실행
+3. 현재부터 실패하는 항목 정리
+4. 업무와 직접 관련된 파일 확인
+5. 기존 구조를 유지하는 최소 변경 계획 제시
+
+각 판단의 근거가 된 파일도 함께 알려주세요.</pre>
+            </article>
+
+            <article class="prompt">
+              <div class="prompt-head">
+                <strong>3. 한 단계만 구현</strong>
+                <button class="copy-button" type="button" data-copy-target="promptImplement">복사</button>
+              </div>
+              <pre id="promptImplement">전체 계획 중 첫 번째 단계만 구현해주세요.
+
+기존 구조를 최대한 유지하고,
+불필요한 라이브러리 추가나 대규모 리팩터링은 하지 마세요.
+
+완료 후 다음을 알려주세요.
+
+- 변경한 파일
+- 변경한 이유
+- 제가 직접 확인해야 할 코드
+- 실행한 검증 명령과 결과
+- 아직 구현하지 않은 다음 단계</pre>
+            </article>
+
+            <article class="prompt">
+              <div class="prompt-head">
+                <strong>4. 변경 검토</strong>
+                <button class="copy-button" type="button" data-copy-target="promptReview">복사</button>
+              </div>
+              <pre id="promptReview">현재 변경 내용을 업무 요구사항과 비교해 검토해주세요.
+
+다음을 구분해서 알려주세요.
+
+1. 충족한 요구사항
+2. 아직 누락된 요구사항
+3. 요구사항보다 과하게 구현한 부분
+4. 추측해서 만든 기능이나 API
+5. 오류·빈 상태·경계값 처리 누락
+6. 추가로 실행해야 할 테스트
+
+테스트 결과만 믿지 말고 실제 변경 코드도 검토해주세요.</pre>
+            </article>
+
+            <article class="prompt">
+              <div class="prompt-head">
+                <strong>5. 리뷰 전 최종 점검</strong>
+                <button class="copy-button" type="button" data-copy-target="promptFinal">복사</button>
+              </div>
+              <pre id="promptFinal">리뷰 요청 전 최종 점검을 진행해주세요.
+
+1. 전체 요구사항 체크
+2. 전체 테스트와 빌드 실행
+3. 브라우저에서 확인할 사용자 흐름 정리
+4. 불필요한 파일과 변경 확인
+5. 비밀값이나 환경 정보 노출 확인
+6. 현재 남은 한계 정리
+
+실패한 항목이 있으면 완료라고 표현하지 말고
+원인과 현재 상태를 그대로 알려주세요.</pre>
+            </article>
+
+            <article class="prompt">
+              <div class="prompt-head">
+                <strong>6. 리뷰·인계 준비</strong>
+                <button class="copy-button" type="button" data-copy-target="promptExplain">복사</button>
+              </div>
+              <pre id="promptExplain">코드 리뷰와 작업 인계를 준비할 수 있도록
+이번 변경을 팀에 설명할 수 있는 문장으로 정리해주세요.
+
+1. 무엇을 구현했는가
+2. 왜 이 방식으로 구현했는가
+3. AI가 제안했지만 사용하지 않은 방법은 무엇인가
+4. 예외 상황을 어떻게 처리했는가
+5. 어떤 테스트를 직접 실행했는가
+6. 아직 남아 있는 한계는 무엇인가
+
+전문용어를 줄이고, 실제 변경 코드의 근거를 함께 표시해주세요.</pre>
+            </article>
+          </div>
+        </section>
+
+        <section id="verify">
+          <div class="section-head">
+            <div>
+              <h2>검증 항목</h2>
+              <p>모두 구현하라는 뜻이 아니라, 확인 여부와 이유를 알고 있어야 한다.</p>
+            </div>
+            <span class="label">직접 확인</span>
+          </div>
+          <div class="verification-grid">
+            <article class="check-card">
+              <h3>기능</h3>
+              <p>핵심 사용자 흐름이 처음부터 끝까지 동작하는가?</p>
+            </article>
+            <article class="check-card">
+              <h3>입력</h3>
+              <p>빈 값, 잘못된 값, 긴 값, 중복 실행을 처리하는가?</p>
+            </article>
+            <article class="check-card">
+              <h3>상태</h3>
+              <p>로딩, 결과 없음, 오류 상태가 사용자에게 보이는가?</p>
+            </article>
+            <article class="check-card">
+              <h3>기술</h3>
+              <p>테스트·빌드가 통과하고 콘솔 오류가 없는가?</p>
+            </article>
+            <article class="check-card">
+              <h3>범위</h3>
+              <p>요구하지 않은 기능과 불필요한 리팩터링이 없는가?</p>
+            </article>
+            <article class="check-card">
+              <h3>근거</h3>
+              <p>중요한 선택을 왜 했는지 코드와 실행 결과로 설명할 수 있는가?</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="questions">
+          <div class="section-head">
+            <div>
+              <h2>리뷰·인계 전 설명</h2>
+              <p>코드만 넘기지 않고 판단과 검증 결과를 동료가 이어받을 수 있게 설명한다.</p>
+            </div>
+            <span class="label">팀 공유</span>
+          </div>
+          <div class="question-grid">
+            <article class="question-card">
+              <h3>무엇을 바꿨나요?</h3>
+              <p>변경한 기능, 파일, 사용자 흐름을 짧게 설명한다.</p>
+            </article>
+            <article class="question-card">
+              <h3>왜 이 방식인가요?</h3>
+              <p>기존 구조 유지, 구현 범위, 다른 선택지를 쓰지 않은 이유를 말한다.</p>
+            </article>
+            <article class="question-card">
+              <h3>예외는 어떻게 처리했나요?</h3>
+              <p>빈 입력, 실패, 로딩, 결과 없음 중 실제로 확인한 내용을 답한다.</p>
+            </article>
+            <article class="question-card">
+              <h3>어떻게 검증했나요?</h3>
+              <p>실행한 테스트 명령과 브라우저에서 확인한 흐름을 구체적으로 말한다.</p>
+            </article>
+            <article class="question-card">
+              <h3>AI 제안을 그대로 썼나요?</h3>
+              <p>검토 후 수정하거나 제외한 부분과 그 이유를 설명한다.</p>
+            </article>
+            <article class="question-card">
+              <h3>남은 한계는 무엇인가요?</h3>
+              <p>못 한 부분을 숨기지 말고 시간과 범위를 기준으로 솔직하게 답한다.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="guardrails">
+          <div class="section-head">
+            <div>
+              <h2>팀 사용 원칙</h2>
+              <p>AI의 작업 범위와 사람이 승인해야 할 경계를 먼저 정한다.</p>
+            </div>
+            <span class="label">운영 안전</span>
+          </div>
+          <div class="guardrail-grid">
+            <article class="guardrail-card danger">
+              <h3>파괴적 명령</h3>
+              <p>
+                <code>git clean -fdx</code>, 전체 삭제, 광범위한 프로세스 종료처럼 복구하기
+                어려운 명령은 승인 없이 실행하지 않는다.
+              </p>
+            </article>
+            <article class="guardrail-card danger">
+              <h3>운영 설정</h3>
+              <p>
+                배포, 인증, 권한, 데이터 삭제와 외부 전송처럼 영향이 큰 변경은 별도 검토와
+                담당자 승인을 거친다.
+              </p>
+            </article>
+            <article class="guardrail-card">
+              <h3>도구 사용</h3>
+              <p>Codex·Claude·Aider 등 어떤 도구를 쓰더라도 결과를 이해하고 직접 검증한다.</p>
+            </article>
+            <article class="guardrail-card">
+              <h3>기록과 공유</h3>
+              <p>
+                결정 근거, 실행한 테스트, 남은 한계와 롤백 방법을 이슈·PR·작업 문서에 남긴다.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <footer>
+          이 체크리스트는 AI와 협업하는 개발 작업의 공통 흐름을 정리한 참고 자료입니다.
+          실제 팀의 보안 정책, 코드 리뷰 규칙, 배포 절차와 담당자 판단을 우선합니다.
+        </footer>
+      </main>
+    </div>
+
+    <script>
+      const storageKey = "ai-collaboration-development-checklist-progress";
+      const checklist = document.querySelectorAll("#taskChecklist input");
+      const progressText = document.getElementById("progressText");
+      const progressFill = document.getElementById("progressFill");
+      const resetButton = document.getElementById("resetProgress");
+
+      function readProgress() {
+        try {
+          return JSON.parse(localStorage.getItem(storageKey) || "[]");
+        } catch {
+          return [];
+        }
+      }
+
+      function updateProgress() {
+        const values = Array.from(checklist, (input) => input.checked);
+        const completed = values.filter(Boolean).length;
+        const percent = checklist.length === 0 ? 0 : (completed / checklist.length) * 100;
+
+        progressText.textContent = `${completed} / ${checklist.length} 완료`;
+        progressFill.style.width = `${percent}%`;
+        localStorage.setItem(storageKey, JSON.stringify(values));
+      }
+
+      const savedProgress = readProgress();
+      checklist.forEach((input, index) => {
+        input.checked = Boolean(savedProgress[index]);
+        input.addEventListener("change", updateProgress);
+      });
+      updateProgress();
+
+      resetButton.addEventListener("click", () => {
+        checklist.forEach((input) => {
+          input.checked = false;
+        });
+        updateProgress();
+      });
+
+      document.querySelectorAll(".copy-button").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const target = document.getElementById(button.dataset.copyTarget);
+          const text = target?.textContent?.trim() || "";
+
+          if (!text) return;
+
+          try {
+            await navigator.clipboard.writeText(text);
+          } catch {
+            const selection = window.getSelection();
+            const range = document.createRange();
+            range.selectNodeContents(target);
+            selection.removeAllRanges();
+            selection.addRange(range);
+            document.execCommand("copy");
+            selection.removeAllRanges();
+          }
+
+          button.textContent = "완료";
+          button.dataset.copied = "true";
+
+          window.setTimeout(() => {
+            button.textContent = "복사";
+            button.dataset.copied = "false";
+          }, 1400);
+        });
+      });
+    </script>
+  </body>
+</html>

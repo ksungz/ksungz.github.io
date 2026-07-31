@@ -204,14 +204,16 @@
 
       .example-list,
       .cs-list,
-      .syntax-list {
+      .syntax-list,
+      .review-list {
         display: grid;
         gap: 12px;
       }
 
       .example,
       .cs-card,
-      .syntax-card {
+      .syntax-card,
+      .review-card {
         overflow: hidden;
         border: 1px solid #d9dee3;
         border-radius: 8px;
@@ -396,6 +398,69 @@
         padding: 18px;
       }
 
+      .review-card {
+        padding: 18px;
+      }
+
+      .review-card h3 {
+        margin: 0;
+        font-size: 17px;
+        line-height: 25px;
+        letter-spacing: 0;
+      }
+
+      .review-card p {
+        margin: 9px 0 0;
+        color: #34414d;
+        font-size: 14px;
+        line-height: 23px;
+      }
+
+      .review-card pre {
+        margin-top: 14px;
+      }
+
+      .trace-wrap {
+        margin-top: 14px;
+        overflow-x: auto;
+      }
+
+      .trace-table {
+        width: 100%;
+        min-width: 560px;
+        border-collapse: collapse;
+        color: #34414d;
+        font-size: 13px;
+        line-height: 20px;
+      }
+
+      .trace-table th,
+      .trace-table td {
+        padding: 10px 12px;
+        border: 1px solid #d9dee3;
+        text-align: left;
+      }
+
+      .trace-table th {
+        background: #f5f7f8;
+        color: #17202a;
+      }
+
+      .answer-box {
+        margin-top: 14px;
+        padding: 12px 14px;
+        border-left: 3px solid #0f766e;
+        background: #e6f4f1;
+        color: #244d49;
+        font-size: 13px;
+        line-height: 21px;
+      }
+
+      .answer-box strong {
+        display: block;
+        margin-bottom: 4px;
+      }
+
       .cs-card p {
         margin: 9px 0 0;
         color: #34414d;
@@ -460,7 +525,7 @@
         .nav-tabs,
         .language-tabs {
           display: grid;
-          grid-template-columns: repeat(4, minmax(0, 1fr));
+          grid-template-columns: repeat(5, minmax(68px, 1fr));
         }
 
         .language-tabs {
@@ -542,7 +607,8 @@
 
         .example,
         .cs-card,
-        .syntax-card {
+        .syntax-card,
+        .review-card {
           break-inside: avoid;
           box-shadow: none;
         }
@@ -570,8 +636,8 @@
         <a class="back" href="/learning">← Learning Space로 돌아가기</a>
         <h1>코딩 기본기 연습 워크북</h1>
         <p class="lead">
-          문법 기초부터 10개 구현 패턴까지 Python으로 먼저 읽고 JavaScript로 비교합니다.
-          코드를 외우기보다 입력, 반복, 저장, 반환의 순서를 익히는 데 집중합니다.
+          문법 기초, 10개 구현 패턴, 오류 찾기와 CS 핵심 개념을 함께 연습합니다.
+          코드를 외우기보다 입력, 반복, 저장, 검증의 순서를 익히는 데 집중합니다.
         </p>
         <div class="progress-row">
           <span>예제 확인</span>
@@ -588,6 +654,7 @@
         <div class="nav-tabs" role="tablist" aria-label="워크북 목차">
           <button type="button" role="tab" aria-selected="true" data-panel="basics">문법 기초</button>
           <button type="button" role="tab" aria-selected="false" data-panel="examples">예제 10</button>
+          <button type="button" role="tab" aria-selected="false" data-panel="debugging">오류 찾기</button>
           <button type="button" role="tab" aria-selected="false" data-panel="cs">CS 요약</button>
           <button type="button" role="tab" aria-selected="false" data-panel="process">풀이 순서</button>
         </div>
@@ -631,6 +698,157 @@
         <div class="example-list" id="exampleList"></div>
       </section>
 
+      <section class="panel" id="debugging" role="tabpanel" hidden>
+        <div class="section-heading">
+          <p class="eyebrow">DEBUGGING BASICS</p>
+          <h2>작은 테스트로 이진 탐색 오류 찾기</h2>
+          <p class="section-description">
+            코드를 한 번에 이해하려 하지 말고 함수의 약속, 경계값, 반복 범위가 줄어드는지를
+            차례로 확인합니다.
+          </p>
+        </div>
+
+        <aside class="study-rule">
+          오류 찾기 문제에서는 먼저 <strong>원소 0개·1개·2개</strong>를 넣어봅니다.
+          작은 입력은 마지막 값을 빼먹는 오류와 무한 반복을 가장 빨리 보여줍니다.
+        </aside>
+
+        <div class="review-list">
+          <article class="review-card">
+            <h3>1. 함수의 약속 확인하기</h3>
+            <p>
+              정렬된 배열에서 목표값을 찾고, 값이 있으면 인덱스를, 없으면 -1을 반환하는
+              함수입니다. 먼저 기대 결과를 테스트로 적습니다.
+            </p>
+            <pre><code>search([1, 3, 5], 3); // 기대값: 1
+search([1, 3, 5], 4); // 기대값: -1</code></pre>
+          </article>
+
+          <article class="review-card">
+            <h3>2. 원소가 하나인 경우 확인하기</h3>
+            <p>
+              <code>search([1], 1)</code>은 0을 반환해야 합니다. 하지만 기존
+              <code>while (lo &lt; hi)</code>에서는 lo와 hi가 모두 0이라 반복문을 한 번도
+              실행하지 않고 -1을 반환합니다.
+            </p>
+            <div class="answer-box">
+              <strong>첫 번째 수정</strong>
+              마지막 후보 하나가 남았을 때도 확인하도록
+              <code>while (lo &lt;= hi)</code>로 바꿉니다.
+            </div>
+          </article>
+
+          <article class="review-card">
+            <h3>3. 검색 범위가 실제로 줄어드는지 확인하기</h3>
+            <p>
+              <code>search([1, 2], 2)</code>를 넣고 lo, hi, mid를 따라가면 같은 상태가
+              계속 반복됩니다.
+            </p>
+            <div class="trace-wrap">
+              <table class="trace-table">
+                <thead>
+                  <tr>
+                    <th>반복</th>
+                    <th>lo</th>
+                    <th>hi</th>
+                    <th>mid</th>
+                    <th>가운데 값</th>
+                    <th>실행 결과</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>lo = mid → 0</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>같은 상태 반복</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="answer-box">
+              <strong>두 번째 수정</strong>
+              mid 위치는 이미 확인했으므로 오른쪽을 찾을 때
+              <code>lo = mid + 1</code>로 바꿉니다.
+            </div>
+          </article>
+
+          <article class="review-card">
+            <h3>4. 수정한 전체 코드</h3>
+            <pre><code>function search(sortedArr, target) {
+  // 검색 범위의 시작 인덱스
+  let lo = 0;
+
+  // 검색 범위의 마지막 인덱스
+  let hi = sortedArr.length - 1;
+
+  // 마지막 후보까지 확인해야 하므로 &lt;=를 사용합니다.
+  while (lo &lt;= hi) {
+    // 현재 검색 범위의 가운데 인덱스를 구합니다.
+    const mid = lo + Math.floor((hi - lo) / 2);
+
+    // 가운데 값이 목표값이면 해당 위치를 반환합니다.
+    if (sortedArr[mid] === target) {
+      return mid;
+    }
+
+    // 가운데 값이 더 작으면 오른쪽 절반을 검색합니다.
+    if (sortedArr[mid] &lt; target) {
+      // mid는 이미 확인했으므로 다음 위치부터 시작합니다.
+      lo = mid + 1;
+    } else {
+      // 가운데 값이 더 크면 왼쪽 절반을 검색합니다.
+      hi = mid - 1;
+    }
+  }
+
+  // 끝까지 찾지 못하면 -1을 반환합니다.
+  return -1;
+}
+
+function main() {
+  // 일반적인 성공 사례
+  console.log(search([1, 3, 5, 7, 9], 7)); // 3
+
+  // 첫 번째와 마지막 값
+  console.log(search([1, 3, 5, 7, 9], 1)); // 0
+  console.log(search([1, 3, 5, 7, 9], 9)); // 4
+
+  // 원소가 하나인 배열
+  console.log(search([1], 1)); // 0
+
+  // 목표값이 없는 경우
+  console.log(search([1, 3, 5, 7, 9], 4)); // -1
+
+  // 빈 배열
+  console.log(search([], 1)); // -1
+}
+
+main();</code></pre>
+          </article>
+
+          <article class="review-card">
+            <h3>5. 소리 내어 설명하는 답변</h3>
+            <div class="answer-box">
+              먼저 원소가 하나인 경계 사례를 확인했습니다. 기존 코드는 lo와 hi가 같으면
+              마지막 후보를 검사하지 않아 while 조건을 lo &lt;= hi로 수정했습니다. 또
+              원소 두 개에서 오른쪽 값을 찾으면 lo = mid 이후 범위가 줄지 않아 무한 반복되므로
+              이미 확인한 mid를 제외하고 lo = mid + 1로 수정했습니다.
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section class="panel" id="cs" role="tabpanel" hidden>
         <div class="section-heading">
           <p class="eyebrow">CS BASICS</p>
@@ -656,6 +874,14 @@
             <li>“중간 결과는 딕셔너리 또는 Set에 저장하겠습니다.”</li>
             <li>“작성한 뒤 예시를 직접 넣어 확인하겠습니다.”</li>
             <li>“한 번 순회하므로 시간복잡도는 O(n)입니다.”</li>
+          </ol>
+        </div>
+        <div class="talk-script">
+          <strong>코드가 바로 떠오르지 않을 때</strong>
+          <ol>
+            <li>“문제를 정확히 이해했는지 입력과 기대 결과부터 확인하겠습니다.”</li>
+            <li>“해결 순서는 생각나지만 문법이 바로 떠오르지 않아 의사코드부터 설명하겠습니다.”</li>
+            <li>“현재 여기까지 접근했고 이 단계에서 막혔습니다. 힌트를 주시면 이어서 시도하겠습니다.”</li>
           </ol>
         </div>
         <div class="schedule">
@@ -1186,7 +1412,9 @@ console.log(sortByAge(users));`
         ["Set은 언제 사용하나요?", "중복을 허용하지 않는 값의 모음이 필요할 때 사용합니다. 이미 본 값인지 확인하거나 중복을 제거할 때 유용합니다.", ["중복 제거", "포함 여부", "평균 O(1)"]],
         ["O(n)과 O(n log n)의 차이는 무엇인가요?", "O(n)은 입력을 한 번 순회할 때 나타납니다. O(n log n)은 일반적인 비교 정렬에서 나타나며 입력이 커질수록 단순 순회보다 비용이 더 빠르게 증가합니다.", ["한 번 순회", "정렬", "입력 크기"]],
         ["동기와 비동기의 차이는 무엇인가요?", "동기는 한 작업이 끝날 때까지 다음 작업이 기다립니다. 비동기는 오래 걸리는 작업을 기다리는 동안 다른 일을 진행하고 완료 결과를 나중에 처리합니다.", ["대기", "다른 작업", "완료 처리"]],
-        ["프로세스와 스레드의 차이는 무엇인가요?", "프로세스는 독립된 메모리 공간에서 실행되는 프로그램 단위입니다. 스레드는 한 프로세스 안에서 메모리를 공유하며 실행되는 작업 단위입니다.", ["독립 메모리", "메모리 공유", "실행 단위"]],
+        ["프로세스와 스레드의 차이는 무엇인가요?", "프로세스는 실행 중인 프로그램으로 기본적으로 독립된 메모리와 자원을 가집니다. 스레드는 프로세스 안에서 실제 작업을 수행하는 실행 단위이며 같은 프로세스의 메모리와 자원을 공유합니다. 예를 들어 음악 재생 프로그램을 하나의 프로세스로 보면 화면 처리, 음악 재생, 네트워크 수신 작업은 각각 별도의 스레드로 동작할 수 있습니다.", ["프로세스는 독립", "스레드는 공유", "프로그램 안의 작업"]],
+        ["HTTPS란 무엇인가요?", "HTTPS는 HTTP 통신을 TLS로 보호하는 방식입니다. 브라우저와 서버 사이에서 주고받는 데이터를 암호화하고, 통신 중 데이터가 바뀌지 않았는지 확인하며, 인증서를 통해 접속한 서버가 실제 서버인지 검증합니다.", ["HTTP + TLS", "암호화", "무결성", "서버 인증"]],
+        ["HTTPS를 왜 사용하나요?", "로그인 정보, 쿠키, 개인정보처럼 중요한 데이터가 중간에서 노출되는 것을 막고, 공격자가 통신 내용을 변경하거나 가짜 서버로 사용자를 유도하는 위험을 줄이기 위해 사용합니다. 핵심 목적은 암호화, 무결성, 인증입니다.", ["도청 방지", "변조 방지", "가짜 서버 방지"]],
         ["HTTP GET과 POST의 차이는 무엇인가요?", "GET은 주로 데이터를 조회하고 POST는 서버에 새 작업이나 데이터 생성을 요청할 때 사용합니다. GET 요청은 같은 요청을 반복해도 상태가 달라지지 않는 것이 일반적입니다.", ["조회", "생성", "멱등성"]],
         ["401과 403의 차이는 무엇인가요?", "401은 인증이 필요하거나 인증에 실패한 상태입니다. 403은 사용자가 누구인지는 알지만 해당 작업을 수행할 권한이 없는 상태입니다.", ["401 인증", "403 권한"]],
         ["REST API와 WebSocket의 차이는 무엇인가요?", "REST API는 요청마다 응답을 받는 방식에 적합합니다. WebSocket은 연결을 유지하면서 서버와 클라이언트가 실시간으로 메시지를 주고받을 때 적합합니다.", ["요청·응답", "연결 유지", "실시간"]],

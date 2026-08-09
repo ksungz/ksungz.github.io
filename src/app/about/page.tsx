@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "13년간 서비스 UI를 개발·운영한 경험을 바탕으로 문제와 적용 범위를 정하고, AI 코딩 에이전트로 구현한 결과를 실행과 테스트로 검증하며 역할을 확장하고 있습니다.",
+  description: "13년간 서비스의 UI를 개발·운영하며 레거시 구조를 개선하고, AI를 개발과 검증 과정에 활용해온 Frontend Engineer 김성재입니다.",
 };
 
 export default function About() {
@@ -11,29 +11,28 @@ export default function About() {
     <div className="mx-auto max-w-3xl px-4 sm:px-6 py-12 sm:py-16">
       <section className="mb-12 sm:mb-16">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">About</p>
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4 sm:mb-6">김성재</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2">김성재</h1>
+        <p className="mb-4 sm:mb-6 text-sm font-medium">Frontend Engineer</p>
         <div className="space-y-4 text-sm leading-relaxed text-[var(--color-muted)] max-w-xl">
           <p>
             13년간 커머스·게임·플랫폼 서비스의 UI를 개발하고 운영했습니다.
-            오래 운영되는 서비스에서 사람이 같은 맥락을 반복해서 찾고,
-            리뷰와 산출물을 매번 처음부터 만들며, 작은 변경도 여러 영역을 다시 확인해야 하는 문제를 경험했습니다.
+            모바일웹 상품상세와 신규 서비스 UI를 담당하며 복잡한 화면 상태,
+            반응형 UI, 크로스브라우징, 디자인 검수와 운영 대응을 수행했습니다.
           </p>
           <p>
-            이 문제를 줄이기 위해 AI Agent, RAG, MCP와 자동화 워크플로우를
-            실제 개발 과정에 적용하고 있습니다. AI가 판단을 대신하게 하기보다
-            필요한 맥락과 초안, 확인 항목을 준비하게 하고
-            제품과 사용자에게 영향을 주는 결정은 사람이 담당하는 방식을 선호합니다.
+            2,384개 SCSS 파일의 Dart Sass 전환과 React·TypeScript 컴포넌트 이관,
+            CSS 내재화와 Storybook 기반 검증 환경 구축을 진행했습니다.
+            오래된 구조를 한 번에 바꾸기보다 변경 범위와 결과를 확인하며 단계적으로 전환하는 방식을 선호합니다.
           </p>
           <p>
             하이브랩에서는 약 3년간 팀장으로 업무 분배, 공수 산정, 품질 관리와
             클라이언트 커뮤니케이션을 담당했습니다.
           </p>
           <p>
-            AX Doctor와 Agent Bridge는 제품 범위와 판정·완료 기준을 정한 뒤
-            AI 코딩 에이전트를 활용해 구현하고, 실제 명령과 테스트로 검증해 공개했습니다.
-            Obsidian RAG와 BabyPick도 같은 방식으로 적용 범위와 실행 결과를 확인하고 있습니다.
-            제품 운영과 팀 리딩 경험을 바탕으로
-            현업 문제를 AI 워크플로우와 제품 개발로 연결하는 역할로 확장하고 있습니다.
+            최근에는 Claude Code, Codex, Cursor와 회사에서 제공한 AI 도구를
+            코드 검토, 문서 초안과 반복 작업에 활용하고 있습니다.
+            도구가 만든 결과는 실행과 테스트로 다시 확인하며, 개인 프로젝트는
+            제가 정한 문제 범위와 실제 구현 범위, 현재 한계를 구분해 기록합니다.
           </p>
         </div>
       </section>
@@ -44,11 +43,11 @@ export default function About() {
         </h2>
         <div className="space-y-3">
           {[
-            { q: "현업 문제 이해", a: "13년간의 제품 운영 경험을 기반으로 반복 업무와 맥락 단절을 찾습니다." },
-            { q: "AI 워크플로우 적용·검증", a: "문제와 적용 범위, 완료 기준을 정하고 AI 코딩 에이전트로 구현한 결과를 실제 실행과 테스트로 검증합니다." },
-            { q: "Human-in-the-loop", a: "AI는 초안과 확인 항목을 준비하고, 최종 판단은 사람이 합니다." },
-            { q: "AI 제품 구현", a: "아이디어를 실제 사용할 수 있는 제품으로 만들고 배포·운영합니다." },
-            { q: "운영과 개선", a: "배포 후 운영 기록과 피드백으로 다음 반복을 설계합니다." },
+            { q: "서비스 UI 개발·운영", a: "화면의 상태와 예외, 여러 직군의 변경 범위를 확인하고 운영 중인 서비스에 안정적으로 반영합니다." },
+            { q: "레거시 현대화", a: "기존 산출물과 운영 영향을 확인하며 HTML·SCSS 구조를 React와 현대적인 스타일 환경으로 단계적으로 전환합니다." },
+            { q: "컴포넌트 검증", a: "Storybook과 문서로 화면 상태와 협업 기준을 확인할 수 있게 정리합니다." },
+            { q: "AI-assisted Development", a: "AI는 반복 검토와 초안을 돕고, 설계와 영향 범위, 최종 결과는 직접 확인합니다." },
+            { q: "협업과 리딩", a: "업무 범위와 일정을 조율하고 여러 사람이 같은 기준으로 작업할 수 있도록 문서화합니다." },
           ].map(({ q, a }) => (
             <div key={q} className="rounded-lg border border-[var(--color-border)] p-4">
               <p className="text-sm font-semibold">{q}</p>
@@ -67,7 +66,7 @@ export default function About() {
             href="/products"
             className="inline-flex items-center rounded-lg border border-[var(--color-foreground)] bg-[var(--color-foreground)] px-4 py-2.5 sm:py-2 text-xs font-medium text-white transition-colors hover:bg-[var(--color-muted)] min-h-[44px]"
           >
-            Products
+            Projects
           </Link>
           <Link
             href="/career"

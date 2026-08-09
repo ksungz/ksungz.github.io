@@ -1,7 +1,7 @@
 # 김성재 포트폴리오
 
-13년간 서비스의 UI를 개발하고 운영하며 경험한 문제를 바탕으로,
-AI Agent와 자동화를 실제 업무 시스템과 제품으로 연결하는 과정을 정리한 사이트입니다.
+13년간 서비스의 UI를 개발하고 운영한 경험과 레거시 현대화,
+AI를 개발과 검증 과정에 활용한 기록을 정리한 사이트입니다.
 
 단순히 사용한 기술을 나열하기보다 다음 내용을 확인할 수 있도록 구성했습니다.
 
@@ -14,21 +14,21 @@ AI Agent와 자동화를 실제 업무 시스템과 제품으로 연결하는 �
 ## 사이트 보기
 
 - [홈](https://ksungz-github-io.vercel.app)
-- [AX 시스템과 AI 제품](https://ksungz-github-io.vercel.app/products)
+- [AI를 활용한 프로젝트와 실험](https://ksungz-github-io.vercel.app/products)
 - [Case Studies](https://ksungz-github-io.vercel.app/case-studies)
 - [Engineering Notes](https://ksungz-github-io.vercel.app/engineering)
 - [Career](https://ksungz-github-io.vercel.app/career)
 
 ## 대표 내용
 
-### AX Systems
+### AI를 활용한 개발 도구와 실험
 
 - **AX Doctor**: 새 AI 개발 도구를 설치하기 전에 설정 충돌과 미확인 범위를 점검하는 읽기 전용 CLI
 - **Agent Bridge**: 이미 로그인해 사용하는 여러 AI 코딩 CLI를 한 작업 공간에서 연결하는 오픈소스 도구
 - **Obsidian RAG**: 여러 AI 에이전트가 같은 프로젝트 문서와 결정 기록을 검색하는 로컬 지식 검색 환경
-- **Developer Workflow AX**: 회사 제공 AI 도구를 실제 개발 흐름에 도입하고 사람의 검증 범위를 정리한 사례
+- **AI-assisted Development**: 회사 제공 AI 도구를 실제 개발 흐름에 적용하고 사람의 검증 범위를 정리한 사례
 
-### AI Products
+### 개인 서비스와 자동화
 
 - **BabyPick**: 육아용품 탐색 서비스와 사람 검수형 콘텐츠 운영 자동화
 - **News Automation**: 뉴스 선택부터 분석, 블로그 초안과 GitHub PR까지 이어지는 파이프라인

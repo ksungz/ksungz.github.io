@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "김성재 AI Workflow & Product Engineering 포트폴리오";
+export const alt = "김성재 Frontend Engineer 포트폴리오";
 export const size = {
   width: 1200,
   height: 630,
@@ -31,7 +31,7 @@ export default function OpenGraphImage() {
             fontWeight: 600,
           }}
         >
-          김성재 · AI Workflow &amp; Product Engineering
+          김성재 · Frontend Engineer
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div
@@ -44,8 +44,8 @@ export default function OpenGraphImage() {
               maxWidth: 980,
             }}
           >
-            <div style={{ display: "flex" }}>현업의 반복 업무와 맥락 단절을</div>
-            <div style={{ display: "flex" }}>AI Agent와 자동화로 개선합니다.</div>
+            <div style={{ display: "flex" }}>서비스의 UI를 안정적으로 운영하고</div>
+            <div style={{ display: "flex" }}>개발과 검증 과정을 개선합니다.</div>
           </div>
           <div
             style={{
@@ -54,7 +54,7 @@ export default function OpenGraphImage() {
               fontSize: 28,
             }}
           >
-            Service UI · AI Workflow · Product Engineering
+            Service UI · Legacy Modernization · AI-assisted Development
           </div>
         </div>
         <div

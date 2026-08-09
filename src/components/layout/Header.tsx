@@ -7,10 +7,10 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 const nav = [
-  { href: "/products", label: "Products" },
-  { href: "/case-studies", label: "Case Studies" },
-  { href: "/engineering", label: "Engineering" },
   { href: "/career", label: "Career" },
+  { href: "/engineering", label: "Engineering" },
+  { href: "/products", label: "Projects" },
+  { href: "/case-studies", label: "Case Studies" },
   { href: "/about", label: "About" },
 ];
 

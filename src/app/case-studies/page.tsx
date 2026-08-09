@@ -9,10 +9,17 @@ export const metadata: Metadata = {
 const caseStudies = [
   {
     id: "developer-workflow-ax",
-    title: "Developer Workflow AX — 팀의 반복 업무에 AI를 적용한 과정",
+    title: "AI-assisted Development — 팀의 반복 업무에 AI를 적용한 과정",
     excerpt: "승인된 업무 문맥 연결, 회사 제공 PR Review Agent의 8개 저장소 적용, 공통 작성 규칙과 사람의 검증 범위를 정리한 실무 사례.",
     href: "/case-studies/developer-workflow-ax",
-    tags: ["Workflow AX", "MCP", "AI Review", "Human-in-the-loop"],
+    tags: ["AI-assisted Development", "MCP", "AI Review", "Human-in-the-loop"],
+  },
+  {
+    id: "babypick-ai",
+    title: "BabyPick — 육아용품 탐색 서비스와 콘텐츠 운영 자동화",
+    excerpt: "공식 가이드의 생성·검증·API 발행을 자동화하고, 네이버·인스타 콘텐츠는 사람 검수 전 단계까지 연결한 운영 사례입니다.",
+    href: "/case-studies/babypick-ai",
+    tags: ["Next.js", "Automation", "Supabase", "Human-in-the-loop"],
   },
   {
     id: "ax-doctor",
@@ -49,13 +56,6 @@ const caseStudies = [
     href: "/case-studies/news-automation",
     tags: ["AI Agent", "Telegram Bot", "Automation"],
   },
-  {
-    id: "babypick-ai",
-    title: "BabyPick — 육아용품 탐색 서비스와 콘텐츠 운영 자동화",
-    excerpt: "공식 가이드의 생성·검증·API 발행을 자동화하고, 네이버·인스타 콘텐츠는 사람 검수 전 단계까지 연결한 운영 사례입니다.",
-    href: "/case-studies/babypick-ai",
-    tags: ["AI Content", "Automation", "Supabase", "Human-in-the-loop"],
-  },
 ];
 
 export default function CaseStudies() {
@@ -63,9 +63,10 @@ export default function CaseStudies() {
     <div className="mx-auto max-w-3xl px-4 sm:px-6 py-12 sm:py-16">
       <section className="mb-12 sm:mb-16">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">Case Studies</p>
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">문제 해결 과정</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">AI 활용 프로젝트의 문제 해결 과정</h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
-          기술 목록보다 문제, 담당 범위, 판단, 구현, 검증 결과와 현재 한계를 함께 보여줍니다.
+          개인 프로젝트와 실무 적용 사례에서 무엇을 직접 정했고, AI를 어디에 활용했으며,
+          어떤 결과를 확인했는지 기술 목록보다 구체적으로 기록했습니다.
         </p>
       </section>
 

@@ -9,36 +9,32 @@ export const metadata: Metadata = {
 
 const featuredProducts = [
   {
-    name: "Developer Workflow AX",
-    tagline: "회사 제공 AI 도구를 실제 개발 흐름에 도입·설정",
-    description: "승인된 업무 문맥 연결, PR Review Agent의 8개 저장소 적용, 공통 작성 규칙과 사람의 검증 범위를 정리한 실무 사례.",
+    name: "모바일웹 상품상세 UI",
+    tagline: "복잡한 상태와 변경이 이어지는 핵심 화면 개발·운영",
+    description: "다수 유형의 상품상세 UI를 담당하며 신규 기능, 반응형 화면, 크로스브라우징, 디자인 검수와 운영 대응을 수행했습니다.",
+    href: "/engineering/pdp-ui",
+    tags: ["Service UI", "Responsive", "Accessibility"],
+  },
+  {
+    name: "UI Legacy Modernization",
+    tagline: "오래된 스타일 환경을 단계적으로 전환",
+    description: "2,384개 SCSS 파일의 Dart Sass 전환과 React·TypeScript 컴포넌트 이관, CSS 내재화를 진행했습니다.",
+    href: "/engineering/dart-sass",
+    tags: ["Dart Sass", "React", "TypeScript"],
+  },
+  {
+    name: "Commerce UI Components",
+    tagline: "실무 경험을 바탕으로 다시 만든 상품 옵션 UI",
+    description: "옵션 조합, 재고, 오류와 모바일 바텀시트 상태를 React 컴포넌트로 구현하고 Storybook에서 검증했습니다.",
+    href: "https://ksungz-ui.vercel.app/?path=/story/case-studies-상품-옵션-선택--design-and-verification",
+    tags: ["React", "Storybook", "Accessibility"],
+  },
+  {
+    name: "AI-assisted Development",
+    tagline: "반복 검토와 문서 작성을 개발 흐름에 맞게 정리",
+    description: "회사 제공 AI 리뷰 도구와 승인된 업무 문맥 연동을 적용하고, 공통 작성 규칙과 사람이 최종 확인할 범위를 정리했습니다.",
     href: "/case-studies/developer-workflow-ax",
-    tags: ["Workflow AX", "MCP", "AI Review"],
-    group: "AX Systems",
-  },
-  {
-    name: "AX Doctor",
-    tagline: "AI 개발 환경 도입 전 점검 CLI",
-    description: "기존 설정과 충돌, 권한, 미확인 범위를 읽기 전용으로 진단하는 Go 기반 preflight 도구.",
-    href: "/products#ax-doctor",
-    tags: ["Go", "CLI", "Preflight"],
-    group: "AX Systems",
-  },
-  {
-    name: "Agent Bridge",
-    tagline: "로그인된 여러 AI CLI를 한 작업 단위로 연결하는 오픈소스 도구",
-    description: "각 CLI의 기존 로그인·구독 환경을 유지하면서 공통 목표, 결정, 실행·리뷰 기록과 인계 문서를 관리합니다.",
-    href: "/case-studies/agent-bridge",
-    tags: ["CLI", "Open Source", "MIT"],
-    group: "AX Systems",
-  },
-  {
-    name: "BabyPick",
-    tagline: "육아용품 탐색 서비스와 사람 검수형 콘텐츠 운영",
-    description: "공식 가이드는 생성·검증·API 발행을 자동화하고, 네이버·인스타 콘텐츠는 사람이 검수할 수 있는 초안과 패키지까지 준비합니다.",
-    href: "/products#babypick-ai",
-    tags: ["Next.js", "Supabase", "Automation", "Human-in-the-loop"],
-    group: "AI Products",
+    tags: ["AI Review", "MCP", "Human-in-the-loop"],
   },
 ];
 
@@ -49,26 +45,25 @@ export default function Home() {
       {/* Hero */}
       <section className="mb-16 sm:mb-20">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">
-          Service UI · AI Workflow · Automation
+          Frontend Engineer
         </p>
         <h1 className="text-2xl sm:text-4xl font-bold tracking-tight mb-4 sm:mb-6 leading-snug sm:leading-tight">
-          <span className="block">13년간 서비스 UI를 개발·운영하며</span>
-          <span className="block text-[var(--color-muted)]">발견한 반복 업무와 맥락 단절을</span>
-          <span className="block text-[var(--color-muted)]">AI Agent와 자동화로 개선합니다.</span>
+          <span className="block">13년간 서비스의 UI를 개발하고 운영하며</span>
+          <span className="block text-[var(--color-muted)]">사용자 화면의 품질과 유지보수성을</span>
+          <span className="block text-[var(--color-muted)]">꾸준히 개선해왔습니다.</span>
         </h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
-          커머스·게임·플랫폼 서비스에서 UI를 개발하고 운영하며
-          현장의 반복 업무, 맥락 단절, 검증 비용 문제를 경험했습니다.
-          그 경험을 바탕으로 문제와 적용 범위, 완료 기준을 정하고
-          AI 코딩 에이전트로 구현한 결과를 실행과 테스트로 검증하며,
-          AI 워크플로우와 제품 개발로 역할을 확장하고 있습니다.
+          모바일웹 상품상세와 신규 서비스 UI를 담당하며 반응형 화면,
+          크로스브라우징, 변경 영향 검증과 운영 대응을 수행했습니다.
+          대규모 Sass 전환, React·TypeScript 컴포넌트 이관과 Storybook 환경을 구축했고,
+          최근에는 AI 도구를 활용해 코드 검토와 문서 작성 등 반복적인 개발 과정을 개선하고 있습니다.
         </p>
         <div className="mt-6 sm:mt-8 flex flex-wrap gap-2 sm:gap-3">
           <Link
-            href="/products"
+            href="/career"
             className="inline-flex items-center rounded-lg border border-[var(--color-foreground)] bg-[var(--color-foreground)] px-4 py-2.5 sm:py-2 text-xs font-medium text-white transition-colors hover:bg-[var(--color-muted)] min-h-[44px]"
           >
-            View Products
+            View Career
           </Link>
           <Link
             href="https://github.com/ksungz"
@@ -79,10 +74,10 @@ export default function Home() {
             View GitHub
           </Link>
           <Link
-            href="/case-studies"
+            href="/products"
             className="inline-flex items-center rounded-lg border border-[var(--color-border)] px-4 py-2.5 sm:py-2 text-xs font-medium transition-colors hover:border-[var(--color-foreground)] min-h-[44px]"
           >
-            Read Case Studies
+            View Projects
           </Link>
         </div>
       </section>
@@ -118,16 +113,16 @@ export default function Home() {
           ))}
         </div>
         <Link
-          href="/case-studies/ax-evidence-gates"
+          href="/products"
           className="mt-4 flex min-h-[44px] flex-col justify-center gap-1 border-t border-[var(--color-border)] py-3 text-xs transition-colors hover:text-[var(--color-foreground)] sm:flex-row sm:items-center sm:justify-between"
         >
           <span>
-            <strong className="font-semibold">AX Evidence Gates</strong>
+            <strong className="font-semibold">AI를 활용한 프로젝트와 실험</strong>
             <span className="ml-2 text-[var(--color-muted)]">
-              공개 근거 품질 게이트와 LangGraph 학습용 후속 PoC
+              Agent Bridge, AX Doctor, BabyPick과 자동화 기록
             </span>
           </span>
-          <span className="text-[var(--color-muted)]">49 tests · GitHub 공개 →</span>
+          <span className="text-[var(--color-muted)]">현재 범위와 한계를 함께 기록 →</span>
         </Link>
       </section>
 
@@ -138,21 +133,21 @@ export default function Home() {
         </h2>
         <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-3">
           <div className="rounded-lg border border-[var(--color-border)] p-4">
-            <h3 className="text-sm font-semibold">문제 정의</h3>
+            <h3 className="text-sm font-semibold">서비스 UI 개발·운영</h3>
             <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-              현업에서 반복되는 업무와 맥락 단절을 찾고, AI가 해결할 범위를 정의합니다.
+              복잡한 사용자 화면의 상태와 예외를 구현하고 운영 중인 서비스에 안정적으로 반영합니다.
             </p>
           </div>
           <div className="rounded-lg border border-[var(--color-border)] p-4">
-            <h3 className="text-sm font-semibold">AI 워크플로우 적용·검증</h3>
+            <h3 className="text-sm font-semibold">레거시 현대화</h3>
             <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-              문제와 완료 기준을 정하고 AI 코딩 에이전트로 구현한 결과를 실제 명령과 테스트로 확인합니다.
+              오래된 HTML·SCSS 구조를 단계적으로 전환하고 컴포넌트와 스타일의 변경 맥락을 정리합니다.
             </p>
           </div>
           <div className="rounded-lg border border-[var(--color-border)] p-4">
-            <h3 className="text-sm font-semibold">제품 운영과 개선</h3>
+            <h3 className="text-sm font-semibold">AI-assisted Development</h3>
             <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-              아이디어를 실제 사용할 수 있는 제품으로 만들고, 배포 후 운영 기록과 피드백으로 반복 개선합니다.
+              AI를 코드 검토와 문서 초안, 반복 작업에 활용하고 최종 판단과 검증은 사람이 담당합니다.
             </p>
           </div>
         </div>

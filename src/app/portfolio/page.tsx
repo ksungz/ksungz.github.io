@@ -11,16 +11,16 @@ export default function PortfolioPage() {
           <span aria-hidden="true">&gt;_</span> k.sungjae@portfolio:~$
         </a>
         <nav className="pf-cli-nav" aria-label="포트폴리오 탐색">
-          <a href="#workflow">AX Work</a>
-          <a href="#ax-doctor">AX Doctor</a>
-          <a href="#agents">Agent Systems</a>
-          <a href="#ai-products">AI Products</a>
-          <a href="#work">UI Background</a>
+          <a href="#work">UI Experience</a>
           <a href="#case-study">UI Case Study</a>
+          <a href="#workflow">AI-assisted Work</a>
+          <a href="#ai-products">Side Projects</a>
+          <a href="#ax-doctor">AI Tools</a>
+          <a href="#agents">Agent Experiments</a>
           <a href="/career">Career</a>
           <a href="mailto:k.suzkim@gmail.com">Contact</a>
         </nav>
-        <p className="pf-cli-status"><i aria-hidden="true" /> AI Workflow &amp; Product Engineering</p>
+        <p className="pf-cli-status"><i aria-hidden="true" /> Frontend Engineer</p>
       </header>
 
       <main className="pf-main">
@@ -34,18 +34,18 @@ export default function PortfolioPage() {
         <p className="pf-hero-command"><span aria-hidden="true">$</span> whoami</p>
         <h1>김성재</h1>
         <p className="pf-hero-statement">
-          13년간 서비스 UI를 개발·운영하며 발견한 반복 업무와 맥락 단절을
-          AI Agent와 자동화로 개선하고 있습니다.
+          13년간 서비스의 UI를 개발하고 운영하며 사용자 화면의 품질과 유지보수성을 개선해왔습니다.
+          최근에는 AI를 활용해 개발과 검증 과정을 더 효율적으로 만들고 있습니다.
         </p>
         <div className="pf-hero-actions">
-          <a className="pf-scroll-link" href="#workflow"><span aria-hidden="true">$</span> open ./ax-work <span aria-hidden="true">↓</span></a>
+          <a className="pf-scroll-link" href="#work"><span aria-hidden="true">$</span> open ./ui-work <span aria-hidden="true">↓</span></a>
           <Link className="pf-scroll-link" href="/engineering">
             <span aria-hidden="true">$</span> open ./engineering
           </Link>
           <Link
             className="pf-3d-link"
             href="/products"
-            aria-label="AX 시스템과 AI 제품 목록 열기"
+            aria-label="AI를 활용한 프로젝트와 실험 목록 열기"
           >
             <span aria-hidden="true">◆</span> open ./products
           </Link>
@@ -69,8 +69,8 @@ export default function PortfolioPage() {
             설계와 영향 범위, 예외는 사람이 최종 검증하도록 운영 기준을 정리했습니다.
           </p>
           <p>
-            개인 프로젝트는 문제와 범위, 완료 기준을 정한 뒤 AI 에이전트를 활용해 구현하고,
-            실제 실행과 테스트로 검증합니다. AX Doctor와 Agent Bridge는 오픈소스로 공개했고,
+            개인 프로젝트는 문제와 범위, 완료 기준을 정한 뒤 AI 코딩 도구를 활용해 구현하고,
+            실제 실행과 테스트로 검증합니다. AX Doctor와 Agent Bridge는 공개 저장소로 운영하고,
             Obsidian RAG와 BabyPick은 운영하며 확인한 범위와 아직 해결하지 못한 한계까지 기록하고 있습니다.
           </p>
         </div>
@@ -498,8 +498,8 @@ export default function PortfolioPage() {
       <div className="pf-footer">
         <p className="pf-footer-name">김성재</p>
         <p className="pf-footer-copy">
-          서비스 UI 개발·운영 경험을 기반으로 문제와 적용 범위를 정하고,
-          AI 코딩 에이전트로 구현한 결과를 실제 실행과 테스트로 검증하고 있습니다.
+          서비스 UI 개발·운영과 레거시 현대화 경험을 바탕으로,
+          AI를 활용해 개발과 검증 과정을 개선하고 있습니다.
         </p>
         <nav className="pf-footer-actions" aria-label="Portfolio 다음 이동">
           <a href="/career">전체 경력 보기 →</a>
@@ -510,7 +510,7 @@ export default function PortfolioPage() {
 
       <div className="pf-statusbar" role="status" aria-label="Portfolio 상태">
         <span><i aria-hidden="true" /> ready</span>
-        <span>AI Workflow</span>
+        <span>Frontend · AI-assisted</span>
         <span>UTF-8</span>
         <span>320 · 390 · 1440</span>
       </div>

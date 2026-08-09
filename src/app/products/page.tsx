@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Products",
-  description: "서비스 UI 경험을 바탕으로 문제 범위를 정하고 AI 코딩 에이전트와 함께 구현·검증한 AI Workflow와 Product 프로젝트",
+  title: "Projects",
+  description: "AI 코딩 도구를 활용해 구현하고 직접 실행·검증한 개발 도구, 개인 서비스와 자동화 프로젝트",
 };
 
 interface ProductLink {
@@ -212,18 +212,19 @@ export default function Products() {
   return (
     <div className="mx-auto max-w-3xl px-4 sm:px-6 py-12 sm:py-16">
       <section className="mb-12 sm:mb-16">
-        <p className="font-mono text-xs text-[var(--color-muted)] mb-3">Products</p>
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">AX 시스템과 AI 제품</h1>
+        <p className="font-mono text-xs text-[var(--color-muted)] mb-3">Projects</p>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">AI를 활용한 프로젝트와 실험</h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
-          Agent Infrastructure → AI Product Delivery.
-          직접 만든 AX Systems와 AI Products 두 축으로 구성했습니다.
+          업무에서 발견한 문제와 개인적인 아이디어를 작은 도구와 서비스로 구현했습니다.
+          문제 범위와 검증 기준은 직접 정하고, 구현에는 AI 코딩 도구를 활용했습니다.
+          각 프로젝트에는 현재 확인한 범위와 아직 해결하지 못한 한계를 함께 기록합니다.
         </p>
       </section>
 
-      {/* AX Systems */}
+      {/* Developer Tools & Experiments */}
       <section className="mb-12 sm:mb-16">
         <h2 className="mb-4 sm:mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
-          AX Systems
+          Developer Tools &amp; Experiments
         </h2>
         <div className="space-y-6 sm:space-y-8">
           {axSystems.map((p) => (
@@ -232,10 +233,10 @@ export default function Products() {
         </div>
       </section>
 
-      {/* AI Products */}
+      {/* Side Products & Automation */}
       <section>
         <h2 className="mb-4 sm:mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
-          AI Products
+          Side Products &amp; Automation
         </h2>
         <div className="space-y-6 sm:space-y-8">
           {aiProducts.map((p) => (

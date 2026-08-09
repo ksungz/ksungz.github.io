@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Developer Workflow AX — 팀의 반복 업무에 AI를 적용한 과정 | Case Studies",
+  title: "AI-assisted Development — 팀의 반복 업무에 AI를 적용한 과정 | Case Studies",
   description:
     "승인된 업무 문맥 연결, 회사 제공 PR Review Agent의 8개 저장소 적용, 공통 작성 규칙과 Human-in-the-loop 운영 기준을 정리한 실무 사례.",
 };
@@ -82,7 +82,7 @@ const sections = [
   },
 ];
 
-const tags = ["Workflow AX", "MCP", "AI Review", "CI Pipeline", "Human-in-the-loop"];
+const tags = ["AI-assisted Development", "MCP", "AI Review", "CI Pipeline", "Human-in-the-loop"];
 
 export default function DeveloperWorkflowAxCaseStudy() {
   return (
@@ -95,7 +95,7 @@ export default function DeveloperWorkflowAxCaseStudy() {
           ← Case Studies
         </Link>
         <p className="mt-6 mb-3 font-mono text-xs text-[var(--color-muted)]">
-          Developer Workflow AX
+          AI-assisted Development
         </p>
         <h1 className="mb-4 text-2xl font-bold tracking-tight sm:text-3xl">
           팀의 반복 업무에 AI를 적용한 과정

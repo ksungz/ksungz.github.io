@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Career",
-  description: "김성재의 경력 — 서비스 UI 개발·운영 경험과 개발 워크플로우 AX",
+  description: "김성재의 경력 — 서비스 UI 개발·운영, 레거시 현대화와 AI-assisted Development",
 };
 
 const careers = [
@@ -12,7 +12,7 @@ const careers = [
     team: "UI개발팀",
     period: "2020.12 ~ 현재",
     role: "UI 개발자",
-    summary: "모바일웹 상품상세(PDP)를 포함한 핵심 서비스 UI 개발·운영. 기존 HTML/SCSS 구조를 React 환경으로 전환하고, AI 도구를 도입해 반복 작업을 자동화.",
+    summary: "모바일웹 상품상세(PDP)를 포함한 핵심 서비스 UI를 개발·운영하고 있습니다. 기존 HTML/SCSS 구조를 React 환경으로 단계적으로 전환하고, 회사 제공 AI 도구를 반복 검토와 문서 작성 흐름에 적용했습니다.",
     achievements: [
       {
         title: "Dart Sass 마이그레이션 — 2,384개 파일, 3주 완료",
@@ -99,7 +99,7 @@ export default function CareerPage() {
         <p className="font-mono text-xs text-[var(--color-muted)] mb-2">Career</p>
         <h1 className="text-xl sm:text-2xl font-bold tracking-tight">김성재</h1>
         <p className="mt-2 text-sm text-[var(--color-muted)]">
-          Service UI · AI Workflow · Product Engineering
+          Frontend Engineer · Service UI · Legacy Modernization · AI-assisted Development
         </p>
       </div>
 
@@ -108,8 +108,8 @@ export default function CareerPage() {
         <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">About</h2>
         <div className="space-y-3 text-sm text-[var(--color-muted)] leading-relaxed">
           <p>13년간 커머스, 게임, 플랫폼 서비스에서 UI를 개발하고 운영해왔습니다. 웹 표준, 접근성, 마크업 구조화, SCSS 설계, 반응형 UI 구현을 바탕으로 서비스 화면의 구조와 유지보수성을 개선했습니다.</p>
-          <p>현재는 모바일웹 상품상세(PDP)를 포함한 핵심 서비스 UI를 담당하면서, AI 도구를 도입해 반복 작업을 줄이고 제품 개발 과정으로 역할을 넓히고 있습니다. SCSS 마이그레이션, PR Review Agent, 커밋·PR·QA 체크리스트 자동화 흐름을 정리했습니다.</p>
-          <p>개인 프로젝트에서는 문제와 범위, 최종 판단 기준을 직접 정하고 AI 코딩 에이전트로 구현한 AX Doctor, Agent Bridge, Obsidian RAG, News Automation과 BabyPick AI를 실행·검증하고 있습니다. 공개 코드와 운영 기록에는 확인한 범위와 한계를 함께 남깁니다.</p>
+          <p>현재는 모바일웹 상품상세(PDP)를 포함한 핵심 서비스 UI를 담당하며, 2,384개 SCSS 파일의 Dart Sass 전환과 React·TypeScript 컴포넌트 이관, CSS 내재화와 Storybook 환경 구축을 진행했습니다.</p>
+          <p>최근에는 회사에서 제공한 AI 리뷰 도구와 승인된 업무 문맥 연동을 실제 개발 흐름에 적용했습니다. 개인 프로젝트에서도 AI 코딩 도구를 활용하되, 제가 정한 문제 범위와 실제 구현·검증 결과, 현재 한계를 구분해 기록합니다.</p>
         </div>
       </section>
 
@@ -159,11 +159,11 @@ export default function CareerPage() {
         </div>
       </section>
 
-      {/* Products 링크 */}
+      {/* Projects 링크 */}
       <section>
         <div className="mb-4 sm:mb-6 flex items-center justify-between">
           <h2 className="text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">
-            Products
+            Projects
           </h2>
           <Link href="/products" className="text-xs text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors min-h-[44px] flex items-center">
             전체 보기 →
@@ -174,10 +174,10 @@ export default function CareerPage() {
           className="group block rounded-lg border border-[var(--color-border)] p-4 sm:p-5 transition-colors hover:border-[var(--color-foreground)]"
         >
           <h3 className="text-sm font-semibold group-hover:text-[var(--color-foreground)]">
-            AX Doctor, Agent Bridge, Obsidian RAG, BabyPick AI
+            AI를 활용한 개인 프로젝트와 실험
           </h3>
           <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-            문제 정의부터 AI 활용, 구현, 배포, 운영까지 직접 만든 제품들을 확인하세요.
+            Agent Bridge, AX Doctor, BabyPick과 자동화 프로젝트의 구현 범위와 검증 기록을 확인할 수 있습니다.
           </p>
         </Link>
       </section>

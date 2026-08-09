@@ -22,21 +22,21 @@ const notoSansKR = Noto_Sans_KR({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ksungz-github-io.vercel.app"),
-  title: { default: "김성재 · AI Workflow & Product Engineering", template: "%s · 김성재" },
-  description: "13년간 서비스 UI를 개발·운영한 경험을 바탕으로 문제와 적용 범위를 정하고, AI 코딩 에이전트로 구현한 결과를 실행과 테스트로 검증하며 역할을 확장하고 있습니다.",
+  title: { default: "김성재 · Frontend Engineer", template: "%s · 김성재" },
+  description: "13년간 커머스·게임·플랫폼 서비스의 UI를 개발하고 운영하며, 레거시 현대화와 AI를 활용한 개발 과정 개선을 진행해온 Frontend Engineer입니다.",
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    siteName: "김성재 · AI Workflow & Product Engineering",
-    title: "김성재 · AI Workflow & Product Engineering",
+    siteName: "김성재 · Frontend Engineer",
+    title: "김성재 · Frontend Engineer",
     description:
-      "13년간 서비스 UI를 개발·운영한 경험을 바탕으로 AI Agent와 자동화를 업무와 제품 개발에 적용하고 검증합니다.",
+      "서비스 UI 개발·운영과 레거시 현대화 경험을 바탕으로 AI를 개발과 검증 과정에 활용합니다.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "김성재 · AI Workflow & Product Engineering",
+    title: "김성재 · Frontend Engineer",
     description:
-      "서비스 UI 개발·운영 경험을 바탕으로 AI Agent와 자동화를 업무와 제품 개발에 적용하고 검증합니다.",
+      "서비스 UI 개발·운영과 레거시 현대화 경험을 바탕으로 AI를 개발과 검증 과정에 활용합니다.",
   },
 };
 

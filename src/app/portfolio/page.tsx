@@ -92,7 +92,7 @@ export default function PortfolioPage() {
           </div>
           <div className="pf-poc-card">
             <h4>SCSS 구조와 CSS 의존성 개선</h4>
-            <p>2,384개 SCSS 파일을 Dart Sass로 전환하며 CSS 산출물 차이를 확인했습니다. 이후 분산된 CSS를 React 프로젝트 안으로 옮겨 화면 코드와 스타일 변경 맥락을 함께 관리하도록 정리했습니다.</p>
+            <p>AI 보조 도구를 활용해 2,384개 SCSS 파일을 Dart Sass로 전환하고 CSS 산출물과 빌드 결과를 직접 확인했습니다. 이후 HTML/SCSS 기반 화면의 React·TypeScript 컴포넌트 이관에 참여하며, 분산된 CSS를 프로젝트 안으로 옮겨 화면 코드와 스타일 변경 맥락을 함께 관리하도록 정리했습니다.</p>
           </div>
           <div className="pf-poc-card">
             <h4>컴포넌트 검증과 문서화</h4>

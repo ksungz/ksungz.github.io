@@ -18,7 +18,7 @@ const featuredProducts = [
   {
     name: "UI Legacy Modernization",
     tagline: "오래된 스타일 환경을 단계적으로 전환",
-    description: "2,384개 SCSS 파일의 Dart Sass 전환과 React·TypeScript 컴포넌트 이관, CSS 내재화를 진행했습니다.",
+    description: "AI 보조 도구를 활용해 2,384개 SCSS 파일을 Dart Sass로 전환하고 결과를 직접 검증했습니다. HTML/SCSS 화면의 React·TypeScript 컴포넌트 이관에도 참여했습니다.",
     href: "/engineering/dart-sass",
     tags: ["Dart Sass", "React", "TypeScript"],
   },
@@ -55,7 +55,7 @@ export default function Home() {
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
           모바일웹 상품상세와 신규 서비스 UI를 담당하며 반응형 화면,
           크로스브라우징, 변경 영향 검증과 운영 대응을 수행했습니다.
-          대규모 Sass 전환, React·TypeScript 컴포넌트 이관과 Storybook 환경을 구축했고,
+          AI 보조 도구를 활용해 대규모 Sass 전환을 수행하고 React·TypeScript 컴포넌트 이관에 참여했으며, Storybook 환경을 구축했습니다.
           최근에는 AI 도구를 활용해 코드 검토와 문서 작성 등 반복적인 개발 과정을 개선하고 있습니다.
         </p>
         <div className="mt-6 sm:mt-8 flex flex-wrap gap-2 sm:gap-3">

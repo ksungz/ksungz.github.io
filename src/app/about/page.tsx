@@ -20,8 +20,9 @@ export default function About() {
             반응형 UI, 크로스브라우징, 디자인 검수와 운영 대응을 수행했습니다.
           </p>
           <p>
-            2,384개 SCSS 파일의 Dart Sass 전환과 React·TypeScript 컴포넌트 이관,
-            CSS 내재화와 Storybook 기반 검증 환경 구축을 진행했습니다.
+            AI 보조 도구를 활용해 2,384개 SCSS 파일을 Dart Sass로 전환하고,
+            산출물과 빌드 결과를 직접 검증했습니다. HTML/SCSS 기반 화면의
+            React·TypeScript 컴포넌트 이관에 참여하고 Storybook 기반 검증 환경을 구축했습니다.
             오래된 구조를 한 번에 바꾸기보다 변경 범위와 결과를 확인하며 단계적으로 전환하는 방식을 선호합니다.
           </p>
           <p>

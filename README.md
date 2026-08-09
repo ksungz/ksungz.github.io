@@ -36,8 +36,9 @@ AI를 개발과 검증 과정에 활용한 기록을 정리한 사이트입니�
 ### 서비스 UI 경력
 
 - 모바일웹 상품상세와 신규 서비스 UI 개발·운영
-- 2,384개 SCSS 파일의 Dart Sass 전환
-- React·TypeScript 컴포넌트 이관과 Storybook 기반 검증 환경
+- AI 보조 도구를 활용한 2,384개 SCSS 파일의 Dart Sass 전환과 산출물·빌드 결과 직접 검증
+- AI 보조 도구를 활용한 HTML/SCSS 기반 화면의 React·TypeScript 컴포넌트 이관 참여
+- Storybook 기반 검증 환경 구축
 - 접근성, 반응형 UI, 크로스브라우징과 운영 문서화
 
 ## 실험과 학습 공간

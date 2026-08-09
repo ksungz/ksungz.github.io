@@ -28,7 +28,7 @@ const careers = [
       },
       {
         title: "React 기반 PDP 컴포넌트 전환 및 CSS 내재화",
-        action: "HTML/SCSS 산출물을 React 컴포넌트+CSS Modules로 이관. CDN 의존 CSS를 프로젝트 내부로 단계적 내재화(7편 시리즈). Storybook 기반 확인 환경 구축.",
+        action: "AI 보조 도구를 활용한 HTML/SCSS 산출물의 React·TypeScript 컴포넌트 이관에 참여. CDN 의존 CSS를 프로젝트 내부로 단계적 내재화(7편 시리즈). Storybook 기반 확인 환경 구축.",
         impact: "화면 코드와 스타일 변경 맥락을 하나의 저장소에서 관리. 신규 작업자 온보딩 기준 정리.",
         link: "/engineering/react-pdp",
       },
@@ -108,7 +108,7 @@ export default function CareerPage() {
         <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">About</h2>
         <div className="space-y-3 text-sm text-[var(--color-muted)] leading-relaxed">
           <p>13년간 커머스, 게임, 플랫폼 서비스에서 UI를 개발하고 운영해왔습니다. 웹 표준, 접근성, 마크업 구조화, SCSS 설계, 반응형 UI 구현을 바탕으로 서비스 화면의 구조와 유지보수성을 개선했습니다.</p>
-          <p>현재는 모바일웹 상품상세(PDP)를 포함한 핵심 서비스 UI를 담당하며, 2,384개 SCSS 파일의 Dart Sass 전환과 React·TypeScript 컴포넌트 이관, CSS 내재화와 Storybook 환경 구축을 진행했습니다.</p>
+          <p>현재는 모바일웹 상품상세(PDP)를 포함한 핵심 서비스 UI를 담당하며, AI 보조 도구를 활용해 2,384개 SCSS 파일의 Dart Sass 전환을 진행하고 산출물과 빌드 결과를 직접 검증했습니다. HTML/SCSS 기반 화면의 React·TypeScript 컴포넌트 이관에도 참여했습니다.</p>
           <p>최근에는 회사에서 제공한 AI 리뷰 도구와 승인된 업무 문맥 연동을 실제 개발 흐름에 적용했습니다. 개인 프로젝트에서도 AI 코딩 도구를 활용하되, 제가 정한 문제 범위와 실제 구현·검증 결과, 현재 한계를 구분해 기록합니다.</p>
         </div>
       </section>

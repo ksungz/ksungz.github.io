@@ -265,6 +265,81 @@
         padding: 28px 30px 80px;
       }
 
+      .crash-plan {
+        margin-bottom: 24px;
+        border: 1px solid #b8c8c2;
+        border-left: 5px solid var(--green);
+        background: var(--surface);
+      }
+
+      .crash-plan-head {
+        padding: 16px 18px 14px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .crash-plan h2 {
+        margin: 0;
+        font-size: 18px;
+        line-height: 27px;
+      }
+
+      .crash-plan p {
+        margin: 5px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 21px;
+      }
+
+      .crash-plan-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+        gap: 0;
+      }
+
+      .crash-plan-block {
+        padding: 15px 18px 17px;
+      }
+
+      .crash-plan-block + .crash-plan-block {
+        border-left: 1px solid var(--line);
+      }
+
+      .crash-plan-block h3 {
+        margin: 0;
+        font-size: 13px;
+        line-height: 20px;
+      }
+
+      .crash-plan-list {
+        margin: 9px 0 0;
+        padding-left: 20px;
+        color: #44515a;
+        font-size: 13px;
+        line-height: 21px;
+      }
+
+      .crash-plan-list li + li {
+        margin-top: 4px;
+      }
+
+      .focus-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-top: 11px;
+      }
+
+      .focus-link {
+        min-height: 34px;
+        padding: 0 10px;
+        border: 1px solid #b8c8c2;
+        border-radius: 5px;
+        background: var(--green-soft);
+        color: #075d44;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
       .problem-header {
         display: grid;
         grid-template-columns: minmax(0, 1fr) auto;
@@ -714,6 +789,15 @@
           display: block;
         }
 
+        .crash-plan-grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .crash-plan-block + .crash-plan-block {
+          border-top: 1px solid var(--line);
+          border-left: 0;
+        }
+
         h1 {
           font-size: 24px;
           line-height: 33px;
@@ -859,6 +943,7 @@
           <h2 class="sidebar-title">문제 목록</h2>
           <div class="filters" aria-label="난이도 필터">
             <button class="filter-button" type="button" data-filter="all" aria-pressed="true">전체</button>
+            <button class="filter-button" type="button" data-filter="focus" aria-pressed="false">오늘 필수</button>
             <button class="filter-button" type="button" data-filter="basic" aria-pressed="false">기초</button>
             <button class="filter-button" type="button" data-filter="core" aria-pressed="false">핵심</button>
             <button class="filter-button" type="button" data-filter="practical" aria-pressed="false">응용</button>
@@ -871,6 +956,43 @@
       </aside>
 
       <main>
+        <section class="crash-plan" aria-labelledby="crash-plan-title">
+          <div class="crash-plan-head">
+            <h2 id="crash-plan-title">면접 전 3시간 압축 순서</h2>
+            <p>정답을 읽고 끝내지 말고, 각 문제를 답안 없이 한 번 다시 입력한 뒤 접근 방법을 30초 동안 말하세요.</p>
+          </div>
+          <div class="crash-plan-grid">
+            <div class="crash-plan-block">
+              <h3>반드시 볼 6문제</h3>
+              <ol class="crash-plan-list">
+                <li><strong>0~35분:</strong> 짝수 합계, 상품 ID 빈도 계산</li>
+                <li><strong>35~70분:</strong> 판매 가능 상품 정렬</li>
+                <li><strong>70~105분:</strong> 목표 합을 만드는 두 인덱스</li>
+                <li><strong>105~135분:</strong> 멈추지 않는 이진 탐색</li>
+                <li><strong>135~165분:</strong> 여러 구좌의 좋아요 동기화</li>
+                <li><strong>165~180분:</strong> 자기소개와 경력 답변 소리 내어 말하기</li>
+              </ol>
+              <div class="focus-links" aria-label="필수 문제 바로가기">
+                <button class="focus-link" type="button" data-problem-id="sum-even">1. 배열 순회</button>
+                <button class="focus-link" type="button" data-problem-id="frequency">2. 빈도표</button>
+                <button class="focus-link" type="button" data-problem-id="filter-sort-products">3. 필터·정렬</button>
+                <button class="focus-link" type="button" data-problem-id="two-sum">4. Map 탐색</button>
+                <button class="focus-link" type="button" data-problem-id="debug-binary-search">5. 오류 수정</button>
+                <button class="focus-link" type="button" data-problem-id="sync-sections">6. 상태 동기화</button>
+              </div>
+            </div>
+            <div class="crash-plan-block">
+              <h3>시간이 남을 때만</h3>
+              <ul class="crash-plan-list">
+                <li>괄호 문자열 검증: 스택의 기본</li>
+                <li>원본이 바뀌는 좋아요: React 불변성</li>
+                <li>백오피스 페이지 나누기: 인덱스 계산</li>
+              </ul>
+              <p><strong>막히면:</strong> 예시를 손으로 추적하고, 먼저 O(n²) 단순 풀이를 말한 뒤 개선하세요.</p>
+            </div>
+          </div>
+        </section>
+
         <div class="mobile-problem-picker">
           <label for="problem-select">연습할 문제</label>
           <select id="problem-select"></select>
@@ -993,14 +1115,19 @@
             "조건을 만족할 때만 합계에 더하세요.",
           ],
           solution: `function solution(numbers) {
+  // 합계는 숫자이므로 0부터 시작합니다.
   let sum = 0;
 
+  // 배열의 값을 앞에서부터 하나씩 확인합니다.
   for (const number of numbers) {
+    // 2로 나눈 나머지가 0이면 짝수입니다.
     if (number % 2 === 0) {
+      // 기존 합계에 현재 짝수를 누적합니다.
       sum += number;
     }
   }
 
+  // 빈 배열이면 반복문이 실행되지 않아 그대로 0을 반환합니다.
   return sum;
 }`,
           approach: "배열을 한 번 순회하면서 짝수인 값만 누적합니다.",
@@ -1038,12 +1165,16 @@
             "null 병합 연산자 ?? 를 사용해도 됩니다.",
           ],
           solution: `function solution(productIds) {
+  // 상품 ID를 key, 등장 횟수를 value로 저장할 빈도표입니다.
   const counts = {};
 
+  // 모든 상품 ID를 한 번씩 확인합니다.
   for (const id of productIds) {
+    // 처음 나온 ID는 0으로 보고 1을 더하고, 기존 ID는 현재 횟수에 1을 더합니다.
     counts[id] = (counts[id] ?? 0) + 1;
   }
 
+  // 완성된 빈도표를 반환합니다.
   return counts;
 }`,
           approach: "ID를 키, 등장 횟수를 값으로 갖는 객체를 만들며 한 번 순회합니다.",
@@ -1171,7 +1302,10 @@
           ],
           solution: `function solution(products, minPrice) {
   return products
+    // 재고가 있으면서 최소 가격 이상인 상품만 새 배열에 남깁니다.
     .filter((product) => product.inStock && product.price >= minPrice)
+    // 가격 오름차순으로 정렬하고, 가격이 같으면 ID 오름차순으로 정렬합니다.
+    // filter가 만든 새 배열을 sort하므로 원본 products 배열은 바뀌지 않습니다.
     .sort((a, b) => a.price - b.price || a.id.localeCompare(b.id));
 }`,
           approach: "filter로 새 배열을 만든 뒤 두 정렬 기준을 순서대로 적용합니다.",
@@ -1276,18 +1410,24 @@
             "현재 값을 저장하기 전에 보수가 있는지 확인해야 같은 원소를 재사용하지 않습니다.",
           ],
           solution: `function solution(numbers, target) {
+  // 지금까지 본 숫자의 값과 인덱스를 저장합니다.
   const indexByValue = new Map();
 
+  // 값뿐 아니라 인덱스를 반환해야 하므로 일반 for문을 사용합니다.
   for (let index = 0; index < numbers.length; index += 1) {
+    // 현재 숫자와 더해서 target이 되는 값입니다.
     const complement = target - numbers[index];
 
+    // 필요한 값이 앞에서 이미 나왔다면 두 인덱스를 바로 반환합니다.
     if (indexByValue.has(complement)) {
       return [indexByValue.get(complement), index];
     }
 
+    // 확인을 먼저 하고 저장해야 현재 원소 하나를 두 번 사용하지 않습니다.
     indexByValue.set(numbers[index], index);
   }
 
+  // 끝까지 두 숫자를 찾지 못한 경우입니다.
   return [-1, -1];
 }`,
           approach: "이미 본 값의 인덱스를 Map에 저장해 필요한 보수를 O(1)에 찾습니다.",
@@ -1695,13 +1835,18 @@
             "toggle 대신 nextLiked를 지정해야 중복 상품이 서로 다른 상태에서 시작해도 수렴합니다.",
           ],
           solution: `function solution(sections, targetId, nextLiked) {
+  // map을 사용해 원본 sections를 변경하지 않고 새 배열을 만듭니다.
   return sections.map((section) => ({
+    // title 등 기존 구좌 정보는 그대로 복사합니다.
     ...section,
+    // 각 구좌의 상품 배열도 새 배열로 만듭니다.
     products: section.products.map((product) => {
+      // 대상이 아닌 상품은 바꿀 필요가 없으므로 기존 객체를 반환합니다.
       if (product.id !== targetId) {
         return product;
       }
 
+      // 같은 ID의 상품은 새 객체로 복사하고 목표 상태로 통일합니다.
       return {
         ...product,
         liked: nextLiked,
@@ -1786,10 +1931,13 @@
             "오른쪽을 탐색할 때 mid를 다시 포함할 필요가 없습니다.",
           ],
           solution: `function solution(sortedArr, target) {
+  // 탐색할 범위의 양 끝 인덱스입니다.
   let lo = 0;
   let hi = sortedArr.length - 1;
 
+  // 양 끝이 같아도 마지막 원소를 확인해야 하므로 <= 를 사용합니다.
   while (lo <= hi) {
+    // 현재 탐색 범위의 가운데 인덱스를 계산합니다.
     const mid = lo + Math.floor((hi - lo) / 2);
 
     if (sortedArr[mid] === target) {
@@ -1797,12 +1945,16 @@
     }
 
     if (sortedArr[mid] < target) {
+      // mid는 이미 정답이 아니므로 제외하고 오른쪽을 탐색합니다.
+      // lo = mid로 두면 lo와 mid가 같을 때 무한루프가 생깁니다.
       lo = mid + 1;
     } else {
+      // mid를 제외하고 왼쪽을 탐색합니다.
       hi = mid - 1;
     }
   }
 
+  // 탐색 범위가 사라질 때까지 찾지 못한 경우입니다.
   return -1;
 }`,
           approach:
@@ -2423,6 +2575,14 @@
       ];
 
       const state = loadState();
+      const focusProblemIds = new Set([
+        "sum-even",
+        "frequency",
+        "filter-sort-products",
+        "two-sum",
+        "debug-binary-search",
+        "sync-sections",
+      ]);
       let currentIndex = Math.max(
         0,
         problems.findIndex((problem) => problem.id === state.currentId),
@@ -2526,7 +2686,12 @@
 
       function renderNavigation() {
         elements.problemList.innerHTML = problems
-          .filter((problem) => activeFilter === "all" || problem.level === activeFilter)
+          .filter(
+            (problem) =>
+              activeFilter === "all" ||
+              (activeFilter === "focus" && focusProblemIds.has(problem.id)) ||
+              problem.level === activeFilter,
+          )
           .map((problem) => {
             const index = problems.findIndex((item) => item.id === problem.id);
             const current = index === currentIndex;
@@ -2860,6 +3025,12 @@
       elements.problemSelect.addEventListener("change", () =>
         selectProblem(Number(elements.problemSelect.value)),
       );
+      document.querySelectorAll(".focus-link").forEach((button) => {
+        button.addEventListener("click", () => {
+          const index = problems.findIndex((problem) => problem.id === button.dataset.problemId);
+          selectProblem(index);
+        });
+      });
       document.querySelector("#next-unsolved").addEventListener("click", () => {
         const nextIndex = problems.findIndex(
           (problem, index) => index > currentIndex && !state.passed[problem.id],

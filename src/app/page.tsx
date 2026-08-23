@@ -45,7 +45,7 @@ export default function Home() {
       {/* Hero */}
       <section className="mb-16 sm:mb-20">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">
-          Frontend Engineer
+          Frontend Engineer · Service UI
         </p>
         <h1 className="text-2xl sm:text-4xl font-bold tracking-tight mb-4 sm:mb-6 leading-snug sm:leading-tight">
           <span className="block">13년 동안 서비스의 UI를 만들고 운영하며</span>

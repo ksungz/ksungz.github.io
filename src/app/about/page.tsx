@@ -12,7 +12,7 @@ export default function About() {
       <section className="mb-12 sm:mb-16">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">About</p>
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2">김성재</h1>
-        <p className="mb-4 sm:mb-6 text-sm font-medium">Frontend Engineer</p>
+        <p className="mb-4 sm:mb-6 text-sm font-medium">Frontend Engineer · Service UI</p>
         <div className="space-y-4 text-sm leading-relaxed text-[var(--color-muted)] max-w-xl">
           <p>
             13년 동안 커머스·게임·플랫폼 서비스에서 UI를 만들고 운영했습니다.

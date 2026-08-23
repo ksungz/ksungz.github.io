@@ -20,7 +20,7 @@ export default function PortfolioPage() {
           <a href="/career">Career</a>
           <a href="mailto:k.suzkim@gmail.com">Contact</a>
         </nav>
-        <p className="pf-cli-status"><i aria-hidden="true" /> Frontend Engineer</p>
+        <p className="pf-cli-status"><i aria-hidden="true" /> Frontend Engineer · Service UI</p>
       </header>
 
       <main className="pf-main">
@@ -35,7 +35,7 @@ export default function PortfolioPage() {
         <h1>김성재</h1>
         <p className="pf-hero-statement">
           13년간 서비스의 UI를 개발하고 운영하며 사용자 화면의 품질과 유지보수성을 개선해왔습니다.
-          최근에는 AI를 활용해 개발과 검증 과정을 더 효율적으로 만들고 있습니다.
+          최근에는 AI를 코드 검토와 문서 초안, 반복 작업에 활용하고 결과를 직접 확인합니다.
         </p>
         <div className="pf-hero-actions">
           <a className="pf-scroll-link" href="#work"><span aria-hidden="true">$</span> open ./ui-work <span aria-hidden="true">↓</span></a>
@@ -64,8 +64,8 @@ export default function PortfolioPage() {
             운영 중인 서비스에 안정적으로 반영해왔습니다.
           </p>
           <p>
-            회사에서는 승인된 업무 문맥 연결과 회사 제공 PR Review Agent를
-            실제 개발 흐름에 도입·설정했습니다. 반복 항목은 AI가 먼저 확인하고,
+            회사에서는 승인된 업무 문맥 연결과 회사 제공 PR Review Agent의
+            실제 개발 흐름 적용 과정에 참여해 필요한 설정을 정리했습니다. 반복 항목은 AI가 먼저 확인하고,
             설계와 영향 범위, 예외는 사람이 최종 검증하도록 운영 기준을 정리했습니다.
           </p>
           <p>
@@ -218,7 +218,7 @@ export default function PortfolioPage() {
           </div>
           <p className="pf-project-desc">
             UI 개발 리뷰에서는 BEM 네이밍, SCSS 구조, 접근성 속성, 중복 스타일처럼 반복해서 보는 항목이 많습니다.
-            회사에서 제공한 PR Review Agent를 여러 저장소의 파이프라인에 적용해 이 항목들을 먼저 확인하도록 구성했습니다.
+            회사에서 제공한 PR Review Agent의 여러 저장소 적용 과정에 참여해 이 항목들을 먼저 확인하도록 구성했습니다.
             Agent 자체를 개발한 것이 아니라 파일 필터, 검토 기준과 실행 방식을 실제 업무에 맞게 설정했습니다.
             설계, 영향 범위, 예외 케이스는 기존 코드 리뷰에서 별도로 확인했습니다.
           </p>
@@ -323,8 +323,8 @@ export default function PortfolioPage() {
       <section className="pf-section" id="ai-products">
         <h2 className="pf-section-title">직접 만든 제품과 자동화</h2>
         <p className="pf-section-lead">
-          개인 프로젝트에서는 화면 구현부터 API, DB, 배치 작업과 배포까지 직접 다룹니다.
-          서비스와 자동화를 직접 운영하면서 사용 흐름을 확인하고 필요한 기능을 보완하고 있습니다.
+          개인 프로젝트에서는 AI 코딩 도구를 활용해 화면, API, DB와 배치 작업을 구현합니다.
+          배포 후 동작과 사용 흐름은 직접 확인하며 필요한 기능을 보완하고 있습니다.
         </p>
 
         <div className="pf-service-grid">
@@ -510,7 +510,7 @@ export default function PortfolioPage() {
 
       <div className="pf-statusbar" role="status" aria-label="Portfolio 상태">
         <span><i aria-hidden="true" /> ready</span>
-        <span>Frontend · AI-assisted</span>
+        <span>Frontend · Service UI</span>
         <span>UTF-8</span>
         <span>320 · 390 · 1440</span>
       </div>

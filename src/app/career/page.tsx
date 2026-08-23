@@ -21,8 +21,8 @@ const careers = [
         link: "/engineering/dart-sass",
       },
       {
-        title: "AI PR Review Agent — 8개 저장소 적용",
-        action: "사내 제공 AI Agent를 파이프라인에 연결. SCSS/HTML 중심 파일 필터링, 접근성·BEM·SCSS 컨벤션 리뷰 기준 정리.",
+        title: "AI PR Review Agent — 8개 저장소 적용 과정 참여",
+        action: "사내 제공 AI Agent의 저장소 적용 과정에 참여해 SCSS/HTML 중심 파일 필터링과 접근성·BEM·SCSS 컨벤션 리뷰 기준을 설정.",
         impact: "반복 컨벤션은 Agent의 1차 확인 항목으로 옮기고, 설계·영향 범위와 예외는 개발자가 최종 검증하도록 운영.",
         link: "/case-studies/developer-workflow-ax",
       },

@@ -45,7 +45,7 @@ export default function PortfolioPage() {
           <Link
             className="pf-3d-link"
             href="/products"
-            aria-label="AI를 활용한 프로젝트와 실험 목록 열기"
+            aria-label="AI를 활용한 작업 목록 열기"
           >
             <span aria-hidden="true">◆</span> open ./products
           </Link>
@@ -108,7 +108,7 @@ export default function PortfolioPage() {
         <h2 className="pf-section-title">업무 경험을 바탕으로 새로 만든 UI</h2>
         <p className="pf-section-lead">
           상품상세 UI를 운영하며 자주 마주친 상태와 예외 케이스를 바탕으로 옵션 선택 흐름을 새로 설계했습니다.
-          색상·사이즈 조합, 재고, 추가 금액, 모바일 화면 전환을 공개 컴포넌트로 구현하고 확인 결과를 Storybook에 남겼습니다.
+          색상·사이즈 조합, 재고, 추가 금액, 모바일 화면 전환을 React 컴포넌트로 구현하고 확인 결과를 Storybook에 남겼습니다.
         </p>
 
         <div className="pf-project">

@@ -29,13 +29,6 @@ const featuredProducts = [
     href: "https://ksungz-ui.vercel.app/?path=/story/case-studies-상품-옵션-선택--design-and-verification",
     tags: ["React", "Storybook", "Accessibility"],
   },
-  {
-    name: "AI-assisted Development",
-    tagline: "반복 검토와 문서 작성을 개발 흐름에 맞게 정리",
-    description: "회사에서 제공한 PR Review Agent를 여러 저장소에 적용하고, 파일 필터와 리뷰 기준, 사람이 직접 확인할 항목을 정리했습니다.",
-    href: "/case-studies/developer-workflow-ax",
-    tags: ["AI Review", "MCP", "Human-in-the-loop"],
-  },
 ];
 
 export default function Home() {
@@ -92,7 +85,7 @@ export default function Home() {
             <Link
               key={name}
               href={href}
-              className="group rounded-lg border border-[var(--color-border)] p-4 sm:p-5 transition-colors hover:border-[var(--color-foreground)]"
+              className="group rounded-lg border border-[var(--color-border)] p-4 sm:p-5 transition-colors hover:border-[var(--color-foreground)] last:sm:col-span-2"
             >
               <h3 className="text-base font-semibold group-hover:text-[var(--color-foreground)]">
                 {name}
@@ -117,7 +110,7 @@ export default function Home() {
           className="mt-4 flex min-h-[44px] flex-col justify-center gap-1 border-t border-[var(--color-border)] py-3 text-xs transition-colors hover:text-[var(--color-foreground)] sm:flex-row sm:items-center sm:justify-between"
         >
           <span>
-            <strong className="font-semibold">AI를 활용한 프로젝트와 실험</strong>
+            <strong className="font-semibold">AI를 활용한 작업</strong>
             <span className="ml-2 text-[var(--color-muted)]">
               Agent Bridge, AX Doctor, BabyPick과 자동화 기록
             </span>

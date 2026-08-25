@@ -15,21 +15,21 @@ const careers = [
     summary: "모바일웹 상품상세(PDP)와 앱 WebView UI를 개발·운영했습니다. 공통 UI와 SCSS 구조를 정리하고, 기존 HTML/SCSS 화면의 Dart Sass 전환과 React·TypeScript 컴포넌트 이관에 참여했습니다.",
     achievements: [
       {
-        title: "Dart Sass 마이그레이션 — 2,384개 파일, 3주 완료",
-        action: "AI 코딩 도구(Cursor, Claude)로 패턴별 변환 스크립트를 만들고, 폴더 단위로 나눠 적용. 변환 전후 CSS 산출물 비교로 운영 영향 최소화.",
-        impact: "빌드 오류 없이 운영 반영. 이후 다른 저장소에도 동일 방식 적용해 SCSS 환경 통일.",
+        title: "모바일웹 상품상세·앱 WebView UI 개발·운영",
+        action: "가격·옵션·리뷰·배송·프로모션 등 여러 영역이 맞물리는 상품상세 UI를 개발·운영했습니다. 신규 기능과 상품 유형별 변경에 대응하고, 기획·디자인·백엔드 담당자와 영향 범위를 확인했습니다.",
+        impact: "iOS·Android 기기와 브라우저별 렌더링 차이, 반응형 화면과 앱 WebView 이슈를 확인해 운영 환경에 반영했습니다.",
+        link: "/engineering/pdp-ui",
+      },
+      {
+        title: "Dart Sass 전환 — 2,384개 파일",
+        action: "AI 보조 도구를 활용해 패턴별 전환 작업을 진행하고, 폴더 단위로 나눠 적용했습니다. 전환 전후의 CSS 산출물과 빌드 결과를 직접 확인했습니다.",
+        impact: "기존 화면에 미치는 영향을 확인하며 운영 환경에 단계적으로 반영했습니다.",
         link: "/engineering/dart-sass",
       },
       {
-        title: "AI PR Review Agent — 8개 저장소 적용 과정 참여",
-        action: "사내 제공 AI Agent의 저장소 적용 과정에 참여해 SCSS/HTML 중심 파일 필터링과 접근성·BEM·SCSS 컨벤션 리뷰 기준을 설정.",
-        impact: "반복 컨벤션은 Agent의 1차 확인 항목으로 옮기고, 설계·영향 범위와 예외는 개발자가 최종 검증하도록 운영.",
-        link: "/case-studies/developer-workflow-ax",
-      },
-      {
-        title: "React 기반 PDP 컴포넌트 전환 및 CSS 내재화",
-        action: "AI 보조 도구를 활용한 HTML/SCSS 산출물의 React·TypeScript 컴포넌트 이관에 참여. CDN 의존 CSS를 프로젝트 내부로 단계적 내재화(7편 시리즈). Storybook 기반 확인 환경 구축.",
-        impact: "화면 코드와 스타일 변경 맥락을 하나의 저장소에서 관리. 신규 작업자 온보딩 기준 정리.",
+        title: "React 기반 PDP 컴포넌트 이관과 CSS 내재화",
+        action: "HTML·SCSS 기반 화면을 React·TypeScript 컴포넌트 구조로 옮기는 작업에 참여했습니다. 분산된 CSS를 프로젝트 내부로 옮기고 Storybook에서 컴포넌트 상태를 확인할 수 있도록 정리했습니다.",
+        impact: "화면 코드와 스타일 변경 내용을 같은 저장소에서 확인할 수 있게 되었고, 관련 작업 기준을 문서로 남겼습니다.",
         link: "/engineering/react-pdp",
       },
     ],
@@ -174,10 +174,10 @@ export default function CareerPage() {
           className="group block rounded-lg border border-[var(--color-border)] p-4 sm:p-5 transition-colors hover:border-[var(--color-foreground)]"
         >
           <h3 className="text-sm font-semibold group-hover:text-[var(--color-foreground)]">
-            AI를 활용한 개인 프로젝트와 실험
+            AI를 활용한 작업
           </h3>
           <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-            Agent Bridge, AX Doctor, BabyPick과 자동화 프로젝트의 구현 범위와 검증 기록을 확인할 수 있습니다.
+            Agent Bridge, AX Doctor, BabyPick과 자동화 작업에서 구현한 내용과 확인한 결과를 볼 수 있습니다.
           </p>
         </Link>
       </section>

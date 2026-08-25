@@ -1,60 +1,28 @@
 ---
-title: AI 기반 개발 환경 구축
+title: 업무에서 AI 도구를 활용한 방법
 period: 2025.10 ~ 현재
 company: 11번가
-role: AI 개발 환경 구축, 스킬·규칙 설계, 파이프라인 적용
-description: Cursor AI 기반 개발 환경을 구축하고, UI 개발에 특화된 스킬과 규칙을 직접 설계해 팀 내 공유
-tags: [Cursor AI, Bitbucket Pipelines, MCP, Node.js]
+role: UI 개발 규칙 정리와 AI 도구 적용 참여
+description: 코드 검토, 문서 초안과 반복 작업에 AI 도구를 활용하고 직접 확인한 내용
+tags: [Cursor AI, UI Development, Documentation, Code Review]
 ---
 
-## 담당 업무
+## 담당 범위
 
-Cursor AI 기반 개발 환경을 구축하고, UI 개발에 특화된 스킬과 규칙을 직접 설계해 팀 내 공유하고 있습니다. MCP를 활용한 업무 자동화 환경을 구성하고, 사내 제공 AI PR Review Agent를 여러 저장소에 적용·운영하고 있습니다.
+Cursor와 회사에서 제공한 AI 도구를 UI 개발 업무에 활용했습니다. UI 관련 규칙과 예시를 정리하고, PR 설명·문서 초안·QA 체크리스트 등 반복 산출물을 작성할 때 사용했습니다. 회사 제공 PR Review Agent의 저장소 적용 과정에는 UI 파일 필터와 검토 기준을 정리하는 범위로 참여했습니다.
 
-## 주요 성과
+## 실제로 활용한 작업
 
-- **UI 개발 특화 스킬·규칙 직접 설계** — Figma 연동 규칙, SCSS/마크업/접근성 코드 리뷰, UI 파트 PR 양식 자동화 등
-- **AI PR Review Agent 적용·운영** — 사내 제공 Agent를 Bitbucket Pipelines에 적용, 여러 저장소 운영, On-Demand 방식 전환
-- **팀 전용 Cursor AI 설정 배포 도구** — 스킬·규칙 관리 및 저장소 일괄 동기화 도구 구축
-- **MCP 연동** — Bitbucket, Jira, Confluence, Slack 통합 업무 환경 구성
+- SCSS·HTML 마크업과 접근성 관련 코드 검토
+- PR 설명, 커밋 메시지와 작업 계획 초안 작성
+- Confluence 문서와 QA 체크리스트 초안 작성
+- 반복해서 확인하는 UI 개발 기준과 예시 정리
+- 생성한 결과를 실제 코드, 문서와 대조해 직접 확인
 
-## 팀 Cursor 스킬·규칙 체계
+## 회사 제공 AI 도구 적용
 
-팀 내에서 운영 중인 Cursor 스킬·규칙 체계에 참여하고 있으며, 그 중 UI 개발에 특화된 항목을 직접 설계했습니다.
+회사 제공 PR Review Agent 자체를 개발한 것은 아닙니다. 저장소 적용 과정에 참여해 UI 파일을 대상으로 하는 필터와 접근성·BEM·SCSS 검토 기준을 정리하고 실행 결과를 확인했습니다.
 
-### 직접 설계한 항목
+반복 규칙은 AI가 먼저 확인하도록 구성하되, 설계 의도와 영향 범위, 예외 케이스는 기존 코드 리뷰에서 사람이 계속 확인했습니다.
 
-| 분류 | 내용 |
-|------|------|
-| 스킬 | UI파트 PR 양식 자동화, SCSS/마크업/접근성 코드 리뷰, Storybook 검수 가이드 생성, Figma 디자인 스펙 연동 |
-| 규칙 | Figma 기반 UI 구현 규칙, BEM/접근성/SCSS 코딩 규칙, 반응형 마크업 규칙 |
-
-### 팀 전체 체계 (참여·의견 제안)
-
-| 분류 | 항목 |
-|------|------|
-| Git/PR | 커밋 메시지 자동 생성, PR 디스크립션 자동 생성, 브랜치 네이밍 |
-| 문서/이슈 | Confluence 위키 자동화, Jira 이슈 생성, 작업시간 기록 |
-| 계획/검증 | 구현 계획 수립, QA 검증 자동화 |
-| 커뮤니케이션 | Slack 메시지 읽기·요약, 주간 다이제스트 |
-| 인프라 | Bitbucket Pipelines 규칙, CLI 도구 사용 규칙 |
-
-## AI 활용 실무 적용 사례
-
-| 영역 | 활용 내용 |
-|------|---------|
-| 코드 리뷰 | PR diff 기반 SCSS/HTML 마크업 전문 리뷰, Critical/Warning/Suggestion 분류 |
-| PR·커밋 | 브랜치 diff 분석 → 디스크립션/메시지 자동 생성 → 원스텝 실행 |
-| 문서 작성 | Jira/기획서 기반 Confluence 위키 자동 생성, Storybook 검수 가이드 자동화 |
-| 구현 계획 | 기획서 분석 → Phase별 구현 계획 수립, 영향범위 분석 |
-| 접근성 점검 | ARIA, 시맨틱 HTML, 대체 텍스트, 키보드 내비게이션 자동 점검 |
-
-
-## 팀 전용 Cursor AI 설정 배포 도구
-
-`2025.01 ~ 현재`
-
-- 팀 공용 설정 배포 도구 초기 구성 및 배포 흐름 설정
-- 저장소 일괄 동기화 스크립트 구축 (--merge, origin/main pull)
-- UI 전용 규칙 (BEM, 접근성, SCSS, 반응형) frontmatter 추가
-- Slack PR Bot 자동화 설정
+정량적인 시간 절감이나 검출률은 측정하지 않았기 때문에 별도 성과로 적지 않았습니다.

@@ -791,7 +791,7 @@ export default function ThreeBlogExperience() {
         </aside>
       )}
 
-      <p className="tb-corner-note">AI 도구로 구현한 포트폴리오 탐색 실험 · 2026</p>
+      <p className="tb-corner-note">AI 도구로 구현한 포트폴리오 탐색 · 2026</p>
     </div>
   );
 }

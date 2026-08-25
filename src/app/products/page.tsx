@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description: "AI 코딩 도구를 활용해 구현하고 직접 실행·검증한 개발 도구, 개인 서비스와 자동화 프로젝트",
+  description: "AI 코딩 도구를 활용해 구현하고 직접 실행·검증한 개발 도구, 개인 서비스와 자동화 작업",
 };
 
 interface ProductLink {
@@ -213,7 +213,7 @@ export default function Products() {
     <div className="mx-auto max-w-3xl px-4 sm:px-6 py-12 sm:py-16">
       <section className="mb-12 sm:mb-16">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">Projects</p>
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">AI를 활용한 프로젝트와 실험</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">AI를 활용한 작업</h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
           업무에서 발견한 문제와 개인적인 아이디어를 작은 도구와 서비스로 구현했습니다.
           문제 범위와 검증 기준은 직접 정하고, 구현에는 AI 코딩 도구를 활용했습니다.
@@ -221,10 +221,10 @@ export default function Products() {
         </p>
       </section>
 
-      {/* Developer Tools & Experiments */}
+      {/* Developer Tools & Automation */}
       <section className="mb-12 sm:mb-16">
         <h2 className="mb-4 sm:mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
-          Developer Tools &amp; Experiments
+          Developer Tools &amp; Automation
         </h2>
         <div className="space-y-6 sm:space-y-8">
           {axSystems.map((p) => (

@@ -107,9 +107,9 @@ export default function CareerPage() {
       <section className="mb-10 sm:mb-12">
         <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">About</h2>
         <div className="space-y-3 text-sm text-[var(--color-muted)] leading-relaxed">
-          <p>13년 동안 커머스, 게임, 플랫폼 서비스에서 UI를 만들고 운영했습니다. 웹 표준과 접근성, 마크업 구조, SCSS, 반응형 UI를 다루며 오래된 화면을 안정적으로 개선해왔습니다.</p>
-          <p>현재는 모바일웹 상품상세(PDP)를 포함한 핵심 서비스 UI를 맡고 있습니다. AI 보조 도구로 2,384개 SCSS 파일을 Dart Sass로 전환하고 산출물과 빌드 결과를 직접 확인했습니다. HTML/SCSS 화면의 React·TypeScript 컴포넌트 이관에도 참여했습니다.</p>
-          <p>회사에서는 제공받은 AI 리뷰 도구와 승인된 업무 문맥 연동을 개발 흐름에 적용했습니다. 개인 프로젝트도 문제와 범위를 먼저 정한 뒤 AI 코딩 도구로 구현하고, 실행 결과와 현재 한계를 함께 기록합니다.</p>
+          <p>13년 동안 커머스·게임·플랫폼 서비스의 UI를 개발하고 운영했습니다. 웹 표준과 접근성, 마크업 구조, SCSS와 반응형 UI를 다루며 오래된 화면을 안정적으로 개선해왔습니다.</p>
+          <p>현재는 11번가 모바일웹 상품상세(PDP)와 신규 서비스 화면을 맡고 있습니다. AI 보조 도구를 활용해 2,384개 SCSS 파일을 Dart Sass로 전환하고 결과를 확인했으며, HTML/SCSS 화면의 React·TypeScript 컴포넌트 이관에도 참여했습니다.</p>
+          <p>최근에는 회사에서 제공한 AI 리뷰 도구를 반복 검토와 문서 작성에 활용하고 있습니다. 개인 프로젝트에서는 문제와 구현 범위를 먼저 정하고, 실행 결과와 현재 한계를 함께 기록합니다.</p>
         </div>
       </section>
 

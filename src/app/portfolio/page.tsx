@@ -34,8 +34,8 @@ export default function PortfolioPage() {
         <p className="pf-hero-command"><span aria-hidden="true">$</span> whoami</p>
         <h1>김성재</h1>
         <p className="pf-hero-statement">
-          13년간 서비스의 UI를 개발하고 운영하며 사용자 화면의 품질과 유지보수성을 개선해왔습니다.
-          최근에는 AI를 코드 검토와 문서 초안, 반복 작업에 활용하고 결과를 직접 확인합니다.
+          13년간 커머스·게임·플랫폼 서비스의 UI를 개발하고 운영했습니다.
+          오래된 화면과 스타일 구조를 단계적으로 개선하고, 최근에는 AI를 코드 검토와 반복 작업에 활용합니다.
         </p>
         <div className="pf-hero-actions">
           <a className="pf-scroll-link" href="#work"><span aria-hidden="true">$</span> open ./ui-work <span aria-hidden="true">↓</span></a>
@@ -59,19 +59,19 @@ export default function PortfolioPage() {
         </div>
         <div className="pf-hero-copy">
           <p>
-            커머스, 게임, 플랫폼 서비스에서 13년간 UI를 개발하고 운영했습니다.
-            복잡한 변경 범위와 검증 기준을 기획, 디자인, 백엔드 담당자와 조율하고
+            커머스·게임·플랫폼 서비스에서 13년간 UI를 개발하고 운영했습니다.
+            복잡한 화면의 변경 범위와 검증 기준을 기획·디자인·백엔드 담당자와 조율하고
             운영 중인 서비스에 안정적으로 반영해왔습니다.
           </p>
           <p>
-            회사에서는 승인된 업무 문맥 연결과 회사 제공 PR Review Agent의
-            실제 개발 흐름 적용 과정에 참여해 필요한 설정을 정리했습니다. 반복 항목은 AI가 먼저 확인하고,
-            설계와 영향 범위, 예외는 사람이 최종 검증하도록 운영 기준을 정리했습니다.
+            회사에서 제공한 PR Review Agent를 여러 저장소에 적용하는 과정에 참여해
+            파일 필터와 리뷰 기준을 설정했습니다. 반복적인 컨벤션은 AI가 먼저 확인하고,
+            설계와 영향 범위, 예외는 사람이 판단하도록 역할을 나눴습니다.
           </p>
           <p>
-            개인 프로젝트는 문제와 범위, 완료 기준을 정한 뒤 AI 코딩 도구를 활용해 구현하고,
-            실제 실행과 테스트로 검증합니다. AX Doctor와 Agent Bridge는 공개 저장소로 운영하고,
-            Obsidian RAG와 BabyPick은 운영하며 확인한 범위와 아직 해결하지 못한 한계까지 기록하고 있습니다.
+            개인 프로젝트는 문제와 구현 범위를 먼저 정한 뒤 AI 코딩 도구로 만들고,
+            실제 실행과 테스트로 결과를 확인합니다. AX Doctor, Agent Bridge, Obsidian RAG와
+            BabyPick에는 확인한 범위와 아직 해결하지 못한 한계까지 함께 기록하고 있습니다.
           </p>
         </div>
       </section>

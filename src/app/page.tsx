@@ -48,16 +48,16 @@ export default function Home() {
           Frontend Engineer · Service UI
         </p>
         <h1 className="text-2xl sm:text-4xl font-bold tracking-tight mb-4 sm:mb-6 leading-snug sm:leading-tight">
-          <span className="block">13년 동안 서비스의 UI를 만들고 운영하며</span>
-          <span className="block text-[var(--color-muted)]">오래된 화면을 안정적으로</span>
-          <span className="block text-[var(--color-muted)]">개선해왔습니다.</span>
+          <span className="block">13년 동안 커머스·게임·플랫폼 서비스에서</span>
+          <span className="block text-[var(--color-muted)]">사용자가 만나는 화면을 만들고 운영했습니다.</span>
+          <span className="block text-[var(--color-muted)]">오래된 구조도 안정적으로 개선해왔습니다.</span>
         </h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
-          현재는 모바일웹 상품상세와 신규 서비스 UI를 맡고 있습니다.
-          반응형 화면을 구현하고 브라우저별 이슈와 운영 중인 화면의 변경 영향을 확인합니다.
-          최근에는 AI 보조 도구로 2,384개 SCSS 파일을 Dart Sass로 전환하고 결과를 직접 검증했습니다.
-          HTML/SCSS 화면의 React·TypeScript 컴포넌트 이관과 Storybook 확인 환경 구축에도 참여했습니다.
-          AI는 코드 검토와 문서 초안 같은 반복 작업에도 사용하며, 최종 결과는 직접 확인합니다.
+          현재는 11번가 모바일웹 상품상세와 신규 서비스 화면을 맡아,
+          기기와 브라우저별 차이를 확인하고 운영 중 발생하는 문제에 대응하고 있습니다.
+          공통 UI와 SCSS 구조를 정리했으며, AI 보조 도구를 활용한 2,384개 SCSS 파일의
+          Dart Sass 전환과 React·TypeScript 컴포넌트 이관에도 참여했습니다.
+          서비스에 미치는 영향을 살피며 오래된 구조를 단계적으로 개선하는 데 익숙합니다.
         </p>
         <div className="mt-6 sm:mt-8 flex flex-wrap gap-2 sm:gap-3">
           <Link

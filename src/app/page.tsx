@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 const featuredProducts = [
   {
     name: "모바일웹 상품상세 UI",
-    tagline: "복잡한 상태와 변경이 이어지는 핵심 화면 개발·운영",
-    description: "다수 유형의 상품상세 UI를 담당하며 신규 기능, 반응형 화면, 크로스브라우징, 디자인 검수와 운영 대응을 수행했습니다.",
+    tagline: "상품상세와 앱 WebView의 UI 개발·운영",
+    description: "여러 유형의 상품상세와 앱 WebView UI를 담당하며 신규 기능, 반응형 화면, 크로스브라우징과 운영 이슈에 대응했습니다.",
     href: "/engineering/pdp-ui",
     tags: ["Service UI", "Responsive", "Accessibility"],
   },
@@ -32,7 +32,7 @@ const featuredProducts = [
   {
     name: "AI-assisted Development",
     tagline: "반복 검토와 문서 작성을 개발 흐름에 맞게 정리",
-    description: "회사 제공 AI 리뷰 도구와 승인된 업무 문맥 연동을 적용하고, 공통 작성 규칙과 사람이 최종 확인할 범위를 정리했습니다.",
+    description: "회사에서 제공한 PR Review Agent를 여러 저장소에 적용하고, 파일 필터와 리뷰 기준, 사람이 직접 확인할 항목을 정리했습니다.",
     href: "/case-studies/developer-workflow-ax",
     tags: ["AI Review", "MCP", "Human-in-the-loop"],
   },
@@ -48,16 +48,15 @@ export default function Home() {
           Frontend Engineer · Service UI
         </p>
         <h1 className="text-2xl sm:text-4xl font-bold tracking-tight mb-4 sm:mb-6 leading-snug sm:leading-tight">
-          <span className="block">13년 동안 커머스·게임·플랫폼 서비스에서</span>
-          <span className="block text-[var(--color-muted)]">사용자가 만나는 화면을 만들고 운영했습니다.</span>
-          <span className="block text-[var(--color-muted)]">오래된 구조도 안정적으로 개선해왔습니다.</span>
+          <span className="block">서비스 UI를 만들고 운영하며</span>
+          <span className="block text-[var(--color-muted)]">복잡한 화면과 오래된 구조를</span>
+          <span className="block text-[var(--color-muted)]">단계적으로 개선해왔습니다.</span>
         </h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
-          현재는 11번가 모바일웹 상품상세와 신규 서비스 화면을 맡아,
-          기기와 브라우저별 차이를 확인하고 운영 중 발생하는 문제에 대응하고 있습니다.
-          공통 UI와 SCSS 구조를 정리했으며, AI 보조 도구를 활용한 2,384개 SCSS 파일의
-          Dart Sass 전환과 React·TypeScript 컴포넌트 이관에도 참여했습니다.
-          서비스에 미치는 영향을 살피며 오래된 구조를 단계적으로 개선하는 데 익숙합니다.
+          13년 동안 커머스·게임·플랫폼 서비스의 UI를 개발하고 운영했습니다.
+          11번가에서는 모바일웹 상품상세와 앱 WebView UI를 담당하며,
+          다양한 상품 유형과 기기·브라우저 환경에서 발생하는 문제에 대응해왔습니다.
+          공통 UI와 스타일 구조를 정리하고 Dart Sass 전환과 React·TypeScript 컴포넌트 이관에도 참여했습니다.
         </p>
         <div className="mt-6 sm:mt-8 flex flex-wrap gap-2 sm:gap-3">
           <Link
@@ -146,9 +145,9 @@ export default function Home() {
             </p>
           </div>
           <div className="rounded-lg border border-[var(--color-border)] p-4">
-            <h3 className="text-sm font-semibold">AI-assisted Development</h3>
+            <h3 className="text-sm font-semibold">협업과 검증</h3>
             <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-              AI를 코드 검토와 문서 초안, 반복 작업에 활용하고 최종 판단과 검증은 사람이 담당합니다.
+              기획·디자인·백엔드 담당자와 변경 범위를 맞추고, 문서와 화면 확인 기준을 남깁니다.
             </p>
           </div>
         </div>

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Career",
-  description: "김성재의 경력 — 서비스 UI 개발·운영, 레거시 현대화와 AI-assisted Development",
+  description: "김성재의 경력 — 커머스·게임·플랫폼 서비스 UI 개발·운영과 레거시 UI 전환",
 };
 
 const careers = [
@@ -12,7 +12,7 @@ const careers = [
     team: "UI개발팀",
     period: "2020.12 ~ 현재",
     role: "UI 개발자",
-    summary: "모바일웹 상품상세(PDP)를 포함한 핵심 서비스 UI를 개발·운영하고 있습니다. 기존 HTML/SCSS 구조를 React 환경으로 단계적으로 전환하고, 회사 제공 AI 도구를 반복 검토와 문서 작성 흐름에 적용했습니다.",
+    summary: "모바일웹 상품상세(PDP)와 앱 WebView UI를 개발·운영했습니다. 공통 UI와 SCSS 구조를 정리하고, 기존 HTML/SCSS 화면의 Dart Sass 전환과 React·TypeScript 컴포넌트 이관에 참여했습니다.",
     achievements: [
       {
         title: "Dart Sass 마이그레이션 — 2,384개 파일, 3주 완료",
@@ -99,7 +99,7 @@ export default function CareerPage() {
         <p className="font-mono text-xs text-[var(--color-muted)] mb-2">Career</p>
         <h1 className="text-xl sm:text-2xl font-bold tracking-tight">김성재</h1>
         <p className="mt-2 text-sm text-[var(--color-muted)]">
-          Frontend Engineer · Service UI · Legacy Modernization · AI-assisted Development
+          Frontend Engineer · Service UI · Legacy Modernization
         </p>
       </div>
 
@@ -107,9 +107,9 @@ export default function CareerPage() {
       <section className="mb-10 sm:mb-12">
         <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">About</h2>
         <div className="space-y-3 text-sm text-[var(--color-muted)] leading-relaxed">
-          <p>13년 동안 커머스·게임·플랫폼 서비스의 UI를 개발하고 운영했습니다. 웹 표준과 접근성, 마크업 구조, SCSS와 반응형 UI를 다루며 오래된 화면을 안정적으로 개선해왔습니다.</p>
-          <p>현재는 11번가 모바일웹 상품상세(PDP)와 신규 서비스 화면을 맡고 있습니다. AI 보조 도구를 활용해 2,384개 SCSS 파일을 Dart Sass로 전환하고 결과를 확인했으며, HTML/SCSS 화면의 React·TypeScript 컴포넌트 이관에도 참여했습니다.</p>
-          <p>최근에는 회사에서 제공한 AI 리뷰 도구를 반복 검토와 문서 작성에 활용하고 있습니다. 개인 프로젝트에서는 문제와 구현 범위를 먼저 정하고, 실행 결과와 현재 한계를 함께 기록합니다.</p>
+          <p>13년 동안 커머스·게임·플랫폼 서비스의 UI를 개발하고 운영했습니다. 웹 표준과 접근성, 반응형 UI, 기기·브라우저별 이슈를 다루며 오래 운영된 화면을 개선해왔습니다.</p>
+          <p>11번가에서는 모바일웹 상품상세(PDP)와 앱 WebView UI를 담당하며, 다양한 상품 유형과 기기·브라우저 환경에서 발생하는 문제에 대응해왔습니다.</p>
+          <p>공통 UI와 스타일 구조를 정리하고 Dart Sass 전환과 React·TypeScript 컴포넌트 이관에 참여했습니다. AI 도구는 반복 작업과 코드 검토에 활용하되 최종 결과는 직접 확인합니다.</p>
         </div>
       </section>
 

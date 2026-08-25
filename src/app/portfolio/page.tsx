@@ -34,8 +34,8 @@ export default function PortfolioPage() {
         <p className="pf-hero-command"><span aria-hidden="true">$</span> whoami</p>
         <h1>김성재</h1>
         <p className="pf-hero-statement">
-          13년간 커머스·게임·플랫폼 서비스의 UI를 개발하고 운영했습니다.
-          오래된 화면과 스타일 구조를 단계적으로 개선하고, 최근에는 AI를 코드 검토와 반복 작업에 활용합니다.
+          운영 중인 서비스 UI를 어떻게 바꾸고 검증했는지,
+          오래된 화면을 새로운 구조로 옮기며 어떤 방식으로 진행했는지 정리했습니다.
         </p>
         <div className="pf-hero-actions">
           <a className="pf-scroll-link" href="#work"><span aria-hidden="true">$</span> open ./ui-work <span aria-hidden="true">↓</span></a>
@@ -59,19 +59,19 @@ export default function PortfolioPage() {
         </div>
         <div className="pf-hero-copy">
           <p>
-            커머스·게임·플랫폼 서비스에서 13년간 UI를 개발하고 운영했습니다.
-            복잡한 화면의 변경 범위와 검증 기준을 기획·디자인·백엔드 담당자와 조율하고
-            운영 중인 서비스에 안정적으로 반영해왔습니다.
+            11번가에서는 모바일웹 상품상세와 앱 WebView UI를 담당하며,
+            다양한 상품 유형과 기기·브라우저 환경에서 발생하는 문제에 대응해왔습니다.
+            기획·디자인·백엔드 담당자와 변경 범위를 맞추고 배포 전후 결과를 확인했습니다.
           </p>
           <p>
-            회사에서 제공한 PR Review Agent를 여러 저장소에 적용하는 과정에 참여해
-            파일 필터와 리뷰 기준을 설정했습니다. 반복적인 컨벤션은 AI가 먼저 확인하고,
-            설계와 영향 범위, 예외는 사람이 판단하도록 역할을 나눴습니다.
+            하이브랩에서는 네이버·커머스·게임 프로젝트의 UI를 개발했고,
+            약 3년간 팀장으로 업무 분배, 공수 산정, 품질 관리와
+            클라이언트 커뮤니케이션을 담당했습니다.
           </p>
           <p>
-            개인 프로젝트는 문제와 구현 범위를 먼저 정한 뒤 AI 코딩 도구로 만들고,
-            실제 실행과 테스트로 결과를 확인합니다. AX Doctor, Agent Bridge, Obsidian RAG와
-            BabyPick에는 확인한 범위와 아직 해결하지 못한 한계까지 함께 기록하고 있습니다.
+            최근에는 AI 도구를 대규모 전환 작업, 코드 검토와 문서 초안에 활용합니다.
+            개인 프로젝트는 문제와 구현 범위를 먼저 정하고 직접 실행한 결과와
+            아직 해결하지 못한 한계를 함께 기록합니다.
           </p>
         </div>
       </section>
@@ -83,12 +83,12 @@ export default function PortfolioPage() {
         <h2 className="pf-section-title">서비스 UI 개발과 운영 개선</h2>
         <p className="pf-section-lead">
           운영 중인 화면을 바꿀 때는 구현뿐 아니라 영향 범위, 협업 대상, 검증 기준과 반영 이후의 결과까지 함께 확인합니다.
-          여러 도메인이 맞물리는 화면을 맡으며 변경 단위를 나누고 안정적으로 반영하는 경험을 쌓았습니다.
+          여러 도메인이 맞물리는 화면을 운영하며 변경 단위를 나누고 안정적으로 반영하는 경험을 쌓았습니다.
         </p>
         <div className="pf-poc-grid">
           <div className="pf-poc-card">
             <h4>모바일웹 PDP 운영</h4>
-            <p>가격, 옵션, 리뷰, 배송, 프로모션처럼 여러 도메인이 맞물리는 상품상세 UI를 맡으며 기획·디자인·백엔드와 영향 범위를 확인했습니다.</p>
+            <p>가격, 옵션, 리뷰, 배송, 프로모션처럼 여러 도메인이 맞물리는 상품상세 UI를 운영하며 기획·디자인·백엔드와 영향 범위를 확인했습니다.</p>
           </div>
           <div className="pf-poc-card">
             <h4>SCSS 구조와 CSS 의존성 개선</h4>
@@ -96,7 +96,7 @@ export default function PortfolioPage() {
           </div>
           <div className="pf-poc-card">
             <h4>컴포넌트 검증과 문서화</h4>
-            <p>Storybook 기반 확인 환경과 기술 문서로 신규 작업자 온보딩, 기존 화면 수정, 컴포넌트 단위 커뮤니케이션에 필요한 기준을 정리했습니다.</p>
+            <p>컴포넌트의 상태를 Storybook에서 확인하고, 신규 작업자 온보딩과 기존 화면 수정에 필요한 기준을 기술 문서로 정리했습니다.</p>
           </div>
         </div>
       </section>
@@ -498,8 +498,8 @@ export default function PortfolioPage() {
       <div className="pf-footer">
         <p className="pf-footer-name">김성재</p>
         <p className="pf-footer-copy">
-          서비스 UI 개발·운영과 레거시 현대화 경험을 바탕으로,
-          AI를 활용해 개발과 검증 과정을 개선하고 있습니다.
+          서비스 UI를 오래 운영하며 쌓은 경험을 바탕으로,
+          운영 중인 화면과 오래된 구조를 함께 다룹니다.
         </p>
         <nav className="pf-footer-actions" aria-label="Portfolio 다음 이동">
           <a href="/career">전체 경력 보기 →</a>

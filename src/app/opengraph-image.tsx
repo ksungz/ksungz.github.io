@@ -54,7 +54,7 @@ export default function OpenGraphImage() {
               fontSize: 28,
             }}
           >
-            Service UI · Legacy Modernization · AI-assisted Development
+            Service UI · WebView · Legacy Modernization
           </div>
         </div>
         <div

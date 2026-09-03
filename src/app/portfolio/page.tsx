@@ -12,15 +12,14 @@ export default function PortfolioPage() {
         </a>
         <nav className="pf-cli-nav" aria-label="포트폴리오 탐색">
           <a href="#work">UI Experience</a>
-          <a href="#case-study">UI Case Study</a>
+          <a href="#react-work">Work Case</a>
+          <a href="#case-study">Public UI</a>
           <a href="#workflow">AI-assisted Work</a>
           <a href="#ai-products">Side Projects</a>
-          <a href="#ax-doctor">AI Tools</a>
-          <a href="#agents">Agent Experiments</a>
           <a href="/career">Career</a>
           <a href="mailto:k.suzkim@gmail.com">Contact</a>
         </nav>
-        <p className="pf-cli-status"><i aria-hidden="true" /> Frontend Engineer · Service UI</p>
+        <p className="pf-cli-status"><i aria-hidden="true" /> Frontend Engineer | Service UI</p>
       </header>
 
       <main className="pf-main">
@@ -29,7 +28,7 @@ export default function PortfolioPage() {
       <header className="pf-hero" id="top">
         <div className="pf-hero-meta">
           <span>README.md / profile</span>
-          <span><i aria-hidden="true" /> updated · 2026</span>
+          <span><i aria-hidden="true" /> updated 2026</span>
         </div>
         <p className="pf-hero-command"><span aria-hidden="true">$</span> whoami</p>
         <h1>김성재</h1>
@@ -45,7 +44,7 @@ export default function PortfolioPage() {
           <Link
             className="pf-3d-link"
             href="/products"
-            aria-label="AI를 활용한 작업 목록 열기"
+            aria-label="개인 프로젝트 목록 열기"
           >
             <span aria-hidden="true">◆</span> open ./products
           </Link>
@@ -60,18 +59,18 @@ export default function PortfolioPage() {
         <div className="pf-hero-copy">
           <p>
             11번가에서는 모바일웹 상품상세와 앱 WebView UI를 담당하며,
-            다양한 상품 유형과 기기·브라우저 환경에서 발생하는 문제에 대응해왔습니다.
-            기획·디자인·백엔드 담당자와 변경 범위를 맞추고 배포 전후 결과를 확인했습니다.
+            다양한 상품 유형과 기기, 브라우저 환경에 미치는 영향을 확인하며 변경 사항을 반영했습니다.
+            기획, 디자인, 백엔드 담당자와 범위를 맞추고 배포 전후 결과를 확인했습니다.
           </p>
           <p>
-            하이브랩에서는 네이버·커머스·게임 프로젝트의 UI를 개발했고,
+            React 기반 신규 UI 블록 약 18개를 구현하고, 공통 스타일을 제외한 운영 블록 SCSS 약 108개를
+            컴포넌트 구조에 맞춰 재구성해 상품상세 첫 화면(ATF) 개선에 반영했습니다.
+          </p>
+          <p>
+            하이브랩에서는 네이버, 커머스, 게임 프로젝트의 UI를 개발했고,
             약 3년간 팀장으로 업무 분배, 공수 산정, 품질 관리와
             클라이언트 커뮤니케이션을 담당했습니다.
-          </p>
-          <p>
-            최근에는 AI 도구를 대규모 전환 작업, 코드 검토와 문서 초안에 활용합니다.
-            개인 프로젝트는 문제와 구현 범위를 먼저 정하고 직접 실행한 결과와
-            아직 해결하지 못한 한계를 함께 기록합니다.
+            AI 도구는 반복 변환과 코드 검토를 보조하는 수단으로 사용하고 최종 결과는 직접 확인합니다.
           </p>
         </div>
       </section>
@@ -87,16 +86,68 @@ export default function PortfolioPage() {
         </p>
         <div className="pf-poc-grid">
           <div className="pf-poc-card">
-            <h4>모바일웹 PDP 운영</h4>
-            <p>가격, 옵션, 리뷰, 배송, 프로모션처럼 여러 도메인이 맞물리는 상품상세 UI를 운영하며 기획·디자인·백엔드와 영향 범위를 확인했습니다.</p>
+            <h4>모바일웹 PDP와 WebView 운영</h4>
+            <p>가격, 옵션, 리뷰, 배송, 프로모션처럼 여러 영역이 맞물리는 상품상세 UI를 운영하며 기획, 디자인, 백엔드 담당자와 영향 범위를 확인했습니다.</p>
           </div>
           <div className="pf-poc-card">
-            <h4>SCSS 구조와 CSS 의존성 개선</h4>
-            <p>AI 보조 도구를 활용해 2,384개 SCSS 파일을 Dart Sass로 전환하고 CSS 산출물과 빌드 결과를 직접 확인했습니다. 이후 HTML/SCSS 기반 화면의 React·TypeScript 컴포넌트 이관에 참여하며, 분산된 CSS를 프로젝트 안으로 옮겨 화면 코드와 스타일 변경 맥락을 함께 관리하도록 정리했습니다.</p>
+            <h4>React UI와 운영 SCSS 내재화</h4>
+            <p>신규 UI 블록 약 18개를 구현하고, 별도 저장소의 운영 블록 SCSS 약 108개를 React 구조에 맞춰 재구성해 코드와 스타일을 같은 작업 맥락에서 확인할 수 있도록 했습니다.</p>
           </div>
           <div className="pf-poc-card">
-            <h4>컴포넌트 검증과 문서화</h4>
-            <p>컴포넌트의 상태를 Storybook에서 확인하고, 신규 작업자 온보딩과 기존 화면 수정에 필요한 기준을 기술 문서로 정리했습니다.</p>
+            <h4>Dart Sass와 빌드 개선</h4>
+            <p>약 2,384개 SCSS 파일을 Dart Sass로 전환하고 산출물을 직접 확인했습니다. 별도 작업으로 직렬 빌드를 병렬화해 약 24초에서 14초 내외로 줄였습니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <hr className="pf-divider" />
+
+      {/* 실제 서비스에 반영한 구조 개선 */}
+      <section className="pf-section" id="react-work">
+        <h2 className="pf-section-title">React UI 블록 구현과 운영 SCSS 내재화</h2>
+        <p className="pf-section-lead">
+          React 컴포넌트와 운영 스타일이 서로 다른 저장소에 있어 변경에 필요한 맥락을 한 번에 확인하기 어려웠습니다.
+          파일을 옮기는 데 그치지 않고 React 구조에 맞는 스타일 관리 단위를 다시 정해 실제 서비스에 반영했습니다.
+        </p>
+
+        <div className="pf-project">
+          <div className="pf-project-header">
+            <h3>상품상세 첫 화면(ATF) 구조 개선</h3>
+            <Link className="pf-project-link" href="/engineering/react-pdp">상세 기록 →</Link>
+            <span className="pf-badge pf-badge-live">서비스 반영</span>
+          </div>
+          <p className="pf-project-desc">
+            React 기반 신규 UI 블록 약 18개를 구현했습니다. 공통 스타일을 제외한 기존 운영 블록 SCSS 약 108개는
+            React 컴포넌트의 분리 기준에 맞춰 화면 블록 단위로 재구성하고 내재화했습니다.
+          </p>
+          <div className="pf-detail">
+            <h4>판단한 기준</h4>
+            <ul>
+              <li>기존 SCSS와 React 컴포넌트의 분리 기준이 달라 모든 스타일을 강제로 1:1 매칭하지 않음</li>
+              <li>기존 스타일은 화면 블록을 기준으로 관련 SCSS를 모아 관리</li>
+              <li>신규 UI는 컴포넌트와 스타일 블록이 대응하도록 구성</li>
+              <li>여러 화면이 함께 사용하는 공통 SCSS는 이번 내재화 범위에서 제외</li>
+            </ul>
+          </div>
+          <div className="pf-detail">
+            <h4>확인한 결과</h4>
+            <ul>
+              <li>대상으로 정한 운영 블록 SCSS를 React 저장소로 모두 이동</li>
+              <li>컴포넌트 코드와 관련 스타일을 한 저장소에서 확인할 수 있는 구조 마련</li>
+              <li>개발자와 AI 보조 도구가 코드와 스타일의 맥락을 함께 확인할 수 있도록 작업 범위 정리</li>
+              <li>신규 UI 블록과 내재화된 스타일을 상품상세 첫 화면 개선에 반영</li>
+            </ul>
+          </div>
+          <p className="pf-project-desc">
+            운영 블록 약 108개와 신규 UI 블록 약 18개는 분류 기준이 달라 합산하지 않습니다.
+            개발 시간이나 오류 감소율도 별도로 측정하지 않아 성과 수치로 사용하지 않습니다.
+          </p>
+          <div className="pf-chips">
+            <span className="pf-chip">React</span>
+            <span className="pf-chip">TypeScript</span>
+            <span className="pf-chip">SCSS</span>
+            <span className="pf-chip">Storybook</span>
+            <span className="pf-chip">WebView</span>
           </div>
         </div>
       </section>
@@ -108,7 +159,7 @@ export default function PortfolioPage() {
         <h2 className="pf-section-title">업무 경험을 바탕으로 새로 만든 UI</h2>
         <p className="pf-section-lead">
           상품상세 UI를 운영하며 자주 마주친 상태와 예외 케이스를 바탕으로 옵션 선택 흐름을 새로 설계했습니다.
-          색상·사이즈 조합, 재고, 추가 금액, 모바일 화면 전환을 React 컴포넌트로 구현하고 확인 결과를 Storybook에 남겼습니다.
+          색상과 사이즈 조합, 재고, 추가 금액, 모바일 화면 전환을 React 컴포넌트로 구현하고 확인 결과를 Storybook에 남겼습니다.
         </p>
 
         <div className="pf-project">
@@ -145,8 +196,8 @@ export default function PortfolioPage() {
               <li>색상 변경 시 기존 사이즈가 품절이면 선택 해제</li>
               <li>품절, 재고 부족, 옵션 추가 금액, 최대 구매 수량 처리</li>
               <li>필수 옵션 누락 시 오류 메시지와 해당 그룹으로 포커스 이동</li>
-              <li>320px·390px·1440px 레이아웃과 모바일 하단 안전 영역 확인</li>
-              <li>Storybook 접근성 위반 0건, TypeScript·ESLint·테스트·원격 빌드 통과</li>
+              <li>320px, 390px, 1440px 레이아웃과 모바일 하단 안전 영역 확인</li>
+              <li>Storybook 접근성 위반 0건, TypeScript, ESLint, 테스트와 원격 빌드 통과</li>
             </ul>
           </div>
           <div className="pf-chips">
@@ -168,7 +219,7 @@ export default function PortfolioPage() {
         <p className="pf-section-lead">
           회사에서 제공한 도구와 승인된 연동을 실제 개발 흐름에 적용하고,
           반복 작업의 규칙과 사람이 최종 판단할 범위를 정리했습니다.
-          도구 자체 개발과 제가 담당한 도입·설정·운영 범위는 구분해서 기록합니다.
+          도구 자체 개발과 제가 담당한 도입, 설정, 운영 범위는 구분해서 기록합니다.
         </p>
 
         <div className="pf-project">
@@ -185,7 +236,7 @@ export default function PortfolioPage() {
           <div className="pf-detail">
             <h4>한 일</h4>
             <ul>
-              <li><strong>Cursor 규칙·스킬</strong> — UI 개발 기준, Git/PR 흐름, 리뷰 기준을 팀에서 재사용할 수 있게 정리</li>
+              <li><strong>Cursor 규칙과 스킬</strong> — UI 개발 기준, Git/PR 흐름, 리뷰 기준을 팀에서 재사용할 수 있게 정리</li>
               <li><strong>MCP 연동</strong> — 승인된 업무 범위 안에서 Jira, Confluence, 코드 저장소 문맥을 참고하는 흐름 구성</li>
               <li><strong>설정 배포</strong> — 여러 저장소에 흩어진 AI 설정을 한 곳에서 관리하고 동기화하는 방식 구성</li>
               <li><strong>반복 산출물 표준화</strong> — PR 설명, 커밋 메시지, 작업 계획, 위키 초안을 같은 형식으로 생성하도록 정리</li>
@@ -197,7 +248,7 @@ export default function PortfolioPage() {
             <ul>
               <li>개인마다 달랐던 프롬프트와 작성 형식을 팀 공통 규칙으로 정리</li>
               <li>PR, 커밋, 위키, QA 산출물을 일정한 형식의 초안으로 생성</li>
-              <li>반복 항목은 AI의 1차 확인 대상으로 옮기고, 맥락·영향 범위·예외 케이스는 사람이 최종 검증</li>
+              <li>반복 항목은 AI의 1차 확인 대상으로 옮기고, 맥락, 영향 범위와 예외 케이스는 사람이 최종 검증</li>
               <li>참고할 문맥의 범위와 공개 문서에 남기지 말아야 할 정보를 사용 기준에 포함</li>
             </ul>
           </div>
@@ -229,7 +280,7 @@ export default function PortfolioPage() {
               <li>SCSS, HTML 마크업 중심으로 파일 필터링 규칙 설정</li>
               <li>팀의 접근성, BEM, SCSS 컨벤션을 리뷰 기준에 반영</li>
               <li>자동 트리거와 수동 트리거 방식을 나눠 실제 업무 흐름에 맞게 조정</li>
-              <li>반복 컨벤션과 설계·영향 범위 검토 항목을 분리</li>
+              <li>반복 컨벤션과 설계, 영향 범위 검토 항목을 분리</li>
             </ul>
           </div>
           <div className="pf-detail">
@@ -250,71 +301,6 @@ export default function PortfolioPage() {
           </div>
         </div>
 
-      </section>
-
-      <hr className="pf-divider" />
-
-      {/* AI 개발 환경 도입 전 점검 도구 */}
-      <section className="pf-section pf-section-dark" id="ax-doctor">
-        <h2 className="pf-section-title">AI 개발 환경 도입 전 점검 도구</h2>
-        <p className="pf-section-lead">
-          개인 AI 작업 환경을 정리하면서 새 설정을 설치하기 전에 기존 도구와 충돌하지 않는지,
-          확인하지 못한 영역은 없는지 먼저 점검할 필요가 있었습니다.
-          설치기와 분리된 읽기 전용 CLI로 문제와 판정 기준을 다시 정의하고,
-          AI 코딩 에이전트를 활용해 구현한 뒤 합성 시나리오와 테스트로 검증했습니다.
-        </p>
-
-        <div className="pf-project">
-          <div className="pf-project-header">
-            <h3>AX Doctor</h3>
-            <a className="pf-project-link" href="/engineering/ax-doctor-preflight" target="_blank" rel="noopener noreferrer">만든 과정 ↗</a>
-            <a className="pf-project-link" href="https://github.com/ksungz/ax-doctor" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-            <span className="pf-badge pf-badge-live">오픈소스</span>
-          </div>
-          <p className="pf-project-desc">
-            현재 환경에 이미 있는 AI 클라이언트와 공용 자산, 개인·조직 정책, 새로 도입할 대상을 나눠 입력받고
-            충돌과 정책 차이, 미확인 범위를 근거와 함께 보고서로 남기는 도구입니다.
-            자동 설치나 수정은 하지 않고 도입 진행 여부를 판단하는 데 필요한 정보만 제공합니다.
-          </p>
-          <figure className="pf-demo-figure">
-            <img
-              src="/portfolio/ax-doctor-live-demo.png"
-              alt="AX Doctor 합성 safe 시나리오가 READY_WITH_CONDITIONS, risky 시나리오가 NOT_READY로 판정된 실제 CLI 실행 화면"
-            />
-            <figcaption>
-              2026년 7월 26일 실제 명령 실행 결과입니다. 두 시나리오 모두 합성 데이터만 사용하며,
-              실제 HOME, AI 설정, 인증정보, 프로세스와 네트워크는 읽지 않습니다.
-            </figcaption>
-          </figure>
-          <div className="pf-detail">
-            <h4>문제를 나눈 방식</h4>
-            <ul>
-              <li><strong>Profile</strong> — 허용할 클라이언트와 파일 접근, 네트워크, 비밀정보 보관 기준을 선언</li>
-              <li><strong>Target manifest</strong> — 새 패키지가 만들거나 바꾸려는 파일과 설정을 실행 없이 기술</li>
-              <li><strong>Read-only preflight</strong> — 승인된 범위만 조사하고 현재 상태와 도입 이후 상태를 비교</li>
-              <li><strong>Evidence report</strong> — 판정뿐 아니라 근거, 검사 범위와 확인하지 못한 항목을 함께 기록</li>
-            </ul>
-          </div>
-          <div className="pf-detail">
-            <h4>현재 검증한 범위</h4>
-            <ul>
-              <li>Codex, Claude와 공용 자산을 가정한 합성 환경에서 <strong>scope → scan → report</strong> 흐름 재현</li>
-              <li><strong>safe</strong>는 READY_WITH_CONDITIONS, <strong>risky</strong>는 NOT_READY로 판정하는 CLI 데모 구현</li>
-              <li>각 실행 결과는 JSON, Markdown, 검사 범위 기록 세 파일로 생성</li>
-              <li>미지원 입력은 무시하지 않고 중단하며, 확인하지 못한 항목은 통과로 추정하지 않도록 처리</li>
-              <li>macOS arm64에서 전체 테스트 게이트와 종료 코드를 재검증하고, 비정규 출력 경로는 <strong>AXD-OUTPUT-UNSAFE</strong>로 중단되는 동작 확인</li>
-              <li>실제 사용자 환경을 읽는 기능이 연결되기 전까지 일반 실행 명령은 의도적으로 비활성화</li>
-            </ul>
-          </div>
-          <div className="pf-chips">
-            <span className="pf-chip">Go</span>
-            <span className="pf-chip">CLI</span>
-            <span className="pf-chip">JSON Schema</span>
-            <span className="pf-chip">Threat Modeling</span>
-            <span className="pf-chip">Synthetic Test</span>
-            <span className="pf-chip">AI Agent</span>
-          </div>
-        </div>
       </section>
 
       <hr className="pf-divider" />
@@ -340,7 +326,7 @@ export default function PortfolioPage() {
               <p>
                 육아용품 가이드와 상품 정보를 함께 제공하는 커머스 서비스입니다.
                 Search Console 키워드, GAS, LLM과 API 웹훅을 연결해 공식 가이드를 자동 발행하고 있습니다.
-                네이버 블로그와 인스타그램은 초안·콘텐츠 패키지와 검수 대기열까지만 준비하고 공개는 사람이 결정합니다.
+                네이버 블로그와 인스타그램은 초안과 콘텐츠 패키지, 검수 대기열까지만 준비하고 공개는 사람이 결정합니다.
               </p>
               <div className="pf-chips">
                 <span className="pf-chip">Next.js</span>
@@ -362,7 +348,7 @@ export default function PortfolioPage() {
               </div>
               <p>
                 쇼츠 영상에서 소개한 상품을 한곳에서 확인할 수 있도록 만든 서비스입니다.
-                랜딩 페이지와 상품 등록·수정 어드민, 통계 화면을 함께 운영하며 노출 상품과 화면 구성을 조정하고 있습니다.
+                랜딩 페이지와 상품 등록, 수정 어드민, 통계 화면을 함께 운영하며 노출 상품과 화면 구성을 조정하고 있습니다.
               </p>
               <div className="pf-chips">
                 <span className="pf-chip">Next.js 16</span>
@@ -398,102 +384,6 @@ export default function PortfolioPage() {
 
       <hr className="pf-divider" />
 
-      {/* 에이전트 운영 환경 */}
-      <section className="pf-section pf-section-dark" id="agents">
-        <h2 className="pf-section-title">AI 에이전트 작업 환경</h2>
-        <p className="pf-section-lead">
-          기존 로그인·구독 환경을 유지한 여러 AI CLI를 한 작업 단위로 연결하고,
-          Hermes와 Obsidian RAG를 조합해 개인 작업 환경을 구성했습니다.
-          문서 출처와 접근 범위, 작업 로그를 남겨 결과와 실행 과정을 다시 확인할 수 있게 했습니다.
-        </p>
-
-        <div className="pf-project" id="agent-bridge">
-          <div className="pf-project-header">
-            <h3>Agent Bridge</h3>
-            <a className="pf-project-link" href="https://github.com/ksungz/agent-bridge" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-            <span className="pf-badge pf-badge-live">오픈소스</span>
-          </div>
-          <p className="pf-project-desc">
-            Claude Code, Codex와 Gemini CLI를 각각 구독·로그인한 상태에서
-            API 키 기반 모델 라우터 없이 하나의 작업에 함께 사용하기 위해 만든 로컬 오케스트레이션 CLI입니다.
-            각 도구의 인증과 결제는 그대로 유지하고, 공통 목표와 결정, 실행·리뷰 기록과 인계 문서만 한 작업 폴더에서 관리합니다.
-          </p>
-          <figure className="pf-demo-figure">
-            <img
-              src="/portfolio/agent-bridge-live-demo.png"
-              alt="Agent Bridge가 공개 샘플 작업을 만들고 로그인된 Codex CLI의 실행 기록과 handoff 문서를 생성한 실제 화면"
-            />
-            <figcaption>
-              사용자 파일이 없는 공개 샘플 작업에서 로그인된 Codex CLI를 실제 연결했습니다.
-              Agent Bridge는 실행 결과를 작업 폴더에 기록하고 다음 도구가 이어갈 handoff 문서를 생성합니다.
-            </figcaption>
-          </figure>
-          <div className="pf-detail">
-            <h4>만든 이유</h4>
-            <ul>
-              <li>각각 로그인된 로컬 CLI를 한 작업 안에서 선택해 실행</li>
-              <li>다음 에이전트에게 요청과 이전 결정을 다시 설명하는 과정 축소</li>
-              <li>여러 에이전트의 실행 결과와 리뷰를 비교 가능한 기록으로 보존</li>
-              <li>API 프록시나 구독 우회 없이 기존 도구의 실행 환경 유지</li>
-            </ul>
-          </div>
-          <div className="pf-detail">
-            <h4>현재 구현 범위</h4>
-            <ul>
-              <li><strong>Task workspace</strong> — 목표, 공통 맥락, 결정과 실행 기록을 파일로 관리</li>
-              <li><strong>CLI adapter</strong> — 명령어 기반 AI 도구를 JSON 설정으로 연결</li>
-              <li><strong>Review</strong> — 여러 에이전트에 같은 검토 요청을 실행하고 결과 기록</li>
-              <li><strong>Handoff</strong> — 다음 에이전트가 이어갈 목표, 결정과 최근 실행을 문서로 생성</li>
-              <li>공개 GitHub 설치부터 Codex CLI 실행과 handoff 생성을 재검증하고, 기록에 포함된 홈 경로를 <strong>v0.1.1</strong>에서 마스킹</li>
-              <li>컨텍스트 자동 압축이나 에이전트별 파일 선별은 아직 구현하지 않음</li>
-            </ul>
-          </div>
-          <div className="pf-chips">
-            <span className="pf-chip">Node.js</span>
-            <span className="pf-chip">TypeScript</span>
-            <span className="pf-chip">CLI</span>
-            <span className="pf-chip">Multi-Agent</span>
-            <span className="pf-chip">Handoff</span>
-            <span className="pf-chip">MIT</span>
-          </div>
-        </div>
-
-        <div className="pf-project">
-          <div className="pf-project-header">
-            <h3>Hermes와 Obsidian RAG를 연결한 작업 환경</h3>
-            <a className="pf-project-link" href="/engineering/ai-workspace" target="_blank" rel="noopener noreferrer">초기 구조 ↗</a>
-            <a className="pf-project-link" href="/engineering/hermes-agent-runtime" target="_blank" rel="noopener noreferrer">전환 과정 ↗</a>
-            <a className="pf-project-link" href="/engineering/obsidian-rag" target="_blank" rel="noopener noreferrer">RAG 글 ↗</a>
-          </div>
-          <p className="pf-project-desc">
-            OpenClaw로 시작한 개인 에이전트 환경을 Hermes 중심으로 정리하고, Obsidian 문서를 로컬 RAG로 인덱싱했습니다.
-            답변에 사용된 문서와 작업 과정을 함께 남겨 이후에도 출처와 실행 내용을 확인할 수 있게 했습니다.
-          </p>
-          <div className="pf-detail">
-            <h4>운영하며 정한 기준</h4>
-            <ul>
-              <li><strong>문서 출처</strong> — 답변에 사용한 원본 문서를 함께 반환하도록 설계</li>
-              <li><strong>접근 범위</strong> — 읽을 수 있는 파일과 실행할 수 있는 도구를 각각 제한</li>
-              <li><strong>작업 로그</strong> — 판단 근거, 실패 지점, 다음 액션을 함께 기록</li>
-              <li><strong>결과 확인</strong> — 코드, 문서, 체크리스트 초안을 실행 전후에 확인할 수 있도록 기록</li>
-              <li><strong>로컬 검색</strong> — 외부 전송 범위와 로컬 처리 범위를 구분</li>
-            </ul>
-          </div>
-          <ObsidianRagDiagram />
-          <div className="pf-chips">
-            <span className="pf-chip">OpenClaw</span>
-            <span className="pf-chip">Hermes Agent</span>
-            <span className="pf-chip">Obsidian RAG</span>
-            <span className="pf-chip">MCP</span>
-            <span className="pf-chip">FastAPI</span>
-            <span className="pf-chip">ChromaDB</span>
-          </div>
-        </div>
-      </section>
-
-
-      <hr className="pf-divider" />
-
       {/* FOOTER */}
       <div className="pf-footer">
         <p className="pf-footer-name">김성재</p>
@@ -503,6 +393,7 @@ export default function PortfolioPage() {
         </p>
         <nav className="pf-footer-actions" aria-label="Portfolio 다음 이동">
           <a href="/career">전체 경력 보기 →</a>
+          <a href="/products">개인 프로젝트 보기 →</a>
           <a href="mailto:k.suzkim@gmail.com">이메일 보내기 →</a>
         </nav>
       </div>
@@ -510,62 +401,10 @@ export default function PortfolioPage() {
 
       <div className="pf-statusbar" role="status" aria-label="Portfolio 상태">
         <span><i aria-hidden="true" /> ready</span>
-        <span>Frontend · Service UI</span>
+        <span>Frontend | Service UI</span>
         <span>UTF-8</span>
-        <span>320 · 390 · 1440</span>
+        <span>320, 390, 1440</span>
       </div>
-    </div>
-  );
-}
-
-function ObsidianRagDiagram() {
-  return (
-    <div className="pf-diagram">
-      <svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Obsidian RAG 검색 레이어 구조" style={{ width: "100%", height: "auto" }}>
-        <defs>
-          <marker id="ragArrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-            <path d="M0,0 L8,3 L0,6" fill="#2457d6" />
-          </marker>
-          <marker id="ragArrowGreen" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-            <path d="M0,0 L8,3 L0,6" fill="#2457d6" />
-          </marker>
-        </defs>
-
-        <rect x="20" y="70" width="130" height="70" rx="8" fill="#f4f6f7" stroke="#2457d6" strokeWidth="1.5" />
-        <text x="85" y="98" textAnchor="middle" fill="#2457d6" fontSize="12" fontWeight="700">Obsidian Vault</text>
-        <text x="85" y="116" textAnchor="middle" fill="#5b6367" fontSize="9">문서 · 메모 · 작업 기록</text>
-
-        <rect x="205" y="35" width="130" height="46" rx="8" fill="#f4f6f7" stroke="#d8dee1" />
-        <text x="270" y="57" textAnchor="middle" fill="#111413" fontSize="11" fontWeight="600">Watcher</text>
-        <text x="270" y="70" textAnchor="middle" fill="#5b6367" fontSize="9">변경 감지</text>
-
-        <rect x="205" y="112" width="130" height="46" rx="8" fill="#f4f6f7" stroke="#d8dee1" />
-        <text x="270" y="134" textAnchor="middle" fill="#111413" fontSize="11" fontWeight="600">Local Embedding</text>
-        <text x="270" y="147" textAnchor="middle" fill="#5b6367" fontSize="9">Ollama</text>
-
-        <rect x="390" y="70" width="130" height="70" rx="8" fill="#f4f6f7" stroke="#2457d6" strokeWidth="1.5" />
-        <text x="455" y="98" textAnchor="middle" fill="#2457d6" fontSize="12" fontWeight="700">RAG Server</text>
-        <text x="455" y="116" textAnchor="middle" fill="#5b6367" fontSize="9">FastAPI + ChromaDB</text>
-
-        <rect x="570" y="25" width="105" height="36" rx="8" fill="#f4f6f7" stroke="#d8dee1" />
-        <text x="622" y="47" textAnchor="middle" fill="#111413" fontSize="10">Claude Code</text>
-        <rect x="570" y="86" width="105" height="36" rx="8" fill="#f4f6f7" stroke="#d8dee1" />
-        <text x="622" y="108" textAnchor="middle" fill="#111413" fontSize="10">Hermes</text>
-        <rect x="570" y="147" width="105" height="36" rx="8" fill="#f4f6f7" stroke="#d8dee1" />
-        <text x="622" y="169" textAnchor="middle" fill="#111413" fontSize="10">Codex / CLI</text>
-
-        <line x1="150" y1="92" x2="203" y2="60" stroke="#2457d6" strokeWidth="1.4" markerEnd="url(#ragArrowGreen)" />
-        <line x1="150" y1="118" x2="203" y2="135" stroke="#2457d6" strokeWidth="1.4" markerEnd="url(#ragArrowGreen)" />
-        <line x1="335" y1="58" x2="388" y2="92" stroke="#2457d6" strokeWidth="1.4" markerEnd="url(#ragArrow)" />
-        <line x1="335" y1="135" x2="388" y2="118" stroke="#2457d6" strokeWidth="1.4" markerEnd="url(#ragArrow)" />
-        <line x1="520" y1="92" x2="568" y2="43" stroke="#2457d6" strokeWidth="1.2" markerEnd="url(#ragArrow)" />
-        <line x1="520" y1="105" x2="568" y2="105" stroke="#2457d6" strokeWidth="1.2" markerEnd="url(#ragArrow)" />
-        <line x1="520" y1="118" x2="568" y2="165" stroke="#2457d6" strokeWidth="1.2" markerEnd="url(#ragArrow)" />
-
-        <text x="350" y="196" textAnchor="middle" fill="#5b6367" fontSize="9">
-          한 번 인덱싱한 Obsidian 문맥을 여러 에이전트가 같은 방식으로 검색
-        </text>
-      </svg>
     </div>
   );
 }

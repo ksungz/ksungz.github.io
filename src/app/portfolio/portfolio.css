@@ -1382,6 +1382,7 @@ body:has(.portfolio-root) {
   color: #bcc6d7;
   font-size: 13px;
   text-underline-offset: 5px;
+  white-space: nowrap;
 }
 
 .pf-cli-nav a:hover,
@@ -1739,7 +1740,7 @@ body:has(.portfolio-root) {
   background: var(--blue);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1180px) {
   .pf-cli-header {
     grid-template-columns: 1fr auto;
     min-height: 98px;
@@ -2179,6 +2180,7 @@ body:has(.portfolio-root) {
   max-width: 820px;
   color: var(--ink);
   font-size: 42px;
+  word-break: keep-all;
 }
 
 .pf-hero-status {
@@ -2282,6 +2284,7 @@ body:has(.portfolio-root) {
 .pf-section-title {
   margin-bottom: 46px;
   font-size: 32px;
+  word-break: keep-all;
 }
 
 .pf-section-title > span {

@@ -967,7 +967,12 @@
       (index + 1) +
       "번 문항 선택지\">" +
       options +
-      "</div>"
+      "</div>" +
+      (reviewMode
+        ? ""
+        : "<p class=\"quick-answer\" aria-label=\"이 문항의 정답\">정답 " +
+          (question.answer + 1) +
+          "번</p>")
     );
   }
 
@@ -1007,7 +1012,7 @@
       domainItems +
       "</ol>" +
       "<div class=\"start-notes\">" +
-      "<p>중간에는 정답과 해설이 표시되지 않으며, 제출하거나 시간이 끝난 뒤 확인할 수 있습니다.</p>" +
+      "<p>각 문항 아래에서 정답 번호를 바로 확인할 수 있으며, 해설은 제출하거나 시간이 끝난 뒤 볼 수 있습니다.</p>" +
       "<p>공식 공개 평가의 유형을 참고해 새로 작성한 실전형 문항이며 실제 기출문제는 아닙니다.</p>" +
       "</div>" +
       "<div class=\"start-action\">" +

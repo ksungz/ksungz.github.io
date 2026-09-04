@@ -2,7 +2,7 @@
   "use strict";
 
   var EXAM_SECONDS = 50 * 60;
-  var STORAGE_KEY = "gtp-ncs-mock-test-v1";
+  var STORAGE_KEY = "gtp-ncs-mock-test-v2";
   var DOMAIN_ORDER = [
     "의사소통능력",
     "수리능력",
@@ -741,6 +741,10 @@
     },
   ];
 
+  if (Array.isArray(window.NCS_MOCK_ADVANCED_QUESTIONS)) {
+    questions = window.NCS_MOCK_ADVANCED_QUESTIONS;
+  }
+
   var app = document.getElementById("app");
   var modalRoot = document.getElementById("modal-root");
   var timerId = null;
@@ -988,9 +992,9 @@
       "</header>" +
       "<main class=\"start-main\">" +
       "<section>" +
-      "<p class=\"eyebrow\">경기테크노파크 필기전형 기준</p>" +
+      "<p class=\"eyebrow\">경기테크노파크 필기전형 대비, 실전 난도</p>" +
       "<h1 class=\"start-title\">50분 동안<br />50문항</h1>" +
-      "<p class=\"start-lead\">의사소통, 수리, 문제해결, 자원관리, 조직이해 영역을 실제 시험 순서와 시간에 맞춰 풉니다.</p>" +
+      "<p class=\"start-lead\">복합 자료해석, 다단계 계산, 조건 추론과 의사결정 문항을 50분 안에 풉니다.</p>" +
       "<div class=\"format-strip\" aria-label=\"시험 형식\">" +
       "<div class=\"format-item\"><span class=\"format-value\">50분</span><span class=\"format-label\">제한 시간</span></div>" +
       "<div class=\"format-item\"><span class=\"format-value\">50</span><span class=\"format-label\">전체 문항</span></div>" +
@@ -1004,7 +1008,7 @@
       "</ol>" +
       "<div class=\"start-notes\">" +
       "<p>중간에는 정답과 해설이 표시되지 않으며, 제출하거나 시간이 끝난 뒤 확인할 수 있습니다.</p>" +
-      "<p>공식 출제 영역을 기준으로 새로 작성한 연습문제이며 실제 기출문제는 아닙니다.</p>" +
+      "<p>공식 공개 평가의 유형을 참고해 새로 작성한 실전형 문항이며 실제 기출문제는 아닙니다.</p>" +
       "</div>" +
       "<div class=\"start-action\">" +
       resume +

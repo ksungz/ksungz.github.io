@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 const uiCaseStudies = [
   {
     id: "react-style-internalization",
-    title: "React UI 블록 구현과 운영 SCSS 내재화",
-    excerpt: "신규 UI 블록 약 18개를 구현하고, 공통 스타일을 제외한 운영 블록 SCSS 약 108개를 React 구조에 맞춰 재구성해 상품상세 첫 화면(ATF) 개선에 반영했습니다.",
+    title: "상품상세 스타일을 React 저장소로 옮기며 정한 기준",
+    excerpt: "AI 개발 흐름을 개선하려고 운영 SCSS를 옮겼습니다. 컴포넌트와 SCSS의 분리 단위가 달라 화면 블록별로 묶었고, 신규 UI 블록 약 18개의 스타일 작업을 실제 상품상세 개선에 반영했습니다.",
     href: "/engineering/react-pdp",
     tags: ["React", "TypeScript", "SCSS", "Production"],
   },
@@ -102,8 +102,8 @@ export default function CaseStudies() {
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">Case Studies</p>
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">구현과 개선 사례</h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
-          서비스 UI를 운영하며 발견한 문제, 선택한 변경 방식과 확인한 결과를 정리했습니다.
-          각 사례에는 직접 맡은 범위와 확인한 결과를 구분해 적었습니다.
+          서비스 UI를 운영하면서 어떤 문제를 만났고 왜 그 방식으로 바꿨는지 정리했습니다.
+          실제 맡은 작업과 적용 후 확인한 결과를 함께 적었습니다.
         </p>
       </section>
 

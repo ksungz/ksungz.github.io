@@ -12,25 +12,25 @@ const careers = [
     team: "UI개발팀",
     period: "2020.12 ~ 2026.08",
     role: "UI 개발자",
-    summary: "모바일웹 상품상세(PDP)와 앱 WebView UI를 개발하고 운영했습니다. 신규 React UI 블록을 구현하고, 별도 저장소에서 관리하던 운영 SCSS를 React 컴포넌트 구조에 맞춰 내재화했습니다.",
+    summary: "모바일웹 상품상세(PDP)와 앱 WebView UI를 개발하고 운영했습니다. 기획, 디자인, 백엔드 담당자와 변경 범위를 조율했고, React 저장소로 스타일을 옮기는 작업에서는 기존 SCSS와 컴포넌트를 연결할 단위를 정했습니다.",
     achievements: [
       {
         title: "모바일웹 상품상세와 앱 WebView UI 개발 및 운영",
         action: "가격, 옵션, 리뷰, 배송, 프로모션 등 여러 영역이 맞물리는 상품상세 UI를 개발하고 운영했습니다. 신규 기능과 상품 유형별 변경이 미치는 범위를 기획, 디자인, 백엔드 담당자와 함께 확인했습니다.",
-        impact: "iOS와 Android 기기, 브라우저별 렌더링 차이와 앱 WebView 이슈를 확인해 운영 환경에 반영했습니다. 문제가 발생했을 때는 서버 상태와 배포 결과, 검증 환경도 직접 확인했습니다.",
-        link: "/engineering/pdp-ui",
+        impact: "iOS와 Android 기기, 브라우저별 렌더링 차이와 앱 WebView 이슈를 확인해 수정했습니다. 운영 문제가 발생했을 때는 서버 접근 권한을 받아 상태를 확인하고 배포 검증 환경도 함께 점검했습니다.",
+        link: "/tech/pdp-ui",
       },
       {
-        title: "React UI 블록 구현과 운영 SCSS 내재화",
-        action: "React 기반 신규 UI 블록 약 18개를 구현했습니다. 공통 스타일을 제외한 기존 운영 블록 SCSS 약 108개는 React 컴포넌트의 분리 기준에 맞춰 화면 블록 단위로 재구성하고 전량 내재화했습니다.",
-        impact: "기존 구조를 무리하게 1:1로 복제하지 않고 변경과 검증이 가능한 단위로 정리해 상품상세 첫 화면(ATF) 개선에 반영했습니다. 개발자와 AI 보조 도구가 코드와 스타일의 맥락을 한 저장소에서 확인할 수 있게 됐습니다.",
-        link: "/engineering/react-pdp",
+        title: "상품상세 스타일의 React 저장소 이관",
+        action: "AI 개발 흐름을 개선하려고 별도 저장소의 운영 SCSS를 React 저장소로 옮겼습니다. 기존 운영 블록 SCSS는 공통 SCSS를 제외하고 약 108개였습니다. React 컴포넌트와 나뉘는 단위가 달라 화면 블록별로 스타일을 묶는 방식을 정했습니다.",
+        impact: "대상 스타일을 모두 옮기고 신규 UI 블록 약 18개에 맞춰 연결했습니다. 컴포넌트와 스타일을 한 저장소에서 참고할 수 있게 됐고, 해당 작업은 실제 상품상세 첫 화면(ATF) 개선에 반영됐습니다.",
+        link: "/tech/react-pdp",
       },
       {
         title: "Dart Sass 전환과 빌드 병렬화",
         action: "AI 보조 도구를 활용해 약 2,384개 SCSS 파일을 Dart Sass 문법으로 전환하고, 전후 CSS 산출물과 빌드 결과를 직접 확인했습니다.",
         impact: "향후 Sass 업데이트에 대응할 기반을 마련했습니다. 별도의 빌드 개선 작업에서는 직렬 실행을 병렬화해 약 24초였던 빌드 시간을 14초 내외로 줄였습니다.",
-        link: "/engineering/dart-sass",
+        link: "/tech/dart-sass",
       },
     ],
   },
@@ -72,18 +72,18 @@ const careers = [
         title: "네이버 웨일 브라우저 공식사이트 — i-award 최우수상",
         action: "브라우저 공식사이트 UI 개발 전담.",
         impact: "i-award 최우수상 수상.",
-        link: "/engineering/whale-browser",
+        link: "/tech/whale-browser",
       },
       {
         title: "배틀그라운드 공식사이트 구축 — i-award 대상",
         action: "PUBG 공식사이트 구축 참여.",
         impact: "i-award 대상 수상.",
-        link: "/engineering/battlegrounds",
+        link: "/tech/battlegrounds",
       },
       {
-        title: "팀장 역할: 업무 분배, 품질 관리, 고객사 커뮤니케이션",
-        action: "여러 프로젝트가 동시에 진행될 때 업무 난이도와 일정 위험을 나눠 팀원별로 배분하고, 중간 확인 시점을 정해 결과물을 검토했습니다. 반복되는 이슈는 공통 작업 기준으로 정리했습니다.",
-        impact: "최종 납기 전에 일정과 품질 문제를 확인할 수 있도록 진행 과정을 관리하고, 팀원과 고객사가 같은 작업 범위를 이해하도록 조율했습니다.",
+        title: "고객사 요구사항 조율과 팀 업무 관리",
+        action: "약 3년간 팀장으로 고객사의 요구사항을 확인하고 작업 범위와 일정을 조율했습니다. 공수를 산정하고 팀원에게 업무를 배분하는 일도 맡았습니다.",
+        impact: "UI 개발과 함께 팀의 진행 상황과 결과물의 품질을 관리했습니다. 프로젝트에서 요구하는 범위와 일정을 고객사, 팀원과 맞추는 역할을 맡았습니다.",
         link: null,
       },
     ],
@@ -107,9 +107,9 @@ export default function CareerPage() {
       <section className="mb-10 sm:mb-12">
         <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest text-[var(--color-muted)]">About</h2>
         <div className="space-y-3 text-sm text-[var(--color-muted)] leading-relaxed">
-          <p>13년 동안 커머스, 게임, 플랫폼 서비스의 UI를 개발하고 운영했습니다. 웹 표준과 접근성, 반응형 UI, 기기와 브라우저별 이슈를 다루며 오래 운영된 화면을 개선해왔습니다.</p>
-          <p>11번가에서는 모바일웹 상품상세와 앱 WebView UI를 담당했습니다. 변경이 여러 상품 유형과 운영 환경에 미치는 범위를 확인하고, 검증 가능한 단위로 나눠 반영했습니다.</p>
-          <p>React 기반 신규 UI 블록을 구현하고 분리돼 있던 운영 SCSS를 컴포넌트 구조에 맞춰 내재화했습니다. AI 도구는 반복 작업과 코드 검토에 활용하되 설계와 최종 결과는 직접 확인합니다.</p>
+          <p>커머스, 게임, 플랫폼 서비스에서 UI를 개발하고 운영해 왔습니다. 11번가에서는 모바일웹 상품상세와 앱 WebView UI를 담당하며 다양한 상품 유형과 기기 환경에 맞춰 화면을 개선했습니다.</p>
+          <p>오래 운영된 화면을 바꿀 때는 기존 구조와 다른 화면에 미칠 영향을 먼저 살폈습니다. 기획, 디자인, 백엔드 담당자와 구현할 내용과 검증할 항목을 조율하고 변경한 뒤에는 실제 화면과 배포 결과를 점검했습니다. AI 도구도 반복 작업에 활용하되 결과를 직접 검토해 적용했습니다.</p>
+          <p>하이브랩에서는 UI 개발과 함께 약 3년간 팀장 역할을 맡았습니다. 고객사의 요구사항을 조율하고 공수 산정, 업무 배분, 일정과 품질을 관리했습니다.</p>
         </div>
       </section>
 
@@ -143,11 +143,11 @@ export default function CareerPage() {
                     </div>
                     <div className="mt-3 space-y-2">
                       <div>
-                        <span className="text-[10px] font-semibold uppercase tracking-widest text-[var(--color-muted)]">Action</span>
+                        <span className="text-[10px] font-semibold text-[var(--color-muted)]">맡은 일과 판단</span>
                         <p className="text-xs leading-relaxed text-[var(--color-muted)] mt-0.5">{ach.action}</p>
                       </div>
                       <div>
-                        <span className="text-[10px] font-semibold uppercase tracking-widest text-[var(--color-muted)]">Impact</span>
+                        <span className="text-[10px] font-semibold text-[var(--color-muted)]">적용과 확인</span>
                         <p className="text-xs leading-relaxed text-[var(--color-muted)] mt-0.5">{ach.impact}</p>
                       </div>
                     </div>

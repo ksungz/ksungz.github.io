@@ -16,9 +16,9 @@ const featuredProducts = [
     tags: ["Service UI", "Responsive", "Accessibility"],
   },
   {
-    name: "React UI와 SCSS 내재화",
-    tagline: "분리된 코드와 스타일의 작업 맥락 통합",
-    description: "신규 UI 블록 약 18개를 구현하고, 공통 스타일을 제외한 운영 블록 SCSS 약 108개를 React 구조에 맞춰 재구성해 상품상세 첫 화면(ATF) 개선에 반영했습니다.",
+    name: "상품상세 스타일의 React 저장소 이관",
+    tagline: "컴포넌트와 SCSS를 어떤 단위로 연결할지 결정",
+    description: "AI 도구가 코드와 스타일을 함께 참고하도록 운영 SCSS를 옮겼습니다. 컴포넌트와 SCSS의 분리 단위가 달라 화면 블록별로 묶었고, 신규 블록 약 18개의 스타일 작업을 실제 상품상세 개선에 반영했습니다.",
     href: "/engineering/react-pdp",
     tags: ["React", "TypeScript", "SCSS"],
   },
@@ -53,10 +53,11 @@ export default function Home() {
           <span className="block text-[var(--color-muted)]">단계적으로 개선해왔습니다.</span>
         </h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
-          13년 동안 커머스, 게임, 플랫폼 서비스의 UI를 개발하고 운영했습니다.
-          11번가에서는 모바일웹 상품상세와 앱 WebView UI를 담당하며,
-          상품 유형과 기기, 브라우저 환경별 차이를 확인하며 변경 사항을 단계적으로 반영했습니다.
-          최근에는 React 기반 신규 UI 블록을 구현하고, 분리돼 있던 운영 SCSS를 컴포넌트 구조에 맞춰 React 저장소로 옮겼습니다.
+          커머스, 게임, 플랫폼 서비스에서 UI를 개발하고 운영해 왔습니다.
+          11번가에서는 모바일웹 상품상세와 앱 WebView UI를 담당했고,
+          하이브랩에서는 약 3년간 팀장으로 고객사 요구사항, 공수, 일정과 품질을 관리했습니다.
+          오래된 화면을 바꿀 때는 기존 구조와 영향을 받는 화면을 살피고,
+          함께 일하는 담당자들과 작업 범위를 맞춥니다.
         </p>
         <div className="mt-6 sm:mt-8 flex flex-wrap gap-2 sm:gap-3">
           <Link
@@ -139,15 +140,15 @@ export default function Home() {
             </p>
           </div>
           <div className="rounded-lg border border-[var(--color-border)] p-4">
-            <h3 className="text-sm font-semibold">레거시 현대화</h3>
+            <h3 className="text-sm font-semibold">기존 구조 개선</h3>
             <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-              오래된 HTML과 SCSS 구조를 단계적으로 전환하고 컴포넌트와 스타일의 변경 맥락을 정리합니다.
+              컴포넌트와 스타일을 관리할 단위를 정하고, 옮긴 뒤에도 기존 화면이 유지되는지 확인합니다.
             </p>
           </div>
           <div className="rounded-lg border border-[var(--color-border)] p-4">
-            <h3 className="text-sm font-semibold">협업과 검증</h3>
+            <h3 className="text-sm font-semibold">업무 조율과 팀 리딩</h3>
             <p className="mt-2 text-xs leading-relaxed text-[var(--color-muted)]">
-              기획, 디자인, 백엔드 담당자와 변경 범위를 맞추고, 문서와 화면 확인 기준을 남깁니다.
+              고객사와 요구사항을 조율하고 공수 산정, 업무 배분, 일정과 품질 관리를 맡았습니다.
             </p>
           </div>
         </div>

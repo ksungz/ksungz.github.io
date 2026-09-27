@@ -33,8 +33,8 @@ export default function PortfolioPage() {
         <p className="pf-hero-command"><span aria-hidden="true">$</span> whoami</p>
         <h1>김성재</h1>
         <p className="pf-hero-statement">
-          운영 중인 서비스 UI를 어떻게 바꾸고 검증했는지,
-          오래된 화면을 새로운 구조로 옮기며 어떤 방식으로 진행했는지 정리했습니다.
+          오래 운영된 화면을 바꾸면서 어떤 문제가 있었고,
+          무엇을 기준으로 작업 방식을 정했는지 정리했습니다.
         </p>
         <div className="pf-hero-actions">
           <a className="pf-scroll-link" href="#work"><span aria-hidden="true">$</span> open ./ui-work <span aria-hidden="true">↓</span></a>
@@ -58,19 +58,19 @@ export default function PortfolioPage() {
         </div>
         <div className="pf-hero-copy">
           <p>
-            11번가에서는 모바일웹 상품상세와 앱 WebView UI를 담당하며,
-            다양한 상품 유형과 기기, 브라우저 환경에 미치는 영향을 확인하며 변경 사항을 반영했습니다.
-            기획, 디자인, 백엔드 담당자와 범위를 맞추고 배포 전후 결과를 확인했습니다.
+            커머스, 게임, 플랫폼 서비스에서 UI를 개발하고 운영해 왔습니다.
+            11번가에서는 모바일웹 상품상세와 앱 WebView UI를 담당하며
+            다양한 상품 유형과 기기 환경에 맞춰 화면을 개선했습니다.
           </p>
           <p>
-            React 기반 신규 UI 블록 약 18개를 구현하고, 공통 스타일을 제외한 운영 블록 SCSS 약 108개를
-            컴포넌트 구조에 맞춰 재구성해 상품상세 첫 화면(ATF) 개선에 반영했습니다.
+            오래 운영된 화면을 바꿀 때는 기존 구조와 다른 화면에 미칠 영향을 먼저 살폈습니다.
+            기획, 디자인, 백엔드 담당자와 구현할 내용과 검증할 항목을 조율하고
+            변경한 뒤에는 실제 화면과 배포 결과를 점검했습니다.
+            AI 도구도 반복 작업에 활용하되 결과를 직접 검토해 적용했습니다.
           </p>
           <p>
-            하이브랩에서는 네이버, 커머스, 게임 프로젝트의 UI를 개발했고,
-            약 3년간 팀장으로 업무 분배, 공수 산정, 품질 관리와
-            클라이언트 커뮤니케이션을 담당했습니다.
-            AI 도구는 반복 변환과 코드 검토를 보조하는 수단으로 사용하고 최종 결과는 직접 확인합니다.
+            하이브랩에서는 UI 개발과 함께 약 3년간 팀장 역할을 맡았습니다.
+            고객사의 요구사항을 조율하고 공수 산정, 업무 배분, 일정과 품질을 관리했습니다.
           </p>
         </div>
       </section>
@@ -81,8 +81,8 @@ export default function PortfolioPage() {
       <section className="pf-section pf-section-dark" id="work">
         <h2 className="pf-section-title">서비스 UI 개발과 운영 개선</h2>
         <p className="pf-section-lead">
-          운영 중인 화면을 바꿀 때는 구현뿐 아니라 영향 범위, 협업 대상, 검증 기준과 반영 이후의 결과까지 함께 확인합니다.
-          여러 도메인이 맞물리는 화면을 운영하며 변경 단위를 나누고 안정적으로 반영하는 경험을 쌓았습니다.
+          상품상세에는 가격, 옵션, 배송처럼 여러 담당자의 작업이 맞물립니다.
+          화면을 바꾸기 전에 영향을 받는 범위를 함께 확인하고, 반영할 내용과 확인할 항목을 조율했습니다.
         </p>
         <div className="pf-poc-grid">
           <div className="pf-poc-card">
@@ -90,8 +90,8 @@ export default function PortfolioPage() {
             <p>가격, 옵션, 리뷰, 배송, 프로모션처럼 여러 영역이 맞물리는 상품상세 UI를 운영하며 기획, 디자인, 백엔드 담당자와 영향 범위를 확인했습니다.</p>
           </div>
           <div className="pf-poc-card">
-            <h4>React UI와 운영 SCSS 내재화</h4>
-            <p>신규 UI 블록 약 18개를 구현하고, 별도 저장소의 운영 블록 SCSS 약 108개를 React 구조에 맞춰 재구성해 코드와 스타일을 같은 작업 맥락에서 확인할 수 있도록 했습니다.</p>
+            <h4>운영 SCSS의 React 저장소 이관</h4>
+            <p>기존 운영 블록 SCSS는 공통 SCSS를 제외하고 약 108개였습니다. 컴포넌트마다 파일을 일대일로 옮기지 않고 화면 블록을 기준으로 묶어 관련 코드와 스타일을 함께 참고하도록 했습니다.</p>
           </div>
           <div className="pf-poc-card">
             <h4>Dart Sass와 빌드 개선</h4>
@@ -104,43 +104,44 @@ export default function PortfolioPage() {
 
       {/* 실제 서비스에 반영한 구조 개선 */}
       <section className="pf-section" id="react-work">
-        <h2 className="pf-section-title">React UI 블록 구현과 운영 SCSS 내재화</h2>
+        <h2 className="pf-section-title">상품상세 스타일을 옮기며 정한 기준</h2>
         <p className="pf-section-lead">
-          React 컴포넌트와 운영 스타일이 서로 다른 저장소에 있어 변경에 필요한 맥락을 한 번에 확인하기 어려웠습니다.
-          파일을 옮기는 데 그치지 않고 React 구조에 맞는 스타일 관리 단위를 다시 정해 실제 서비스에 반영했습니다.
+          React 컴포넌트와 운영 SCSS가 서로 다른 저장소에 있었습니다.
+          AI 도구가 코드와 스타일을 함께 참고하도록 SCSS를 React 저장소로 옮기면서,
+          두 구조를 어떤 단위로 연결할지 정해야 했습니다.
         </p>
 
         <div className="pf-project">
           <div className="pf-project-header">
-            <h3>상품상세 첫 화면(ATF) 구조 개선</h3>
+            <h3>React 컴포넌트에 맞춘 스타일 내재화</h3>
             <Link className="pf-project-link" href="/engineering/react-pdp">상세 기록 →</Link>
             <span className="pf-badge pf-badge-live">서비스 반영</span>
           </div>
           <p className="pf-project-desc">
-            React 기반 신규 UI 블록 약 18개를 구현했습니다. 공통 스타일을 제외한 기존 운영 블록 SCSS 약 108개는
-            React 컴포넌트의 분리 기준에 맞춰 화면 블록 단위로 재구성하고 내재화했습니다.
+            기존 운영 SCSS를 React 저장소로 옮기고 컴포넌트에 맞춰 스타일을 적용했습니다.
+            기존 운영 블록 SCSS는 공통 SCSS를 제외하고 약 108개였으며,
+            신규 UI 블록 약 18개를 중심으로 블록과 스타일을 연결했습니다.
           </p>
           <div className="pf-detail">
             <h4>판단한 기준</h4>
             <ul>
-              <li>기존 SCSS와 React 컴포넌트의 분리 기준이 달라 모든 스타일을 강제로 1:1 매칭하지 않음</li>
-              <li>기존 스타일은 화면 블록을 기준으로 관련 SCSS를 모아 관리</li>
-              <li>신규 UI는 컴포넌트와 스타일 블록이 대응하도록 구성</li>
-              <li>여러 화면이 함께 사용하는 공통 SCSS는 이번 내재화 범위에서 제외</li>
+              <li>React 컴포넌트가 기존 SCSS 블록보다 세분되어 있어 파일별 일대일 이관은 사용하지 않음</li>
+              <li>관련 컴포넌트를 화면 블록 기준으로 묶어 기존 SCSS 적용</li>
+              <li>신규 UI 블록은 가능한 범위에서 블록과 스타일을 일대일로 연결</li>
             </ul>
           </div>
           <div className="pf-detail">
             <h4>확인한 결과</h4>
             <ul>
               <li>대상으로 정한 운영 블록 SCSS를 React 저장소로 모두 이동</li>
-              <li>컴포넌트 코드와 관련 스타일을 한 저장소에서 확인할 수 있는 구조 마련</li>
-              <li>개발자와 AI 보조 도구가 코드와 스타일의 맥락을 함께 확인할 수 있도록 작업 범위 정리</li>
-              <li>신규 UI 블록과 내재화된 스타일을 상품상세 첫 화면 개선에 반영</li>
+              <li>컴포넌트 코드와 관련 스타일을 한 저장소에서 함께 확인</li>
+              <li>Storybook에서 스타일을 연결한 화면과 주요 상태 확인</li>
+              <li>해당 스타일 작업을 실제 상품상세 첫 화면(ATF) 개선에 반영</li>
             </ul>
           </div>
           <p className="pf-project-desc">
             운영 블록 약 108개와 신규 UI 블록 약 18개는 분류 기준이 달라 합산하지 않습니다.
-            개발 시간이나 오류 감소율도 별도로 측정하지 않아 성과 수치로 사용하지 않습니다.
+            확인한 성과는 스타일 이관 완료와 실제 화면 반영입니다. 개발 시간이나 오류 감소율은 따로 측정하지 않았습니다.
           </p>
           <div className="pf-chips">
             <span className="pf-chip">React</span>

@@ -265,7 +265,7 @@ a {
 .start-title {
   max-width: 620px;
   margin: 0;
-  font-size: clamp(34px, 5vw, 58px);
+  font-size: 42px;
   line-height: 1.12;
   letter-spacing: 0;
 }
@@ -373,6 +373,37 @@ a {
 .start-action {
   padding: 20px 22px 22px;
 }
+
+.mode-picker {
+  display: flex;
+  gap: 22px;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.mode-picker legend {
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.mode-picker label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+}
+
+.mode-picker input { accent-color: var(--green); }
+.mode-note { min-height: 36px; margin: 8px 0 14px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.timer-value.untimed { min-width: 94px; font: inherit; font-size: 12px; }
+.set-label { margin: 0 0 12px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.study-help { margin-top: 24px; border-top: 1px solid var(--line); }
+.study-help details { border-bottom: 1px solid var(--line); padding: 14px 0; }
+.study-help summary { cursor: pointer; font-size: 14px; font-weight: 750; }
+.study-help summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.study-help p { margin: 12px 0 0; font-size: 14px; line-height: 1.8; white-space: pre-line; }
 
 .start-action .button {
   width: 100%;
@@ -523,6 +554,11 @@ a {
 .option:hover {
   border-color: #a6b2aa;
   background: #fbfcfa;
+}
+
+.option:focus-within {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
 }
 
 .option.selected {
@@ -1303,7 +1339,7 @@ a {
 
   .question-table {
     width: 100%;
-    min-width: 100%;
+    min-width: 520px;
     font-size: 11px;
   }
 

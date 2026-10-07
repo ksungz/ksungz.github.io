@@ -1,9 +1,16 @@
 (function () {
   "use strict";
 
-  var EXAM_SECONDS = 50 * 60;
-  var STORAGE_KEY = "gtp-ncs-mock-test-v2";
-  var DOMAIN_ORDER = [
+  var params = new URLSearchParams(window.location.search);
+  var isNile = params.get("exam") !== "gtp";
+  var practice = isNile ? window.NCS_NILE_PRACTICE : null;
+  if (isNile && (!practice || practice.questions.length !== 100)) {
+    document.getElementById("app").textContent = "문제 자료를 불러오지 못했습니다. 페이지를 새로고침해 주세요.";
+    return;
+  }
+  var EXAM_SECONDS = (practice ? practice.minutes : 50) * 60;
+  var STORAGE_KEY = practice ? "ncs-" + practice.id : "gtp-ncs-mock-test-v2";
+  var DOMAIN_ORDER = practice ? practice.domains : [
     "의사소통능력",
     "수리능력",
     "문제해결능력",
@@ -744,6 +751,7 @@
   if (Array.isArray(window.NCS_MOCK_ADVANCED_QUESTIONS)) {
     questions = window.NCS_MOCK_ADVANCED_QUESTIONS;
   }
+  if (practice) questions = practice.questions;
 
   var app = document.getElementById("app");
   var modalRoot = document.getElementById("modal-root");
@@ -757,6 +765,7 @@
   function initialState() {
     return {
       version: 1,
+      mode: params.get("mode") === "study" ? "study" : "exam",
       status: "ready",
       current: 0,
       answers: new Array(questions.length).fill(null),
@@ -780,6 +789,7 @@
         Array.isArray(saved.marked) &&
         saved.marked.length === questions.length
       ) {
+        saved.mode = saved.mode === "study" ? "study" : "exam";
         return saved;
       }
     } catch (error) {
@@ -897,6 +907,9 @@
       ? "<div class=\"question-passage\">" + escapeHtml(question.passage) + "</div>"
       : "";
     var table = renderTable(question.table);
+    var setLabel = question.setTitle
+      ? "<p class=\"set-label\">공통 자료 " + escapeHtml(question.setRange) + "번: " + escapeHtml(question.setTitle) + "</p>"
+      : "";
     var options = question.options
       .map(function (option, optionIndex) {
         var classes = ["option"];
@@ -958,6 +971,7 @@
       "<span class=\"domain-badge\">" +
       escapeHtml(question.domain) +
       "</span></div>" +
+      setLabel +
       passage +
       table +
       "<h2 class=\"question-prompt\">" +
@@ -968,41 +982,43 @@
       "번 문항 선택지\">" +
       options +
       "</div>" +
-      (reviewMode
-        ? ""
-        : "<p class=\"quick-answer\" aria-label=\"이 문항의 정답\">정답 " +
-          (question.answer + 1) +
-          "번</p>")
+      (!reviewMode && state.mode === "study"
+        ? "<div class=\"study-help\"><details><summary>풀이 힌트</summary><p>" +
+          escapeHtml(question.hint || "질문에서 구하는 값과 지문의 조건을 먼저 표시하고 선택지를 하나씩 대조해 보세요.") +
+          "</p></details><details><summary>정답과 해설</summary><p><strong>정답 " +
+          (question.answer + 1) + "번</strong></p><p>" + escapeHtml(question.explanation) + "</p></details></div>"
+        : "")
     );
   }
 
   function renderStart() {
     var domainItems = DOMAIN_ORDER.map(function (domain) {
+      var count = questions.filter(function (question) { return question.domain === domain; }).length;
       return (
         "<li><span>" +
         escapeHtml(domain) +
-        "</span><span class=\"domain-count\">10문항</span></li>"
+        "</span><span class=\"domain-count\">" + count + "문항</span></li>"
       );
     }).join("");
     var resume =
-      state.status === "running" && state.endAt && state.endAt > Date.now()
+      state.status === "running" && (state.mode === "study" || state.endAt > Date.now())
         ? "<button class=\"button primary\" type=\"button\" data-action=\"resume\">이어 풀기</button>"
-        : "<button class=\"button primary\" type=\"button\" data-action=\"start\">시험 시작</button>";
+        : "<button class=\"button primary\" type=\"button\" data-action=\"start\">" + (state.mode === "study" ? "학습 시작" : "실전 연습 시작") + "</button>";
 
     app.innerHTML =
       "<div class=\"start-shell\">" +
       "<header class=\"start-header\">" +
-      "<div class=\"brand\"><span class=\"brand-kicker\">PRACTICE TEST</span><p class=\"brand-title\">NCS 실전 모의시험</p></div>" +
+      "<div class=\"brand\"><p class=\"brand-title\">NCS 연습</p></div>" +
       "<a class=\"back-link\" href=\"/learning/\">학습 공간으로</a>" +
       "</header>" +
       "<main class=\"start-main\">" +
       "<section>" +
-      "<p class=\"eyebrow\">경기테크노파크 필기전형 대비, 실전 난도</p>" +
-      "<h1 class=\"start-title\">50분 동안<br />50문항</h1>" +
-      "<p class=\"start-lead\">복합 자료해석, 다단계 계산, 조건 추론과 의사결정 문항을 50분 안에 풉니다.</p>" +
+      "<p class=\"eyebrow\">" + (isNile ? "국가평생교육진흥원 필기 대비" : "이전 50문항 연습") + "</p>" +
+      "<h1 class=\"start-title\">자료 독해와<br />조건 추론</h1>" +
+      "<p class=\"start-lead\">" + (isNile ? "20개 공통 자료, 100개 창작 문항" : "50개 창작 문항") + "</p>" +
       "<div class=\"format-strip\" aria-label=\"시험 형식\">" +
-      "<div class=\"format-item\"><span class=\"format-value\">50분</span><span class=\"format-label\">제한 시간</span></div>" +
-      "<div class=\"format-item\"><span class=\"format-value\">50</span><span class=\"format-label\">전체 문항</span></div>" +
+      "<div class=\"format-item\"><span class=\"format-value\">" + EXAM_SECONDS / 60 + "분</span><span class=\"format-label\">실전 모드</span></div>" +
+      "<div class=\"format-item\"><span class=\"format-value\">" + questions.length + "</span><span class=\"format-label\">전체 문항</span></div>" +
       "<div class=\"format-item\"><span class=\"format-value\">4지</span><span class=\"format-label\">선택형</span></div>" +
       "</div>" +
       "</section>" +
@@ -1012,15 +1028,22 @@
       domainItems +
       "</ol>" +
       "<div class=\"start-notes\">" +
-      "<p>각 문항 아래에서 정답 번호를 바로 확인할 수 있으며, 해설은 제출하거나 시간이 끝난 뒤 볼 수 있습니다.</p>" +
-      "<p>공식 공개 평가의 유형을 참고해 새로 작성한 실전형 문항이며 실제 기출문제는 아닙니다.</p>" +
+      "<p>실제 기출문제가 아닌 창작 연습문제입니다. 실제 시험의 지문 길이와 난도, 선택지 수가 같다고 보장하지 않습니다.</p>" +
+      (isNile ? "<p>영역별 20문항은 연습용 배분입니다. 실제 영역별 문항 수는 제공된 시험 안내에 없습니다.</p>" : "") +
       "</div>" +
       "<div class=\"start-action\">" +
+      "<fieldset class=\"mode-picker\"><legend>풀이 방식</legend>" +
+      "<label><input type=\"radio\" name=\"mode\" value=\"exam\" " + (state.mode === "exam" ? "checked" : "") + ">실전</label>" +
+      "<label><input type=\"radio\" name=\"mode\" value=\"study\" " + (state.mode === "study" ? "checked" : "") + ">학습</label></fieldset>" +
+      "<p class=\"mode-note\">" + (state.mode === "study" ? "시간 제한 없음, 힌트와 해설 열람 가능" : "시간 제한 적용, 제출 전 정답 숨김") + "</p>" +
       resume +
       "</div>" +
       "</section>" +
       "</main>" +
-      "<footer class=\"start-footer\">공식 공고 기준: NCS 5개 영역, 영역별 10문항, 총 50문항 50분</footer>" +
+      "<footer class=\"start-footer\">" +
+      (isNile ? "형식 기준: 사용자 제공 필기 안내의 100문항, 110분, 5개 영역. " : "이전 연습: 50문항, 50분. ") +
+      "구성요소 참고: <a href=\"https://www.ncs.go.kr/unity/th03/TH0309.do?jobCd=04\" target=\"_blank\" rel=\"noopener\">NCS 자기관리</a>, <a href=\"https://www.ncs.go.kr/unity/th03/TH0309.do?jobCd=06\" target=\"_blank\" rel=\"noopener\">디지털</a>. " +
+      "<a href=\"?exam=" + (isNile ? "gtp" : "nile") + "\">" + (isNile ? "이전 50문항" : "새 100문항") + "</a></footer>" +
       "</div>";
   }
 
@@ -1029,13 +1052,13 @@
     return (
       "<header class=\"exam-topbar\">" +
       "<div class=\"topbar-inner\">" +
-      "<div class=\"brand\"><span class=\"brand-kicker\">NCS MOCK TEST</span><h1 class=\"brand-title\">" +
+      "<div class=\"brand\"><span class=\"brand-kicker\">" + (state.mode === "study" ? "학습" : "실전 연습") + "</span><h1 class=\"brand-title\">" +
       escapeHtml(questions[state.current].domain) +
       "</h1></div>" +
-      "<div class=\"timer-block\"><span class=\"timer-label\">남은 시간</span><span id=\"timer\" class=\"timer-value " +
-      (remaining <= 300 ? "warning" : "") +
+      "<div class=\"timer-block\"><span class=\"timer-label\">" + (state.mode === "study" ? "" : "남은 시간") + "</span><span id=\"timer\" class=\"timer-value " +
+      (state.mode === "study" ? "untimed" : remaining <= 300 ? "warning" : "") +
       "\">" +
-      formatTime(remaining) +
+      (state.mode === "study" ? "시간 제한 없음" : formatTime(remaining)) +
       "</span></div>" +
       "<div class=\"topbar-actions\">" +
       "<button class=\"button mobile-only\" type=\"button\" data-action=\"open-sheet\"><span class=\"button-symbol\" aria-hidden=\"true\">▦</span>답안지</button>" +
@@ -1075,7 +1098,7 @@
         escapeHtml(domain) +
         "<span>" +
         answered +
-        "/10</span></h3><div class=\"answer-grid\">" +
+        "/" + domainIndices.length + "</span></h3><div class=\"answer-grid\">" +
         domainIndices
           .map(function (index) {
             return renderAnswerCell(index, mode);
@@ -1119,12 +1142,12 @@
       "<div class=\"answer-head\"><h2>답안지</h2>" +
       (compact
         ? "<button class=\"sheet-close\" type=\"button\" data-action=\"close-sheet\" aria-label=\"답안지 닫기\">×</button>"
-        : "<span class=\"answer-progress\">" + answered + " / 50</span>") +
+        : "<span class=\"answer-progress\">" + answered + " / " + questions.length + "</span>") +
       "</div>" +
       (compact
-        ? "<p class=\"answer-progress\">" + answered + " / 50 응답</p>"
+        ? "<p class=\"answer-progress\">" + answered + " / " + questions.length + " 응답</p>"
         : "<div class=\"answer-progress-bar\"><div class=\"answer-progress-fill\" style=\"width:" +
-          answered * 2 +
+          (answered / questions.length * 100) +
           "%\"></div></div>") +
       "<div class=\"answer-domains\">" +
       renderAnswerGroups("exam") +
@@ -1197,7 +1220,7 @@
     var answered = getAnsweredCount();
     var wrong = getWrongIndices().length;
     var blank = getBlankIndices().length;
-    var score = correct * 2;
+    var score = Math.round(correct / questions.length * 1000) / 10;
     var spent = state.timeSpent === null ? EXAM_SECONDS : state.timeSpent;
     var filteredIndices = getFilteredReviewIndices();
     if (filteredIndices.length && filteredIndices.indexOf(reviewIndex) < 0) {
@@ -1221,7 +1244,7 @@
         "</strong><span>/ " +
         domainQuestions.length +
         "</span></div><div class=\"domain-bar\"><div class=\"domain-bar-fill\" style=\"width:" +
-        domainCorrect * 10 +
+        (domainCorrect / domainQuestions.length * 100) +
         "%\"></div></div></div>"
       );
     }).join("");
@@ -1278,11 +1301,7 @@
       "<section class=\"score-band\">" +
       "<div class=\"score-block\"><span class=\"score-label\">총점</span><div class=\"score-value\"><strong>" +
       score +
-      "</strong><span>/ 100</span></div><span class=\"score-status " +
-      (score >= 40 ? "pass" : "fail") +
-      "\">" +
-      (score >= 40 ? "과목 과락 기준 이상" : "과목 과락 기준 미만") +
-      "</span></div>" +
+      "</strong><span>/ 100</span></div></div>" +
       "<div class=\"result-summary\">" +
       "<div class=\"summary-item\"><strong>" +
       correct +
@@ -1293,7 +1312,7 @@
       "<div class=\"summary-item\"><strong>" +
       formatTime(spent) +
       "</strong><span>풀이 시간</span></div>" +
-      "<p class=\"result-note\">경기테크노파크 공고상 NCS 과목은 40점 미만이면 과락입니다. 실제 합격자는 과락 통과자 중 고득점 순으로 결정되므로 40점은 합격선이 아닙니다. 응답 " +
+      "<p class=\"result-note\">" + (state.mode === "study" ? "학습 모드는 힌트와 해설을 열람할 수 있어 실전 점수와 비교할 수 없습니다. " : "창작 문제의 연습 점수이며 실제 시험의 점수나 합격 가능성을 예측하지 않습니다. ") + "응답 " +
       answered +
       "문항, 미응답 " +
       blank +
@@ -1324,7 +1343,7 @@
     var description = isSubmit
       ? blank > 0
         ? "아직 답하지 않은 문항이 " + blank + "개 있습니다. 제출하면 정답과 해설이 표시됩니다."
-        : "50문항에 모두 답했습니다. 제출하면 정답과 해설이 표시됩니다."
+        : questions.length + "문항에 모두 답했습니다. 제출하면 정답과 해설이 표시됩니다."
       : "현재 답안과 결과가 모두 삭제되고 시작 화면으로 돌아갑니다.";
     var confirmLabel = isSubmit ? "제출하기" : "다시 시작";
     modalRoot.innerHTML =
@@ -1360,6 +1379,11 @@
     var timer = document.getElementById("timer");
     if (!timer) return;
     var remaining = getRemainingSeconds();
+    if (state.mode === "study") {
+      timer.textContent = "시간 제한 없음";
+      timer.classList.remove("warning");
+      return;
+    }
     timer.textContent = formatTime(remaining);
     timer.classList.toggle("warning", remaining <= 300);
   }
@@ -1367,7 +1391,7 @@
   function ensureTimer() {
     if (timerId) window.clearInterval(timerId);
     timerId = null;
-    if (state.status !== "running") return;
+    if (state.status !== "running" || state.mode === "study") return;
     timerId = window.setInterval(function () {
       var remaining = getRemainingSeconds();
       updateTimerDisplay();
@@ -1376,10 +1400,12 @@
   }
 
   function startExam() {
+    var mode = state.mode;
     state = initialState();
+    state.mode = mode;
     state.status = "running";
     state.startedAt = Date.now();
-    state.endAt = state.startedAt + EXAM_SECONDS * 1000;
+    state.endAt = state.mode === "study" ? null : state.startedAt + EXAM_SECONDS * 1000;
     saveState();
     render();
     ensureTimer();
@@ -1391,9 +1417,8 @@
     var submittedAt = Date.now();
     state.status = "result";
     state.submittedAt = submittedAt;
-    state.timeSpent = state.startedAt
-      ? Math.min(EXAM_SECONDS, Math.max(0, Math.round((submittedAt - state.startedAt) / 1000)))
-      : EXAM_SECONDS;
+    var elapsed = state.startedAt ? Math.max(0, Math.round((submittedAt - state.startedAt) / 1000)) : 0;
+    state.timeSpent = state.mode === "study" ? elapsed : Math.min(EXAM_SECONDS, elapsed);
     state.finishReason = reason;
     state.endAt = null;
     modalType = null;
@@ -1444,6 +1469,13 @@
 
   app.addEventListener("change", function (event) {
     var target = event.target;
+    if (state.status === "ready" && target instanceof HTMLInputElement && target.name === "mode") {
+      state.mode = target.value === "study" ? "study" : "exam";
+      saveState();
+      renderStart();
+      app.querySelector('input[name="mode"]:checked').focus({ preventScroll: true });
+      return;
+    }
     if (
       state.status === "running" &&
       target instanceof HTMLInputElement &&
@@ -1452,6 +1484,7 @@
       state.answers[state.current] = Number(target.value);
       saveState();
       renderExam();
+      app.querySelector('input[name="answer"]:checked').focus({ preventScroll: true });
     }
   });
 
@@ -1527,7 +1560,7 @@
         renderExam();
       }
     }
-    if (state.status === "running" && !modalType) {
+    if (state.status === "running" && !modalType && !sheetOpen) {
       if (event.target instanceof HTMLInputElement) return;
       if (event.key === "ArrowLeft" && state.current > 0) {
         goToQuestion(state.current - 1);

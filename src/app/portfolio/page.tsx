@@ -13,6 +13,7 @@ export default function PortfolioPage() {
         </a>
         <nav className="pf-cli-nav" aria-label="포트폴리오 탐색">
           <a href="#work">UI Experience</a>
+          <a href="#current-project">Recent Projects</a>
           <a href="#react-work">Work Case</a>
           <a href="#case-study">Public UI</a>
           <a href="#workflow">AI-assisted Work</a>
@@ -45,7 +46,7 @@ export default function PortfolioPage() {
           <Link
             className="pf-3d-link"
             href="/products"
-            aria-label="개인 프로젝트 목록 열기"
+            aria-label="프로젝트 목록 열기"
           >
             <span aria-hidden="true">◆</span> open ./products
           </Link>
@@ -105,10 +106,22 @@ export default function PortfolioPage() {
           </div>
           <Link href="/products#service-operations" className="pf-project-link">담당 업무와 적용 내용 →</Link>
         </div>
-        <div className="pf-project">
-          <h3>베이비픽 | 개인 프로젝트</h3>
-          <p className="pf-project-desc">{babyPickSummary}</p>
-          <a href="https://babypick.co.kr" className="pf-project-link" target="_blank" rel="noopener noreferrer">서비스 보기 ↗</a>
+        <div className="pf-service-card">
+          <img src="/portfolio/babypick-guide.png" alt="베이비픽의 육아용품 가이드 목록" />
+          <div>
+            <div className="pf-project-header">
+              <h3>베이비픽 | 개인 프로젝트</h3>
+              <a href="https://babypick.co.kr" className="pf-project-link" target="_blank" rel="noopener noreferrer">서비스 보기 ↗</a>
+              <a href="https://blog.naver.com/babypick_blog" className="pf-project-link" target="_blank" rel="noopener noreferrer">블로그 ↗</a>
+            </div>
+            <p>{babyPickSummary}</p>
+            <div className="pf-chips">
+              <span className="pf-chip">Next.js</span>
+              <span className="pf-chip">Supabase</span>
+              <span className="pf-chip">GAS</span>
+              <span className="pf-chip">LLM</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -246,33 +259,6 @@ export default function PortfolioPage() {
             PR 설명, 커밋 메시지, 작업 계획, 위키 초안, QA 체크리스트처럼 자주 작성하는 산출물에 공통 형식을 적용했고,
             여러 저장소에서 같은 설정을 재사용할 수 있도록 관리와 동기화 흐름을 구성했습니다.
           </p>
-          <div className="pf-detail">
-            <h4>한 일</h4>
-            <ul>
-              <li><strong>Cursor 규칙과 스킬</strong> — UI 개발 기준, Git/PR 흐름, 리뷰 기준을 팀에서 재사용할 수 있게 정리</li>
-              <li><strong>MCP 연동</strong> — 승인된 업무 범위 안에서 Jira, Confluence, 코드 저장소 문맥을 참고하는 흐름 구성</li>
-              <li><strong>설정 배포</strong> — 여러 저장소에 흩어진 AI 설정을 한 곳에서 관리하고 동기화하는 방식 구성</li>
-              <li><strong>반복 산출물 표준화</strong> — PR 설명, 커밋 메시지, 작업 계획, 위키 초안을 같은 형식으로 생성하도록 정리</li>
-              <li><strong>문서화</strong> — 팀원이 따라 쓸 수 있도록 사용 흐름, 예시, 주의사항을 위키로 정리</li>
-            </ul>
-          </div>
-          <div className="pf-detail">
-            <h4>바뀐 점</h4>
-            <ul>
-              <li>개인마다 달랐던 프롬프트와 작성 형식을 팀 공통 규칙으로 정리</li>
-              <li>PR, 커밋, 위키, QA 산출물을 일정한 형식의 초안으로 생성</li>
-              <li>반복 항목은 AI의 1차 확인 대상으로 옮기고, 맥락, 영향 범위와 예외 케이스는 사람이 최종 검증</li>
-              <li>참고할 문맥의 범위와 공개 문서에 남기지 말아야 할 정보를 사용 기준에 포함</li>
-            </ul>
-          </div>
-          <div className="pf-chips">
-            <span className="pf-chip">Cursor Rules</span>
-            <span className="pf-chip">Skills</span>
-            <span className="pf-chip">MCP</span>
-            <span className="pf-chip">Jira</span>
-            <span className="pf-chip">Confluence</span>
-            <span className="pf-chip">Node.js</span>
-          </div>
         </div>
 
         <div className="pf-project">
@@ -286,32 +272,6 @@ export default function PortfolioPage() {
             Agent 자체를 개발한 것이 아니라 파일 필터, 검토 기준과 실행 방식을 실제 업무에 맞게 설정했습니다.
             설계, 영향 범위, 예외 케이스는 기존 코드 리뷰에서 별도로 확인했습니다.
           </p>
-          <div className="pf-detail">
-            <h4>한 일</h4>
-            <ul>
-              <li>여러 저장소의 파이프라인에 AI 리뷰 스텝 적용</li>
-              <li>SCSS, HTML 마크업 중심으로 파일 필터링 규칙 설정</li>
-              <li>팀의 접근성, BEM, SCSS 컨벤션을 리뷰 기준에 반영</li>
-              <li>자동 트리거와 수동 트리거 방식을 나눠 실제 업무 흐름에 맞게 조정</li>
-              <li>반복 컨벤션과 설계, 영향 범위 검토 항목을 분리</li>
-            </ul>
-          </div>
-          <div className="pf-detail">
-            <h4>운영 기준</h4>
-            <ul>
-              <li>접근성, BEM, SCSS 규칙처럼 명확한 항목부터 확인</li>
-              <li>리뷰 기준을 개인 기억에 의존하지 않고 접근성, BEM, SCSS 규칙으로 명문화</li>
-              <li>리뷰 결과는 머지 조건이 아닌 확인 항목으로 제공</li>
-              <li>과한 코멘트와 오탐은 규칙을 조정하는 기준으로 기록</li>
-            </ul>
-          </div>
-          <div className="pf-chips">
-            <span className="pf-chip">AI Review</span>
-            <span className="pf-chip">CI Pipeline</span>
-            <span className="pf-chip">SCSS</span>
-            <span className="pf-chip">Accessibility</span>
-            <span className="pf-chip">Code Review</span>
-          </div>
         </div>
 
       </section>
@@ -320,37 +280,13 @@ export default function PortfolioPage() {
 
       {/* 개인 서비스와 자동화 */}
       <section className="pf-section" id="ai-products">
-        <h2 className="pf-section-title">직접 만든 제품과 자동화</h2>
+        <h2 className="pf-section-title">그 밖의 서비스와 자동화</h2>
         <p className="pf-section-lead">
           개인 프로젝트에서는 AI 코딩 도구를 활용해 화면, API, DB와 배치 작업을 구현합니다.
           배포 후 동작과 사용 흐름은 직접 확인하며 필요한 기능을 보완하고 있습니다.
         </p>
 
         <div className="pf-service-grid">
-          <div className="pf-service-card">
-            <img src="/portfolio/babypick-guide.png" alt="베이비픽 가이드 목록 — 매일 자동 발행된 글이 날짜별로 쌓여 있는 모습" />
-            <div>
-              <div className="pf-project-header">
-                <h3>베이비픽</h3>
-                <a className="pf-project-link" href="https://babypick.co.kr" target="_blank" rel="noopener noreferrer">사이트 ↗</a>
-                <a className="pf-project-link" href="https://blog.naver.com/babypick_blog" target="_blank" rel="noopener noreferrer">블로그 ↗</a>
-                <span className="pf-badge pf-badge-live">운영 중</span>
-              </div>
-              <p>
-                육아용품 가이드와 상품 정보를 함께 제공하는 커머스 서비스입니다.
-                Search Console 키워드, GAS, LLM과 API 웹훅을 연결해 공식 가이드를 자동 발행하고 있습니다.
-                네이버 블로그와 인스타그램은 초안과 콘텐츠 패키지, 검수 대기열까지만 준비하고 공개는 사람이 결정합니다.
-              </p>
-              <div className="pf-chips">
-                <span className="pf-chip">Next.js</span>
-                <span className="pf-chip">Supabase</span>
-                <span className="pf-chip">GAS</span>
-                <span className="pf-chip">LLM</span>
-                <span className="pf-chip">Human-in-the-loop</span>
-              </div>
-            </div>
-          </div>
-
           <div className="pf-service-card">
             <img src="/portfolio/dailypick-mobile.png" alt="데일리픽아이템 — 모바일 랜딩 페이지" />
             <div>
@@ -406,7 +342,7 @@ export default function PortfolioPage() {
         </p>
         <nav className="pf-footer-actions" aria-label="Portfolio 다음 이동">
           <a href="/career">전체 경력 보기 →</a>
-          <a href="/products">개인 프로젝트 보기 →</a>
+          <a href="/products">프로젝트 보기 →</a>
           <a href="mailto:k.suzkim@gmail.com">이메일 보내기 →</a>
         </nav>
       </div>

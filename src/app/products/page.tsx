@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { currentProject, babyPickSummary } from "@/lib/profile";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description: "AI 코딩 도구를 활용해 구현하고 직접 실행·검증한 개발 도구, 개인 서비스와 자동화 작업",
+  description: "공동 프로젝트의 서비스 홈페이지와 운영 관리 시스템, 개인 서비스와 AI 도구 활용 기록",
 };
 
 interface ProductLink {
@@ -111,7 +112,7 @@ const aiProducts: ProductData[] = [
     name: "BabyPick",
     tagline: "육아용품 탐색 서비스와 사람 검수형 콘텐츠 운영",
     problem: "혼자 서비스 개발과 콘텐츠 작성을 함께 하기에는 시간이 부족했습니다.",
-    solution: "Next.js와 Supabase로 서비스를 구축하고, 키워드 관리 → AI 생성 → 중복·금지 표현 검사 → API 발행으로 공식 가이드를 자동화했습니다. 네이버 블로그는 SmartEditor 임시저장, 인스타그램은 콘텐츠 패키지와 검수 대기열까지만 연결하고 공개는 사람이 결정합니다.",
+    solution: babyPickSummary,
     stack: ["Next.js", "Supabase", "Google Apps Script", "LLM", "Human-in-the-loop"],
     status: "운영 중 · 공식 가이드 220개+ · 외부 채널은 사람 검수 후 발행",
     links: [
@@ -213,12 +214,28 @@ export default function Products() {
     <div className="mx-auto max-w-3xl px-4 sm:px-6 py-12 sm:py-16">
       <section className="mb-12 sm:mb-16">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">Projects</p>
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">AI를 활용한 작업</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">서비스와 업무 도구 개발</h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
-          업무에서 발견한 문제와 개인적인 아이디어를 작은 도구와 서비스로 구현했습니다.
-          문제 범위와 검증 기준은 직접 정하고, 구현에는 AI 코딩 도구를 활용했습니다.
-          각 프로젝트에는 현재 확인한 범위와 아직 해결하지 못한 한계를 함께 기록합니다.
+          공동 프로젝트에서 맡은 개발과 운영 업무, 개인 서비스와 도구를 정리했습니다.
+          필요한 기능과 확인할 기준을 정하고 AI 개발 도구를 활용해 구현했습니다.
+          각 프로젝트의 적용 범위와 확인한 결과를 함께 기록합니다.
         </p>
+      </section>
+
+      <section id="service-operations" className="mb-12 scroll-mt-20 border-b border-[var(--color-border)] pb-10 sm:mb-16">
+        <h2 className="text-lg font-semibold">{currentProject.title}</h2>
+        <p className="mt-2 text-xs text-[var(--color-muted)]">{currentProject.role} | {currentProject.period}</p>
+        <p className="mt-4 text-sm leading-relaxed">{currentProject.summary}</p>
+        <div className="mt-6 space-y-6">
+          {currentProject.sections.map((section) => (
+            <div key={section.title}>
+              <h3 className="text-sm font-semibold">{section.title}</h3>
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-[var(--color-muted)]">
+                {section.items.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* Developer Tools & Automation */}

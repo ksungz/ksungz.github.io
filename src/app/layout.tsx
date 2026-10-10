@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans_KR } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { profileTitle, profileDescription } from "@/lib/profile";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -22,21 +23,19 @@ const notoSansKR = Noto_Sans_KR({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ksungz-github-io.vercel.app"),
-  title: { default: "김성재 | Frontend Engineer", template: "%s | 김성재" },
-  description: "커머스, 게임, 플랫폼 서비스의 UI를 13년간 개발하고 운영하며 모바일웹, WebView UI와 레거시 구조를 개선해온 Frontend Engineer입니다.",
+  title: { default: profileTitle, template: "%s | 김성재" },
+  description: profileDescription,
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    siteName: "김성재 | Frontend Engineer",
-    title: "김성재 | Frontend Engineer",
-    description:
-      "모바일웹과 WebView UI 운영, 레거시 UI 전환 경험을 정리한 Frontend Engineer 김성재의 포트폴리오입니다.",
+    siteName: profileTitle,
+    title: profileTitle,
+    description: profileDescription,
   },
   twitter: {
     card: "summary_large_image",
-    title: "김성재 | Frontend Engineer",
-    description:
-      "모바일웹과 WebView UI 운영, 레거시 UI 전환 경험을 정리한 Frontend Engineer 김성재의 포트폴리오입니다.",
+    title: profileTitle,
+    description: profileDescription,
   },
 };
 

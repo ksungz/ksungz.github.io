@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "김성재 Frontend Engineer 포트폴리오";
+export const alt = "김성재 서비스 개발과 운영 포트폴리오";
 export const size = {
   width: 1200,
   height: 630,
@@ -31,7 +31,7 @@ export default function OpenGraphImage() {
             fontWeight: 600,
           }}
         >
-          김성재 · Frontend Engineer
+          김성재 | 서비스 개발과 운영
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div
@@ -44,8 +44,8 @@ export default function OpenGraphImage() {
               maxWidth: 980,
             }}
           >
-            <div style={{ display: "flex" }}>서비스의 UI를 안정적으로 운영하고</div>
-            <div style={{ display: "flex" }}>개발과 검증 과정을 개선합니다.</div>
+            <div style={{ display: "flex" }}>서비스를 만들고 운영하며</div>
+            <div style={{ display: "flex" }}>필요한 개선을 이어갑니다.</div>
           </div>
           <div
             style={{
@@ -54,7 +54,7 @@ export default function OpenGraphImage() {
               fontSize: 28,
             }}
           >
-            Service UI · WebView · Legacy Modernization
+            UI 개발, 서비스 운영, 팀 리딩, 업무 도구 구현
           </div>
         </div>
         <div
@@ -68,7 +68,7 @@ export default function OpenGraphImage() {
             paddingTop: 28,
           }}
         >
-          <span>13 years of service UI development</span>
+          <span>Experience and Projects</span>
           <span>ksungz-github-io.vercel.app</span>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { profileIntroduction, currentProject, babyPickSummary } from "@/lib/profile";
 import "./portfolio.css";
 
 /* eslint-disable @next/next/no-img-element */
@@ -19,7 +20,7 @@ export default function PortfolioPage() {
           <a href="/career">Career</a>
           <a href="mailto:k.suzkim@gmail.com">Contact</a>
         </nav>
-        <p className="pf-cli-status"><i aria-hidden="true" /> Frontend Engineer | Service UI</p>
+        <p className="pf-cli-status"><i aria-hidden="true" /> 서비스 개발과 운영</p>
       </header>
 
       <main className="pf-main">
@@ -33,8 +34,8 @@ export default function PortfolioPage() {
         <p className="pf-hero-command"><span aria-hidden="true">$</span> whoami</p>
         <h1>김성재</h1>
         <p className="pf-hero-statement">
-          오래 운영된 화면을 바꾸면서 어떤 문제가 있었고,
-          무엇을 기준으로 작업 방식을 정했는지 정리했습니다.
+          서비스 UI 개발과 운영, 팀 리딩 경험과
+          최근 진행하는 서비스 및 업무 도구 개발을 정리했습니다.
         </p>
         <div className="pf-hero-actions">
           <a className="pf-scroll-link" href="#work"><span aria-hidden="true">$</span> open ./ui-work <span aria-hidden="true">↓</span></a>
@@ -54,24 +55,10 @@ export default function PortfolioPage() {
       <section className="pf-readme-output" aria-label="포트폴리오 소개">
         <div className="pf-readme-header">
           <span>README.md</span>
-          <span>3 blocks</span>
+          <span>Introduction</span>
         </div>
         <div className="pf-hero-copy">
-          <p>
-            커머스, 게임, 플랫폼 서비스에서 UI를 개발하고 운영해 왔습니다.
-            11번가에서는 모바일웹 상품상세와 앱 WebView UI를 담당하며
-            다양한 상품 유형과 기기 환경에 맞춰 화면을 개선했습니다.
-          </p>
-          <p>
-            오래 운영된 화면을 바꿀 때는 기존 구조와 다른 화면에 미칠 영향을 먼저 살폈습니다.
-            기획, 디자인, 백엔드 담당자와 구현할 내용과 검증할 항목을 조율하고
-            변경한 뒤에는 실제 화면과 배포 결과를 점검했습니다.
-            AI 도구도 반복 작업에 활용하되 결과를 직접 검토해 적용했습니다.
-          </p>
-          <p>
-            하이브랩에서는 UI 개발과 함께 약 3년간 팀장 역할을 맡았습니다.
-            고객사의 요구사항을 조율하고 공수 산정, 업무 배분, 일정과 품질을 관리했습니다.
-          </p>
+          {profileIntroduction.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         </div>
       </section>
 
@@ -97,6 +84,31 @@ export default function PortfolioPage() {
             <h4>Dart Sass와 빌드 개선</h4>
             <p>약 2,384개 SCSS 파일을 Dart Sass로 전환하고 산출물을 직접 확인했습니다. 별도 작업으로 직렬 빌드를 병렬화해 약 24초에서 14초 내외로 줄였습니다.</p>
           </div>
+        </div>
+      </section>
+
+      <hr className="pf-divider" />
+
+      <section className="pf-section" id="current-project">
+        <h2 className="pf-section-title">최근 프로젝트</h2>
+        <div className="pf-project">
+          <h3>{currentProject.title}</h3>
+          <p className="pf-project-desc">{currentProject.role} | {currentProject.period}</p>
+          <p className="pf-project-desc">{currentProject.summary}</p>
+          <div className="pf-detail">
+            <h4>맡은 일</h4>
+            <ul>
+              <li>상담 신청과 관리자 화면을 연결하고 접수 조회, 상태 변경, 메모와 자료 내보내기 구현</li>
+              <li>협업 기록을 다시 참고할 수 있도록 AI 질의응답과 정기 요약 기능 구성</li>
+              <li>원본을 보존하는 엑셀 처리 도구와 콘텐츠 게시 상태 관리 기능 구성</li>
+            </ul>
+          </div>
+          <Link href="/products#service-operations" className="pf-project-link">담당 업무와 적용 내용 →</Link>
+        </div>
+        <div className="pf-project">
+          <h3>베이비픽 | 개인 프로젝트</h3>
+          <p className="pf-project-desc">{babyPickSummary}</p>
+          <a href="https://babypick.co.kr" className="pf-project-link" target="_blank" rel="noopener noreferrer">서비스 보기 ↗</a>
         </div>
       </section>
 
@@ -402,7 +414,7 @@ export default function PortfolioPage() {
 
       <div className="pf-statusbar" role="status" aria-label="Portfolio 상태">
         <span><i aria-hidden="true" /> ready</span>
-        <span>Frontend | Service UI</span>
+        <span>서비스 개발과 운영</span>
         <span>UTF-8</span>
         <span>320, 390, 1440</span>
       </div>

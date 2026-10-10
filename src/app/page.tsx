@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { currentProject } from "@/lib/profile";
 
 export const metadata: Metadata = {
   alternates: {
@@ -30,11 +31,11 @@ const featuredProducts = [
     tags: ["Dart Sass", "Build", "Validation"],
   },
   {
-    name: "Commerce UI Components",
-    tagline: "실무 경험을 바탕으로 다시 만든 상품 옵션 UI",
-    description: "옵션 조합, 재고, 오류와 모바일 바텀시트 상태를 React 컴포넌트로 구현하고 Storybook에서 검증했습니다.",
-    href: "https://ksungz-ui.vercel.app/?path=/story/case-studies-상품-옵션-선택--design-and-verification",
-    tags: ["React", "Storybook", "Accessibility"],
+    name: currentProject.title,
+    tagline: "상담 접수부터 후속 업무와 협업 기록 관리까지",
+    description: currentProject.summary,
+    href: "/products#service-operations",
+    tags: ["공동 프로젝트", "관리 시스템", "AI 도구 활용"],
   },
 ];
 
@@ -45,19 +46,18 @@ export default function Home() {
       {/* Hero */}
       <section className="mb-16 sm:mb-20">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">
-          Frontend Engineer | Service UI
+          서비스 개발과 운영
         </p>
         <h1 className="text-2xl sm:text-4xl font-bold tracking-tight mb-4 sm:mb-6 leading-snug sm:leading-tight">
-          <span className="block">서비스 UI를 만들고 운영하며</span>
-          <span className="block text-[var(--color-muted)]">복잡한 화면과 오래된 구조를</span>
-          <span className="block text-[var(--color-muted)]">단계적으로 개선해왔습니다.</span>
+          <span className="block">김성재</span>
+          <span className="block text-[var(--color-muted)]">서비스 개발과 운영의 경험을</span>
+          <span className="block text-[var(--color-muted)]">실제 업무 개선으로 이어갑니다.</span>
         </h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
           커머스, 게임, 플랫폼 서비스에서 UI를 개발하고 운영해 왔습니다.
-          11번가에서는 모바일웹 상품상세와 앱 WebView UI를 담당했고,
-          하이브랩에서는 약 3년간 팀장으로 고객사 요구사항, 공수, 일정과 품질을 관리했습니다.
-          오래된 화면을 바꿀 때는 기존 구조와 영향을 받는 화면을 살피고,
-          함께 일하는 담당자들과 작업 범위를 맞춥니다.
+          11번가에서는 모바일웹 상품상세와 앱 WebView UI를 담당했고
+          하이브랩에서는 약 3년간 팀장으로 요구사항, 일정과 UI 결과물의 품질을 관리했습니다.
+          최근에는 공동 프로젝트에서 AI 개발 도구를 활용해 서비스 홈페이지와 운영 관리 시스템을 만들고 있습니다.
         </p>
         <div className="mt-6 sm:mt-8 flex flex-wrap gap-2 sm:gap-3">
           <Link
@@ -118,7 +118,7 @@ export default function Home() {
           className="mt-4 flex min-h-[44px] flex-col justify-center gap-1 border-t border-[var(--color-border)] py-3 text-xs transition-colors hover:text-[var(--color-foreground)] sm:flex-row sm:items-center sm:justify-between"
         >
           <span>
-            <strong className="font-semibold">개인 프로젝트와 AI 활용 기록</strong>
+            <strong className="font-semibold">프로젝트와 AI 활용 기록</strong>
             <span className="ml-2 text-[var(--color-muted)]">
               직접 만든 도구와 서비스의 구현 범위, 검증 결과와 한계
             </span>

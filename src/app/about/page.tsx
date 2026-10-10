@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { profileDescription, profileIntroduction } from "@/lib/profile";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "커머스, 게임, 플랫폼 서비스의 UI를 13년간 개발하고 운영해온 Frontend Engineer 김성재입니다.",
+  description: profileDescription,
 };
 
 export default function About() {
@@ -12,23 +13,9 @@ export default function About() {
       <section className="mb-12 sm:mb-16">
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">About</p>
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2">김성재</h1>
-        <p className="mb-4 sm:mb-6 text-sm font-medium">Frontend Engineer | Service UI</p>
+        <p className="mb-4 sm:mb-6 text-sm font-medium">서비스 개발과 운영</p>
         <div className="space-y-4 text-sm leading-relaxed text-[var(--color-muted)] max-w-xl">
-          <p>
-            커머스, 게임, 플랫폼 서비스에서 UI를 개발하고 운영해 왔습니다.
-            11번가에서는 모바일웹 상품상세와 앱 WebView UI를 담당하며
-            다양한 상품 유형과 기기 환경에 맞춰 화면을 개선했습니다.
-          </p>
-          <p>
-            오래 운영된 화면을 바꿀 때는 기존 구조와 다른 화면에 미칠 영향을 먼저 살폈습니다.
-            기획, 디자인, 백엔드 담당자와 구현할 내용과 검증할 항목을 조율하고
-            변경한 뒤에는 실제 화면과 배포 결과를 점검했습니다.
-            AI 도구도 반복 작업에 활용하되 결과를 직접 검토해 적용했습니다.
-          </p>
-          <p>
-            하이브랩에서는 UI 개발과 함께 약 3년간 팀장 역할을 맡았습니다.
-            고객사의 요구사항을 조율하고 공수 산정, 업무 배분, 일정과 품질을 관리했습니다.
-          </p>
+          {profileIntroduction.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         </div>
       </section>
 

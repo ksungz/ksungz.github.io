@@ -1,8 +1,8 @@
 # 김성재 포트폴리오
 
 커머스, 게임, 플랫폼 서비스의 UI를 개발하고 운영해 왔습니다.
-모바일웹 상품상세와 앱 WebView UI 운영, 공통 UI와 스타일 구조 정리,
-기존 화면과 스타일 구조를 바꾼 경험을 정리한 개인 포트폴리오입니다.
+모바일웹 상품상세와 앱 WebView UI 운영, 기존 구조 개선과 팀 리딩 경험을 정리했습니다.
+최근에는 공동 프로젝트에 참여해 AI 개발 도구를 활용한 서비스 홈페이지와 운영 관리 시스템을 만들고 있습니다.
 
 각 작업에서 어떤 문제가 있었고 왜 그 방식으로 바꿨는지,
 직접 맡은 범위와 적용 후 확인한 결과를 함께 적었습니다.
@@ -10,7 +10,7 @@
 ## 사이트 보기
 
 - [홈](https://ksungz-github-io.vercel.app)
-- [AI를 활용한 작업](https://ksungz-github-io.vercel.app/products)
+- [서비스와 업무 도구 개발](https://ksungz-github-io.vercel.app/products)
 - [Case Studies](https://ksungz-github-io.vercel.app/case-studies)
 - [Engineering Notes](https://ksungz-github-io.vercel.app/engineering)
 - [Career](https://ksungz-github-io.vercel.app/career)
@@ -26,6 +26,13 @@
 - 별도 빌드 병렬화로 대표 실행 시간을 약 24초에서 14초 내외로 단축
 - 약 3년간 팀장으로 고객사 요구사항, 공수, 업무 배분, 일정과 품질 관리
 - 접근성, 반응형 UI, 크로스브라우징과 운영 문서화
+
+### 최근 공동 프로젝트
+
+- **서비스 홈페이지와 운영 관리 시스템**: 상담 신청과 관리자 화면을 연결하고 접수 조회, 상태 변경, 메모와 자료 내보내기 기능 구성
+- AI 질의응답과 정기 요약을 협업에 활용하고 업무의 실제 완료 여부는 별도로 확인
+- 원본을 보존하는 엑셀 처리 도구와 콘텐츠 게시 상태 관리 기능 구성
+- 재직 경력과 구분한 공동 프로젝트 참여이며 필요한 기능을 정하고 AI 개발 도구를 활용해 구현, 검증, 배포 진행
 
 ### AI를 활용한 개발 도구와 작업
 

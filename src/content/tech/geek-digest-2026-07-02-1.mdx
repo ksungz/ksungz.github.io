@@ -1,0 +1,18 @@
+---
+title: "GeekNews 픽: TS 컴파일러 코드 그래프 MCP — Claude Code 토큰 10배 절감"
+date: "2026-07-02"
+category: "GeekNews 픽"
+badge: digest
+description: "TypeScript 컴파일러로 만든 코드 그래프 MCP가 본문이 아닌 인덱스만으로 Claude Code 토큰을 10배 줄이면서 품질은 유지한 사례"
+tags: ["MCP", "TypeScript", "AI agents", "token optimization", "code graph"]
+---
+
+GeekNews에서 Jeongho Nam의 @ttsc/graph 글을 봤는데, Claude Code에서 토큰을 10배 줄인 사례다. TypeScript 컴파일러가 그린 함수·클래스·파일 간 호출/상속/의존 관계를 노드와 엣지로 만들어 에이전트에게 주는 MCP 서버인데, 핵심은 소스 본문을 주지 않고 이름·시그니처·파일:라인 span만 담긴 인덱스를 준다는 점이다. 기존 codegraph, codebase-memory-mcp, serena는 본문까지 덧붙여 토큰이 폭발하거나 에이전트가 결국 grep으로 돌아갔는데, @ttsc/graph는 저장소가 커져도 토큰 사용량이 일정하고 8개 저장소·4개 모델에서 10배 절감에도 품질이 떨어지지 않았다. 또 schema 구조로 강제 CoT를 유도해 에이전트가 그래프를 실제로 타게 만든 점도 인상 깊었다.
+
+AI가 짜고 AI가 고치는 루프 속에서 컴파일러가 보증하는 인덱스만으로 관계 추론하게 만드는 접근이 앞으로 더 보고 싶다. 물론 사람이 어느 순간 멈춰서 의심하는 지점은 여전히 필요하다.
+
+이 소식을 보면서 AI가 짜고 AI가 고치는 루프 속에서 사람의 최종 판단이 여전히 필요하다는 점에 대해 다시 생각하게 됐다.
+
+---
+
+* 출처 : https://dev.to/samchon/i-made-ts-compiler-graph-mcp-10x-fewer-tokens-in-claude-code-1aea

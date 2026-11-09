@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-11-09 — 피드 LLM을 Claude로 이전
+
+- 피드 수집과 Feed Studio의 분석·블로그 초안을 Ollama Cloud에서 Claude Sonnet 5.5(`claude-sonnet-5-5`, Anthropic SDK)로 옮김
+- 피드 수집 워크플로는 `FEED_LLM_PROVIDER=anthropic`과 비밀값 `ANTHROPIC_API_KEY`를 사용
+- Ollama 호출 경로와 `OLLAMA_*` 설정 읽기를 제거. 키가 없거나 다른 제공자를 지정하면 LLM 없이 규칙 기반으로만 처리
+
 ## 2026-07-11 — Info Feed 운영 구조 보강
 
 ### 공개 피드

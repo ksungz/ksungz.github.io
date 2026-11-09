@@ -61,7 +61,7 @@ const message = (content, stopReason = "end_turn") => ({
   },
 });
 
-test("제공자: Anthropic 키가 있으면 Claude Sonnet 5.5를 쓰고, 없으면 예전처럼 Ollama를 쓴다", () =>
+test("제공자: Anthropic 키가 있으면 Claude Sonnet 5.5를 쓰고, Ollama 키나 ollama 지정은 더 이상 쓰지 않는다", () =>
   withEnv({ ANTHROPIC_API_KEY: "a", OLLAMA_API_KEY: "o" }, () => {
     assert.deepEqual(getFeedLlmProviderInfo(), {
       name: "anthropic",
@@ -72,9 +72,18 @@ test("제공자: Anthropic 키가 있으면 Claude Sonnet 5.5를 쓰고, 없으�
     .then(() =>
       withEnv({ OLLAMA_API_KEY: "o" }, () => {
         assert.deepEqual(getFeedLlmProviderInfo(), {
+          name: "none",
+          configured: false,
+          model: null,
+        });
+      })
+    )
+    .then(() =>
+      withEnv({ FEED_LLM_PROVIDER: "ollama", OLLAMA_API_KEY: "o" }, () => {
+        assert.deepEqual(getFeedLlmProviderInfo(), {
           name: "ollama",
-          configured: true,
-          model: "kimi-k2.7-code:cloud",
+          configured: false,
+          model: null,
         });
       })
     )
@@ -88,7 +97,7 @@ test("제공자: Anthropic 키가 있으면 Claude Sonnet 5.5를 쓰고, 없으�
       })
     ));
 
-test("제공자: 워크플로처럼 FEED_LLM_*로 지정하면 그 키와 모델을 쓰고, Ollama 모델 이름은 Claude에 보내지 않는다", () =>
+test("제공자: 워크플로처럼 FEED_LLM_*로 지정하면 그 키와 모델을 쓰고, 예전 모델 이름은 Claude에 보내지 않는다", () =>
   withEnv(
     {
       FEED_LLM_PROVIDER: "anthropic",
@@ -110,6 +119,12 @@ test("제공자: 워크플로처럼 FEED_LLM_*로 지정하면 그 키와 모델
           assert.equal(getFeedLlmProviderInfo().model, "claude-sonnet-5-5");
         }
       )
+    )
+    .then(() =>
+      withEnv({ FEED_LLM_API_KEY: "k" }, () => {
+        // 제공자를 적지 않아도 키가 있으면 Claude다.
+        assert.equal(getFeedLlmProviderInfo().name, "anthropic");
+      })
     )
     .then(() =>
       withEnv({ FEED_LLM_PROVIDER: "anthropic" }, () => {

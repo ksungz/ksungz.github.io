@@ -1,47 +1,25 @@
 import Anthropic from "@anthropic-ai/sdk";
 
-// 2026-11-09 Ollama 구독을 그만두면서 Claude(Anthropic)를 기본 제공자로 쓴다.
-// ollama는 FEED_LLM_PROVIDER=ollama로 지정하거나 Anthropic 키가 없을 때만 쓴다.
+// 2026-11-09 Ollama 구독을 그만두면서 Claude(Anthropic)로 옮기고 Ollama 경로는 지웠다.
+// 키가 없거나 다른 제공자를 지정하면 LLM 없이 규칙 기반으로만 처리한다.
 const ANTHROPIC_DEFAULT_MODEL = "claude-sonnet-5-5";
 
 function resolveConfig() {
   const explicit = (process.env.FEED_LLM_PROVIDER || "").trim().toLowerCase();
-  const genericKey = process.env.FEED_LLM_API_KEY || "";
-  const anthropicKey = process.env.ANTHROPIC_API_KEY || "";
-  const ollamaKey = process.env.OLLAMA_API_KEY || "";
-  const provider =
-    explicit ||
-    (anthropicKey ? "anthropic" : genericKey || ollamaKey ? "ollama" : "none");
-
-  if (provider === "anthropic") {
-    const apiKey = genericKey || anthropicKey;
-    const requested = process.env.FEED_LLM_MODEL || "";
-    return {
-      provider,
-      configured: Boolean(apiKey),
-      apiKey,
-      baseUrl: process.env.FEED_LLM_BASE_URL || "",
-      // Ollama용 모델 이름이 남아 있어도 Claude에는 보내지 않는다.
-      model: requested.startsWith("claude-") ? requested : ANTHROPIC_DEFAULT_MODEL,
-    };
+  const apiKey = process.env.FEED_LLM_API_KEY || process.env.ANTHROPIC_API_KEY || "";
+  const provider = explicit || (apiKey ? "anthropic" : "none");
+  if (provider !== "anthropic") {
+    return { provider, configured: false, apiKey: "", baseUrl: "", model: "" };
   }
-  if (provider === "ollama") {
-    const apiKey = genericKey || ollamaKey;
-    return {
-      provider,
-      configured: Boolean(apiKey),
-      apiKey,
-      baseUrl:
-        process.env.FEED_LLM_BASE_URL ||
-        process.env.OLLAMA_HOST ||
-        "https://ollama.com",
-      model:
-        process.env.FEED_LLM_MODEL ||
-        process.env.OLLAMA_MODEL ||
-        "kimi-k2.7-code:cloud",
-    };
-  }
-  return { provider, configured: false, apiKey: "", baseUrl: "", model: "" };
+  const requested = process.env.FEED_LLM_MODEL || "";
+  return {
+    provider,
+    configured: Boolean(apiKey),
+    apiKey,
+    baseUrl: process.env.FEED_LLM_BASE_URL || "",
+    // claude-로 시작하지 않는 예전 모델 이름은 Claude에 보내지 않는다.
+    model: requested.startsWith("claude-") ? requested : ANTHROPIC_DEFAULT_MODEL,
+  };
 }
 
 export function getFeedLlmProviderInfo() {
@@ -53,7 +31,11 @@ export function getFeedLlmProviderInfo() {
   };
 }
 
-async function generateWithAnthropic(config, prompt, timeoutMs) {
+export async function generateFeedJson(prompt, timeoutMs = 120_000) {
+  const config = resolveConfig();
+  if (!config.configured) {
+    throw new Error(`LLM provider '${config.provider}' is not configured`);
+  }
   const client = new Anthropic({
     apiKey: config.apiKey,
     authToken: null,
@@ -79,34 +61,4 @@ async function generateWithAnthropic(config, prompt, timeoutMs) {
     .map((block) => block.text)
     .join("")
     .trim();
-}
-
-export async function generateFeedJson(prompt, timeoutMs = 120_000) {
-  const config = resolveConfig();
-  if (!config.configured) {
-    throw new Error(`LLM provider '${config.provider}' is not configured`);
-  }
-  if (config.provider === "anthropic") {
-    return generateWithAnthropic(config, prompt, timeoutMs);
-  }
-
-  const response = await fetch(`${config.baseUrl.replace(/\/$/, "")}/api/chat`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${config.apiKey}`,
-    },
-    body: JSON.stringify({
-      model: config.model,
-      messages: [{ role: "user", content: prompt }],
-      stream: false,
-      format: "json",
-    }),
-    signal: AbortSignal.timeout(timeoutMs),
-  });
-  if (!response.ok) {
-    throw new Error(`LLM provider returned ${response.status}`);
-  }
-  const data = await response.json();
-  return data.message?.content || "";
 }

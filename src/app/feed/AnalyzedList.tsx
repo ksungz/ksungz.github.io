@@ -22,7 +22,7 @@ export function AnalyzedList({ items }: AnalyzedListProps) {
             className="pr-btn"
             onClick={() =>
               alert(
-                "Ollama Cloud 분석 → MDX 생성 → GitHub PR 생성\n(실제 구현 시 API 라우트로 실행)"
+                "Claude 분석 → MDX 생성 → GitHub PR 생성\n(실제 구현 시 API 라우트로 실행)"
               )
             }
           >

@@ -227,6 +227,12 @@ export default function Products() {
         <p className="mt-2 text-xs text-[var(--color-muted)]">{currentProject.role} | {currentProject.period}</p>
         <p className="mt-4 text-sm leading-relaxed">{currentProject.summary}</p>
         <div className="mt-6 space-y-6">
+          {currentProject.cases.map(({ title, summary }) => (
+            <div key={title}>
+              <h3 className="text-sm font-semibold">{title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">{summary}</p>
+            </div>
+          ))}
           {currentProject.sections.map((section) => (
             <div key={section.title}>
               <h3 className="text-sm font-semibold">{section.title}</h3>

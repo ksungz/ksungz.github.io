@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 const careers = [
   {
     company: "11번가",
-    team: "UI개발팀",
+    team: "FE개발팀",
     period: "2020.12 ~ 2026.08",
     role: "UI 개발자",
     summary: "모바일웹 상품상세(PDP)와 앱 WebView UI를 개발하고 운영했습니다. 기획, 디자인, 백엔드 담당자와 변경 범위를 조율했고, React 저장소로 스타일을 옮기는 작업에서는 기존 SCSS와 컴포넌트를 연결할 단위를 정했습니다.",
@@ -64,7 +64,7 @@ const careers = [
   },
   {
     company: "하이브랩",
-    team: "FE개발팀",
+    team: "FE개발1팀",
     period: "2012.07 ~ 2019.06",
     role: "UI 개발자 → 팀장 (약 3년)",
     summary: "네이버, 블리자드, PUBG, 스마일게이트 등 여러 클라이언트의 UI 프로젝트를 수행했습니다. 약 3년간 팀장으로 업무 분배, 공수 산정, 품질 관리와 고객사 커뮤니케이션을 담당했습니다.",
@@ -163,8 +163,8 @@ export default function CareerPage() {
         <h3 className="text-sm font-semibold">{currentProject.title}</h3>
         <p className="mt-2 text-xs text-[var(--color-muted)]">{currentProject.role} | {currentProject.period}</p>
         <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">{currentProject.summary}</p>
-        <Link href="/products#service-operations" className="mt-3 inline-flex min-h-11 items-center text-xs underline underline-offset-4">담당 업무와 적용 내용</Link>
-        <h3 className="mt-7 text-sm font-semibold">베이비픽 | 개인 프로젝트</h3>
+        <Link href="/products#service-operations" className="mt-3 inline-flex min-h-11 items-center text-xs underline underline-offset-4">서비스 운영 도구와 사례 보기</Link>
+        <h3 className="mt-5 text-sm font-semibold">베이비픽 | 개인 프로젝트</h3>
         <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">{babyPickSummary}</p>
       </section>
 

@@ -35,14 +35,12 @@ export default function PortfolioPage() {
         <p className="pf-hero-command"><span aria-hidden="true">$</span> whoami</p>
         <h1>김성재</h1>
         <p className="pf-hero-statement">
-          서비스 UI 개발과 운영, 팀 리딩 경험과
-          최근 진행하는 서비스 및 업무 도구 개발을 정리했습니다.
+          커머스와 게임 서비스의 UI 개발과 운영 개선,
+          최근에 만든 서비스 운영 도구를 정리했습니다.
         </p>
         <div className="pf-hero-actions">
           <a className="pf-scroll-link" href="#work"><span aria-hidden="true">$</span> open ./ui-work <span aria-hidden="true">↓</span></a>
-          <Link className="pf-scroll-link" href="/engineering">
-            <span aria-hidden="true">$</span> open ./engineering
-          </Link>
+          <a className="pf-scroll-link" href="#current-project"><span aria-hidden="true">$</span> open ./recent-work <span aria-hidden="true">↓</span></a>
           <Link
             className="pf-3d-link"
             href="/products"
@@ -96,15 +94,13 @@ export default function PortfolioPage() {
           <h3>{currentProject.title}</h3>
           <p className="pf-project-desc">{currentProject.role} | {currentProject.period}</p>
           <p className="pf-project-desc">{currentProject.summary}</p>
-          <div className="pf-detail">
-            <h4>맡은 일</h4>
-            <ul>
-              <li>상담 신청과 관리자 화면을 연결하고 접수 조회, 상태 변경, 메모와 자료 내보내기 구현</li>
-              <li>협업 기록을 다시 참고할 수 있도록 AI 질의응답과 정기 요약 기능 구성</li>
-              <li>원본을 보존하는 엑셀 처리 도구와 콘텐츠 게시 상태 관리 기능 구성</li>
-            </ul>
-          </div>
-          <Link href="/products#service-operations" className="pf-project-link">담당 업무와 적용 내용 →</Link>
+          {currentProject.cases.map(({ title, summary }) => (
+            <div key={title} className="pf-detail">
+              <h4>{title}</h4>
+              <p className="pf-project-desc">{summary}</p>
+            </div>
+          ))}
+          <Link href="/products#service-operations" className="pf-project-link">운영 도구와 상담 관리 작업 보기 →</Link>
         </div>
         <div className="pf-service-card">
           <img src="/portfolio/babypick-guide.png" alt="베이비픽의 육아용품 가이드 목록" />
@@ -337,8 +333,8 @@ export default function PortfolioPage() {
       <div className="pf-footer">
         <p className="pf-footer-name">김성재</p>
         <p className="pf-footer-copy">
-          서비스 UI를 오래 운영하며 쌓은 경험을 바탕으로,
-          운영 중인 화면과 오래된 구조를 함께 다룹니다.
+          서비스 화면을 만들고 운영한 경험,
+          실제 업무를 확인하며 개선한 과정을 함께 기록합니다.
         </p>
         <nav className="pf-footer-actions" aria-label="Portfolio 다음 이동">
           <a href="/career">전체 경력 보기 →</a>

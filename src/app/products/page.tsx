@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { currentProject, babyPickSummary } from "@/lib/profile";
+import { currentProject, currentProjectPortfolio, babyPickSummary } from "@/lib/profile";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -224,22 +224,21 @@ export default function Products() {
 
       <section id="service-operations" className="mb-12 scroll-mt-20 border-b border-[var(--color-border)] pb-10 sm:mb-16">
         <h2 className="mb-4 text-sm font-semibold text-[var(--color-muted)]">공동 프로젝트</h2>
-        <h3 className="text-lg font-semibold">{currentProject.title}</h3>
+        <h3 className="text-lg font-semibold">{currentProjectPortfolio.title}</h3>
         <p className="mt-2 text-xs text-[var(--color-muted)]">{currentProject.role} | {currentProject.period}</p>
-        <p className="mt-4 text-sm leading-relaxed">{currentProject.summary}</p>
-        <div className="mt-6 space-y-6">
-          {currentProject.sections.map((section) => (
-            <div key={section.title}>
-              <h4 className="text-sm font-semibold">{section.title}</h4>
-              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-[var(--color-muted)]">
-                {section.items.map((item) => <li key={item}>{item}</li>)}
-              </ul>
-            </div>
-          ))}
-          {currentProject.cases.map(({ title, summary }) => (
+        <p className="mt-4 break-keep! text-sm leading-relaxed">{currentProjectPortfolio.summary}</p>
+        <div className="mt-8 space-y-7 divide-y divide-[var(--color-border)]">
+          {currentProjectPortfolio.areas.map(({ title, details }) => (
             <div key={title}>
-              <h4 className="text-sm font-semibold">{title}</h4>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">{summary}</p>
+              <h4 className="mb-4 font-semibold">{title}</h4>
+              <div className="space-y-4 pb-6">
+                {details.map(({ title: detailTitle, description }) => (
+                  <div key={detailTitle}>
+                    <h5 className="text-sm font-semibold">{detailTitle}</h5>
+                    <p className="mt-1.5 break-keep! text-sm leading-relaxed text-[var(--color-muted)]">{description}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>

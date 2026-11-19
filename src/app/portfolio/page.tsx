@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { profileIntroduction, currentProject, babyPickSummary } from "@/lib/profile";
+import { profileIntroduction, currentProject, currentProjectPortfolio, babyPickSummary } from "@/lib/profile";
 import "./portfolio.css";
 
 /* eslint-disable @next/next/no-img-element */
@@ -35,7 +35,7 @@ export default function PortfolioPage() {
         <h1>김성재</h1>
         <p className="pf-hero-statement">
           커머스와 게임 서비스의 UI 개발과 운영 개선,
-          최근에 만든 서비스 운영 도구를 정리했습니다.
+          공동 프로젝트에서 만든 웹과 업무 시스템을 정리했습니다.
         </p>
         <div className="pf-hero-actions">
           <a className="pf-scroll-link" href="#work"><span aria-hidden="true">$</span> 실무 UI 사례 <span aria-hidden="true">↓</span></a>
@@ -184,16 +184,16 @@ export default function PortfolioPage() {
       <section className="pf-section" id="current-project">
         <h2 className="pf-section-title">공동 프로젝트</h2>
         <div className="pf-project">
-          <h3>{currentProject.title}</h3>
+          <h3>{currentProjectPortfolio.title}</h3>
           <p className="pf-project-desc">{currentProject.role} | {currentProject.period}</p>
-          <p className="pf-project-desc">{currentProject.summary}</p>
-          {currentProject.cases.map(({ title, summary }) => (
+          <p className="pf-project-desc break-keep!">{currentProjectPortfolio.summary}</p>
+          {currentProjectPortfolio.areas.map(({ title, summary }) => (
             <div key={title} className="pf-detail">
               <h4>{title}</h4>
-              <p className="pf-project-desc">{summary}</p>
+              <p className="pf-project-desc break-keep!">{summary}</p>
             </div>
           ))}
-          <Link href="/products#service-operations" className="pf-project-link">상담 관리와 업무 자동화 상세 →</Link>
+          <Link href="/products#service-operations" className="pf-project-link">공동 프로젝트 상세 →</Link>
         </div>
       </section>
 

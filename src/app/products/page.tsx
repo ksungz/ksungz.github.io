@@ -27,22 +27,6 @@ interface ProductData {
 
 const axSystems: ProductData[] = [
   {
-    id: "agent-bridge",
-    name: "Agent Bridge",
-    tagline: "로그인된 여러 AI CLI를 한 작업 단위로 연결하는 오픈소스 도구",
-    problem: "Claude Code, Codex, Gemini CLI를 각각 구독·로그인해 사용했지만, 한 작업에서 함께 쓰려면 요청과 결과를 직접 옮기고 다음 에이전트에게 다시 설명해야 했습니다. API 키 기반 모델 라우터가 아니라 기존 CLI 환경을 유지한 채 조합하는 방법이 필요했습니다.",
-    solution: "제품 범위와 작업 기록 계약을 정하고 AI 코딩 에이전트를 활용해, 각 CLI를 독립된 로컬 프로세스로 실행하는 얇은 오케스트레이션 계층을 구현했습니다. 실제 CLI 실행과 테스트로 동작을 검증했으며, 인증·결제를 대신 관리하거나 API를 프록시하지 않습니다.",
-    stack: ["Node.js", "CLI", "MIT", "CI"],
-    status: "오픈소스 · v0.1.1 · 공개 설치와 Codex CLI 실행 검증",
-    links: [
-      { label: "GitHub", href: "https://github.com/ksungz/agent-bridge" },
-      { label: "Release", href: "https://github.com/ksungz/agent-bridge/releases/tag/v0.1.1" },
-    ],
-    relatedLinks: [
-      { label: "Case Study", href: "/case-studies/agent-bridge" },
-    ],
-  },
-  {
     id: "ax-doctor",
     name: "AX Doctor",
     tagline: "AI 개발 환경 도입 전 점검 CLI",
@@ -102,6 +86,22 @@ const axSystems: ProductData[] = [
       { label: "초기 구조", href: "/engineering/ai-workspace" },
       { label: "전환 과정", href: "/engineering/hermes-agent-runtime" },
       { label: "하네스 점검", href: "/engineering/ai-agent-harness-audit" },
+    ],
+  },
+  {
+    id: "agent-bridge",
+    name: "Agent Bridge",
+    tagline: "로그인된 여러 AI CLI를 한 작업 단위로 연결하는 오픈소스 도구",
+    problem: "Claude Code, Codex, Gemini CLI를 각각 구독·로그인해 사용했지만, 한 작업에서 함께 쓰려면 요청과 결과를 직접 옮기고 다음 에이전트에게 다시 설명해야 했습니다. API 키 기반 모델 라우터가 아니라 기존 CLI 환경을 유지한 채 조합하는 방법이 필요했습니다.",
+    solution: "제품 범위와 작업 기록 계약을 정하고 AI 코딩 에이전트를 활용해, 각 CLI를 독립된 로컬 프로세스로 실행하는 얇은 오케스트레이션 계층을 구현했습니다. 실제 CLI 실행과 테스트로 동작을 검증했으며, 인증·결제를 대신 관리하거나 API를 프록시하지 않습니다.",
+    stack: ["Node.js", "CLI", "MIT", "CI"],
+    status: "오픈소스 · v0.1.1 · 공개 설치와 Codex CLI 실행 검증",
+    links: [
+      { label: "GitHub", href: "https://github.com/ksungz/agent-bridge" },
+      { label: "Release", href: "https://github.com/ksungz/agent-bridge/releases/tag/v0.1.1" },
+    ],
+    relatedLinks: [
+      { label: "Case Study", href: "/case-studies/agent-bridge" },
     ],
   },
 ];
@@ -223,46 +223,45 @@ export default function Products() {
       </section>
 
       <section id="service-operations" className="mb-12 scroll-mt-20 border-b border-[var(--color-border)] pb-10 sm:mb-16">
-        <h2 className="text-lg font-semibold">{currentProject.title}</h2>
+        <h2 className="mb-4 text-sm font-semibold text-[var(--color-muted)]">공동 프로젝트</h2>
+        <h3 className="text-lg font-semibold">{currentProject.title}</h3>
         <p className="mt-2 text-xs text-[var(--color-muted)]">{currentProject.role} | {currentProject.period}</p>
         <p className="mt-4 text-sm leading-relaxed">{currentProject.summary}</p>
         <div className="mt-6 space-y-6">
-          {currentProject.cases.map(({ title, summary }) => (
-            <div key={title}>
-              <h3 className="text-sm font-semibold">{title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">{summary}</p>
-            </div>
-          ))}
           {currentProject.sections.map((section) => (
             <div key={section.title}>
-              <h3 className="text-sm font-semibold">{section.title}</h3>
+              <h4 className="text-sm font-semibold">{section.title}</h4>
               <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-[var(--color-muted)]">
                 {section.items.map((item) => <li key={item}>{item}</li>)}
               </ul>
             </div>
           ))}
+          {currentProject.cases.map(({ title, summary }) => (
+            <div key={title}>
+              <h4 className="text-sm font-semibold">{title}</h4>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">{summary}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Developer Tools & Automation */}
       <section className="mb-12 sm:mb-16">
-        <h2 className="mb-4 sm:mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
-          Developer Tools &amp; Automation
+        <h2 className="mb-4 sm:mb-6 text-sm font-semibold text-[var(--color-muted)]">
+          개인 서비스와 자동화
         </h2>
         <div className="space-y-6 sm:space-y-8">
-          {axSystems.map((p) => (
+          {aiProducts.map((p) => (
             <ProductCard key={p.id} {...p} />
           ))}
         </div>
       </section>
 
-      {/* Side Products & Automation */}
       <section>
-        <h2 className="mb-4 sm:mb-6 text-sm font-semibold uppercase tracking-widest text-[var(--color-muted)]">
-          Side Products &amp; Automation
+        <h2 className="mb-4 sm:mb-6 text-sm font-semibold text-[var(--color-muted)]">
+          개발 도구와 실험
         </h2>
         <div className="space-y-6 sm:space-y-8">
-          {aiProducts.map((p) => (
+          {axSystems.map((p) => (
             <ProductCard key={p.id} {...p} />
           ))}
         </div>

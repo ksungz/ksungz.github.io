@@ -438,7 +438,7 @@ body:has(.portfolio-root) > main {
   border-left: 1px solid var(--line);
 }
 
-.pf-poc-card h4 {
+.pf-poc-card h3 {
   margin: 0 0 18px;
   color: var(--ink);
   font-size: 18px;
@@ -450,6 +450,11 @@ body:has(.portfolio-root) > main {
   color: var(--muted);
   font-size: 13px;
   line-height: 1.8;
+}
+
+.pf-poc-card .pf-project-link {
+  display: inline-block;
+  margin-top: 12px;
 }
 
 /* Projects */
@@ -695,6 +700,12 @@ body:has(.portfolio-root) > main {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
+}
+
+@media (min-width: 1200px) {
+  .pf-service-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .pf-service-card {
@@ -1593,7 +1604,7 @@ body:has(.portfolio-root) {
 }
 
 .pf-focus-card h3,
-.pf-poc-card h4,
+.pf-poc-card h3,
 .pf-project h3,
 .pf-service-card h3 {
   color: var(--ink);
@@ -1856,7 +1867,7 @@ body:has(.portfolio-root) {
 }
 
 .pf-focus-card h3,
-.pf-poc-card h4 {
+.pf-poc-card h3 {
   font-size: 19px;
 }
 

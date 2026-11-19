@@ -12,14 +12,13 @@ export default function PortfolioPage() {
           <span aria-hidden="true">&gt;_</span> k.sungjae@portfolio:~$
         </a>
         <nav className="pf-cli-nav" aria-label="포트폴리오 탐색">
-          <a href="#work">UI Experience</a>
-          <a href="#current-project">Recent Projects</a>
-          <a href="#react-work">Work Case</a>
-          <a href="#case-study">Public UI</a>
-          <a href="#workflow">AI-assisted Work</a>
-          <a href="#ai-products">Side Projects</a>
-          <a href="/career">Career</a>
-          <a href="mailto:k.suzkim@gmail.com">Contact</a>
+          <a href="#work">실무 UI</a>
+          <a href="#workflow">실무 AI 활용</a>
+          <a href="#current-project">공동 프로젝트</a>
+          <a href="#case-study">공개 UI 사례</a>
+          <a href="#ai-products">개인 서비스</a>
+          <a href="/career">전체 경력</a>
+          <a href="mailto:k.suzkim@gmail.com">연락처</a>
         </nav>
         <p className="pf-cli-status"><i aria-hidden="true" /> 서비스 개발과 운영</p>
       </header>
@@ -39,14 +38,14 @@ export default function PortfolioPage() {
           최근에 만든 서비스 운영 도구를 정리했습니다.
         </p>
         <div className="pf-hero-actions">
-          <a className="pf-scroll-link" href="#work"><span aria-hidden="true">$</span> open ./ui-work <span aria-hidden="true">↓</span></a>
-          <a className="pf-scroll-link" href="#current-project"><span aria-hidden="true">$</span> open ./recent-work <span aria-hidden="true">↓</span></a>
+          <a className="pf-scroll-link" href="#work"><span aria-hidden="true">$</span> 실무 UI 사례 <span aria-hidden="true">↓</span></a>
+          <a className="pf-scroll-link" href="#current-project"><span aria-hidden="true">$</span> 공동 프로젝트 <span aria-hidden="true">↓</span></a>
           <Link
             className="pf-3d-link"
             href="/products"
             aria-label="프로젝트 목록 열기"
           >
-            <span aria-hidden="true">◆</span> open ./products
+            <span aria-hidden="true">◆</span> 프로젝트 목록
           </Link>
         </div>
       </header>
@@ -72,51 +71,19 @@ export default function PortfolioPage() {
         </p>
         <div className="pf-poc-grid">
           <div className="pf-poc-card">
-            <h4>모바일웹 PDP와 WebView 운영</h4>
-            <p>가격, 옵션, 리뷰, 배송, 프로모션처럼 여러 영역이 맞물리는 상품상세 UI를 운영하며 기획, 디자인, 백엔드 담당자와 영향 범위를 확인했습니다.</p>
+            <h3>모바일웹 상품상세와 앱 WebView 운영</h3>
+            <p>모바일웹과 앱에서 상품 유형이나 기기에 따라 화면이 어떻게 동작하는지 살피고 배포 결과까지 확인했습니다.</p>
+            <Link className="pf-project-link" href="/engineering/pdp-ui">상품상세 운영 기록 →</Link>
           </div>
           <div className="pf-poc-card">
-            <h4>운영 SCSS의 React 저장소 이관</h4>
-            <p>기존 운영 블록 SCSS는 공통 SCSS를 제외하고 약 108개였습니다. 컴포넌트마다 파일을 일대일로 옮기지 않고 화면 블록을 기준으로 묶어 관련 코드와 스타일을 함께 참고하도록 했습니다.</p>
+            <h3>운영 SCSS의 React 저장소 이관</h3>
+            <p>컴포넌트와 스타일을 화면 블록 단위로 묶어 관리하고 실제 상품상세 첫 화면 개선에 반영했습니다.</p>
+            <a className="pf-project-link" href="#react-work">스타일 이관 사례 ↓</a>
           </div>
           <div className="pf-poc-card">
-            <h4>Dart Sass와 빌드 개선</h4>
+            <h3>Dart Sass와 빌드 개선</h3>
             <p>약 2,384개 SCSS 파일을 Dart Sass로 전환하고 산출물을 직접 확인했습니다. 별도 작업으로 직렬 빌드를 병렬화해 약 24초에서 14초 내외로 줄였습니다.</p>
-          </div>
-        </div>
-      </section>
-
-      <hr className="pf-divider" />
-
-      <section className="pf-section" id="current-project">
-        <h2 className="pf-section-title">최근 프로젝트</h2>
-        <div className="pf-project">
-          <h3>{currentProject.title}</h3>
-          <p className="pf-project-desc">{currentProject.role} | {currentProject.period}</p>
-          <p className="pf-project-desc">{currentProject.summary}</p>
-          {currentProject.cases.map(({ title, summary }) => (
-            <div key={title} className="pf-detail">
-              <h4>{title}</h4>
-              <p className="pf-project-desc">{summary}</p>
-            </div>
-          ))}
-          <Link href="/products#service-operations" className="pf-project-link">운영 도구와 상담 관리 작업 보기 →</Link>
-        </div>
-        <div className="pf-service-card">
-          <img src="/portfolio/babypick-guide.png" alt="베이비픽의 육아용품 가이드 목록" />
-          <div>
-            <div className="pf-project-header">
-              <h3>베이비픽 | 개인 프로젝트</h3>
-              <a href="https://babypick.co.kr" className="pf-project-link" target="_blank" rel="noopener noreferrer">서비스 보기 ↗</a>
-              <a href="https://blog.naver.com/babypick_blog" className="pf-project-link" target="_blank" rel="noopener noreferrer">블로그 ↗</a>
-            </div>
-            <p>{babyPickSummary}</p>
-            <div className="pf-chips">
-              <span className="pf-chip">Next.js</span>
-              <span className="pf-chip">Supabase</span>
-              <span className="pf-chip">GAS</span>
-              <span className="pf-chip">LLM</span>
-            </div>
+            <Link className="pf-project-link" href="/engineering/dart-sass">Sass 전환과 빌드 기록 →</Link>
           </div>
         </div>
       </section>
@@ -176,11 +143,67 @@ export default function PortfolioPage() {
 
       <hr className="pf-divider" />
 
+      {/* 회사 안에서 적용한 AI 보조 흐름 */}
+      <section className="pf-section pf-section-tinted" id="workflow">
+        <h2 className="pf-section-title">실무에 적용한 AI 도구와 규칙</h2>
+        <p className="pf-section-lead">
+          회사에서 제공한 도구와 승인된 연동을 실제 개발 흐름에 적용하고,
+          반복 작업의 규칙과 사람이 최종 판단할 범위를 정리했습니다.
+          도구 자체 개발과 제가 담당한 도입, 설정, 운영 범위는 구분해서 기록합니다.
+        </p>
+
+        <div className="pf-project">
+          <div className="pf-project-header">
+            <h3>팀에서 함께 쓰는 규칙과 작성 흐름</h3>
+            <Link className="pf-project-link" href="/case-studies/developer-workflow-ax">적용 사례 →</Link>
+            <span className="pf-badge pf-badge-running">실무 적용</span>
+          </div>
+          <p className="pf-project-desc">
+            Cursor 규칙과 스킬을 팀의 UI 개발 기준에 맞춰 정리했습니다.
+            PR 설명, 커밋 메시지, 작업 계획, 위키 초안, QA 체크리스트처럼 자주 작성하는 산출물에 공통 형식을 적용했고,
+            여러 저장소에서 같은 설정을 재사용할 수 있도록 관리와 동기화 흐름을 구성했습니다.
+          </p>
+        </div>
+
+        <div className="pf-project">
+          <div className="pf-project-header">
+            <h3>AI PR Review Agent 적용</h3>
+            <Link className="pf-project-link" href="/engineering/pr-review-agent">코드 리뷰 적용 기록 →</Link>
+          </div>
+          <p className="pf-project-desc">
+            UI 개발 리뷰에서는 BEM 네이밍, SCSS 구조, 접근성 속성, 중복 스타일처럼 반복해서 보는 항목이 많습니다.
+            회사에서 제공한 PR Review Agent의 여러 저장소 적용 과정에 참여해 이 항목들을 먼저 확인하도록 구성했습니다.
+            Agent 자체를 개발한 것이 아니라 파일 필터, 검토 기준과 실행 방식을 실제 업무에 맞게 설정했습니다.
+            설계, 영향 범위, 예외 케이스는 기존 코드 리뷰에서 별도로 확인했습니다.
+          </p>
+        </div>
+      </section>
+
+      <hr className="pf-divider" />
+
+      <section className="pf-section" id="current-project">
+        <h2 className="pf-section-title">공동 프로젝트</h2>
+        <div className="pf-project">
+          <h3>{currentProject.title}</h3>
+          <p className="pf-project-desc">{currentProject.role} | {currentProject.period}</p>
+          <p className="pf-project-desc">{currentProject.summary}</p>
+          {currentProject.cases.map(({ title, summary }) => (
+            <div key={title} className="pf-detail">
+              <h4>{title}</h4>
+              <p className="pf-project-desc">{summary}</p>
+            </div>
+          ))}
+          <Link href="/products#service-operations" className="pf-project-link">상담 관리와 업무 자동화 상세 →</Link>
+        </div>
+      </section>
+
+      <hr className="pf-divider" />
+
       {/* 실무 경험을 바탕으로 만든 UI */}
       <section className="pf-section pf-section-feature" id="case-study">
-        <h2 className="pf-section-title">업무 경험을 바탕으로 새로 만든 UI</h2>
+        <h2 className="pf-section-title">공개 UI 구현 사례</h2>
         <p className="pf-section-lead">
-          상품상세 UI를 운영하며 자주 마주친 상태와 예외 케이스를 바탕으로 옵션 선택 흐름을 새로 설계했습니다.
+          상품상세 UI 운영 경험을 바탕으로 옵션 선택 흐름을 새로 설계한 개인 작업입니다.
           색상과 사이즈 조합, 재고, 추가 금액, 모바일 화면 전환을 React 컴포넌트로 구현하고 확인 결과를 Storybook에 남겼습니다.
         </p>
 
@@ -235,54 +258,33 @@ export default function PortfolioPage() {
 
       <hr className="pf-divider" />
 
-      {/* 회사 안에서 적용한 AI 보조 흐름 */}
-      <section className="pf-section pf-section-tinted" id="workflow">
-        <h2 className="pf-section-title">개발 업무에 적용한 AI 도구와 규칙</h2>
-        <p className="pf-section-lead">
-          회사에서 제공한 도구와 승인된 연동을 실제 개발 흐름에 적용하고,
-          반복 작업의 규칙과 사람이 최종 판단할 범위를 정리했습니다.
-          도구 자체 개발과 제가 담당한 도입, 설정, 운영 범위는 구분해서 기록합니다.
-        </p>
-
-        <div className="pf-project">
-          <div className="pf-project-header">
-            <h3>팀에서 함께 쓰는 규칙과 작성 흐름</h3>
-            <a className="pf-project-link" href="/case-studies/developer-workflow-ax">Case Study →</a>
-            <span className="pf-badge pf-badge-running">실무 적용</span>
-          </div>
-          <p className="pf-project-desc">
-            Cursor 규칙과 스킬을 팀의 UI 개발 기준에 맞춰 정리했습니다.
-            PR 설명, 커밋 메시지, 작업 계획, 위키 초안, QA 체크리스트처럼 자주 작성하는 산출물에 공통 형식을 적용했고,
-            여러 저장소에서 같은 설정을 재사용할 수 있도록 관리와 동기화 흐름을 구성했습니다.
-          </p>
-        </div>
-
-        <div className="pf-project">
-          <div className="pf-project-header">
-            <h3>AI PR Review Agent 적용</h3>
-            <a className="pf-project-link" href="/engineering/pr-review-agent" target="_blank" rel="noopener noreferrer">관련 글 ↗</a>
-          </div>
-          <p className="pf-project-desc">
-            UI 개발 리뷰에서는 BEM 네이밍, SCSS 구조, 접근성 속성, 중복 스타일처럼 반복해서 보는 항목이 많습니다.
-            회사에서 제공한 PR Review Agent의 여러 저장소 적용 과정에 참여해 이 항목들을 먼저 확인하도록 구성했습니다.
-            Agent 자체를 개발한 것이 아니라 파일 필터, 검토 기준과 실행 방식을 실제 업무에 맞게 설정했습니다.
-            설계, 영향 범위, 예외 케이스는 기존 코드 리뷰에서 별도로 확인했습니다.
-          </p>
-        </div>
-
-      </section>
-
-      <hr className="pf-divider" />
-
       {/* 개인 서비스와 자동화 */}
       <section className="pf-section" id="ai-products">
-        <h2 className="pf-section-title">그 밖의 서비스와 자동화</h2>
+        <h2 className="pf-section-title">개인 서비스와 자동화</h2>
         <p className="pf-section-lead">
           개인 프로젝트에서는 AI 코딩 도구를 활용해 화면, API, DB와 배치 작업을 구현합니다.
           배포 후 동작과 사용 흐름은 직접 확인하며 필요한 기능을 보완하고 있습니다.
         </p>
 
         <div className="pf-service-grid">
+          <div className="pf-service-card">
+            <img src="/portfolio/babypick-guide.png" alt="베이비픽의 육아용품 가이드 목록" />
+            <div>
+              <div className="pf-project-header">
+                <h3>베이비픽</h3>
+                <a href="https://babypick.co.kr" className="pf-project-link" target="_blank" rel="noopener noreferrer">서비스 보기 ↗</a>
+                <a href="https://blog.naver.com/babypick_blog" className="pf-project-link" target="_blank" rel="noopener noreferrer">블로그 ↗</a>
+              </div>
+              <p>{babyPickSummary}</p>
+              <div className="pf-chips">
+                <span className="pf-chip">Next.js</span>
+                <span className="pf-chip">Supabase</span>
+                <span className="pf-chip">GAS</span>
+                <span className="pf-chip">LLM</span>
+              </div>
+            </div>
+          </div>
+
           <div className="pf-service-card">
             <img src="/portfolio/dailypick-mobile.png" alt="데일리픽아이템 — 모바일 랜딩 페이지" />
             <div>

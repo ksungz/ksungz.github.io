@@ -216,9 +216,8 @@ export default function Products() {
         <p className="font-mono text-xs text-[var(--color-muted)] mb-3">Projects</p>
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">서비스와 업무 도구 개발</h1>
         <p className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xl">
-          공동 프로젝트에서 맡은 개발과 운영 업무, 개인 서비스와 도구를 정리했습니다.
-          필요한 기능과 확인할 기준을 정하고 AI 개발 도구를 활용해 구현했습니다.
-          각 프로젝트의 적용 범위와 확인한 결과를 함께 기록합니다.
+          만들고 싶은 게 생기면 AI와 함께 직접 만들어 봅니다.
+          화면 뒤에서 데이터가 어떻게 오가는지 따라가 보고, 예상과 다르게 동작하는 부분을 찾아 고치는 과정이 재미있습니다.
         </p>
       </section>
 
@@ -231,10 +230,12 @@ export default function Products() {
           {currentProjectPortfolio.areas.map(({ title, structure, details, verification }) => (
             <section key={title} className="py-6 first:pt-0 last:pb-0">
               <h4 className="font-semibold">{title}</h4>
-              <p className="mt-2 break-keep! border-l-2 border-[var(--color-border)] pl-3 text-sm leading-relaxed [overflow-wrap:anywhere]">
-                <span className="mr-1.5 font-semibold">구조</span>{" "}
-                {structure}
-              </p>
+              {structure && (
+                <p className="mt-2 break-keep! border-l-2 border-[var(--color-border)] pl-3 text-sm leading-relaxed [overflow-wrap:anywhere]">
+                  <span className="mr-1.5 font-semibold">구조</span>{" "}
+                  {structure}
+                </p>
+              )}
               <div className="mt-4 space-y-4">
                 {details.map(({ title: detailTitle, description }) => (
                   <div key={detailTitle}>

@@ -68,7 +68,6 @@ export const currentProjectPortfolio = {
       title: "반복 업무 자동화",
       summary:
         "업체 조회와 접수 안내를 자동화했습니다. 콘텐츠 보관함에서는 자료와 게시 상태를 함께 확인할 수 있게 했습니다.",
-      structure: "업체 조회는 명단에서 결과 장부로 이어지고, 접수 안내와 콘텐츠 동기화는 각각 관리자 화면과 연결됩니다.",
       details: [
         {
           title: "업체 조회와 결과 정리",

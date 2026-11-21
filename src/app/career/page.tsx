@@ -166,6 +166,11 @@ export default function CareerPage() {
         <Link href="/products#service-operations" className="mt-3 inline-flex min-h-11 items-center text-xs underline underline-offset-4">서비스 운영 도구와 사례 보기</Link>
         <h3 className="mt-5 text-sm font-semibold">베이비픽 | 개인 프로젝트</h3>
         <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">{babyPickSummary}</p>
+        <h3 className="mt-5 text-sm font-semibold">AI 에이전트 작업 인계 | 개인 작업 환경</h3>
+        <p className="mt-3 text-sm leading-relaxed text-[var(--color-muted)]">
+          Obsidian 작업 문서에 결정, 수정 범위, 검증 결과와 미확인 항목을 남겨 Codex와 Claude Code가 같은 기준으로 구현과 검토를 이어가도록 구성했습니다.
+        </p>
+        <Link href="/tech/ai-agent-handoff" className="mt-3 inline-flex min-h-11 items-center text-xs underline underline-offset-4">작업 인계와 재검증 사례 보기</Link>
       </section>
 
       {/* Projects 링크 */}

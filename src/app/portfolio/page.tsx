@@ -13,7 +13,7 @@ export default function PortfolioPage() {
         </a>
         <nav className="pf-cli-nav" aria-label="포트폴리오 탐색">
           <a href="#work">실무 UI</a>
-          <a href="#workflow">실무 AI 활용</a>
+          <a href="#workflow">AI 개발 방식</a>
           <a href="#current-project">공동 프로젝트</a>
           <a href="#case-study">공개 UI 사례</a>
           <a href="#ai-products">개인 서비스</a>
@@ -145,7 +145,7 @@ export default function PortfolioPage() {
 
       {/* 회사 안에서 적용한 AI 보조 흐름 */}
       <section className="pf-section pf-section-tinted" id="workflow">
-        <h2 className="pf-section-title">실무에 적용한 AI 도구와 규칙</h2>
+        <h2 className="pf-section-title">AI 도구를 적용한 개발 방식</h2>
         <p className="pf-section-lead">
           회사에서 제공한 도구와 승인된 연동을 실제 개발 흐름에 적용하고,
           반복 작업의 규칙과 사람이 최종 판단할 범위를 정리했습니다.
@@ -175,6 +175,18 @@ export default function PortfolioPage() {
             회사에서 제공한 PR Review Agent의 여러 저장소 적용 과정에 참여해 이 항목들을 먼저 확인하도록 구성했습니다.
             Agent 자체를 개발한 것이 아니라 파일 필터, 검토 기준과 실행 방식을 실제 업무에 맞게 설정했습니다.
             설계, 영향 범위, 예외 케이스는 기존 코드 리뷰에서 별도로 확인했습니다.
+          </p>
+        </div>
+
+        <div className="pf-project">
+          <div className="pf-project-header">
+            <h3>문서로 이어가는 에이전트 작업 인계</h3>
+            <Link className="pf-project-link" href="/tech/ai-agent-handoff">인계 사례 보기 →</Link>
+            <span className="pf-badge pf-badge-running">개인 작업 환경</span>
+          </div>
+          <p className="pf-project-desc">
+            Obsidian에 결정과 수정 범위, 확인한 결과와 남은 일을 기록합니다.
+            Claude Code가 수정하고 Codex가 재검토할 때 같은 문서를 읽고 실제 코드와 테스트 결과를 대조했습니다.
           </p>
         </div>
       </section>

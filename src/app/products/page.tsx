@@ -226,12 +226,16 @@ export default function Products() {
         <h2 className="mb-4 text-sm font-semibold text-[var(--color-muted)]">공동 프로젝트</h2>
         <h3 className="text-lg font-semibold">{currentProjectPortfolio.title}</h3>
         <p className="mt-2 text-xs text-[var(--color-muted)]">{currentProject.role} | {currentProject.period}</p>
-        <p className="mt-4 break-keep! text-sm leading-relaxed">{currentProjectPortfolio.summary}</p>
-        <div className="mt-8 space-y-7 divide-y divide-[var(--color-border)]">
-          {currentProjectPortfolio.areas.map(({ title, details }) => (
-            <div key={title}>
-              <h4 className="mb-4 font-semibold">{title}</h4>
-              <div className="space-y-4 pb-6">
+        <p className="mt-4 break-keep! text-sm leading-relaxed">{currentProjectPortfolio.detailIntro}</p>
+        <div className="mt-8 divide-y divide-[var(--color-border)]">
+          {currentProjectPortfolio.areas.map(({ title, structure, details, verification }) => (
+            <section key={title} className="py-6 first:pt-0 last:pb-0">
+              <h4 className="font-semibold">{title}</h4>
+              <p className="mt-2 break-keep! border-l-2 border-[var(--color-border)] pl-3 text-sm leading-relaxed [overflow-wrap:anywhere]">
+                <span className="mr-1.5 font-semibold">구조</span>{" "}
+                {structure}
+              </p>
+              <div className="mt-4 space-y-4">
                 {details.map(({ title: detailTitle, description }) => (
                   <div key={detailTitle}>
                     <h5 className="text-sm font-semibold">{detailTitle}</h5>
@@ -239,7 +243,11 @@ export default function Products() {
                   </div>
                 ))}
               </div>
-            </div>
+              <div className="mt-4">
+                <h5 className="text-sm font-semibold">확인한 범위</h5>
+                <p className="mt-1.5 break-keep! text-sm leading-relaxed text-[var(--color-muted)]">{verification}</p>
+              </div>
+            </section>
           ))}
         </div>
       </section>
